@@ -1,0 +1,15 @@
+stages:
+  - build
+  - deploy
+
+build:
+  stage: build
+  image: node:14.7.0-alpine3.11
+  script:
+    - npm install
+    - npm run build
+
+
+  artifacts:
+    paths:
+      - dist
