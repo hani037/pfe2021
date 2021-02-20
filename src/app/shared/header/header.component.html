@@ -1,6 +1,4 @@
-
-
-<mat-toolbar  color="primary">
+<!--<mat-toolbar  color="primary">
   <mat-toolbar-row >
     <a style="color: white"  class="example-spacer" [routerLink]="['/']">Calendrier</a>
     <button (click)="login()" style="right: 2%;position: absolute;color: white"  class="btn btn-outline-primary ">se connecter </button>
@@ -8,3 +6,30 @@
 
   </mat-toolbar-row>
 </mat-toolbar>
+-->
+<p>
+<mat-toolbar color="primary">
+  <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-around center">
+    <div>
+      <img style="margin-right: 2%" src="../../../favicon.ico">
+      <span class="example-spacer"></span>
+      <span>I-EVENTS</span>
+
+    </div>
+    <mat-form-field fxFlex="40">
+
+      <input matInput type="search"  class="search-input">
+      <mat-label style="font-size: 70%">Search</mat-label>
+      <mat-icon style="font-size: 90%" matSuffix>search</mat-icon>
+    </mat-form-field>
+    <button [matMenuTriggerFor]="menu" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>PROFILE</button>
+      <button [routerLink]="['/login']"  mat-menu-item>LOGIN</button>
+    </mat-menu>
+  </mat-toolbar-row>
+
+</mat-toolbar>
+</p>

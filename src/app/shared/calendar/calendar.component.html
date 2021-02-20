@@ -1,0 +1,112 @@
+<mat-card  style="margin-left:4%;margin-top: 3%;margin-right: 4%">
+
+  <mat-card-title style="color: white"  fxLayout="row" fxLayoutAlign="space-around center">Calendar</mat-card-title>
+
+
+  <mat-card-content >
+
+      <div  fxLayout="row" fxLayoutAlign="space-around center" >
+        <div >
+          <div class="btn-group">
+            <div
+              class="btn btn-primary"
+              mwlCalendarPreviousView
+              [view]="view"
+              [(viewDate)]="viewDate"
+              (viewDateChange)="closeOpenMonthViewDay()"
+            >
+              Previous
+            </div>
+            <div
+              class="btn btn-outline-secondary"
+              mwlCalendarToday
+              [(viewDate)]="viewDate"
+            >
+              Today
+            </div>
+            <div
+              class="btn btn-primary"
+              mwlCalendarNextView
+              [view]="view"
+              [(viewDate)]="viewDate"
+              (viewDateChange)="closeOpenMonthViewDay()"
+            >
+              Next
+            </div>
+          </div>
+        </div>
+        <div  >
+          <h3 style="text-align: center;color:white ">{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+        </div>
+        <div  >
+          <div class="btn-group">
+            <div
+              class="btn btn-primary"
+              (click)="setView(CalendarView.Month)"
+              [class.active]="view === CalendarView.Month"
+            >
+              Month
+            </div>
+            <div
+              class="btn btn-primary"
+              (click)="setView(CalendarView.Week)"
+              [class.active]="view === CalendarView.Week"
+            >
+              Week
+            </div>
+            <div
+              class="btn btn-primary"
+              (click)="setView(CalendarView.Day)"
+              [class.active]="view === CalendarView.Day"
+            >
+              Day
+            </div>
+          </div>
+        </div>
+
+      </div>
+    <div >
+
+
+      <div [ngSwitch]="view">
+        <mwl-calendar-month-view
+          *ngSwitchCase="CalendarView.Month"
+          [viewDate]="viewDate"
+          [events]="events"
+          [refresh]="refresh"
+
+        >
+        </mwl-calendar-month-view>
+        <mwl-calendar-week-view
+          *ngSwitchCase="CalendarView.Week"
+          [viewDate]="viewDate"
+          [hourSegmentHeight]="20"
+          [daysInWeek]="5"
+          [dayEndHour]="16"
+          [dayStartHour]="8"
+          [events]="events"
+          [refresh]="refresh"
+          (eventClicked)="handleEvent('Clicked', $event.event)"
+        >
+        </mwl-calendar-week-view>
+        <mwl-calendar-day-view
+          *ngSwitchCase="CalendarView.Day"
+          [viewDate]="viewDate"
+          [events]="events"
+          [dayStartHour]="8"
+          [dayEndHour]="16"
+          [refresh]="refresh"
+          (eventClicked)="handleEvent('Clicked', $event.event)"
+        >
+        </mwl-calendar-day-view>
+      </div>
+    </div>
+    <div style="position: absolute;bottom: 1%;right:1%" class="example-button-container">
+      <button (click)="add_event()" mat-fab color="accent" aria-label="Example icon button with a bookmark icon">
+        <mat-icon>calendar_today</mat-icon>
+      </button>
+    </div>
+  </mat-card-content>
+
+</mat-card>
+

@@ -15,20 +15,45 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { AgmCoreModule } from '@agm/core';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {AuthInterceptor} from './Interceptors/authInterceptor';
+import {NgbDatepickerModule, NgbTimepickerModule} from "@ng-bootstrap/ng-bootstrap";
+import { AddEventComponent } from './shared/add-event/add-event.component';
+import { CalendarComponent } from './shared/calendar/calendar.component';
+import {FormsModule} from "@angular/forms";
+import {MatCardModule} from "@angular/material/card";
 
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatIconModule} from "@angular/material/icon";
+import {MatButtonModule} from '@angular/material/button';
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatNativeDateModule} from "@angular/material/core";
 
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import {MatInputModule} from "@angular/material/input";
+import {FlexModule} from "@angular/flex-layout";
+import {MatMenuModule} from "@angular/material/menu";
+import { LoginComponent } from './login/login.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
 
-
+export const interceptorProviders =
+  [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ];
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     HomeComponent,
+    AddEventComponent,
+    CalendarComponent,
+    LoginComponent,
+    SignUpComponent,
   ],
   imports: [
+    NgxMaterialTimepickerModule,
     BrowserModule,
-
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -43,8 +68,22 @@ import { HttpClientModule } from '@angular/common/http';
       useFactory: adapterFactory,
     }),
     FontAwesomeModule,
+    NgbDatepickerModule,
+    NgbTimepickerModule,
+    FormsModule,
+    MatCardModule,
+    MatDialogModule,
+    MatIconModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatInputModule,
+    FlexModule,
+    MatMenuModule,
+
   ],
-  providers: [ ],
+  providers: [interceptorProviders,MatDatepickerModule ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

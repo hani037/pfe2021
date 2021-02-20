@@ -1,0 +1,46 @@
+<div class="text-center">
+  <h1 class="text-center">EVENT</h1>
+  <div class="form-group">
+
+    <form action="" method="post" (ngSubmit)="add(f)" #f="ngForm" >
+      <div >
+
+        <mat-form-field appearance="fill">
+          <mat-label>Choose a date</mat-label>
+          <input ngModel required name="date" id="date" #date="ngModel"  matInput [matDatepicker]="picker">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="flex-container">
+        <div>
+          <h6 style="margin-right: 1%;color: #5e72e4" >START TIME</h6>
+        </div>
+        <div fxLayout="column" fxLayoutAlign="space-around center" class="default-time-example">
+          <input class="input-group-text" required name="start" id="start" #start ngModel  aria-label="default time" [ngxTimepicker]="fullTime" [format]="24"  >
+          <ngx-material-timepicker #fullTime></ngx-material-timepicker>
+        </div>
+      </div>
+
+      <div class="flex-container">
+        <div>
+          <h6 style="margin-right: 1%;color: #5e72e4" >END  TIME</h6>
+        </div>
+        <div >
+          <div class="default-time-example" fxLayout="column" fxLayoutAlign="space-around center">
+            <input class="input-group-text" aria-label="default time" [ngxTimepicker]="fullTime1" [format]="24" #end ngModel required name="end" id="end" >
+            <ngx-material-timepicker #fullTime1></ngx-material-timepicker>
+          </div>        </div>
+      </div>
+      <label for="description"></label><textarea ngModel required name="description" id="description" #description="ngModel" class="form-control" rows="3" placeholder="Description"></textarea>
+      <div class="text-center" style="margin-top: 3%" >
+
+        <button [disabled]="f.invalid"  type="submit" mat-flat-button color="warn">ADD</button>
+      </div>
+    </form>
+
+
+  </div>
+</div>
+
+
