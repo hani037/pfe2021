@@ -36,6 +36,8 @@ import {FlexModule} from "@angular/flex-layout";
 import {MatMenuModule} from "@angular/material/menu";
 import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {UserService} from "./shared/service/user.service";
 
 export const interceptorProviders =
   [
@@ -54,6 +56,7 @@ export const interceptorProviders =
   imports: [
     NgxMaterialTimepickerModule,
     BrowserModule,
+    MatProgressSpinnerModule,
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -83,7 +86,14 @@ export const interceptorProviders =
     MatMenuModule,
 
   ],
-  providers: [interceptorProviders,MatDatepickerModule ],
+  providers: [interceptorProviders,MatDatepickerModule,{
+    provide: APP_INITIALIZER,
+    useFactory: (ds: UserService) =>async () => {
+      await ds.autoLogin();
+    },
+    deps: [UserService],
+    multi: true
+  } ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

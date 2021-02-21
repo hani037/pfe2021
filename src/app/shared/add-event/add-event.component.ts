@@ -16,15 +16,7 @@ export class AddEventComponent implements OnInit {
 
 
   add(f:NgForm) {
-    console.log(f.value)
-    /*
-    '2021-02-13T08:00:00.000Z'
-    2021-2-9T22:59:0.000Z
-    date: {year: 2021, month: 2, day: 18}
-description: "aaaaaaaaa"
-end: {hour: 22, minute: 59, second: 0}
-start: {hour: 22, minute: 59, second: 0}
-    */
+
 
     let date = ("0" + f.value.date.getDate()).slice(-2);
 

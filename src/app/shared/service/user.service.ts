@@ -15,6 +15,7 @@ export class UserService {
 
   token : string;
   tokensUrl = '/api/v1/tokens';
+  usersUrl = '/api/v1/users';
 
   readonly _userConnected = new BehaviorSubject<User>(null);
   private dataStore: { user: User } = { user : new User()};
@@ -38,6 +39,9 @@ export class UserService {
     //Récupération de l'objet
     this._userConnected.next(null);
 
+  }
+  createUser(user: User): Promise<User> {
+    return this.http.post<User>(this.usersUrl, user).toPromise();
   }
   login(userName: String, password: String): Promise<any> {
     let user = new User();

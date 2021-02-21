@@ -22,6 +22,7 @@ import {AddEventComponent} from '../add-event/add-event.component';
 import {Subject} from 'rxjs';
 import {event} from "../model/event";
 import {EventService} from "../service/event.service";
+import {UserService} from "../service/user.service";
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
@@ -29,6 +30,7 @@ import {EventService} from "../service/event.service";
 })
 export class CalendarComponent implements OnInit {
   refresh: Subject<any> = new Subject();
+  loading:boolean=true;
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
 
   /*client:Client ={id:1,userName:'Terrains El Menzah 5 ',lat:36.8484,lng:10.1745,
@@ -71,19 +73,24 @@ export class CalendarComponent implements OnInit {
     }
   };
   events: CalendarEvent[]=[];
-  constructor(private dialog: MatDialog,private eventService:EventService) { }
+  constructor(private dialog: MatDialog,private eventService:EventService,private userService:UserService) { }
 
   ngOnInit(): void {
-    this.events_user = this.eventService.get_user_events(1);
-    this.events_user.forEach(event=>{
-      this.events.push( {
-        start: new Date(event.start),
-        end:new Date(event.end),
-        title: event.description,
-        color:this.colors.blue,
-        actions:this.actions
-      },)
-    })
+     this.eventService.get_user_events().subscribe(data=>{
+       console.log(data)
+       this.events_user = data;
+       this.events_user.forEach(event=>{
+         this.events.push( {
+           start: new Date(event.start),
+           end:new Date(event.end),
+           title: event.description,
+           color:this.colors.blue,
+           actions:this.actions
+         },)
+       });
+       this.loading= false;
+    });
+
   }
 
   setView(view: CalendarView) {
@@ -102,7 +109,11 @@ export class CalendarComponent implements OnInit {
       width: '360px',
     }).afterClosed()
       .subscribe(response => {
-        this.eventService.create_user_events(1,{start:response.data.start,end:response.data.end,description:response.data.description})
+        const event1 = new event();
+        event1.start  = response.data.start;
+        event1.end  = response.data.end;
+        event1.description  = response.data.description;
+
         this.events.push( {
           start: new Date(response.data.start),
           end:new Date(response.data.end),
@@ -110,9 +121,9 @@ export class CalendarComponent implements OnInit {
           color:this.colors.blue,
           actions:this.actions
         },)
-        console.log(this.events);
+        this.eventService.create_user_events(event1).subscribe(data=>console.log(data));
         this.refresh.next();
-      });;
+      });
   }
 
 }

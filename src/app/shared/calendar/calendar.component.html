@@ -1,4 +1,10 @@
-<mat-card  style="margin-left:4%;margin-top: 3%;margin-right: 4%">
+
+  <div *ngIf="loading" fxLayout="row" fxLayoutAlign="space-around center">
+    <mat-spinner></mat-spinner>
+  </div>
+
+
+<mat-card *ngIf="!loading" style="margin-left:4%;margin-top: 3%;margin-right: 4%">
 
   <mat-card-title style="color: white"  fxLayout="row" fxLayoutAlign="space-around center">Calendar</mat-card-title>
 

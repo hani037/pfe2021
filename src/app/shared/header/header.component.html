@@ -27,7 +27,7 @@
     </button>
     <mat-menu #menu="matMenu">
       <button mat-menu-item>PROFILE</button>
-      <button [routerLink]="['/login']"  mat-menu-item>LOGIN</button>
+      <button (click)="logout()" mat-menu-item>LOGOUT</button>
     </mat-menu>
   </mat-toolbar-row>
 

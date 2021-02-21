@@ -8,22 +8,19 @@
         </div>
         <div class="card-body">
           <h5  class="card-title text-center">Login</h5>
-          <form class="form-signin">
+          <form action="" method="post" (ngSubmit)="login(f)" #f="ngForm" class="form-signin">
             <div class="form-group">
-              <input type="text" id="inputUserame" class="form-control" placeholder="Username" required autofocus>
-            </div>
-
-            <div class="form-group">
-              <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required>
+              <input ngModel required name="userName"  #userName="ngModel" type="text" id="userName" class="form-control" placeholder="userName"  autofocus>
             </div>
 
 
+
             <div class="form-group">
-              <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+              <input type="password" id="inputPassword" class="form-control" id="Password" placeholder="Password" ngModel required name="Password"  #Password="ngModel">
             </div>
 
             <div >
-              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Login</button>
+              <button [disabled]="f.invalid" class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Login</button>
               <a (click)="router.navigateByUrl('sign-up')" class="d-block text-center mt-2 small" >Sign Up</a>
             </div>
 

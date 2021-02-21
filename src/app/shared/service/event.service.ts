@@ -1,16 +1,18 @@
 import { Injectable } from '@angular/core';
 import {event} from "../model/event";
+import {HttpClient} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventService {
-  events:event[]=[{start:'2021-02-20T08:00:00.000Z',end:'2021-02-20T14:00:00.000Z',description:'aaa'}];
-  constructor() { }
-  get_user_events(id){
-    return this.events;
+  eventsUrl = '/api/v1/events';
+  //events:event[]=[{start:'2021-02-22T08:00:00.000Z',end:'2021-02-22T14:00:00.000Z',description:'aaa'}];
+  constructor(private http:HttpClient) { }
+  get_user_events(){
+    return this.http.get<event[]>(this.eventsUrl);
   }
-  create_user_events(id,event){
-    this.events.push(event);
+  create_user_events(event){
+    return this.http.post<event>(this.eventsUrl,event);
   }
 }
