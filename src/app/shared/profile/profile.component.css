@@ -1,0 +1,15 @@
+.card-profile-image {
+  position: relative;
+
+}
+img {
+  max-width: 160px;
+  border-radius: .25rem;
+@extend .shadow;
+  transform: translate(-50%,-30%);
+  position: absolute;
+  left: 50%;
+  transition: all .2s ease-in-out;
+
+}
+

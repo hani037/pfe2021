@@ -10,10 +10,10 @@
 <p>
 <mat-toolbar color="primary">
   <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-around center">
-    <div>
+    <div >
       <img style="margin-right: 2%" src="../../../favicon.ico">
       <span class="example-spacer"></span>
-      <span>I-EVENTS</span>
+      <a style="text-decoration: none;color: white;" href="/home">I-EVENTS</a>
 
     </div>
     <mat-form-field fxFlex="40">
@@ -26,7 +26,7 @@
       <mat-icon>menu</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item>PROFILE</button>
+      <button (click)="profile()" mat-menu-item>PROFILE</button>
       <button (click)="logout()" mat-menu-item>LOGOUT</button>
     </mat-menu>
   </mat-toolbar-row>

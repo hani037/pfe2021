@@ -1,0 +1,68 @@
+<app-header></app-header>
+<main style="margin-top: 4%" class="profile-page">
+  <section class="section">
+    <div class="container">
+      <div class="card card-profile shadow mt--200">
+        <div >
+          <div class="row justify-content-center">
+            <div class="col-lg-3 order-lg-2">
+              <div class="card-profile-image">
+                  <img src="../../../assets/img/profile.png" class="rounded-circle">
+              </div>
+            </div>
+            <div class="col-lg-4 order-lg-3 text-lg-left align-self-lg-center">
+              <div class="card-profile-actions py-2 mt-lg-0">
+              </div>
+            </div>
+            <div class="col-lg-4 order-lg-1">
+
+            </div>
+          </div>
+          <div   class="text-center mt-5">
+
+            <h3 style="color: #007bff"> {{userService.userConnected.firstName}} {{userService.userConnected.lastName}}
+            </h3>
+          <p style="margin-right: 10%;margin-left: 10%">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab alias aliquid, commodi consequatur, ducimus fugiat illum, itaque laborum molestiae officia perferendis quam quod reiciendis repudiandae rerum saepe ullam veniam voluptatum?</p>
+          </div>
+
+          <mat-tab-group>
+            <mat-tab label="TODAY EVENTS"> <app-calendar-profile></app-calendar-profile> </mat-tab>
+            <mat-tab label="MODIFY INFORMATION">
+              <div class="text-center mt-5"  >
+              <mat-form-field style="margin-right: 1%">
+                <mat-label>First name</mat-label>
+                <input [value]="userService.userConnected.firstName" matInput >
+              </mat-form-field>
+              <mat-form-field style="margin-right: 1%">
+                <mat-label >Last name</mat-label>
+                <input [value]="userService.userConnected.lastName" matInput >
+
+              </mat-form-field>
+              <button  style="margin-right: 1%" style="margin-right: 1%" class="btn-danger" mat-raised-button>Submit</button>
+            </div>
+              <div class="text-center mt-5"  >
+                <mat-form-field style="margin-right: 1%">
+                  <mat-label>E-mail</mat-label>
+                  <input [value]="userService.userConnected.email" matInput >
+                </mat-form-field>
+                <button  style="margin-right: 1%" style="margin-right: 1%" class="btn-danger" mat-raised-button>Submit</button>
+              </div>
+              <div class="text-center mt-5"  >
+                <mat-form-field style="margin-right: 1%">
+                  <mat-label>New Password</mat-label>
+                  <input  matInput >
+                </mat-form-field>
+                <mat-form-field style="margin-right: 1%">
+                  <mat-label>Confirm Password</mat-label>
+                  <input  matInput >
+                </mat-form-field>
+                <button  style="margin-right: 1%" style="margin-right: 1%" class="btn-danger" mat-raised-button>Submit</button>
+              </div>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+

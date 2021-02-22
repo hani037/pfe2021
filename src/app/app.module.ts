@@ -38,6 +38,9 @@ import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {UserService} from "./shared/service/user.service";
+import { ProfileComponent } from './shared/profile/profile.component';
+import { CalendarProfileComponent } from './shared/calendar-profile/calendar-profile.component';
+import {MatTabsModule} from "@angular/material/tabs";
 
 export const interceptorProviders =
   [
@@ -52,6 +55,8 @@ export const interceptorProviders =
     CalendarComponent,
     LoginComponent,
     SignUpComponent,
+    ProfileComponent,
+    CalendarProfileComponent,
   ],
   imports: [
     NgxMaterialTimepickerModule,
@@ -84,6 +89,7 @@ export const interceptorProviders =
     MatInputModule,
     FlexModule,
     MatMenuModule,
+    MatTabsModule,
 
   ],
   providers: [interceptorProviders,MatDatepickerModule,{
