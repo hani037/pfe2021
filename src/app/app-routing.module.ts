@@ -12,6 +12,7 @@ import {ProfileComponent} from "./shared/profile/profile.component";
 
 const routes: Routes = [
   { path: '', component: AppComponent ,children:[
+      { path: '',   redirectTo: 'home', pathMatch: 'full'},
       { path: 'home', component: HomeComponent,canActivate:[ConnectActivate]},
       { path: 'profile', component: ProfileComponent,canActivate:[ConnectActivate]},
       { path: 'login', component:LoginComponent,canActivate:[LoginActivate]},

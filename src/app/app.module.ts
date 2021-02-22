@@ -41,6 +41,7 @@ import {UserService} from "./shared/service/user.service";
 import { ProfileComponent } from './shared/profile/profile.component';
 import { CalendarProfileComponent } from './shared/calendar-profile/calendar-profile.component';
 import {MatTabsModule} from "@angular/material/tabs";
+import { EventComponent } from './shared/event/event.component';
 
 export const interceptorProviders =
   [
@@ -57,6 +58,7 @@ export const interceptorProviders =
     SignUpComponent,
     ProfileComponent,
     CalendarProfileComponent,
+    EventComponent,
   ],
   imports: [
     NgxMaterialTimepickerModule,
