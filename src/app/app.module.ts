@@ -42,7 +42,7 @@ import { ProfileComponent } from './shared/profile/profile.component';
 import { CalendarProfileComponent } from './shared/calendar-profile/calendar-profile.component';
 import {MatTabsModule} from "@angular/material/tabs";
 import { EventComponent } from './shared/event/event.component';
-
+import {  MatSnackBarModule } from "@angular/material/snack-bar";
 export const interceptorProviders =
   [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
@@ -92,6 +92,7 @@ export const interceptorProviders =
     FlexModule,
     MatMenuModule,
     MatTabsModule,
+    MatSnackBarModule
 
   ],
   providers: [interceptorProviders,MatDatepickerModule,{

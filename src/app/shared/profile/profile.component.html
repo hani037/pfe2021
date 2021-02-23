@@ -33,34 +33,35 @@
 
             <mat-tab label="MODIFY INFORMATION">
               <div class="text-center mt-5"  >
-              <mat-form-field style="margin-right: 1%">
-                <mat-label>First name</mat-label>
-                <input [value]="userService.userConnected.firstName" matInput >
-              </mat-form-field>
-              <mat-form-field style="margin-right: 1%">
-                <mat-label >Last name</mat-label>
-                <input [value]="userService.userConnected.lastName" matInput >
+                <form action="" method="post" (ngSubmit)="update_user_name(f)" #f="ngForm" >
+                  <mat-form-field style="margin-right: 1%">
+                    <mat-label>First name</mat-label>
+                    <input [ngModel]="userService.userConnected.firstName" required name="firstName"  #firstName="ngModel" type="text" id="firstName"  matInput >
+                  </mat-form-field>
+                  <mat-form-field style="margin-right: 1%">
+                    <mat-label >Last name</mat-label>
+                    <input [ngModel]="userService.userConnected.lastName" required name="lastName"  #lastName="ngModel" type="text" id="lastName"  matInput >
 
-              </mat-form-field>
-              <button  style="margin-right: 1%" style="margin-right: 1%" class="btn-danger" mat-raised-button>Submit</button>
+                  </mat-form-field>
+                  <button type="submit" [disabled]="f.invalid" style="margin-right: 1%" class="btn-danger" mat-raised-button>Submit</button>
+                </form>
+
             </div>
+
               <div class="text-center mt-5"  >
-                <mat-form-field style="margin-right: 1%">
-                  <mat-label>E-mail</mat-label>
-                  <input [value]="userService.userConnected.email" matInput >
-                </mat-form-field>
-                <button  style="margin-right: 1%" style="margin-right: 1%" class="btn-danger" mat-raised-button>Submit</button>
-              </div>
-              <div class="text-center mt-5"  >
+                <form action="" method="post" (ngSubmit)="update_user_password(f1)" #f1="ngForm" >
                 <mat-form-field style="margin-right: 1%">
                   <mat-label>New Password</mat-label>
-                  <input  matInput >
+                  <input type="password"  ngModel required name="password"  #password="ngModel"  matInput >
                 </mat-form-field>
                 <mat-form-field style="margin-right: 1%">
                   <mat-label>Confirm Password</mat-label>
-                  <input  matInput >
+                  <input type="password"  ngModel required name="password1"  #password1="ngModel"  matInput >
                 </mat-form-field>
-                <button  style="margin-right: 1%" style="margin-right: 1%" class="btn-danger" mat-raised-button>Submit</button>
+                <button  type="submit" [disabled]="f1.invalid||password.value!=password1.value"  style="margin-right: 1%" class="btn-danger" mat-raised-button>Submit</button>
+                  <br>
+               <span style="color: #ea4335;font-size: 200%" *ngIf="password1.touched&&password.value!=password1.value">passwords don't match</span>
+                </form>
               </div>
             </mat-tab>
           </mat-tab-group>

@@ -43,6 +43,9 @@ export class UserService {
   createUser(user: User): Promise<User> {
     return this.http.post<User>(this.usersUrl, user).toPromise();
   }
+  updateUser(user: User): Promise<User> {
+    return this.http.put<User>(this.usersUrl, user).toPromise();
+  }
   login(userName: String, password: String): Promise<any> {
     let user = new User();
     user.userName = userName;
