@@ -20,14 +20,35 @@
         <div >
           <mat-list >
 
-            <mat-list-item [style.color]="route_active!=l.path ? 'rgba(0, 0, 0, 0.3)' : null" style="cursor: pointer"  (click)="router.navigateByUrl(l.path)" *ngFor="let l of list" >
+              <mat-list-item [style.color]="route_active!=l.path ? 'rgba(0, 0, 0, 0.3)' : null" style="cursor: pointer"  (click)="navigate(l.path)" *ngFor="let l of list" >
               <div *ngIf="route_active===l.path"  class="rectangle"></div>
               <mat-icon *ngIf="route_active!=l.path" fontSet="material-icons-outlined"  matListIcon>{{l.icon}}</mat-icon>
               <mat-icon  *ngIf="route_active===l.path" style="color: #58CB7D" matListIcon>{{l.icon}}</mat-icon>
               <h3 *ngIf="expand" matLine><strong>{{l.title}}</strong></h3>
+              <hr>
 
             </mat-list-item>
+            <mat-list-item [style.color]="route_active!='login'? 'rgba(0, 0, 0, 0.3)' : null" style="cursor: pointer"  (click)="logout()"  >
+              <div *ngIf="route_active==='login'"  class="rectangle"></div>
+              <mat-icon *ngIf="route_active!='login'" fontSet="material-icons-outlined"  matListIcon>logout</mat-icon>
+              <mat-icon  *ngIf="route_active==='login'" style="color: #58CB7D" matListIcon>logout</mat-icon>
+              <h3 *ngIf="expand" matLine><strong>LOG OUT</strong></h3>
+              <hr>
+
+            </mat-list-item>
+
           </mat-list>
+          <!--
+           <mat-list *ngIf="l.title==='CALENDRIER'">
+            <mat-list-item  [style.color]="index!=i ? 'rgba(0, 0, 0, 0.3)' : null" style="cursor: pointer" (click)="index=i"   *ngFor="let l2 of list_calendar;let i = index" >
+              <div *ngIf="index===i "  class="rectangle"></div>
+              <mat-icon *ngIf="index!=i " fontSet="material-icons-outlined"  matListIcon>calendar</mat-icon>
+              <mat-icon  *ngIf="index===i " style="color: #58CB7D" matListIcon>calendar</mat-icon>
+              <h3 *ngIf="expand" matLine><strong>{{l2}}</strong></h3>
+            </mat-list-item>
+          </mat-list>
+          -->
+
         </div>
 
       </div>

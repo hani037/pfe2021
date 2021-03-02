@@ -14,7 +14,7 @@ const routes: Routes = [
 
       { path: '',   redirectTo: 'home', pathMatch: 'full'},
       { path: 'home', component: HomeComponent,canActivate:[ConnectActivate]},
-      { path: 'profile', component: ProfileComponent},
+      { path: 'profile', component: ProfileComponent,canActivate:[ConnectActivate]},
       { path: 'login', component:LoginComponent,canActivate:[LoginActivate]},
       { path: 'sign-up', component:SignUpComponent,canActivate:[LoginActivate]},
 
