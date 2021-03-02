@@ -43,7 +43,7 @@ export class CalendarComponent implements OnInit {
   events_user:event[];
   nb:number=0;
   viewDate: Date = new Date();
-  view: CalendarView = CalendarView.Week;
+  view: CalendarView = CalendarView.Month;
   activeDayIsOpen: boolean = true;
   CalendarView = CalendarView;
   modalData: {
@@ -107,6 +107,7 @@ export class CalendarComponent implements OnInit {
     this.dialog.open(AddEventComponent, {
       height: '480px',
       width: '360px',
+      backdropClass: 'backdropBackground'
     }).afterClosed()
       .subscribe(response => {
         const event1 = new event();

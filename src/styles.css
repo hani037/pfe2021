@@ -10,3 +10,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .timepicker-backdrop-overlay {
   z-index: 10000000 !important;
 }
+.backdropBackground {
+background: rgba(255, 255, 255, 0.8);
+}

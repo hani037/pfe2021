@@ -43,6 +43,10 @@ import { CalendarProfileComponent } from './shared/calendar-profile/calendar-pro
 import {MatTabsModule} from "@angular/material/tabs";
 import { EventComponent } from './shared/event/event.component';
 import {  MatSnackBarModule } from "@angular/material/snack-bar";
+import { SidenavComponent } from './shared/sidenav/sidenav.component';
+import {MatSidenavModule} from "@angular/material/sidenav";
+import {MatListModule} from "@angular/material/list";
+import {MatBadgeModule} from "@angular/material/badge";
 export const interceptorProviders =
   [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
@@ -59,6 +63,7 @@ export const interceptorProviders =
     ProfileComponent,
     CalendarProfileComponent,
     EventComponent,
+    SidenavComponent,
   ],
   imports: [
     NgxMaterialTimepickerModule,
@@ -92,7 +97,10 @@ export const interceptorProviders =
     FlexModule,
     MatMenuModule,
     MatTabsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatSidenavModule,
+    MatListModule,
+    MatBadgeModule
 
   ],
   providers: [interceptorProviders,MatDatepickerModule,{

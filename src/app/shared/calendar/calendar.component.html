@@ -12,64 +12,60 @@
   <mat-card-content >
 
       <div  fxLayout="row" fxLayoutAlign="space-around center" >
-        <div >
-          <div class="btn-group">
-            <div
-              class="btn btn-primary"
-              mwlCalendarPreviousView
-              [view]="view"
-              [(viewDate)]="viewDate"
-              (viewDateChange)="closeOpenMonthViewDay()"
-            >
-              Previous
-            </div>
-            <div
-              class="btn btn-outline-primary"
-              mwlCalendarToday
-              [(viewDate)]="viewDate"
-            >
-              Today
-            </div>
-            <div
-              class="btn btn-primary"
-              mwlCalendarNextView
-              [view]="view"
-              [(viewDate)]="viewDate"
-              (viewDateChange)="closeOpenMonthViewDay()"
-            >
-              Next
-            </div>
-          </div>
-        </div>
-        <div  >
-          <h3 style="text-align: center;color:white ">{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
-        </div>
         <div  >
           <div class="btn-group">
-            <div
-              class="btn btn-primary"
+            <button
+              mat-raised-button
+              [color]="view === CalendarView.Month ? 'warn' : null"
               (click)="setView(CalendarView.Month)"
               [class.active]="view === CalendarView.Month"
             >
               Month
-            </div>
-            <div
-              class="btn btn-primary"
+            </button>
+            <button
+              mat-raised-button
+              [color]="view === CalendarView.Week ? 'warn' : null"
               (click)="setView(CalendarView.Week)"
               [class.active]="view === CalendarView.Week"
             >
               Week
-            </div>
-            <div
-              class="btn btn-primary"
+            </button>
+            <button
+              mat-raised-button
+              [color]="view === CalendarView.Day ? 'warn' : null"
               (click)="setView(CalendarView.Day)"
               [class.active]="view === CalendarView.Day"
             >
               Day
-            </div>
+            </button>
           </div>
         </div>
 
+
+        <div  fxLayout="row" fxLayoutAlign="space-around center"   >
+          <button   mwlCalendarPreviousView
+                    [view]="view"
+                    [(viewDate)]="viewDate"
+                    (viewDateChange)="closeOpenMonthViewDay()"  mat-icon-button color="warn" aria-label="Example icon button with a heart icon">
+            <mat-icon>keyboard_arrow_left</mat-icon>
+          </button>
+          <h3 style="text-align: center;color:black;flex: 1 ">{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+          <button    mwlCalendarNextView
+                     color="warn"
+                     [view]="view"
+                     [(viewDate)]="viewDate"
+                     (viewDateChange)="closeOpenMonthViewDay()" mat-icon-button color="warn" aria-label="Example icon button with a heart icon">
+            <mat-icon>keyboard_arrow_right</mat-icon>
+          </button>
+        </div>
+        <div >
+          <button  mat-raised-button >
+            <mat-icon>filter_alt</mat-icon>
+            FILTER
+
+
+          </button>
+        </div>
       </div>
     <div >
 
@@ -108,8 +104,8 @@
       </div>
     </div>
     <div style="position: absolute;bottom: 1%;right:1%" class="example-button-container">
-      <button (click)="add_event()" mat-fab color="accent" aria-label="Example icon button with a bookmark icon">
-        <mat-icon>calendar_today</mat-icon>
+      <button (click)="add_event()" mat-fab color="warn" aria-label="Example icon button with a bookmark icon">
+        <mat-icon>add</mat-icon>
       </button>
     </div>
   </mat-card-content>
