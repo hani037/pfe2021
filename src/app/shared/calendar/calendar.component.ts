@@ -58,18 +58,27 @@ export class CalendarComponent implements OnInit {
       }
     },
   ];
+
   colors: any = {
     red: {
-      primary: '#ad2121',
-      secondary: '#FAE3E3'
+      primary: 'rgba(244,0,5,0.6)',
+      secondary: 'rgba(244,0,5,0.6)'
     },
     blue: {
-      primary: '#031cff',
-      secondary: '#82fffd'
+      primary: 'rgba(33,211,200,0.53)',
+      secondary: 'rgba(33,211,200,0.56)'
     },
     yellow: {
-      primary: '#e3bc08',
-      secondary: '#FDF1BA'
+      primary: 'rgba(244,232,0,0.67)',
+      secondary: 'rgba(244,232,0,0.53)'
+    },
+    pink: {
+      primary: 'rgba(244,13,137,0.56)',
+      secondary: 'rgba(255,0,188,0.54)'
+    },
+    green: {
+      primary: 'rgba(0,244,22,0.56)',
+      secondary: 'rgba(45,255,22,0.55)'
     }
   };
   events: CalendarEvent[]=[];
@@ -84,7 +93,7 @@ export class CalendarComponent implements OnInit {
            start: new Date(event.start),
            end:new Date(event.end),
            title: event.description,
-           color:this.colors.blue,
+           color:this.colors[event.color],
            actions:this.actions
          },)
        });
@@ -102,11 +111,15 @@ export class CalendarComponent implements OnInit {
   handleEvent(action: string, event: CalendarEvent): void {
 
   }
-
+  dayClicked(day): void {
+    console.log(day);
+  this.view = CalendarView.Day;
+  this.viewDate = day.date;
+  }
   add_event() {
     this.dialog.open(AddEventComponent, {
-      height: '480px',
-      width: '360px',
+      height: '600px',
+      width: '500px',
       backdropClass: 'backdropBackground'
     }).afterClosed()
       .subscribe(response => {
@@ -114,12 +127,13 @@ export class CalendarComponent implements OnInit {
         event1.start  = response.data.start;
         event1.end  = response.data.end;
         event1.description  = response.data.description;
+        event1.color  = response.data.color;
 
         this.events.push( {
           start: new Date(response.data.start),
           end:new Date(response.data.end),
           title:response.data.description,
-          color:this.colors.blue,
+          color:this.colors[response.data.color],
           actions:this.actions
         },)
         this.eventService.create_user_events(event1).subscribe(data=>console.log(data));

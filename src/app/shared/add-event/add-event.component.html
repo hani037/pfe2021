@@ -5,34 +5,91 @@
     <form action="" method="post" (ngSubmit)="add(f)" #f="ngForm" >
       <div >
 
-        <mat-form-field appearance="fill">
-          <mat-label>Choose a date</mat-label>
+        <mat-form-field appearance="legacy">
+          <mat-label>Date</mat-label>
           <input ngModel required name="date" id="date" #date="ngModel"  matInput [matDatepicker]="picker">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker-toggle style="color: black;font-size: 180%" matSuffix [for]="picker"></mat-datepicker-toggle>
+
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
       </div>
-      <div class="flex-container">
-        <div>
-          <h6 style="margin-right: 1%;color: #5e72e4" >START TIME</h6>
-        </div>
-        <div fxLayout="column" fxLayoutAlign="space-around center" class="default-time-example">
-          <input class="input-group-text" required name="start" id="start" #start ngModel  aria-label="default time" [ngxTimepicker]="fullTime" [format]="24"  >
-          <ngx-material-timepicker #fullTime></ngx-material-timepicker>
-        </div>
-      </div>
 
-      <div class="flex-container">
-        <div>
-          <h6 style="margin-right: 1%;color: #5e72e4" >END  TIME</h6>
-        </div>
-        <div >
-          <div class="default-time-example" fxLayout="column" fxLayoutAlign="space-around center">
-            <input class="input-group-text" aria-label="default time" [ngxTimepicker]="fullTime1" [format]="24" #end ngModel required name="end" id="end" >
-            <ngx-material-timepicker #fullTime1></ngx-material-timepicker>
-          </div>        </div>
+      <p>
+        <mat-form-field appearance="legacy">
+          <mat-label>Start Time</mat-label>
+          <input matInput  required name="start" id="start" #start ngModel  aria-label="default time" [ngxTimepicker]="fullTime1" [format]="24"  >
+          <ngx-material-timepicker #fullTime1></ngx-material-timepicker>
+          <mat-icon matSuffix>schedule</mat-icon>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="legacy">
+          <mat-label>End Time</mat-label>
+          <input matInput  [ngxTimepicker]="fullTime2" [format]="24" #end ngModel required name="end" id="end1"  >
+          <ngx-material-timepicker #fullTime2></ngx-material-timepicker>
+          <mat-icon matSuffix>schedule</mat-icon>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="legacy">
+          <mat-label>Import Image</mat-label>
+          <input matInput >
+          <mat-icon matSuffix>upload</mat-icon>
+        </mat-form-field>
+      </p>
+      <div fxLayout="row" fxLayoutAlign="space-around center">
+        <h5 >Color:</h5>
+        <mat-radio-group #color [ngModel]="'red'" required name="color" id="color"   style="font-size: 200%" aria-label="Select an option">
+          <mat-radio-button  class="pink_circle"  value="pink"></mat-radio-button>
+          <mat-radio-button class="red_circle"  value="red"></mat-radio-button>
+          <mat-radio-button class="blue_circle"  value="blue"></mat-radio-button>
+          <mat-radio-button class="green_circle"  value="green"></mat-radio-button>
+          <mat-radio-button class="yellow_circle"  value="yellow"></mat-radio-button>
+        </mat-radio-group>
       </div>
-      <label for="description"></label><textarea ngModel required name="description" id="description" #description="ngModel" class="form-control" rows="3" placeholder="Description"></textarea>
+      <p>
+        <mat-form-field appearance="legacy">
+          <mat-label>Add Friend</mat-label>
+          <mat-chip-list #chipList1 >
+            <input matInput [matChipInputFor]="chipList1"
+                   [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                   [matChipInputAddOnBlur]="addOnBlur"
+                   (matChipInputTokenEnd)="add_friend($event)" >
+          </mat-chip-list>
+          <mat-icon matSuffix>group_add</mat-icon>
+        </mat-form-field>
+        <br>
+
+        <mat-chip *ngFor="let friend of friends" [selectable]="selectable"
+                  [removable]="removable" (removed)="remove_friend(friend)">
+          {{friend.name}}
+          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+        </mat-chip>
+      </p>
+      <p>
+        <mat-form-field appearance="legacy">
+          <mat-label>Tag</mat-label>
+          <mat-chip-list #chipList >
+          <input matInput [matChipInputFor]="chipList"
+                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                 [matChipInputAddOnBlur]="addOnBlur"
+                 (matChipInputTokenEnd)="add_tag($event)" >
+          </mat-chip-list>
+          <mat-icon matSuffix>sell</mat-icon>
+        </mat-form-field>
+        <br>
+
+        <mat-chip *ngFor="let tags of tags" [selectable]="selectable"
+                  [removable]="removable" (removed)="remove_tag(tags)">
+          {{tags.name}}
+          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+        </mat-chip>
+      </p>
+
+      <div class="text-center" >
+        <label for="description"></label><textarea ngModel required name="description" id="description"   #description="ngModel" class="form-control " rows="3" placeholder="Description"></textarea>
+
+      </div>
       <div class="text-center" style="margin-top: 3%" >
 
         <button [disabled]="f.invalid"  type="submit" mat-flat-button color="warn">ADD</button>

@@ -43,19 +43,19 @@
 
 
         <div  fxLayout="row" fxLayoutAlign="space-around center"   >
-          <button   mwlCalendarPreviousView
+          <button style="margin-right: 1%"   mwlCalendarPreviousView
                     [view]="view"
                     [(viewDate)]="viewDate"
                     (viewDateChange)="closeOpenMonthViewDay()"  mat-icon-button color="warn" aria-label="Example icon button with a heart icon">
-            <mat-icon>keyboard_arrow_left</mat-icon>
+            <mat-icon style="font-size: 300%">keyboard_arrow_left</mat-icon>
           </button>
-          <h3 style="text-align: center;color:black;flex: 1 ">{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+          <h3 style="text-align: center;color:black;">{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
           <button    mwlCalendarNextView
                      color="warn"
                      [view]="view"
                      [(viewDate)]="viewDate"
                      (viewDateChange)="closeOpenMonthViewDay()" mat-icon-button color="warn" aria-label="Example icon button with a heart icon">
-            <mat-icon>keyboard_arrow_right</mat-icon>
+            <mat-icon style="font-size: 300%">keyboard_arrow_right</mat-icon>
           </button>
         </div>
         <div >
@@ -76,6 +76,8 @@
           [viewDate]="viewDate"
           [events]="events"
           [refresh]="refresh"
+          (dayClicked)="dayClicked( $event.day)"
+
 
         >
         </mwl-calendar-month-view>
@@ -83,7 +85,7 @@
           *ngSwitchCase="CalendarView.Week"
           [viewDate]="viewDate"
           [hourSegmentHeight]="20"
-          [daysInWeek]="5"
+
           [dayEndHour]="16"
           [dayStartHour]="8"
           [events]="events"

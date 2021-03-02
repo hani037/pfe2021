@@ -15,8 +15,9 @@ export class AppComponent implements OnInit  {
   title = 'calendrier';
   route_active='';
   public list:List[] =[
-    {icon:'home',title:'CALENDRIER',path:'home'},
-    {icon:'perm_identity',title:'PROFILE',path:'profile'}
+    {icon:'home_outline',title:'CALENDRIER',path:'home'},
+    {icon:'person',title:'PROFILE',path:'profile'},
+    {icon:'logout',title:'LOG OUT',path:'login'}
   ];
   expand: boolean=true;
   constructor(public router:Router,public activatedRoute: ActivatedRoute) {

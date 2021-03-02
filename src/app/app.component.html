@@ -4,7 +4,7 @@
 <mat-drawer-container fullscreen autosize >
 
   <mat-drawer #sidenav mode="side" opened="true" role="navigation" style="background-color:#fafafa">
-    <ng-container>
+    <ng-container >
 
       <div fxLayout="column" fxLayoutAlign="space-around center" >
         <div style="margin-top: 50%;margin-bottom: 50%">
@@ -12,18 +12,19 @@
 
             <mat-list-item style="cursor: pointer;font-size: 200%"  >
               <mat-icon  matListIcon>facebook</mat-icon>
-              <h1 *ngIf="expand" matLine>I-events</h1>
+              <h3 *ngIf="expand" matLine>I-events</h3>
 
             </mat-list-item>
           </mat-list>
         </div>
-        <div fxFlex="2">
+        <div >
           <mat-list >
 
-            <mat-list-item style="cursor: pointer"  (click)="router.navigateByUrl(l.path)" *ngFor="let l of list" >
+            <mat-list-item [style.color]="route_active!=l.path ? 'rgba(0, 0, 0, 0.3)' : null" style="cursor: pointer"  (click)="router.navigateByUrl(l.path)" *ngFor="let l of list" >
               <div *ngIf="route_active===l.path"  class="rectangle"></div>
-              <mat-icon   matListIcon>{{l.icon}}</mat-icon>
-              <h3 *ngIf="expand" matLine>{{l.title}}</h3>
+              <mat-icon *ngIf="route_active!=l.path" fontSet="material-icons-outlined"  matListIcon>{{l.icon}}</mat-icon>
+              <mat-icon  *ngIf="route_active===l.path" style="color: #58CB7D" matListIcon>{{l.icon}}</mat-icon>
+              <h3 *ngIf="expand" matLine><strong>{{l.title}}</strong></h3>
 
             </mat-list-item>
           </mat-list>

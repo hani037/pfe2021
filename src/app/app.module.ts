@@ -47,6 +47,8 @@ import { SidenavComponent } from './shared/sidenav/sidenav.component';
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatListModule} from "@angular/material/list";
 import {MatBadgeModule} from "@angular/material/badge";
+import {MatRadioModule} from "@angular/material/radio";
+import {MatChipsModule} from "@angular/material/chips";
 export const interceptorProviders =
   [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
@@ -100,7 +102,9 @@ export const interceptorProviders =
     MatSnackBarModule,
     MatSidenavModule,
     MatListModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatRadioModule,
+    MatChipsModule
 
   ],
   providers: [interceptorProviders,MatDatepickerModule,{
