@@ -8,31 +8,37 @@
         </div>
         <div class="card-body">
           <h5  class="card-title text-center">Sign Up</h5>
-          <form action="" method="post" (ngSubmit)="createUser(f)" #f="ngForm" class="form-signin">
-            <div class="form-group">
-              <input ngModel required name="userName"  #userName="ngModel" type="text" id="userName" class="form-control" placeholder="userName"  autofocus>
-            </div>
-
-
-            <div class="form-group">
-              <input ngModel required name="email" email  #email="ngModel" type="email" id="email" class="form-control" placeholder="Email address" >
-            </div>
-            <div class="form-group">
-              <input ngModel required name="firstName"  #firstName="ngModel" type="text" id="firstName" class="form-control" placeholder="firstName"  autofocus>
-            </div>
-            <div class="form-group">
-              <input ngModel required name="lastName"  #lastName="ngModel" type="text" id="lastName" class="form-control" placeholder="lastName"  autofocus>
-            </div>
-
-
-            <div class="form-group">
-              <input type="password" id="inputPassword" class="form-control" id="Password" placeholder="Password" ngModel required name="Password"  #Password="ngModel">
-            </div>
-
+          <form action="" method="post" (ngSubmit)="createUser(f)" #f="ngForm" class="form-signin text-center">
+            <mat-form-field style="width: 100%" appearance="outline">
+              <mat-label>userName</mat-label>
+              <input  matInput ngModel required name="userName"  #userName="ngModel" type="text" id="userName"    autofocus >
+              <mat-icon color="accent" matSuffix>person</mat-icon>
+            </mat-form-field>
+            <mat-form-field style="width: 100%" appearance="outline">
+              <mat-label>email</mat-label>
+              <input  matInput ngModel required name="email" email  #email="ngModel" type="email" id="email">
+              <mat-icon color="accent" matSuffix>email</mat-icon>
+            </mat-form-field>
+            <mat-form-field style="width: 100%" appearance="outline">
+              <mat-label>firstName</mat-label>
+              <input  matInput ngModel required name="firstName"  #firstName="ngModel" type="text" id="firstName">
+              <mat-icon color="accent" matSuffix>person</mat-icon>
+            </mat-form-field>
+            <mat-form-field style="width: 100%" appearance="outline">
+              <mat-label>lastName</mat-label>
+              <input  matInput ngModel required name="lastName"  #lastName="ngModel" type="text" id="lastName">
+              <mat-icon color="accent" matSuffix>person</mat-icon>
+            </mat-form-field>
+            <mat-form-field style="width: 100%" appearance="outline">
+              <mat-label>Password</mat-label>
+              <input  matInput type="password" id="inputPassword" id="Password"  ngModel required name="Password"  #Password="ngModel">
+              <mat-icon color="accent" matSuffix>lock</mat-icon>
+            </mat-form-field>
 
             <div >
-              <button [disabled]="f.invalid"  class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign Up</button>
-              <a (click)="router.navigateByUrl('login')" class="d-block text-center mt-2 small" >Login</a>
+              <button style="width: 100%" class="btn-lg"  type="submit" [disabled]="f.invalid" mat-raised-button color="warn">Sign Up</button>
+              <br>
+              <button (click)="router.navigateByUrl('login')" mat-button color="warn">Login</button>
             </div>
 
           </form>

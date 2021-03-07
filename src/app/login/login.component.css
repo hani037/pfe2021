@@ -19,14 +19,14 @@ body {
   margin-bottom: 2rem;
   font-weight: 300;
   font-size: 2.5rem;
-  color: #007bff;
+  color: #ff0017;
 }
 
 .card-signin .card-img-left {
-  width: 45%;
+  width: 5%;
   /* Link to your background image using in the property below! */
-  background: scroll center url('../../assets/img/login.jpg');
   background-size: cover;
+  background-color: #58CB7D;
 }
 
 .card-signin .card-body {

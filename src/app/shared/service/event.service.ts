@@ -15,4 +15,13 @@ export class EventService {
   create_user_events(event){
     return this.http.post<event>(this.eventsUrl,event);
   }
+  updateEvent(event){
+    return this.http.put<event>(this.eventsUrl,event);
+  }
+  get_event_by_id(id:string){
+    return this.http.get<event>(this.eventsUrl+'/'+id);
+  }
+  delete_event(id:string){
+    return this.http.delete(this.eventsUrl+'/'+id);
+  }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from "../model/user";
 import {UserService} from "../service/user.service";
-import {NgForm} from "@angular/forms";
+import {FormBuilder, FormGroup, NgForm, Validators} from "@angular/forms";
 import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
@@ -11,11 +11,19 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 })
 export class ProfileComponent implements OnInit {
   user:User;
-
-  constructor(public userService:UserService,private _snackBar: MatSnackBar) { }
+  firstFormGroup: FormGroup;
+  secondFormGroup: FormGroup;
+  isEditable = false;
+  constructor(public userService:UserService,private _snackBar: MatSnackBar,private _formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-    console.log(this.userService.userConnected)
+    this.firstFormGroup = this._formBuilder.group({
+      firstCtrl: ['', Validators.required]
+    });
+    this.secondFormGroup = this._formBuilder.group({
+      secondCtrl: ['', Validators.required]
+    });
+
   }
 
   update_user_name(f:NgForm){

@@ -62,15 +62,7 @@
           <button (click)="expand=!expand"  mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
             <mat-icon>more_vert</mat-icon>
           </button>
-          <button [matMenuTriggerFor]="menu" mat-raised-button >
-            LANGUAGE
-            <mat-icon>keyboard_arrow_down</mat-icon>
 
-          </button>
-          <mat-menu #menu="matMenu">
-            <button mat-menu-item>ANGLAIS</button>
-            <button  mat-menu-item>FRANCAIS</button>
-          </mat-menu>
           <div style="position: absolute;right:1%" class="example-button-container">
             <button   mat-mini-fab color="white" aria-label="Example icon button with a bookmark icon">
               <mat-icon matBadge="15" matBadgeColor="warn" style="color: #cb4f00">notifications</mat-icon>

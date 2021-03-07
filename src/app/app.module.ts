@@ -20,7 +20,7 @@ import {AuthInterceptor} from './Interceptors/authInterceptor';
 import {NgbDatepickerModule, NgbTimepickerModule} from "@ng-bootstrap/ng-bootstrap";
 import { AddEventComponent } from './shared/add-event/add-event.component';
 import { CalendarComponent } from './shared/calendar/calendar.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatCardModule} from "@angular/material/card";
 
 import {MatDialogModule} from "@angular/material/dialog";
@@ -49,6 +49,7 @@ import {MatListModule} from "@angular/material/list";
 import {MatBadgeModule} from "@angular/material/badge";
 import {MatRadioModule} from "@angular/material/radio";
 import {MatChipsModule} from "@angular/material/chips";
+import {MatStepperModule} from "@angular/material/stepper";
 export const interceptorProviders =
   [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
@@ -104,7 +105,9 @@ export const interceptorProviders =
     MatListModule,
     MatBadgeModule,
     MatRadioModule,
-    MatChipsModule
+    MatChipsModule,
+    MatStepperModule,
+    ReactiveFormsModule
 
   ],
   providers: [interceptorProviders,MatDatepickerModule,{
