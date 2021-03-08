@@ -19,7 +19,8 @@ export class AppComponent implements OnInit  {
   public list_calendar:string[]=['CALENDAR 1','CALENDAR 2','CALENDAR 3']
   public list:List[] =[
     {icon:'home_outline',title:'CALENDRIER',path:'home'},
-    {icon:'person',title:'PROFILE',path:'profile'}
+    {icon:'person',title:'PROFILE',path:'profile'},
+    {icon:'search',title:'SEARCH',path:'search'}
   ];
   expand: boolean=true;
   constructor(public router:Router,public userService:UserService) {

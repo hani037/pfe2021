@@ -108,7 +108,7 @@
 
         <mat-form-field appearance="legacy">
           <mat-label>Date</mat-label>
-          <input   ngModel required name="date" id="edit_date" #date  matInput [matDatepicker]="picker">
+          <input  [formControl]="date1" required  matInput [matDatepicker]="picker">
           <mat-datepicker-toggle style="color: black;font-size: 180%" matSuffix [for]="picker"></mat-datepicker-toggle>
 
           <mat-datepicker #picker></mat-datepicker>
@@ -118,7 +118,7 @@
       <p>
         <mat-form-field appearance="legacy">
           <mat-label>Start Time</mat-label>
-          <input matInput  required name="start" id="edit_start" #start ngModel  aria-label="default time" [ngxTimepicker]="fullTime1" [format]="24"  >
+          <input matInput  required name="start" id="edit_start" #start [ngModel]="start1" aria-label="default time" [ngxTimepicker]="fullTime1" [format]="24"  >
           <ngx-material-timepicker #fullTime1></ngx-material-timepicker>
           <mat-icon matSuffix>schedule</mat-icon>
         </mat-form-field>
@@ -126,7 +126,7 @@
       <p>
         <mat-form-field appearance="legacy">
           <mat-label>End Time</mat-label>
-          <input matInput  [ngxTimepicker]="fullTime2" [format]="24" #end ngModel required name="end" id="edit_end1"  >
+          <input matInput  [ngxTimepicker]="fullTime2" [format]="24" #end [ngModel]="end1"   required name="end" id="edit_end1"  >
           <ngx-material-timepicker #fullTime2></ngx-material-timepicker>
           <mat-icon matSuffix>schedule</mat-icon>
         </mat-form-field>
@@ -193,7 +193,7 @@
       </div>
       <div class="text-center" style="margin-top: 3%" >
 
-        <button [disabled]="f.invalid"  type="submit" mat-flat-button color="warn">ADD</button>
+        <button [disabled]="f.invalid||date1.invalid"  type="submit" mat-flat-button color="warn">ADD</button>
       </div>
     </form>
 

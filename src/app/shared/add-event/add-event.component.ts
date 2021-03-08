@@ -1,10 +1,11 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import { NgForm, Validators} from '@angular/forms';
+import {FormControl, NgForm, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {MatChipInputEvent} from "@angular/material/chips";
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {event} from "../model/event";
 import {EventService} from "../service/event.service";
+import {Time} from "@angular/common";
 
 export interface Tag {
   name: string;
@@ -25,6 +26,9 @@ export class AddEventComponent implements OnInit {
   is_loading:boolean=false;
   event:event;
   is_edit:boolean=false;
+  date1:FormControl;
+  start1:string;
+  end1:string;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   tags: Tag[] = [
     {name: 'Sport'},
@@ -38,6 +42,9 @@ export class AddEventComponent implements OnInit {
     if (this.data){
       this.eventService.get_event_by_id(this.data.id).subscribe(data=>{
         this.event=data;
+        this.date1 = new FormControl(new Date(this.event.start))
+        this.start1 = this.event.start.split(' ')[1].replace(":00","");
+        this.end1 = this.event.end.split(' ')[1].replace(":00","");
         this.is_loading = true;
         this.is_edit = true;
       })
@@ -105,11 +112,10 @@ export class AddEventComponent implements OnInit {
   }
 
   update(f: NgForm) {
-
-    let date = ("0" + f.value.date.getDate()).slice(-2);
-    let month = ("0" + (f.value.date.getMonth()+1 )).slice(-2);
-    let year = f.value.date.getYear()+1900;
-
+    console.log(f);
+    let date = ("0" + this.date1.value.getDate()).slice(-2);
+    let month = ("0" + (this.date1.value.getMonth()+1 )).slice(-2);
+    let year = this.date1.value.getYear()+1900;
     const start=year + "-" + month + "-" + date + " " + f.value.start + ":00" ;
     const end=year + "-" + month + "-" + date + " " + f.value.end + ":00" ;
     const event1 = new event();

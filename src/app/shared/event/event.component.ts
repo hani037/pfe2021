@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {AddEventComponent} from "../add-event/add-event.component";
 import {event} from "../model/event";
-import {MatDialog} from "@angular/material/dialog";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {EventService} from "../service/event.service";
 @Component({
@@ -12,7 +12,7 @@ import {EventService} from "../service/event.service";
 export class EventComponent implements OnInit {
   is_loading:boolean=false;
   event:event;
-  constructor(private dialog: MatDialog,@Inject(MAT_DIALOG_DATA) public data: {id:string},private eventService:EventService) { }
+  constructor(private dialogRef: MatDialogRef<EventComponent>,private dialog: MatDialog,@Inject(MAT_DIALOG_DATA) public data: {id:string},private eventService:EventService) { }
 
   ngOnInit(): void {
  this.getEvent()
@@ -35,6 +35,6 @@ export class EventComponent implements OnInit {
   }
 
   public delete() {
-    this.eventService.delete_event(this.event.id).subscribe()
+    this.eventService.delete_event(this.event.id).subscribe(data=>this.dialogRef.close())
   }
 }

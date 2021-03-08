@@ -1,0 +1,14 @@
+<div class="text-center">
+  <h1>Tout ce dont vous avez besoin</h1>
+  <mat-form-field style="width: 70%" appearance="outline">
+    <mat-label>Position</mat-label>
+    <input  matInput ngModel required name="userName"  #Position="ngModel" type="text" id="Position"    autofocus >
+    <mat-icon color="accent" matSuffix>location_on</mat-icon>
+  </mat-form-field>
+  <h3>
+    Choisissez un service
+  </h3>
+  <div fxLayout="row" fxLayoutAlign="space-around center" >
+    <app-card-search [list]="l" *ngFor="let l of list" ></app-card-search>
+  </div>
+</div>

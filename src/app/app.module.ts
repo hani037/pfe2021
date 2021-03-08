@@ -50,6 +50,8 @@ import {MatBadgeModule} from "@angular/material/badge";
 import {MatRadioModule} from "@angular/material/radio";
 import {MatChipsModule} from "@angular/material/chips";
 import {MatStepperModule} from "@angular/material/stepper";
+import { SearchComponent } from './shared/search/search.component';
+import { CardSearchComponent } from './shared/card-search/card-search.component';
 export const interceptorProviders =
   [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
@@ -67,6 +69,8 @@ export const interceptorProviders =
     CalendarProfileComponent,
     EventComponent,
     SidenavComponent,
+    SearchComponent,
+    CardSearchComponent,
   ],
   imports: [
     NgxMaterialTimepickerModule,
