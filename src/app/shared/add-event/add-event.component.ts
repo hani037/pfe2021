@@ -6,6 +6,7 @@ import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {event} from "../model/event";
 import {EventService} from "../service/event.service";
 import {Time} from "@angular/common";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 export interface Tag {
   name: string;
@@ -36,7 +37,8 @@ export class AddEventComponent implements OnInit {
   ];
   friends: Friend[] = [
   ];
-  constructor(private dialogRef: MatDialogRef<AddEventComponent>,private eventService:EventService,@Inject(MAT_DIALOG_DATA) public data: {id:string}) { }
+  constructor(private dialogRef: MatDialogRef<AddEventComponent>,private eventService:EventService,
+              @Inject(MAT_DIALOG_DATA) public data: {id:string},private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     if (this.data){
@@ -69,7 +71,10 @@ export class AddEventComponent implements OnInit {
     event1.end  = end;
     event1.description  = f.value.description;
     event1.color  = f.value.color;
-    this.eventService.create_user_events(event1).subscribe(data=>this.dialogRef.close());
+    this.eventService.create_user_events(event1).subscribe(data=>{
+      this.dialogRef.close();
+      this.openSnackBar('Event Created','Exit');
+    });
 
   }
   add_tag(event: MatChipInputEvent): void {
@@ -124,6 +129,14 @@ export class AddEventComponent implements OnInit {
     event1.end  = end;
     event1.description  = f.value.description;
     event1.color  = f.value.color;
-    this.eventService.updateEvent(event1).subscribe(data=>this.dialogRef.close());
+    this.eventService.updateEvent(event1).subscribe(data=>{
+      this.dialogRef.close();
+      this.openSnackBar('Event updated','Exit');
+    });
+  }
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+    });
   }
 }

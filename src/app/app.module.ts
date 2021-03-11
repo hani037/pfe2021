@@ -14,7 +14,8 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
-import { AgmCoreModule } from '@agm/core';
+import { GoogleMapsModule } from '@angular/google-maps'
+
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AuthInterceptor} from './Interceptors/authInterceptor';
 import {NgbDatepickerModule, NgbTimepickerModule} from "@ng-bootstrap/ng-bootstrap";
@@ -29,7 +30,6 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
-
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import {MatInputModule} from "@angular/material/input";
 import {FlexModule} from "@angular/flex-layout";
@@ -52,6 +52,10 @@ import {MatChipsModule} from "@angular/material/chips";
 import {MatStepperModule} from "@angular/material/stepper";
 import { SearchComponent } from './shared/search/search.component';
 import { CardSearchComponent } from './shared/card-search/card-search.component';
+import { SearchResultComponent } from './shared/search-result/search-result.component';
+import { ClientCardComponent } from './shared/client-card/client-card.component';
+import {GooglePlacesComponent} from './shared/google-places/google-places.component';
+import { ConfirmationComponent } from './shared/confirmation/confirmation.component'
 export const interceptorProviders =
   [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
@@ -71,18 +75,20 @@ export const interceptorProviders =
     SidenavComponent,
     SearchComponent,
     CardSearchComponent,
+    SearchResultComponent,
+    ClientCardComponent,
+    GooglePlacesComponent,
+    ConfirmationComponent
   ],
   imports: [
     NgxMaterialTimepickerModule,
     BrowserModule,
+    GoogleMapsModule,
     MatProgressSpinnerModule,
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatToolbarModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAz_5xGEJZpM0BL-NQvJMz8pJUAnn0h7m0'
-    }),
     MDBBootstrapModule.forRoot(),
 
     CalendarModule.forRoot({

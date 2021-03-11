@@ -1,0 +1,27 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #ffffff;
+
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #f42a33;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(255, 98, 103);
+}
+.mat-chip{
+  background-color: rgb(244, 69, 69) !important;
+  color: white !important;
+  margin-right: 1%;
+}

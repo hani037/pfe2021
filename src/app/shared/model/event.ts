@@ -1,6 +1,6 @@
 export class event {
-  id: string;
-  userId: string;
+  id?: string;
+  userId?: string;
   start:string;
   end:string;
   color:string;

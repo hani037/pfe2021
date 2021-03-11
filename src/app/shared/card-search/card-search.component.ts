@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {Router} from "@angular/router";
 declare interface List {
   img:string,
   title:string,
@@ -10,9 +11,12 @@ declare interface List {
 })
 export class CardSearchComponent implements OnInit {
   @Input() list:List;
-  constructor() { }
+  constructor(private router:Router) { }
 
   ngOnInit(): void {
   }
 
+  search() {
+    this.router.navigateByUrl('search/aa/aa')
+  }
 }

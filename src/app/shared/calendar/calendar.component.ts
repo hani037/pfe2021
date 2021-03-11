@@ -25,6 +25,7 @@ import {EventService} from "../service/event.service";
 import {UserService} from "../service/user.service";
 import {CalendarProfileComponent} from "../calendar-profile/calendar-profile.component";
 import {EventComponent} from "../event/event.component";
+import {MatSnackBar} from "@angular/material/snack-bar";
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
@@ -107,10 +108,33 @@ export class CalendarComponent implements OnInit {
     this.activeDayIsOpen = false;
   }
   handleEvent(action: string, event: CalendarEvent): void {
+    let CssClass:string;
+    switch (event.color.primary) {
+      case 'rgba(244,0,5,0.6)': {
+        CssClass='backdropBackgroundRed';
+        break;
+      }
+      case 'rgba(33,211,200,0.53)': {
+        CssClass='backdropBackgroundBlue';
+        break;
+      }
+      case 'rgba(244,232,0,0.67)': {
+        CssClass='backdropBackgroundYellow';
+        break;
+      }
+      case 'rgba(0,244,22,0.56)': {
+        CssClass='backdropBackgroundGreen';
+        break;
+      }
+      default: {
+        CssClass='backdropBackgroundPink';
+        break;
+      }
+    }
     this.dialog.open(EventComponent, {
       height: '400px',
       width: '350px',
-      backdropClass: 'backdropBackground',
+      backdropClass: CssClass,
       data:{id: event.id}
     }).afterClosed().subscribe(data=>{
       this.get_evnets();

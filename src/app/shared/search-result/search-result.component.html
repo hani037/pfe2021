@@ -1,0 +1,83 @@
+<div fxLayout="row" fxLayoutAlign="space-around  start" >
+
+  <div fxFlex="70">
+
+
+    <p   >
+      <mat-toolbar   color="warn">
+        <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+          <mat-icon>location_on</mat-icon>
+        </button>
+        <span>Tunis</span>
+        <span class="example-spacer"></span>
+        <div fxLayout="row" fxLayoutAlign="space-around center" >
+          <mat-form-field style="width: 23%"  >
+            <input matInput type="search"  class="search-input">
+            <mat-label style="font-size: 70%">Search</mat-label>
+            <mat-icon style="font-size: 90%" matSuffix>search</mat-icon>
+          </mat-form-field>
+          <div>
+            <div class="example-button-container">
+              <button style="border-color: white"  [matMenuTriggerFor]="menu"  mat-stroked-button aria-label="Example icon button with a menu icon">
+                Filter
+                <mat-icon>filter_alt</mat-icon>
+              </button>
+            </div>
+            <mat-menu  #menu="matMenu">
+              <button (click)="filterClicked('Item 1')" mat-menu-item>Item 1</button>
+              <button (click)="filterClicked('Item 2')" mat-menu-item>Item 2</button>
+            </mat-menu>
+          </div>
+          <div>
+            <div class="example-button-container">
+              <button style="border-color: white"   [matMenuTriggerFor]="menu1"  mat-stroked-button aria-label="Example icon button with a menu icon">
+                Trier Par
+                <mat-icon>keyboard_arrow_right</mat-icon>
+              </button>
+            </div>
+            <mat-menu  #menu1="matMenu">
+              <div fxLayout="row" fxLayoutAlign="space-around center" *ngFor="let tr of trier;let i=index">
+                <button (click)="trierPar(i)"  mat-menu-item>{{tr.name}}</button>
+                <button (click)="removeTrier()"  color="warn" *ngIf="i==Trier_index" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+                  <mat-icon>check</mat-icon>
+                </button>
+              </div>
+            </mat-menu>
+          </div>
+        </div>
+
+      </mat-toolbar>
+    </p>
+    <div >
+      <mat-chip-list style="margin-bottom:1%" fxLayout="row" fxLayoutAlign="space-around center" #chipList aria-label="Fruit selection">
+        <mat-chip *ngFor="let filter of filters" [selectable]="selectable"
+                  [removable]="removable" color="warn" (removed)="remove(filter)">
+          {{filter.name}}
+          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+        </mat-chip>
+      </mat-chip-list>
+    </div>
+    <div style="overflow-y: scroll; height:40rem;">
+      <app-client-card  (mouseenter)="changeAnimation(i)" (mouseleave)="stopAnimation()"
+                        *ngFor="let client of clients;let i=index" [address]="client.Address" [userName]="client.userName"
+                        [Events_Client]="client.events"
+      ></app-client-card>
+
+    </div>
+  </div>
+  <div  fxFlex="25"style="margin-top: 7%">
+
+    <google-map  [center]="center" width="100%" >
+      <map-marker
+        *ngFor="let marker of markers"
+        [position]="marker.position"
+        [label]="marker.label"
+        [title]="marker.title"
+        [options]="marker.options"
+
+      >
+      </map-marker>
+    </google-map>
+  </div>
+
+</div>

@@ -11,7 +11,22 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   z-index: 10000000 !important;
 }
 .backdropBackground {
-background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 253, 254, 0.8);
+}
+.backdropBackgroundRed {
+background: rgba(255, 5, 0, 0.8);
+}
+.backdropBackgroundBlue {
+  background: rgba(33, 211, 200, 0.8);
+}
+.backdropBackgroundPink {
+  background: rgba(244, 13, 137, 0.8);
+}
+.backdropBackgroundGreen {
+  background: rgba(0, 244, 22, 0.8);
+}
+.backdropBackgroundYellow {
+  background: rgba(244, 232, 0, 0.8);
 }
 .red_circle.mat-radio-button.mat-accent .mat-radio-outer-circle {
   border-color: rgb(244, 0, 5);
@@ -42,10 +57,10 @@ background: rgba(255, 255, 255, 0.8);
   background-color:rgba(255, 37, 37,0.26);
 }
 .mat-chip{
-  background-color: rgb(19, 244, 36) !important;
-  color: white !important;
-  margin-right: 1%;
-}
+   background-color: rgb(19, 244, 36) !important;
+   color: white !important;
+   margin-right: 1%;
+ }
 /* width */
 ::-webkit-scrollbar {
   width: 5px;
