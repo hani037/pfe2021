@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
 import {FormControl, NgForm, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {MatChipInputEvent} from "@angular/material/chips";
@@ -7,6 +7,9 @@ import {event} from "../model/event";
 import {EventService} from "../service/event.service";
 import {Time} from "@angular/common";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {catchError, map} from "rxjs/operators";
+import {HttpErrorResponse, HttpEventType} from "@angular/common/http";
+import {of} from "rxjs";
 
 export interface Tag {
   name: string;
@@ -20,11 +23,13 @@ export interface Friend {
   styleUrls: ['./add-event.component.css']
 })
 export class AddEventComponent implements OnInit {
-  visible = true;
+  @ViewChild("fileUpload", {static: false}) fileUpload: ElementRef;
+  @ViewChild("fileUpload1", {static: false}) fileUpload_edit: ElementRef;
+  file;
   selectable = true;
   removable = true;
   addOnBlur = true;
-  is_loading:boolean=false;
+  is_loading:boolean=true;
   event:event;
   is_edit:boolean=false;
   date1:FormControl;
@@ -47,17 +52,17 @@ export class AddEventComponent implements OnInit {
         this.date1 = new FormControl(new Date(this.event.start))
         this.start1 = this.event.start.split(' ')[1].replace(":00","");
         this.end1 = this.event.end.split(' ')[1].replace(":00","");
-        this.is_loading = true;
         this.is_edit = true;
+        this.is_loading = false;
       })
+    }else {
+      this.is_loading = false;
     }
 
   }
 
-
-
   add(f:NgForm) {
-
+    this.is_loading = true;
 
     let date = ("0" + f.value.date.getDate()).slice(-2);
 
@@ -71,9 +76,10 @@ export class AddEventComponent implements OnInit {
     event1.end  = end;
     event1.description  = f.value.description;
     event1.color  = f.value.color;
+    event1.image = '';
     this.eventService.create_user_events(event1).subscribe(data=>{
-      this.dialogRef.close();
-      this.openSnackBar('Event Created','Exit');
+      this.uploadFile(this.file,data.id);
+
     });
 
   }
@@ -130,8 +136,13 @@ export class AddEventComponent implements OnInit {
     event1.description  = f.value.description;
     event1.color  = f.value.color;
     this.eventService.updateEvent(event1).subscribe(data=>{
-      this.dialogRef.close();
-      this.openSnackBar('Event updated','Exit');
+      if(!this.file){
+        this.dialogRef.close();
+        this.openSnackBar('Event updated','Exit');
+      }else{
+        this.is_loading = true;
+        this.uploadFile(this.file,data.id);
+      }
     });
   }
   openSnackBar(message: string, action: string) {
@@ -139,4 +150,25 @@ export class AddEventComponent implements OnInit {
       duration: 2000,
     });
   }
+  onClick() {
+    const fileUpload = this.fileUpload.nativeElement;fileUpload.onchange = () => {
+        const file = fileUpload.files[0];
+        this.file = { data: file, inProgress: false, progress: 0};
+        console.log(this.file)
+    };
+    fileUpload.click();
+
+  }
+
+  uploadFile(file,id:string) {
+    const formData = new FormData();
+    formData.append('file', file.data);
+    file.inProgress = true;
+    this.eventService.uploadImage(formData,id).subscribe(data=>{
+      console.log(data)
+      this.dialogRef.close();
+      this.openSnackBar('Event created ','Exit');
+    })
+  }
 }
+

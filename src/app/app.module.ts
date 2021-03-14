@@ -56,6 +56,7 @@ import { SearchResultComponent } from './shared/search-result/search-result.comp
 import { ClientCardComponent } from './shared/client-card/client-card.component';
 import {GooglePlacesComponent} from './shared/google-places/google-places.component';
 import { ConfirmationComponent } from './shared/confirmation/confirmation.component'
+import {MatProgressBarModule} from "@angular/material/progress-bar";
 export const interceptorProviders =
   [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
@@ -80,46 +81,47 @@ export const interceptorProviders =
     GooglePlacesComponent,
     ConfirmationComponent
   ],
-  imports: [
-    NgxMaterialTimepickerModule,
-    BrowserModule,
-    GoogleMapsModule,
-    MatProgressSpinnerModule,
-    HttpClientModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MDBBootstrapModule.forRoot(),
+    imports: [
+        NgxMaterialTimepickerModule,
+        BrowserModule,
+        GoogleMapsModule,
+        MatProgressSpinnerModule,
+        HttpClientModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        MDBBootstrapModule.forRoot(),
 
-    CalendarModule.forRoot({
-      provide: DateAdapter,
-      useFactory: adapterFactory,
-    }),
-    FontAwesomeModule,
-    NgbDatepickerModule,
-    NgbTimepickerModule,
-    FormsModule,
-    MatCardModule,
-    MatDialogModule,
-    MatIconModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatInputModule,
-    FlexModule,
-    MatMenuModule,
-    MatTabsModule,
-    MatSnackBarModule,
-    MatSidenavModule,
-    MatListModule,
-    MatBadgeModule,
-    MatRadioModule,
-    MatChipsModule,
-    MatStepperModule,
-    ReactiveFormsModule
+        CalendarModule.forRoot({
+            provide: DateAdapter,
+            useFactory: adapterFactory,
+        }),
+        FontAwesomeModule,
+        NgbDatepickerModule,
+        NgbTimepickerModule,
+        FormsModule,
+        MatCardModule,
+        MatDialogModule,
+        MatIconModule,
+        MatButtonModule,
+        MatFormFieldModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatInputModule,
+        FlexModule,
+        MatMenuModule,
+        MatTabsModule,
+        MatSnackBarModule,
+        MatSidenavModule,
+        MatListModule,
+        MatBadgeModule,
+        MatRadioModule,
+        MatChipsModule,
+        MatStepperModule,
+        ReactiveFormsModule,
+        MatProgressBarModule
 
-  ],
+    ],
   providers: [interceptorProviders,MatDatepickerModule,{
     provide: APP_INITIALIZER,
     useFactory: (ds: UserService) =>async () => {

@@ -24,4 +24,7 @@ export class EventService {
   delete_event(id:string){
     return this.http.delete(this.eventsUrl+'/'+id);
   }
+  uploadImage(formData,id){
+    return this.http.put<any>(this.eventsUrl+'/'+id+'/upload',formData)
+  }
 }

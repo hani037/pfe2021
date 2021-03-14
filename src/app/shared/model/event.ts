@@ -5,6 +5,7 @@ export class event {
   end:string;
   color:string;
   description:string;
+  image:string;
   public static clone(src: event, dest : event):void {
     dest.id = src.id;
     dest.userId = src.userId;
@@ -12,5 +13,6 @@ export class event {
     dest.end = src.end;
     dest.color = src.color;
     dest.description = src.description;
+    dest.image = src.image;
   }
 }

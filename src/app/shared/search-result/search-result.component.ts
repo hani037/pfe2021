@@ -50,31 +50,31 @@ export class SearchResultComponent implements OnInit {
 
   ngOnInit(): void {
     this.clients.push({userName:'useName1' ,events:[
-      {start:'Sat Mar 13 2021 9:00:00',end:'Sat Mar 13 2021 10:00:00',color:'',description:''},
-      {start:'Sat Mar 13 2021 11:00:00',end:'Sat Mar 13 2021 12:00:000',color:'',description:''},
-      {start:'Sat Mar 13 2021 12:00:00',end:'Sat Mar 13 2021 13:00:00',color:'',description:''},
-      {start:'Sat Mar 13 2021 14:00:00',end:'Sat Mar 13 2021 15:00:00',color:'',description:''},
-      {start:'Sat Mar 12 2021 9:00:00',end:'Sat Mar 12 2021 10:00:00',color:'',description:''},
+      {start:'Sat Mar 13 2021 9:00:00',end:'Sat Mar 13 2021 10:00:00',color:'',description:'',image:''},
+      {start:'Sat Mar 13 2021 11:00:00',end:'Sat Mar 13 2021 12:00:000',color:'',description:'',image:''},
+      {start:'Sat Mar 13 2021 12:00:00',end:'Sat Mar 13 2021 13:00:00',color:'',description:'',image:''},
+      {start:'Sat Mar 13 2021 14:00:00',end:'Sat Mar 13 2021 15:00:00',color:'',description:'',image:''},
+      {start:'Sat Mar 12 2021 9:00:00',end:'Sat Mar 12 2021 10:00:00',color:'',description:'',image:''},
 
       ], Address:'address1',lat:36.807381,lng:10.181763},
       {userName:'useName2' ,events:[
-          {start:'Sat Mar 13 2021 9:00:00',end:'Sat Mar 13 2021 10:00:00',color:'',description:''},
-          {start:'Sat Mar 13 2021 11:00:00',end:'Sat Mar 13 2021 12:00:000',color:'',description:''},
-          {start:'Sat Mar 13 2021 14:00:00',end:'Sat Mar 13 2021 15:00:00',color:'',description:''},
-          {start:'Sat Mar 12 2021 12:00:00',end:'Sat Mar 12 2021 13:00:00',color:'',description:''},
+          {start:'Sat Mar 13 2021 9:00:00',end:'Sat Mar 13 2021 10:00:00',color:'',description:'',image:''},
+          {start:'Sat Mar 13 2021 11:00:00',end:'Sat Mar 13 2021 12:00:000',color:'',description:'',image:''},
+          {start:'Sat Mar 13 2021 14:00:00',end:'Sat Mar 13 2021 15:00:00',color:'',description:'',image:''},
+          {start:'Sat Mar 12 2021 12:00:00',end:'Sat Mar 12 2021 13:00:00',color:'',description:'',image:''},
 
         ], Address:'address2',lat:36.806389,lng:10.181667},
       {userName:'useName3' ,events:[
-          {start:'Sat Mar 13 2021 9:00:00',end:'Sat Mar 13 2021 10:00:00',color:'',description:''},
-          {start:'Sat Mar 13 2021 8:00:00',end:'Sat Mar 13 2021 9:00:00',color:'',description:''},
-          {start:'Sat Mar 13 2021 14:00:00',end:'Sat Mar 13 2021 15:00:00',color:'',description:''},
-          {start:'Sat Mar 12 2021 9:00:00',end:'Sat Mar 12 2021 10:00:00',color:'',description:''},
+          {start:'Sat Mar 13 2021 9:00:00',end:'Sat Mar 13 2021 10:00:00',color:'',description:'',image:''},
+          {start:'Sat Mar 13 2021 8:00:00',end:'Sat Mar 13 2021 9:00:00',color:'',description:'',image:''},
+          {start:'Sat Mar 13 2021 14:00:00',end:'Sat Mar 13 2021 15:00:00',color:'',description:'',image:''},
+          {start:'Sat Mar 12 2021 9:00:00',end:'Sat Mar 12 2021 10:00:00',color:'',description:'',image:''},
 
         ], Address:'address3',lat:36.805389,lng:10.181667},
       {userName:'useName4' ,events:[
-          {start:'Sat Mar 13 2021 9:00:00',end:'Sat Mar 13 2021 10:00:00',color:'',description:''},
-          {start:'Sat Mar 13 2021 14:00:00',end:'Sat Mar 13 2021 15:00:00',color:'',description:''},
-          {start:'Sat Mar 12 2021 9:00:00',end:'Sat Mar 12 2021 10:00:00',color:'',description:''},
+          {start:'Sat Mar 13 2021 9:00:00',end:'Sat Mar 13 2021 10:00:00',color:'',description:'',image:''},
+          {start:'Sat Mar 13 2021 14:00:00',end:'Sat Mar 13 2021 15:00:00',color:'',description:'',image:''},
+          {start:'Sat Mar 12 2021 9:00:00',end:'Sat Mar 12 2021 10:00:00',color:'',description:'',image:''},
 
         ], Address:'address4',lat:36.804389,lng:10.181687});
     this.center = {lat:36.806389,lng:10.181667}

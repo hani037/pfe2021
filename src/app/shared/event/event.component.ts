@@ -19,7 +19,7 @@ export class EventComponent implements OnInit {
               ,private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
- this.getEvent()
+ this.getEvent();
   }
   update(){
     this.dialog.open(AddEventComponent, {
@@ -33,6 +33,7 @@ export class EventComponent implements OnInit {
   getEvent(){
     this.eventService.get_event_by_id(this.data.id).subscribe(data=>{
       this.event=data;
+      console.log(this.event)
       this.is_loading = true;
     })
   }

@@ -87,8 +87,9 @@ export class CalendarComponent implements OnInit {
     this.eventService.get_user_events().subscribe(data=>{
       this.events=[];
       this.events_user = data;
+      console.log(data);
       this.events_user.forEach(event=>{
-        console.log(event);
+
         this.events.push( {
           start: new Date(event.start),
           end:new Date(event.end),
