@@ -10,6 +10,8 @@ import {LoginActivate} from "./shared/activate/login.activate";
 import {ProfileComponent} from "./shared/profile/profile.component";
 import {SearchComponent} from "./shared/search/search.component";
 import {SearchResultComponent} from "./shared/search-result/search-result.component";
+import {AccountActivateComponent} from "./shared/account-activate/account-activate.component";
+import {EventDisplayComponent} from "./shared/event-display/event-display.component";
 
 
 const routes: Routes = [
@@ -17,6 +19,7 @@ const routes: Routes = [
       { path: '',   redirectTo: 'home', pathMatch: 'full'},
       { path: 'home', component: HomeComponent,canActivate:[ConnectActivate]},
       { path: 'profile', component: ProfileComponent,canActivate:[ConnectActivate]},
+      { path: 'event/:id', component: EventDisplayComponent},
       { path: 'search', component: SearchComponent,canActivate:[ConnectActivate]},
       { path: 'search/:position/:service', component: SearchResultComponent,canActivate:[ConnectActivate]},
       { path: 'login', component:LoginComponent,canActivate:[LoginActivate]},

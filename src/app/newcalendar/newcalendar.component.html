@@ -1,0 +1,10 @@
+<div *ngIf="loading" fxLayout="row" fxLayoutAlign="space-around center">
+  <mat-spinner></mat-spinner>
+</div>
+<div style="position: absolute;bottom: 5%;right:2%;z-index: 10000000 !important;" class="example-button-container">
+  <button (click)="add_event()" mat-fab color="warn" aria-label="Example icon button with a bookmark icon">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+<full-calendar   #fullcalendar *ngIf="!loading" style="margin:1% 2%;font-size: 80%" [options]="calendarOptions"></full-calendar>
+

@@ -23,7 +23,7 @@ export class ConnectActivate implements CanActivate {
   ) {
 
     return this.userService.userConnectedObservable.pipe(map(userConnected => {
-      if (userConnected && userConnected.id) {
+      if (userConnected && userConnected.id && userConnected.enabled) {
         return true;
       }
 

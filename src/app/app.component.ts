@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, NavigationStart, Router, RouterEvent} from "@angular/router";
 import {filter} from "rxjs/operators";
 import {UserService} from "./shared/service/user.service";
@@ -24,10 +24,12 @@ export class AppComponent implements OnInit  {
   ];
   expand: boolean=true;
   constructor(public router:Router,public userService:UserService) {
-
-
+    this.expand = window.innerWidth >= 768;
   }
-
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.expand = window.innerWidth >= 768;
+  }
   ngOnInit(): void {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {

@@ -1,5 +1,5 @@
 import { Injectable, Output, EventEmitter } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 
 import { mergeMap, map } from 'rxjs/operators';
@@ -40,22 +40,21 @@ export class UserService {
     this._userConnected.next(null);
 
   }
-  createUser(user: User): Promise<User> {
-    return this.http.post<User>(this.usersUrl, user).toPromise();
+  createUser(user: User) {
+
+    return this.http.post<User>(this.usersUrl, user);
   }
   updateUser(user: User): Promise<User> {
     return this.http.put<User>(this.usersUrl, user).toPromise();
   }
-  login(userName: String, password: String): Promise<any> {
+  login(userName: string, password: string): Promise<any> {
     let user = new User();
     user.userName = userName;
     user.password = password;
     return this.http.post(this.tokensUrl,user,{ responseType: 'text'})
       .pipe(
         mergeMap( token => {
-          console.log(token);
           this.token = token;
-          localStorage.setItem('token', this.token);
           return this.me();
         }),
       ).toPromise();
@@ -90,4 +89,16 @@ export class UserService {
       return false;
     }
   }
+  public confirmAccount(code:string,user:User){
+  return this.http.put<User>(this.usersUrl+'/registrationConfirm/'+code,user);
+  }
+  public setToken(){
+    localStorage.setItem('token', this.token);
+  }
+
+  changeCode(user: User) {
+    return this.http.put<User>(this.usersUrl+'/changeToken',user);
+
+  }
+ 
 }

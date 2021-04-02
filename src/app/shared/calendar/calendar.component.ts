@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Component, HostListener, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {
   CalendarEvent,
   CalendarEventAction,
@@ -15,8 +15,7 @@ import {
   isSameMonth,
   addHours
 } from 'date-fns';
-import {Client} from "../model/client";
-import {section} from "../model/client";
+
 import {MatDialog} from "@angular/material/dialog";
 import {AddEventComponent} from '../add-event/add-event.component';
 import {Subject} from 'rxjs';
@@ -26,6 +25,9 @@ import {UserService} from "../service/user.service";
 import {CalendarProfileComponent} from "../calendar-profile/calendar-profile.component";
 import {EventComponent} from "../event/event.component";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {AppointmentService} from "../service/appointment.service";
+import {AppointmentComponent} from "../appointment/appointment.component";
+import {map, mergeMap} from "rxjs/operators";
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
@@ -36,7 +38,7 @@ export class CalendarComponent implements OnInit {
   loading:boolean=true;
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
 
-  events_user:event[];
+  isMobileResolution=false;
   nb:number=0;
   viewDate: Date = new Date();
   view: CalendarView = CalendarView.Month;
@@ -78,18 +80,21 @@ export class CalendarComponent implements OnInit {
     }
   };
   events: CalendarEvent[]=[];
-  constructor(private dialog: MatDialog,private eventService:EventService,private userService:UserService) { }
-
-  ngOnInit(): void {
-    this.get_evnets();
+  constructor(private dialog: MatDialog,private eventService:EventService,private appointmentService:AppointmentService) {
+    this.isMobileResolution = window.innerWidth < 768;
   }
-  get_evnets(){
-    this.eventService.get_user_events().subscribe(data=>{
-      this.events=[];
-      this.events_user = data;
-      console.log(data);
-      this.events_user.forEach(event=>{
+    @HostListener('window:resize', ['$event'])
+    onResize(event) {
+      this.isMobileResolution = window.innerWidth < 768;
+    }
+  ngOnInit(): void {
+    this.get_events_appointments().subscribe();
 
+  }
+  get_events_appointments(){
+    return this.eventService.get_user_events().pipe(mergeMap(data=>{
+      this.events=[];
+      data.forEach(event=>{
         this.events.push( {
           start: new Date(event.start),
           end:new Date(event.end),
@@ -99,9 +104,24 @@ export class CalendarComponent implements OnInit {
           actions:this.actions
         },)
       });
+    return  this.appointmentService.getUserAppointment();
+    }),map(data=>{
+      data.forEach(data=>{
+        let date =data.date.split('-')
+        let time =data.time.split(':')
+        this.events.push( {
+          start: new Date(+date[2],+date[1]-1,+date[0],+time[0],+time[1]),
+          end:new Date(+date[2],+date[1]-1,+date[0],+time[0],+time[1]+(+data.duration)),
+          title: 'appointment',
+          id:data.id,
+          color:this.colors.blue,
+          actions:this.actions,
+        },)
+      });
       this.loading= false;
-    });
+    }));
   }
+
   setView(view: CalendarView) {
     this.view = view;
   }
@@ -132,15 +152,24 @@ export class CalendarComponent implements OnInit {
         break;
       }
     }
-    this.dialog.open(EventComponent, {
-      height: '400px',
-      width: '350px',
-      backdropClass: CssClass,
-      data:{id: event.id}
-    }).afterClosed().subscribe(data=>{
-      this.get_evnets();
-      this.refresh.next();
-    })
+    if(event.title.includes("appointment")){
+      this.dialog.open(AppointmentComponent, {
+        height: '300px',
+        width: '350px',
+        backdropClass: CssClass,
+        data:{id: event.id}
+      })
+    }else {
+      this.dialog.open(EventComponent, {
+        height: '400px',
+        width: '350px',
+        backdropClass: CssClass,
+        data:{id: event.id}
+      }).afterClosed().subscribe(data=>{
+        this.get_events_appointments().subscribe(data=>this.refresh.next());
+      })
+    }
+
   }
   dayClicked(day): void {
     console.log(day);
@@ -154,9 +183,7 @@ export class CalendarComponent implements OnInit {
       backdropClass: 'backdropBackground'
     }).afterClosed()
       .subscribe(response => {
-        this.get_evnets();
-        this.refresh.next();
+        this.get_events_appointments().subscribe(data=>this.refresh.next());
       });
   }
-
 }

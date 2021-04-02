@@ -9,7 +9,10 @@
   <h3>
     Choisissez un service
   </h3>
-  <div fxLayout="row" fxLayoutAlign="space-around center" >
+  <div *ngIf="!isMobileResolution" fxLayout="row" fxLayoutAlign="space-around center" >
     <app-card-search [list]="l" *ngFor="let l of list" ></app-card-search>
+  </div>
+  <div  *ngIf="isMobileResolution">
+    <app-card-search style="margin-bottom: 2%" fxLayout="row" fxLayoutAlign="space-around center" class="text-center" [list]="l" *ngFor="let l of list" ></app-card-search>
   </div>
 </div>

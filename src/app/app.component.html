@@ -28,27 +28,17 @@
               <hr>
 
             </mat-list-item>
-            <mat-list-item [style.color]="route_active!='login'? 'rgba(0, 0, 0, 0.3)' : null" style="cursor: pointer"  (click)="logout()"  >
-              <div *ngIf="route_active==='login'"  class="rectangle"></div>
-              <mat-icon *ngIf="route_active!='login'" fontSet="material-icons-outlined"  matListIcon>logout</mat-icon>
-              <mat-icon  *ngIf="route_active==='login'" style="color: #58CB7D" matListIcon>logout</mat-icon>
+            <mat-list-item [style.color]="(route_active!='login')&&(route_active!='sign-up')? 'rgba(0, 0, 0, 0.3)' : null" style="cursor: pointer"  (click)="logout()"  >
+              <div *ngIf="(route_active==='login')||(route_active==='sign-up')"  class="rectangle"></div>
+              <mat-icon *ngIf="(route_active!='login')&&(route_active!='sign-up')" fontSet="material-icons-outlined"  matListIcon>logout</mat-icon>
+              <mat-icon  *ngIf="(route_active==='login')||(route_active==='sign-up')" style="color: #58CB7D" matListIcon>logout</mat-icon>
               <h3 *ngIf="expand" matLine><strong>LOG OUT</strong></h3>
               <hr>
 
             </mat-list-item>
 
           </mat-list>
-          <!--
-           <mat-list *ngIf="l.title==='CALENDRIER'">
-            <mat-list-item  [style.color]="index!=i ? 'rgba(0, 0, 0, 0.3)' : null" style="cursor: pointer" (click)="index=i"   *ngFor="let l2 of list_calendar;let i = index" >
-              <div *ngIf="index===i "  class="rectangle"></div>
-              <mat-icon *ngIf="index!=i " fontSet="material-icons-outlined"  matListIcon>calendar</mat-icon>
-              <mat-icon  *ngIf="index===i " style="color: #58CB7D" matListIcon>calendar</mat-icon>
-              <h3 *ngIf="expand" matLine><strong>{{l2}}</strong></h3>
-            </mat-list-item>
-          </mat-list>
-          -->
-
+      
         </div>
 
       </div>

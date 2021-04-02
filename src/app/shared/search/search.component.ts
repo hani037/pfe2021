@@ -1,4 +1,4 @@
-import {Component, NgZone, OnInit} from '@angular/core';
+import {Component, HostListener, NgZone, OnInit} from '@angular/core';
 declare interface List {
   img:string,
   title:string,
@@ -13,9 +13,12 @@ export class SearchComponent implements OnInit {
   is_Loading:boolean=true;
   address: Object;
   formattedAddress: string;
+  isMobileResolution = false;
   public list:List[]=[];
 
-  constructor(public zone: NgZone) { }
+  constructor(public zone: NgZone) {
+    this.isMobileResolution = window.innerWidth < 1000;
+  }
 
   ngOnInit(): void {
     this.list = [
@@ -34,6 +37,10 @@ export class SearchComponent implements OnInit {
   }
 
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.isMobileResolution = window.innerWidth < 1000;
+  }
 
 
 

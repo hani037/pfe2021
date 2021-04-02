@@ -1,0 +1,28 @@
+<mat-card style="margin-right: 20%;margin-left: 20%;margin-top: 2%"  class="text-center" *ngIf="is_loading">
+
+  <img *ngIf="event.image!=''" style="height: 50%;width: 50%" mat-card-image [src]="event.image" >
+  <mat-card-content>
+    <div  fxLayout="row" fxLayoutAlign="space-around center">
+
+      <h6 style="color: rgba(0,0,0,0.29)" fxFlex="60" ><strong>Start:</strong></h6>
+      <h6 fxFlex="60">{{event.start}}</h6>
+
+    </div>
+    <div  fxLayout="row" fxLayoutAlign="space-around center">
+
+      <h6 style="color: rgba(0,0,0,0.29)" fxFlex="60" ><strong>End:</strong></h6>
+      <h6 fxFlex="60">{{event.end}}</h6>
+
+    </div>
+    <div  fxLayout="row" fxLayoutAlign="space-around center">
+
+      <h6 style="color: rgba(0,0,0,0.29)" fxFlex="60" ><strong>Description:</strong></h6>
+      <h6 fxFlex="60">{{event.description}}</h6>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <button (click)="join()" mat-raised-button color="accent">join</button>
+  </mat-card-actions>
+</mat-card>
+
+

@@ -15,8 +15,7 @@ import {
   isSameMonth,
   addHours
 } from 'date-fns';
-import {Client} from "../model/client";
-import {section} from "../model/client";
+
 import {MatDialog} from "@angular/material/dialog";
 import {AddEventComponent} from '../add-event/add-event.component';
 import {Subject} from 'rxjs';

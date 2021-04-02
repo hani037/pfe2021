@@ -1,0 +1,23 @@
+
+<mat-card style="margin-top: 3%" class="example-card">
+  <mat-card-header fxLayout="row" fxLayoutAlign="start center"   >
+
+    <div  mat-card-avatar class="example-header-image"></div>
+    <mat-card-title > {{userName}}</mat-card-title>
+    <mat-card-subtitle >{{address}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <div *ngIf="loading" fxLayout="row" fxLayoutAlign="space-around center">
+      <mat-spinner></mat-spinner>
+    </div>
+    <full-calendar  #fullcalendar *ngIf="!loading" style="margin:1% 2%" [options]="calendarOptions"></full-calendar>
+  </mat-card-content>
+    <mat-card-actions class="text-center">
+      <div class="example-button-container">
+        <button style="border-color: red" color="warn"   mat-stroked-button aria-label="Example icon button with a menu icon">
+          Profile
+          <mat-icon>person</mat-icon>
+        </button>
+      </div>
+    </mat-card-actions>
+</mat-card>

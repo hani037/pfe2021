@@ -57,6 +57,23 @@ import { ClientCardComponent } from './shared/client-card/client-card.component'
 import {GooglePlacesComponent} from './shared/google-places/google-places.component';
 import { ConfirmationComponent } from './shared/confirmation/confirmation.component'
 import {MatProgressBarModule} from "@angular/material/progress-bar";
+import { AppointmentComponent } from './shared/appointment/appointment.component';
+import { AccountActivateComponent } from './shared/account-activate/account-activate.component';
+import { EventDisplayComponent } from './shared/event-display/event-display.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { NewcalendarComponent } from './newcalendar/newcalendar.component';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import listPlugin from '@fullcalendar/list';
+import interactionPlugin from '@fullcalendar/interaction';
+import { CodeInputModule } from 'angular-code-input';
+import { ClientCardCalendarComponent } from './shared/client-card-calendar/client-card-calendar.component';
+FullCalendarModule.registerPlugins([
+  dayGridPlugin,
+  timeGridPlugin,
+  listPlugin,
+  interactionPlugin
+])
 export const interceptorProviders =
   [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
@@ -79,10 +96,16 @@ export const interceptorProviders =
     SearchResultComponent,
     ClientCardComponent,
     GooglePlacesComponent,
-    ConfirmationComponent
+    ConfirmationComponent,
+    AppointmentComponent,
+    AccountActivateComponent,
+    EventDisplayComponent,
+    NewcalendarComponent,
+    ClientCardCalendarComponent
   ],
     imports: [
         NgxMaterialTimepickerModule,
+      CodeInputModule,
         BrowserModule,
         GoogleMapsModule,
         MatProgressSpinnerModule,
@@ -90,6 +113,7 @@ export const interceptorProviders =
         AppRoutingModule,
         BrowserAnimationsModule,
         MatToolbarModule,
+        FullCalendarModule,
         MDBBootstrapModule.forRoot(),
 
         CalendarModule.forRoot({

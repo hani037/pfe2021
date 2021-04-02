@@ -8,6 +8,7 @@
         </div>
         <div class="card-body">
           <h5  class="card-title text-center">Login</h5>
+
           <form action="" method="post" (ngSubmit)="login(f)" #f="ngForm" class="form-signingn text-center ">
              <mat-form-field style="width: 100%" appearance="outline">
               <mat-label>userName</mat-label>
@@ -25,6 +26,8 @@
                 <button style="width: 100%" class="btn-lg"  type="submit" [disabled]="f.invalid" mat-raised-button color="warn">Login</button>
                 <br>
                 <button (click)="router.navigateByUrl('sign-up')" mat-button color="warn">Sign Up</button>
+
+                <h4 style="color:red" class="text-center" *ngIf="is_error" > User don't exist</h4>
               </div>
             </div>
 

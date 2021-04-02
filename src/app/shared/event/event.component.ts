@@ -33,7 +33,6 @@ export class EventComponent implements OnInit {
   getEvent(){
     this.eventService.get_event_by_id(this.data.id).subscribe(data=>{
       this.event=data;
-      console.log(this.event)
       this.is_loading = true;
     })
   }
@@ -41,6 +40,7 @@ export class EventComponent implements OnInit {
   public delete() {
     this.eventService.delete_event(this.event.id).subscribe(data=>{
       this.dialogRef.close();
+      this.eventService.eventEmitter.next(true);
       this.openSnackBar('Event deleted','Exit');
     })
   }

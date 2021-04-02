@@ -1,6 +1,6 @@
 <div fxLayout="row" fxLayoutAlign="space-around  start" >
 
-  <div fxFlex="70">
+  <div fxFlex="100">
 
 
     <p   >
@@ -8,9 +8,9 @@
         <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
           <mat-icon>location_on</mat-icon>
         </button>
-        <span>Tunis</span>
+        <span style="margin-right: 2%">Tunis</span>
         <span class="example-spacer"></span>
-        <div fxLayout="row" fxLayoutAlign="space-around center" >
+        <div *ngIf="!isMobileResolution" fxLayout="row" fxLayoutAlign="space-around center" >
           <mat-form-field style="width: 23%"  >
             <input matInput type="search"  class="search-input">
             <mat-label style="font-size: 70%">Search</mat-label>
@@ -45,6 +45,14 @@
             </mat-menu>
           </div>
         </div>
+        <div *ngIf="isMobileResolution"  style="margin-left: 2%" >
+          <mat-form-field style="width: 40%;margin-right: 1%"  >
+            <input matInput type="search"  class="search-input">
+            <mat-label style="font-size: 70%">Search</mat-label>
+            <mat-icon style="font-size: 90%" matSuffix>search</mat-icon>
+          </mat-form-field>
+
+        </div>
 
       </mat-toolbar>
     </p>
@@ -58,14 +66,19 @@
       </mat-chip-list>
     </div>
     <div style="overflow-y: scroll; height:40rem;">
-      <app-client-card  (mouseenter)="changeAnimation(i)" (mouseleave)="stopAnimation()"
+     <!-- <app-client-card  (mouseenter)="changeAnimation(i)" (mouseleave)="stopAnimation()"
                         *ngFor="let client of clients;let i=index" [address]="client.Address" [userName]="client.userName"
                         [Events_Client]="client.events"
       ></app-client-card>
+      -->
+      <app-client-card-calendar  (mouseenter)="changeAnimation(i)" (mouseleave)="stopAnimation()"
+                        *ngFor="let client of clients;let i=index" [address]="client.Address" [userName]="client.userName"
+                        [Events_Client]="client.events"
+      ></app-client-card-calendar>
 
     </div>
   </div>
-  <div  fxFlex="25"style="margin-top: 7%">
+  <div *ngIf="!isMobileResolution"  fxFlex="25"style="margin-top: 7%">
 
     <google-map  [center]="center" width="100%" >
       <map-marker
