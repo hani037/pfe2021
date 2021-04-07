@@ -68,6 +68,10 @@ import listPlugin from '@fullcalendar/list';
 import interactionPlugin from '@fullcalendar/interaction';
 import { CodeInputModule } from 'angular-code-input';
 import { ClientCardCalendarComponent } from './shared/client-card-calendar/client-card-calendar.component';
+import { SignUpproComponent } from './sign-uppro/sign-uppro.component';
+import { CdkStepperModule } from '@angular/cdk/stepper';
+import {MatSelectModule} from '@angular/material/select';
+
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
   timeGridPlugin,
@@ -101,7 +105,8 @@ export const interceptorProviders =
     AccountActivateComponent,
     EventDisplayComponent,
     NewcalendarComponent,
-    ClientCardCalendarComponent
+    ClientCardCalendarComponent,
+    SignUpproComponent
   ],
     imports: [
         NgxMaterialTimepickerModule,
@@ -114,6 +119,7 @@ export const interceptorProviders =
         BrowserAnimationsModule,
         MatToolbarModule,
         FullCalendarModule,
+        CdkStepperModule,
         MDBBootstrapModule.forRoot(),
 
         CalendarModule.forRoot({
@@ -143,7 +149,8 @@ export const interceptorProviders =
         MatChipsModule,
         MatStepperModule,
         ReactiveFormsModule,
-        MatProgressBarModule
+        MatProgressBarModule,
+        MatSelectModule,
 
     ],
   providers: [interceptorProviders,MatDatepickerModule,{
