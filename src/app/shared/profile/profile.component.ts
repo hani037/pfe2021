@@ -11,9 +11,18 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 })
 export class ProfileComponent implements OnInit {
   user:User;
+  is_editfirstname:boolean=false;
+  is_editname ; is_editville;  is_editphone; is_editDescr;is_change; is_editmail:boolean=false;
+  is_editaddrs:boolean=false;
+  is_editnaiss:boolean=false;
+  is_editgenre:boolean=false;
+
+
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   isEditable = false;
+
+
   constructor(public userService:UserService,private _snackBar: MatSnackBar,private _formBuilder: FormBuilder) { }
 
   ngOnInit(): void {

@@ -12,6 +12,7 @@ import {SearchComponent} from "./shared/search/search.component";
 import {SearchResultComponent} from "./shared/search-result/search-result.component";
 import {AccountActivateComponent} from "./shared/account-activate/account-activate.component";
 import {EventDisplayComponent} from "./shared/event-display/event-display.component";
+import { SignUpproComponent } from './sign-uppro/sign-uppro.component';
 
 
 const routes: Routes = [
@@ -24,6 +25,7 @@ const routes: Routes = [
       { path: 'search/:position/:service', component: SearchResultComponent,canActivate:[ConnectActivate]},
       { path: 'login', component:LoginComponent,canActivate:[LoginActivate]},
       { path: 'sign-up', component:SignUpComponent,canActivate:[LoginActivate]},
+      { path: 'sign-uppro', component:SignUpproComponent,canActivate:[ConnectActivate]},
 
 
 ]

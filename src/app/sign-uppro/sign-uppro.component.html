@@ -1,0 +1,166 @@
+<main style="margin-top: 4%" class="profile-page">
+    <section class="section">
+        <div class="container">
+            <div class="card card-profile shadow mt--200" style="padding-top: 60px" width="900px">
+
+                <div>
+                    <mat-card-content>
+
+                        <mat-horizontal-stepper [linear]="isLinear" #stepper>
+                            <div class="col-sm-12">
+                                <div class="card">
+                                    <mat-step [stepControl]="firstFormGroup">
+                                        <form [formGroup]="firstFormGroup">
+                                            <ng-template matStepLabel>Secteur d activite</ng-template>
+                                            <div>
+                                                <mat-form-field>
+                                                    <mat-label>Domaine</mat-label>
+                                                    <input matInput ngModel required name="domaine" #domaine="ngModel" type="text" id="domaine" autofocus>
+                                                </mat-form-field>
+                                            </div>
+                                            <div>
+                                                <mat-form-field>
+                                                    <mat-label>votre specialite</mat-label>
+
+                                                    <input matInput ngModel required name="specialite" #specialite="ngModel" type="text" id="specialite">
+
+                                                </mat-form-field>
+                                            </div>
+                                            <div>
+                                                <mat-form-field>
+                                                    <mat-label>votre local </mat-label>
+                                                    <input matInput ngModel required name="local" #local="ngModel" type="text" id="local">
+
+                                                </mat-form-field>
+                                            </div>
+                                            <div> <button mat-button matStepperNext>suivant</button> </div>
+                                        </form>
+                                    </mat-step>
+                                </div>
+                            </div>
+                            <mat-step [stepControl]="secondFormGroup" label="Disponibilite">
+                                <form [formGroup]="secondFormGroup">
+                                    <div class="container-fluid">
+                                        <form [formGroup]="addmore">
+                                            <div class="card">
+                                                <div class="card-header text-center">Horaires de travail</div>
+                                                <div class="card-body">
+                                                    <p>&nbsp;</p>
+                                                    <div class="row">
+                                                        <div>
+                                                            <div class="col-sm-3">
+                                                                <mat-form-field appearance="outline">
+                                                                    <mat-label>activite</mat-label>
+                                                                    <mat-select ngModel required name="activite=" #activite="ngModel" type="text" id="activite">
+                                                                        <mat-option value="1"> medecin </mat-option>
+                                                                        <mat-option value="1"> dentiste </mat-option>
+                                                                        <mat-option value="1"> Plombier </mat-option>
+                                                                        <mat-option value="1"> Electrecien</mat-option>
+                                                                        <mat-option value="1"> Autre</mat-option>
+                                                                    </mat-select>
+                                                                </mat-form-field>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <mat-form-field class="example-form-field" appearance="fill">
+                                                                    <mat-label> validite </mat-label>
+                                                                    <mat-date-range-input [formGroup]="campaignOne" [rangePicker]="campaignOnePicker" [comparisonStart]="campaignTwo.value.start" [comparisonEnd]="campaignTwo.value.end">
+                                                                        <input matStartDate placeholder="Start date" formControlName="start">
+                                                                        <input matEndDate placeholder="End date" formControlName="end">
+                                                                    </mat-date-range-input>
+                                                                    <mat-datepicker-toggle matSuffix [for]="campaignOnePicker"></mat-datepicker-toggle>
+                                                                    <mat-date-range-picker #campaignOnePicker></mat-date-range-picker>
+                                                                </mat-form-field>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <mat-form-field appearance="outline">
+                                                                    <mat-label>statut</mat-label>
+                                                                    <mat-select formControlName="statut">
+
+                                                                        <mat-option value="1">
+                                                                            disponible
+                                                                        </mat-option>
+                                                                        <mat-option value="1">
+                                                                            Ferme
+                                                                        </mat-option>
+
+                                                                    </mat-select>
+                                                                </mat-form-field>
+                                                            </div>
+                                                            <div class="col-sm-3" fxLayout="row" fxLayoutAlign="end end">
+                                                                <mat-label>duree de Seance</mat-label>
+                                                                <input matInput formControlName="duree" class="form-control reset" type="time" name="duree" min="12:00" max="18:00" required>
+                                                                <span class="validity"></span>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-12 table-responsive" formArrayName="itemRows">
+                                                            <table class="table" *ngFor="let jour of listjours.disponible ; let j=index">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th style="white-space: nowrap;padding-right: 4em;float:center"> jour </th>
+                                                                        <th style="white-space: nowrap;padding-right: 4em;float:center"> <span class="required-field"></span>debut de seance </th>
+                                                                        <th style="white-space: nowrap;padding-right: 4em;float:center"> <span class="required-field"></span> fin de seance </th>
+
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr *ngFor="let itemrow of addmore.controls.itemRows['controls']; let i=index" [formGroupName]="i">
+
+                                                                        <td style="white-space: nowrap;" id="namej{{i}}" formControlName="namej" class="form-control"> {{jour.name}} </td>
+
+                                                                        <td> <input id="debut{{i}}" formControlName="debut" class="form-control reset" type="time" name="fin" min="12:00" max="18:00" required>
+                                                                            <span class="validity"></span>
+                                                                        </td>
+
+                                                                        <td> <input formControlName="fin" class="form-control reset" type="time" name="fin" min="12:00" max="18:00" required>
+                                                                            <span class="validity"></span>
+                                                                        </td>
+                                                                        <td> <button *ngIf="addmore.controls.itemRows.controls.length > 1" (click)="deleteRow(i)" class="btn btn-danger"><i class="fa fa-minus-circle" aria-hidden="true"></i></button></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                                <tfoot>
+                                                                    <tr>
+                                                                        <td> <button type="button" (click)="addNewRow()" class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></td>
+                                                                    </tr>
+                                                                </tfoot>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div fxLayout="row" fxLayoutAlign="space-around center" class="card-footer">
+
+                                                    <button mdbBtn type="submit" color="success" rounded="true" mdbWavesEffect>Save</button>
+                                                </div>
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                    <div style="padding-top: 3% ;text-align: center;">
+
+                                        <button mat-button matStepperPrevious>Retour</button>
+                                        <button mat-button matStepperNext>suivant</button>
+
+                                    </div>
+                                </form>
+                            </mat-step>
+                            <mat-step>
+                                <ng-template matStepLabel>Done</ng-template>
+
+                                <div style="padding-top: 25%">
+
+                                    <button mat-button matStepperPrevious>Back</button>
+                                    <button mat-button (click)="stepper.reset()">Reset</button>
+
+                                </div>
+                            </mat-step>
+                        </mat-horizontal-stepper>
+                    </mat-card-content>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+</main>
