@@ -1,4 +1,4 @@
-import {Component, HostListener, OnInit, ViewChild} from '@angular/core';
+import {Component, HostListener, Input, OnInit, ViewChild} from '@angular/core';
 import { CalendarOptions, DateSelectArg, EventClickArg, EventApi } from '@fullcalendar/angular';
 import { EventInput } from '@fullcalendar/angular';
 import {map, mergeMap} from "rxjs/operators";
@@ -9,6 +9,17 @@ import {AddEventComponent} from "../shared/add-event/add-event.component";
 import {AppointmentComponent} from "../shared/appointment/appointment.component";
 import {EventComponent} from "../shared/event/event.component";
 import { FullCalendarComponent } from '@fullcalendar/angular';
+import * as Events from "events";
+import {CalendarPersonalService} from "../shared/service/calendar-personal.service";
+import {AddCalendarComponent} from "../shared/add-calendar/add-calendar.component";
+import {event} from "../shared/model/event";
+import {Appointment} from "../shared/model/appointment";
+
+interface MatFabMenu {
+  id: string | number;
+  icon?: string; // please use either icon or imgUrl
+
+}
 @Component({
   selector: 'app-newcalendar',
   templateUrl: './newcalendar.component.html',
@@ -16,7 +27,20 @@ import { FullCalendarComponent } from '@fullcalendar/angular';
 })
 export class NewcalendarComponent implements OnInit{
   @ViewChild('fullcalendar') fullcalendar: FullCalendarComponent;
+  @Input() events:event[];
+  @Input() appointments:Appointment[];
+  @Input() id:string;
   loading:boolean=true;
+  fabButtonsRandom: MatFabMenu[] = [
+    {
+      id: 1,
+      icon: 'celebration'
+    },
+    {
+      id: 2,
+      icon: 'calendar_today'
+    },
+  ];
   INITIAL_EVENTS: EventInput[] = [];
   calendarVisible = true;
   calendarOptions: CalendarOptions = {
@@ -26,17 +50,18 @@ export class NewcalendarComponent implements OnInit{
       center: 'title',
       right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
     },
-    height:'85%',
+
     initialView: 'dayGridMonth',
-    themeSystem:'bootstrap',
-    // alternatively, use the `events` setting to fetch from a feed
+    slotMinTime:'06:00:00',
+    slotMaxTime:'24:00:00',
+    height:"auto",
     weekends: true,
     editable: true,
     selectable: true,
     selectMirror: true,
     dayMaxEvents: true,
     allDaySlot:false,
-    events:this.INITIAL_EVENTS,
+    initialEvents:this.INITIAL_EVENTS,
     longPressDelay:1,
     select: this.handleDateSelect.bind(this),
     eventClick: this.handleEventClick.bind(this),
@@ -44,13 +69,8 @@ export class NewcalendarComponent implements OnInit{
     eventAdd:this.handleEvents.bind(this),
 
 
-    /* you can update a remote database when these fire:
-    eventAdd:
-    eventChange:
-    eventRemove:
-    */
   };
-  constructor(private dialog: MatDialog,private eventService:EventService,private appointmentService:AppointmentService) {
+    constructor(private dialog: MatDialog,private eventService:EventService,private appointmentService:AppointmentService,private calendarPersonalService:CalendarPersonalService) {
     if(window.innerWidth < 768){
       this.calendarOptions.headerToolbar = {
         left: 'prev',
@@ -97,7 +117,7 @@ export class NewcalendarComponent implements OnInit{
         height: '600px',
         width: '500px',
         backdropClass: 'backdropBackground',
-        data:{start:selectInfo.start,end:selectInfo.end}
+        data:{start:selectInfo.start,end:selectInfo.end,calendarId: this.id}
       })
     }
 
@@ -106,7 +126,7 @@ export class NewcalendarComponent implements OnInit{
 
   handleEventClick(clickInfo: EventClickArg) {
 
-    if(clickInfo.event.title.includes("appointment")){
+    if(clickInfo.event.extendedProps.type=='Appointment'){
       this.dialog.open(AppointmentComponent, {
         height: '300px',
         width: '350px',
@@ -128,50 +148,125 @@ export class NewcalendarComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    this.events.forEach(event=>{
+      this.INITIAL_EVENTS.push( {
+        start: event.start,
+        end:event.end,
+        title: event.description,
+        id:event.id,
+        color:event.color,
+        extendedProps: {
+          type: 'Event'
+        },
+      },)
+    });
+    this.appointments.forEach(appointment=>{
+      this.INITIAL_EVENTS.push( {
+        start: appointment.seance.start,
+        end:appointment.seance.end,
+        title: "Appointment",
+        id:appointment.id,
+        color:"Blue",
+        extendedProps: {
+          type: 'Appointment'
+        },
+      },)
+    });
     this.eventService.eventEmitter.subscribe(data=> {
       if(data){
-        this.get_events_appointments().subscribe(data => {
+        this.getCalendar().subscribe(data => {
           this.calendarOptions.events = this.INITIAL_EVENTS
         })
       }
     });
-  this.get_events_appointments().subscribe(data =>   this.calendarOptions.initialEvents = this.INITIAL_EVENTS);
-
+    this.calendarPersonalService.changeEmitter.subscribe(data=>{
+      if(data){
+        this.getCalendarByID(data).subscribe(data => {
+          this.calendarOptions.events = this.INITIAL_EVENTS
+        })
+      }
+    })
+  //this.get_events_appointments().subscribe(data =>   this.calendarOptions.initialEvents = this.INITIAL_EVENTS);
   }
-  get_events_appointments(){
+  getCalendar(){
     this.INITIAL_EVENTS = [];
-    return this.eventService.get_user_events().pipe(mergeMap(data=>{
-      data.forEach(event=>{
-        this.INITIAL_EVENTS.push( {
+    return this.calendarPersonalService.get_calendar(this.id).pipe(map(data=> {
+      data.events.forEach(event => {
+        this.INITIAL_EVENTS.push({
           start: event.start,
-          end:event.end,
+          end: event.end,
           title: event.description,
-          id:event.id,
-          color:event.color,
+          id: event.id,
+          color: event.color,
+          extendedProps: {
+            type: 'Event'
+          },
         },)
-      });
-      return  this.appointmentService.getUserAppointment();
-    }),map(data=>{
-      data.forEach(data=>{
-        let date =data.date.split('-')
-        let time =data.time.split(':')
+      })
+      data.appointment.forEach(appointment=>{
         this.INITIAL_EVENTS.push( {
-          start: new Date(+date[2],+date[1]-1,+date[0],+time[0],+time[1]),
-          end:new Date(+date[2],+date[1]-1,+date[0],+time[0],+time[1]+(+data.duration)),
-          title: 'appointment',
-          id:data.id,
-          color:'blue',
+          start: appointment.seance.start,
+          end:appointment.seance.end,
+          title: "Appointment",
+          id:appointment.id,
+          color:"Blue",
+          extendedProps: {
+            type: 'Appointment'
+          },
         },)
-
       });
-      this.loading= false;
-    }));
+    }))
+  }
+  getCalendarByID(id){
+    this.INITIAL_EVENTS = [];
+    return this.calendarPersonalService.get_calendar(id).pipe(map(data=> {
+      data.events.forEach(event => {
+        this.INITIAL_EVENTS.push({
+          start: event.start,
+          end: event.end,
+          title: event.description,
+          id: event.id,
+          color: event.color,
+          extendedProps: {
+            type: 'Event'
+          },
+        },)
+      })
+      data.appointment.forEach(appointment=>{
+        this.INITIAL_EVENTS.push( {
+          start: appointment.seance.start,
+          end:appointment.seance.end,
+          title: "Appointment",
+          id:appointment.id,
+          color:"Blue",
+          extendedProps: {
+            type: 'Appointment'
+          },
+        },)
+      });
+    }))
   }
   add_event() {
     this.dialog.open(AddEventComponent, {
       height: '600px',
       width: '500px',
-      backdropClass: 'backdropBackground'
+      backdropClass: 'backdropBackground',
+      data:{calendarId: this.id}
     })
+  }
+  addCalendar(){
+    this.dialog.open(AddCalendarComponent, {
+      height: '200px',
+      width: '300px',
+      backdropClass: 'backdropBackground',
+    })
+  }
+
+  add(event) {
+    if(event ==1){
+      this.add_event();
+    }else if (event==2) {
+    this.addCalendar()
+    }
   }
 }

@@ -16,8 +16,8 @@ export class EventService {
   get_user_events(){
     return this.http.get<event[]>(this.eventsUrl);
   }
-  create_user_events(event){
-    return this.http.post<event>(this.eventsUrl,event);
+  addEvent(event,id){
+    return this.http.post<event>(this.eventsUrl+'/'+id,event);
   }
   updateEvent(event,newContacts){
     return this.http.put<event>(this.eventsUrl,{event,newContacts});

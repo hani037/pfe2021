@@ -1,8 +1,10 @@
+<div fxLayout="column" fxLayoutAlign="space-around center" >
 <div *ngIf="is_loading">
 
 
-  <mat-card-content class="text-center" >
+  <mat-card-content class="text-center"  >
     <img *ngIf="event.image!=''" style="height: 200px" mat-card-image [src]="event.image" >
+    <div *ngIf="event.image==''" style="margin-bottom: 50%"></div>
     <div  fxLayout="row" fxLayoutAlign="space-around center">
 
       <h6 style="color: rgba(0,0,0,0.29)" fxFlex="20" ><strong>Start:</strong></h6>
@@ -27,4 +29,4 @@
   </mat-dialog-actions>
 </div>
 
-
+</div>

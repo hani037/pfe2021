@@ -1,6 +1,9 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {$e} from "codelyzer/angular/styles/chars";
 import {event} from "../model/event";
+import {CalendarProService} from "../service/calendar-pro.service";
+import {CalendarProEs} from "../model/CalendarProEs";
+import {AppointmentService} from "../service/appointment.service";
 declare interface marker {
   position:{
     lat:number,
@@ -40,14 +43,14 @@ export class SearchResultComponent implements OnInit {
   Filter_index:number=-1;
   Trier_index:number=-1;
   markers:marker[];
-  clients:Client[]=[];
-  center:google.maps.LatLngLiteral;
+  calendarPro:CalendarProEs[]=[];
   filters: Filter[] = [
   ];
   trier: Trier[] = [{name:'le plus proche'},{name:'le plus cher'},{name:'le moins cher'}];
   selectable = true;
   removable = true;
-  constructor() {
+  loading: boolean = true;
+  constructor(private calendarProService:CalendarProService,private appointmentService:AppointmentService) {
     this.isMobileResolution = window.innerWidth < 900;
   }
   @HostListener('window:resize', ['$event'])
@@ -55,54 +58,38 @@ export class SearchResultComponent implements OnInit {
     this.isMobileResolution = window.innerWidth < 900;
   }
   ngOnInit(): void {
-    this.clients.push({userName:'useName1' ,events:[
-      {start:'Sat Mar 13 2021 09:00:00',end:'Sat Mar 13 2021 10:00:00',color:'',description:'09:00',image:''},
-      {start:'Sat Mar 13 2021 11:00:00',end:'Sat Mar 13 2021 12:00:000',color:'',description:'09:00',image:''},
-      {start:'Sat Mar 13 2021 12:00:00',end:'Sat Mar 13 2021 13:00:00',color:'',description:'09:00',image:''},
-      {start:'Sat Mar 13 2021 14:00:00',end:'Sat Mar 13 2021 15:00:00',color:'',description:'09:00',image:''},
-      {start:'Sat Mar 12 2021 09:00:00',end:'Sat Mar 12 2021 10:00:00',color:'',description:'09:00',image:''},
+    this.appointmentService.AppointmentEmitter.subscribe(data=>{
+      if(data){
+        this.loading = true;
+        this.Search();
+      }
+    });
+    this.Search();
 
-      ], Address:'address1',lat:36.807381,lng:10.181763},
-      {userName:'useName2' ,events:[
-          {start:'Sat Mar 13 2021 09:00:00',end:'Sat Mar 13 2021 10:00:00',color:'',description:'09:00',image:''},
-          {start:'Sat Mar 13 2021 11:00:00',end:'Sat Mar 13 2021 12:00:000',color:'',description:'09:00',image:''},
-          {start:'Sat Mar 13 2021 14:00:00',end:'Sat Mar 13 2021 15:00:00',color:'',description:'09:00',image:''},
-          {start:'Sat Mar 12 2021 12:00:00',end:'Sat Mar 12 2021 13:00:00',color:'',description:'09:00',image:''},
-
-        ], Address:'address2',lat:36.806389,lng:10.181667},
-      {userName:'useName3' ,events:[
-          {start:'Sat Mar 13 2021 09:00:00',end:'Sat Mar 13 2021 10:00:00',color:'',description:'09:00',image:''},
-          {start:'Sat Mar 13 2021 8:00:00',end:'Sat Mar 13 2021 09:00:00',color:'',description:'09:00',image:''},
-          {start:'Sat Mar 13 2021 14:00:00',end:'Sat Mar 13 2021 15:00:00',color:'',description:'09:00',image:''},
-          {start:'Sat Mar 12 2021 09:00:00',end:'Sat Mar 12 2021 10:00:00',color:'',description:'09:00',image:''},
-
-        ], Address:'address3',lat:36.805389,lng:10.181667},
-      {userName:'useName4' ,events:[
-          {start:'Sat Mar 13 2021 9:00:00',end:'Sat Mar 13 2021 10:00:00',color:'',description:'',image:''},
-          {start:'Sat Mar 13 2021 14:00:00',end:'Sat Mar 13 2021 15:00:00',color:'',description:'',image:''},
-          {start:'Sat Mar 12 2021 9:00:00',end:'Sat Mar 12 2021 10:00:00',color:'',description:'',image:''},
-
-        ], Address:'address4',lat:36.804389,lng:10.181687});
-    this.center = {lat:36.806389,lng:10.181667}
+  }
+  Search(){
+  this.calendarProService.search(0,5).subscribe(calendarProEs=>{
+    this.calendarPro=calendarProEs;
     this.addMarker();
+   });
   }
   addMarker() {
-    this.markers =[]
-    this.clients.forEach((client,index)=>{
+    this.markers =[];
+    this.calendarPro.forEach((calendarPro,index)=>{
       this.markers.push({
         position: {
-          lat: client.lat ,
-          lng: client.lng ,
+          lat: calendarPro.location.lat ,
+          lng: calendarPro.location.lon ,
         },
         label: {
           color: 'red',
-          text: client.userName,
+          text: calendarPro.firstName,
         },
         title: 'Marker title ' + (this.markers.length + 1),
         options: { animation: this.Filter_index == index ? google.maps.Animation.BOUNCE: null},
       })
     })
-
+    this.loading = false;
   }
 
   changeAnimation(index: number) {
@@ -120,9 +107,13 @@ export class SearchResultComponent implements OnInit {
     if (index >= 0) {
       this.filters.splice(index, 1);
     }
+    if (filter.name =="Available Today"){
+      this.ngOnInit();
+    }
   }
 
   filterClicked(filter: string) {
+
     let filter_exist=false;
     this.filters.forEach(fil=>{
       if (fil.name==filter){
@@ -131,6 +122,13 @@ export class SearchResultComponent implements OnInit {
     });
     if (!filter_exist){
       this.filters.push({name:filter})
+      if(filter == "Available Today"){
+        this.loading = true;
+        this.calendarProService.searchByAvailability(0,5).subscribe(calendarProEs=>{
+          this.calendarPro=calendarProEs;
+          this.addMarker();
+        });
+      }
     }
   }
 

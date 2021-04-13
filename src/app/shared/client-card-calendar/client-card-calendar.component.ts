@@ -17,6 +17,8 @@ import {
 import {AddEventComponent} from "../add-event/add-event.component";
 import {AppointmentComponent} from "../appointment/appointment.component";
 import {EventComponent} from "../event/event.component";
+import {DayScheduleEs} from "../model/DayScheduleEs";
+import {Seance} from "../model/seance";
 
 @Component({
   selector: 'app-client-card-calendar',
@@ -25,9 +27,10 @@ import {EventComponent} from "../event/event.component";
 })
 export class ClientCardCalendarComponent implements OnInit {
 
-  @Input() userName:string;
+  @Input() firstName:string;
+  @Input() lastName:string;
   @Input() address:string;
-  @Input() Events_Client:event[];
+  @Input() daysSchedule:DayScheduleEs[];
   @ViewChild('fullcalendar') fullcalendar: FullCalendarComponent;
   loading:boolean=false;
   INITIAL_EVENTS: EventInput[] = [];
@@ -45,7 +48,6 @@ export class ClientCardCalendarComponent implements OnInit {
     height:'400px',
     // alternatively, use the `events` setting to fetch from a feed
     weekends: true,
-
     events:this.INITIAL_EVENTS,
     editable: false,
     selectable: false,
@@ -55,12 +57,6 @@ export class ClientCardCalendarComponent implements OnInit {
     longPressDelay:1,
     eventClick: this.handleEventClick.bind(this),
 
-
-    /* you can update a remote database when these fire:
-    eventAdd:
-    eventChange:
-    eventRemove:
-    */
   };
   constructor(private dialog: MatDialog,private userService:UserService) {
 
@@ -70,12 +66,23 @@ export class ClientCardCalendarComponent implements OnInit {
 
   }
   ngOnInit(): void {
-    this.Events_Client.forEach(event=>{
-      this.INITIAL_EVENTS.push( {
-        start: new Date(event.start),
-        end:new Date(event.end),
-        color:'red',
-      },)
+    this.daysSchedule.forEach(dayScheduleEs=>{
+      let today =new Date();
+      today.setHours(0)
+      if(new Date(dayScheduleEs.date).getTime() < today.getTime()){
+      return;
+      }
+      dayScheduleEs.seances.forEach(seance =>{
+        let seanceTime =new Date();
+        if(new Date(dayScheduleEs+" "+seance.start).getTime() < seanceTime.getTime()){
+          return;
+        }
+        this.INITIAL_EVENTS.push( {
+          start: new Date(dayScheduleEs+" "+seance.start),
+          end:new Date(dayScheduleEs+" "+seance.end),
+          color:'red',
+        },)
+      })
     })
     this.loading = false;
   }
@@ -86,21 +93,35 @@ export class ClientCardCalendarComponent implements OnInit {
     let day = ("0" + clickInfo.event.start.getDate()).slice(-2);
     let month = ("0" + (clickInfo.event.start.getMonth()+1 )).slice(-2);
     let year = clickInfo.event.start.getFullYear();
-    const date =day + "-" + month + "-" + year  ;
-    let minute = '0'+clickInfo.event.start.getMinutes();
+    const date =year + "-" + month + "-" + day  ;
+    let MinStart = clickInfo.event.start.getMinutes().toString();
+    let MinEnd = clickInfo.event.end.getMinutes().toString();
+    let HStart = clickInfo.event.start.getHours().toString();
+    let HEnd = clickInfo.event.end.getHours().toString();
     if(clickInfo.event.start.getMinutes()<10){
-      minute = '0'+clickInfo.event.start.getMinutes();
+      MinStart = '0'+clickInfo.event.start.getMinutes();
     }
-    const time =clickInfo.event.start.getHours() + ":" + minute;
-    const appointment = new Appointment()
+    if(clickInfo.event.end.getMinutes()<10){
+      MinEnd = '0'+clickInfo.event.end.getMinutes();
+    }
+    if(clickInfo.event.start.getHours()<10){
+      HStart = '0'+clickInfo.event.start.getHours();
+    }
+    if(clickInfo.event.end.getHours()<10){
+      HEnd = '0'+clickInfo.event.end.getHours();
+    }
+    const StartTime =HStart + ":" + MinStart;
+    const endTime = HEnd + ":" + MinEnd;
+    const appointment = new Appointment();
     appointment.date = date ;
-    appointment.duration = '30' ;
-    appointment.userProId = 'aaa' ;
+    appointment.calendarProId = this.daysSchedule[0].calendarProId ;
     appointment.userId = this.userService.userConnected.id ;
-    appointment.time = time ;
+    appointment.seance = new Seance();
+    appointment.seance.start =  date+" "+StartTime ;
+    appointment.seance.end = date+" "+endTime ;
     this.dialog.open(ConfirmationComponent, {
-      height: '600px',
-      width: '600px',
+      height: '250px',
+      width: '300px',
       backdropClass: 'backdropBackground',
       data :{appointment:appointment}
     })

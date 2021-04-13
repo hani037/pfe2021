@@ -1,9 +1,8 @@
 <div *ngIf="is_loading">
-  <h4 style="color: rgba(0,0,0,0.29)" class="text-center"> Appointment</h4>
+  <h2 style="color: rgba(0,0,0,0.29)" class="text-center"> Appointment</h2>
   <mat-card-header fxLayout="row" fxLayoutAlign="start center"   >
     <div  mat-card-avatar class="example-header-image"></div>
-    <mat-card-title > UserName</mat-card-title>
-    <mat-card-subtitle >address</mat-card-subtitle>
+    <mat-card-subtitle > UserName</mat-card-subtitle>
 
   </mat-card-header>
 
@@ -20,14 +19,14 @@
     </div>
     <div  fxLayout="row" fxLayoutAlign="space-around center">
 
-      <h6 style="color: rgba(0,0,0,0.29)" fxFlex="20" ><strong>Time:</strong></h6>
-      <h6 fxFlex="60">{{appointment.time}}</h6>
+      <h6 style="color: rgba(0,0,0,0.29)" fxFlex="20" ><strong>Start Time:</strong></h6>
+      <h6 fxFlex="60">{{appointment.seance.start}}</h6>
 
     </div>
     <div  fxLayout="row" fxLayoutAlign="space-around center">
 
-      <h6 style="color: rgba(0,0,0,0.29)" fxFlex="20" ><strong>Duration:</strong></h6>
-      <h6 fxFlex="60">{{appointment.duration}} min</h6>
+      <h6 style="color: rgba(0,0,0,0.29)" fxFlex="20" ><strong>Start Time:</strong></h6>
+      <h6 fxFlex="60">{{appointment.seance.end}}</h6>
     </div>
   </mat-card-content>
   <mat-dialog-actions align="end">

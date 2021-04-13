@@ -106,18 +106,6 @@ export class CalendarComponent implements OnInit {
       });
     return  this.appointmentService.getUserAppointment();
     }),map(data=>{
-      data.forEach(data=>{
-        let date =data.date.split('-')
-        let time =data.time.split(':')
-        this.events.push( {
-          start: new Date(+date[2],+date[1]-1,+date[0],+time[0],+time[1]),
-          end:new Date(+date[2],+date[1]-1,+date[0],+time[0],+time[1]+(+data.duration)),
-          title: 'appointment',
-          id:data.id,
-          color:this.colors.blue,
-          actions:this.actions,
-        },)
-      });
       this.loading= false;
     }));
   }

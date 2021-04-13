@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Appointment} from "../model/appointment";
 import {HttpClient} from "@angular/common/http";
+import {BehaviorSubject} from "rxjs";
 
 
 @Injectable({
@@ -8,9 +9,10 @@ import {HttpClient} from "@angular/common/http";
 })
 export class AppointmentService {
   appointmentUrl = '/api/v1/appointment';
+  AppointmentEmitter = new BehaviorSubject<string>(null);
   constructor(private http:HttpClient) { }
-  createAppointment(appointment: Appointment) {
-    return this.http.post<Appointment>(this.appointmentUrl, appointment);
+  createAppointment(id:string,appointment: Appointment) {
+    return this.http.post<Appointment>(this.appointmentUrl+'/'+id, appointment);
   }
   getUserAppointment() {
     return this.http.get<Appointment[]>(this.appointmentUrl);

@@ -1,1 +1,19 @@
-<app-newcalendar> </app-newcalendar>
+<div *ngIf="loading" fxLayout="row" fxLayoutAlign="space-around center">
+  <mat-spinner></mat-spinner>
+</div>
+<div *ngIf="!loading" >
+  <div  fxLayout="row" fxLayoutAlign="space-around center"   >
+    <button fxFlexOffset="30"    (click)="right()"
+            mat-icon-button  color="warn" >
+      <mat-icon style="font-size: 200%">keyboard_arrow_left</mat-icon>
+    </button>
+    <h1 style="text-align: center;color:black;">{{ calendarPersonal.name }}</h1>
+    <button   (click)="left()"
+              mat-icon-button color="warn" >
+      <mat-icon style="font-size: 200%">keyboard_arrow_right</mat-icon>
+    </button>
+    <div fxFlexOffset="30"></div>
+  </div>
+  <app-newcalendar [id]="calendarPersonal.id" [events]="calendarPersonal.events" [appointments]="calendarPersonal.appointment" > </app-newcalendar>
+</div>
+

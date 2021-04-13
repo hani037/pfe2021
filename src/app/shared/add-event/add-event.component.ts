@@ -10,6 +10,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {catchError, map} from "rxjs/operators";
 import {HttpErrorResponse, HttpEventType} from "@angular/common/http";
 import {of} from "rxjs";
+import {CalendarPersonalService} from "../service/calendar-personal.service";
 
 
 
@@ -38,9 +39,10 @@ export class AddEventComponent implements OnInit {
   friends: string[] = [];
   contacts: string[] = [];
   constructor(private dialogRef: MatDialogRef<AddEventComponent>,private eventService:EventService,
-              @Inject(MAT_DIALOG_DATA) public data: {id:string,start:Date,end:Date},private _snackBar: MatSnackBar) { }
+              @Inject(MAT_DIALOG_DATA) public data: {id:string,start:Date,end:Date,calendarId:string},private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
+    console.log(this.data);
     if (this.data) {
       if (this.data.id) {
         this.eventService.get_event_by_id(this.data.id).subscribe(data => {
@@ -53,11 +55,13 @@ export class AddEventComponent implements OnInit {
           this.is_edit = true;
           this.is_loading = false;
         })
-      } else {
+      } else if (this.data.start) {
         this.date1 = new FormControl(new Date(this.data.start));
         this.start1 = ("0"+this.data.start.getHours()).slice(-2)+':'+ ("0"+this.data.start.getMinutes()).slice(-2);
         this.end1 = ("0"+this.data.end.getHours()).slice(-2) +':'+ ("0"+this.data.end.getMinutes()).slice(-2);
         this.is_add = true;
+        this.is_loading = false;
+      }else {
         this.is_loading = false;
       }
     }
@@ -82,7 +86,7 @@ export class AddEventComponent implements OnInit {
     event1.image = '';
     event1.contacts = this.friends;
     event1.tags = this.tags;
-    this.eventService.create_user_events(event1).subscribe(data=>{
+    this.eventService.addEvent(event1,this.data.calendarId).subscribe(data=>{
       this.eventService.eventEmitter.next(true);
       if(this.file){
         this.uploadFile(this.file,data.id);
@@ -201,7 +205,7 @@ export class AddEventComponent implements OnInit {
     event1.image = '';
     event1.contacts = this.friends;
     event1.tags = this.tags;
-    this.eventService.create_user_events(event1).subscribe(data=>{
+    this.eventService.addEvent(event1,this.data.calendarId).subscribe(data=>{
       this.eventService.eventEmitter.next(true);
       if(this.file){
         this.uploadFile(this.file,data.id);

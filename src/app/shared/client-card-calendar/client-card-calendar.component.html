@@ -3,8 +3,7 @@
   <mat-card-header fxLayout="row" fxLayoutAlign="start center"   >
 
     <div  mat-card-avatar class="example-header-image"></div>
-    <mat-card-title > {{userName}}</mat-card-title>
-    <mat-card-subtitle >{{address}}</mat-card-subtitle>
+    <mat-card-title > {{firstName+" "+lastName}}</mat-card-title>
   </mat-card-header>
   <mat-card-content>
     <div *ngIf="loading" fxLayout="row" fxLayoutAlign="space-around center">

@@ -1,9 +1,10 @@
+import {Seance} from "./seance";
+
 export class Appointment {
   id:string;
   userId:string;
-  userProId:string;
+  calendarProId:string;
   date:string;
-  time:string;
-  duration:string;
+  seance:Seance;
   status?:string;
 }

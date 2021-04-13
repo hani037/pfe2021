@@ -53,7 +53,6 @@ import {MatStepperModule} from "@angular/material/stepper";
 import { SearchComponent } from './shared/search/search.component';
 import { CardSearchComponent } from './shared/card-search/card-search.component';
 import { SearchResultComponent } from './shared/search-result/search-result.component';
-import { ClientCardComponent } from './shared/client-card/client-card.component';
 import {GooglePlacesComponent} from './shared/google-places/google-places.component';
 import { ConfirmationComponent } from './shared/confirmation/confirmation.component'
 import {MatProgressBarModule} from "@angular/material/progress-bar";
@@ -71,6 +70,8 @@ import { ClientCardCalendarComponent } from './shared/client-card-calendar/clien
 import { SignUpproComponent } from './sign-uppro/sign-uppro.component';
 import { CdkStepperModule } from '@angular/cdk/stepper';
 import {MatSelectModule} from '@angular/material/select';
+import {MatFabMenuModule} from "@angular-material-extensions/fab-menu";
+import { AddCalendarComponent } from './shared/add-calendar/add-calendar.component';
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -98,7 +99,6 @@ export const interceptorProviders =
     SearchComponent,
     CardSearchComponent,
     SearchResultComponent,
-    ClientCardComponent,
     GooglePlacesComponent,
     ConfirmationComponent,
     AppointmentComponent,
@@ -106,11 +106,12 @@ export const interceptorProviders =
     EventDisplayComponent,
     NewcalendarComponent,
     ClientCardCalendarComponent,
-    SignUpproComponent
+    SignUpproComponent,
+    AddCalendarComponent
   ],
     imports: [
         NgxMaterialTimepickerModule,
-      CodeInputModule,
+        CodeInputModule,
         BrowserModule,
         GoogleMapsModule,
         MatProgressSpinnerModule,
@@ -151,6 +152,7 @@ export const interceptorProviders =
         ReactiveFormsModule,
         MatProgressBarModule,
         MatSelectModule,
+        MatFabMenuModule,
 
     ],
   providers: [interceptorProviders,MatDatepickerModule,{
