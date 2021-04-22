@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {CalendarOptions, EventClickArg, EventInput} from "@fullcalendar/angular";
-import {CalendarProService} from "../service/calendar-pro.service";
+import {CalendarProService} from "../service/calendarPro.service";
 import {CalendarPro} from "../model/CalendarPro";
 import {CalendarProEs} from "../model/CalendarProEs";
 import {map, mergeMap} from "rxjs/operators";

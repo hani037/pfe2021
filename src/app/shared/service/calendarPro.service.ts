@@ -10,20 +10,39 @@ import {CalendarPro} from "../model/CalendarPro";
 })
 export class CalendarProService {
 
-  calendarProlUrl = '/api/v1/calendarPro';
+  calendarProUrl = '/api/v1/calendarPro';
+
+
+  calendarsPro : CalendarPro[] = [];
+
   constructor(private http:HttpClient) { }
+
+
+
+
+  createCalendarPro(CalendarPro:CalendarPro){
+    return this.http.post<CalendarPro>(this.calendarProUrl,CalendarPro);
+  }
+
+  getCalendarPro(id:string) {
+    return this.http.get<CalendarPro>(this.calendarProUrl+'/'+id);
+  }
+
+
+
+
   search(page,size) {
   let searchCalendarProDto = new SearchCalendarProDto();
   searchCalendarProDto.job="farmer";
   searchCalendarProDto.searchText="leclerc";
-    return this.http.post<CalendarProEs[]>(this.calendarProlUrl+'/search?page='+page+'&size='+size,searchCalendarProDto
+    return this.http.post<CalendarProEs[]>(this.calendarProUrl+'/search?page='+page+'&size='+size,searchCalendarProDto
     )
   }
   searchByAvailabilityToday(page,size) {
     let searchCalendarProDto = new SearchCalendarProDto();
     //searchCalendarProDto.job="farmer";
     //searchCalendarProDto.searchText="deghais";
-    return this.http.post<CalendarProEs[]>(this.calendarProlUrl+'/searchByAvailabilityToday?page='+page+'&size='+size,searchCalendarProDto
+    return this.http.post<CalendarProEs[]>(this.calendarProUrl+'/searchByAvailabilityToday?page='+page+'&size='+size,searchCalendarProDto
     )
   }
   searchByAvailabilityDate(page,size,date) {
@@ -31,16 +50,16 @@ export class CalendarProService {
     //searchCalendarProDto.job="farmer";
     //searchCalendarProDto.searchText="deghais";
     searchCalendarProDto.date=date;
-    return this.http.post<CalendarProEs[]>(this.calendarProlUrl+'/searchByAvailabilityDate?page='+page+'&size='+size,searchCalendarProDto
+    return this.http.post<CalendarProEs[]>(this.calendarProUrl+'/searchByAvailabilityDate?page='+page+'&size='+size,searchCalendarProDto
     )
   }
   get_user_calendarsPro(){
-    return this.http.get<CalendarPro[]>(this.calendarProlUrl);
+    return this.http.get<CalendarPro[]>(this.calendarProUrl);
   }
   get_calendarPro(id){
-    return this.http.get<CalendarPro>(this.calendarProlUrl+'/calendarPro/'+id);
+    return this.http.get<CalendarPro>(this.calendarProUrl+'/calendarPro/'+id);
   }
   get_calendarProEs(id){
-    return this.http.get<CalendarProEs>(this.calendarProlUrl+'/calendarProEs/'+id);
+    return this.http.get<CalendarProEs>(this.calendarProUrl+'/calendarProEs/'+id);
   }
 }

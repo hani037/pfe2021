@@ -8,7 +8,7 @@ import {AddCalendarComponent} from "../shared/add-calendar/add-calendar.componen
 import {MatDialog} from "@angular/material/dialog";
 import {CalendarPro} from "../shared/model/CalendarPro";
 import {map, mergeMap} from "rxjs/operators";
-import {CalendarProService} from "../shared/service/calendar-pro.service";
+import {CalendarProService} from "../shared/service/calendarPro.service";
 
 @Component({
   selector: 'app-home',
