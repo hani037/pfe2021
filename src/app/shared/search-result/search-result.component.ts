@@ -1,7 +1,7 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {$e} from "codelyzer/angular/styles/chars";
 import {event} from "../model/event";
-import {CalendarProService} from "../service/calendar-pro.service";
+import {CalendarProService} from "../service/calendarPro.service";
 import {CalendarProEs} from "../model/CalendarProEs";
 import {AppointmentService} from "../service/appointment.service";
 import {MatDialog} from "@angular/material/dialog";

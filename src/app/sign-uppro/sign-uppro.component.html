@@ -2,141 +2,420 @@
     <section class="section">
         <div class="container">
             <div class="card card-profile shadow mt--200" style="padding-top: 60px" width="900px">
-
                 <div>
                     <mat-card-content>
 
                         <mat-horizontal-stepper [linear]="isLinear" #stepper>
                             <div class="col-sm-12">
                                 <div class="card">
-                                    <mat-step [stepControl]="firstFormGroup">
-                                        <form [formGroup]="firstFormGroup">
-                                            <ng-template matStepLabel>Secteur d activite</ng-template>
-                                            <div>
-                                                <mat-form-field>
-                                                    <mat-label>Domaine</mat-label>
-                                                    <input matInput ngModel required name="domaine" #domaine="ngModel" type="text" id="domaine" autofocus>
-                                                </mat-form-field>
-                                            </div>
-                                            <div>
-                                                <mat-form-field>
-                                                    <mat-label>votre specialite</mat-label>
+                                    <mat-step [stepControl]="weekFormGroup">
 
-                                                    <input matInput ngModel required name="specialite" #specialite="ngModel" type="text" id="specialite">
+                                        <form [formGroup]="weekFormGroup">
 
-                                                </mat-form-field>
-                                            </div>
-                                            <div>
-                                                <mat-form-field>
-                                                    <mat-label>votre local </mat-label>
-                                                    <input matInput ngModel required name="local" #local="ngModel" type="text" id="local">
+                                            <!-- <ng-template matStepLabel>Secteur d activite</ng-template>
+                                        <div>
+                                            <mat-form-field>
+                                                <mat-label>Domaine</mat-label>
+                                                <input class="form-control" formControlName="domaine" type="text" id="domaine">
+                                            </mat-form-field>
+                                        </div>
+                                        <div>
+                                            <mat-form-field>
+                                                <mat-label>votre specialite</mat-label>
 
-                                                </mat-form-field>
-                                            </div>
-                                            <div> <button mat-button matStepperNext>suivant</button> </div>
+                                                <input class="form-control" formControlName="job" type="text" id="specialite">
+
+                                            </mat-form-field>
+                                        </div>
+                                        <div>
+                                            <mat-form-field>
+                                                <mat-label>votre local </mat-label>
+                                                <input class="form-control" formControlName="lon" type="text" id="local">
+
+                                            </mat-form-field>
+                                        </div>
+                                        <div> <button mat-button matStepperNext>suivant</button> </div> -->
+
                                         </form>
                                     </mat-step>
                                 </div>
                             </div>
-                            <mat-step [stepControl]="secondFormGroup" label="Disponibilite">
-                                <form [formGroup]="secondFormGroup">
-                                    <div class="container-fluid">
-                                        <form [formGroup]="addmore">
-                                            <div class="card">
-                                                <div class="card-header text-center">Horaires de travail</div>
-                                                <div class="card-body">
-                                                    <p>&nbsp;</p>
-                                                    <div class="row">
-                                                        <div>
-                                                            <div class="col-sm-3">
-                                                                <mat-form-field appearance="outline">
-                                                                    <mat-label>activite</mat-label>
-                                                                    <mat-select ngModel required name="activite=" #activite="ngModel" type="text" id="activite">
-                                                                        <mat-option value="1"> medecin </mat-option>
-                                                                        <mat-option value="1"> dentiste </mat-option>
-                                                                        <mat-option value="1"> Plombier </mat-option>
-                                                                        <mat-option value="1"> Electrecien</mat-option>
-                                                                        <mat-option value="1"> Autre</mat-option>
-                                                                    </mat-select>
-                                                                </mat-form-field>
-                                                            </div>
-                                                            <div class="col-sm-3">
-                                                                <mat-form-field class="example-form-field" appearance="fill">
-                                                                    <mat-label> validite </mat-label>
-                                                                    <mat-date-range-input [formGroup]="campaignOne" [rangePicker]="campaignOnePicker" [comparisonStart]="campaignTwo.value.start" [comparisonEnd]="campaignTwo.value.end">
-                                                                        <input matStartDate placeholder="Start date" formControlName="start">
-                                                                        <input matEndDate placeholder="End date" formControlName="end">
-                                                                    </mat-date-range-input>
-                                                                    <mat-datepicker-toggle matSuffix [for]="campaignOnePicker"></mat-datepicker-toggle>
-                                                                    <mat-date-range-picker #campaignOnePicker></mat-date-range-picker>
-                                                                </mat-form-field>
-                                                            </div>
-                                                            <div class="col-sm-3">
-                                                                <mat-form-field appearance="outline">
-                                                                    <mat-label>statut</mat-label>
-                                                                    <mat-select formControlName="statut">
+                            <mat-step [stepControl]="weekFormGroup" label="Disponibilite">
+                                <form [formGroup]="weekFormGroup" (ngSubmit)="createCalendarPro()">
+                                    <div class="container">
 
-                                                                        <mat-option value="1">
-                                                                            disponible
-                                                                        </mat-option>
-                                                                        <mat-option value="1">
-                                                                            Ferme
-                                                                        </mat-option>
+                                        <div class="card">
+                                            <div class="card-header text-center">Horaires de travail</div>
+                                            <div class="card-body">
+                                                <p>&nbsp;</p>
 
-                                                                    </mat-select>
-                                                                </mat-form-field>
-                                                            </div>
-                                                            <div class="col-sm-3" fxLayout="row" fxLayoutAlign="end end">
-                                                                <mat-label>duree de Seance</mat-label>
-                                                                <input matInput formControlName="duree" class="form-control reset" type="time" name="duree" min="12:00" max="18:00" required>
-                                                                <span class="validity"></span>
+                                                <div class="col-sm-4  ">
+                                                    <div class="form-group">
+                                                        <div class="col-50">
+                                                            <mat-form-field appearance="outline">
+                                                                <mat-label>activite</mat-label>
+                                                                <mat-select [(ngModel)]="selected" class="form-control" formControlName="job" type="text" id="activite">
+                                                                    <mat-option *ngFor="let metier of metiers" [value]="metier.name"> {{metier.name }}</mat-option>
 
-                                                            </div>
+                                                                </mat-select>
+                                                            </mat-form-field>
                                                         </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-sm-12 table-responsive" formArrayName="itemRows">
-                                                            <table class="table" *ngFor="let jour of listjours.disponible ; let j=index">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th style="white-space: nowrap;padding-right: 4em;float:center"> jour </th>
-                                                                        <th style="white-space: nowrap;padding-right: 4em;float:center"> <span class="required-field"></span>debut de seance </th>
-                                                                        <th style="white-space: nowrap;padding-right: 4em;float:center"> <span class="required-field"></span> fin de seance </th>
 
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <tr *ngFor="let itemrow of addmore.controls.itemRows['controls']; let i=index" [formGroupName]="i">
 
-                                                                        <td style="white-space: nowrap;" id="namej{{i}}" formControlName="namej" class="form-control"> {{jour.name}} </td>
+                                                        <div class="col-25">
+                                                            <mat-label>duree de Seance</mat-label>
+                                                            <input matInput formControlName="chrono" class="form-control" type="number" name="chrono" min="15" required>
+                                                            <span class="validity"></span>
 
-                                                                        <td> <input id="debut{{i}}" formControlName="debut" class="form-control reset" type="time" name="fin" min="12:00" max="18:00" required>
-                                                                            <span class="validity"></span>
-                                                                        </td>
 
-                                                                        <td> <input formControlName="fin" class="form-control reset" type="time" name="fin" min="12:00" max="18:00" required>
-                                                                            <span class="validity"></span>
-                                                                        </td>
-                                                                        <td> <button *ngIf="addmore.controls.itemRows.controls.length > 1" (click)="deleteRow(i)" class="btn btn-danger"><i class="fa fa-minus-circle" aria-hidden="true"></i></button></td>
-                                                                    </tr>
-                                                                </tbody>
-                                                                <tfoot>
-                                                                    <tr>
-                                                                        <td> <button type="button" (click)="addNewRow()" class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></td>
-                                                                    </tr>
-                                                                </tfoot>
-                                                            </table>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                                <div fxLayout="row" fxLayoutAlign="space-around center" class="card-footer">
 
-                                                    <button mdbBtn type="submit" color="success" rounded="true" mdbWavesEffect>Save</button>
+                                                        <mat-label>valable de </mat-label>
+                                                        <input type="date" class="form-control" formControlName="startDate" value="{{ post.startDate | date:'yyyy-MM-dd' }}">
+
+                                                        <mat-label> jusqu a</mat-label>
+
+                                                        <input type="date" class="form-control" formControlName="endDate" value="{{ post.endDate | date:'yyyy-MM-dd' }}">
+
+
+
+
+                                                    </div>
+
                                                 </div>
+
+
                                             </div>
-                                        </form>
 
+
+                                            <form [formGroup]="weekFormGroup">
+                                                <div class="row">
+                                                    <div class="col-sm-12 table-responsive" formArrayName="lundi">
+                                                        <table class="table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style="white-space: nowrap;padding-right: 4em;float:center"> jour </th>
+                                                                    <th style="white-space: nowrap;padding-right: 4em;float:center"> <span class="required-field"></span>debut de seance </th>
+                                                                    <th style="white-space: nowrap;padding-right: 4em;float:center"> <span class="required-field"></span> fin de seance </th>
+
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr class="form-group" *ngFor="let itemrow of weekFormGroup.controls.lundi['controls']; let i=index" [formGroupName]="i">
+
+
+                                                                    <td style="white-space: nowrap;">
+                                                                        <p>Lundi</p>
+                                                                    </td>
+                                                                    <ng-container>
+
+
+
+                                                                        <td> <input formControlName="start" class="form-control " type="time" name="start" min="12:00" max="18:00" required>
+                                                                            <span class="validity"></span>
+                                                                        </td>
+
+                                                                        <td> <input formControlName="end" class="form-control " type="time" name="end" min="12:00" max="18:00" required>
+                                                                            <span class="validity"></span>
+                                                                        </td>
+                                                                    </ng-container>
+
+                                                                    <td> <button *ngIf="weekFormGroup.controls.lundi.controls.length >0" (click)="deleteRow(i)" class="btn btn-danger">
+                                                                        <i class="fa fa-minus-circle" aria-hidden="true"></i></button></td>
+
+                                                                </tr>
+                                                            </tbody>
+                                                            <tfoot>
+                                                                <tr>
+
+                                                                    <td> <button type="button" (click)="addNewRow()" class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></td>
+                                                                </tr>
+                                                            </tfoot>
+                                                        </table>
+
+                                                    </div>
+                                                    <div class="col-sm-12 table-responsive" formArrayName="mardi">
+                                                        <table class="table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style="white-space: nowrap;padding-right: 4em;float:center"> jour </th>
+                                                                    <th style="white-space: nowrap;padding-right: 4em;float:center"> <span class="required-field"></span>debut de seance </th>
+                                                                    <th style="white-space: nowrap;padding-right: 4em;float:center"> <span class="required-field"></span> fin de seance </th>
+
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr class="form-group" *ngFor="let itemrow of weekFormGroup.controls.mardi['controls']; let i=index" [formGroupName]="i">
+
+
+                                                                    <td style="white-space: nowrap;">
+                                                                        <p>mardi</p>
+                                                                    </td>
+                                                                    <ng-container>
+
+
+
+                                                                        <td> <input formControlName="start" class="form-control " type="time" name="start" min="12:00" max="18:00" required>
+                                                                            <span class="validity"></span>
+                                                                        </td>
+
+                                                                        <td> <input formControlName="end" class="form-control " type="time" name="end" min="12:00" max="18:00" required>
+                                                                            <span class="validity"></span>
+                                                                        </td>
+                                                                    </ng-container>
+
+                                                                    <td> <button *ngIf="weekFormGroup.controls.mardi.controls.length >0" (click)="deleteRow1(i)" class="btn btn-danger">
+                                                                      <i class="fa fa-minus-circle" aria-hidden="true"></i></button></td>
+
+                                                                </tr>
+                                                            </tbody>
+                                                            <tfoot>
+                                                                <tr>
+
+                                                                    <td> <button type="button" (click)="addNewRow1()" class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></td>
+                                                                </tr>
+                                                            </tfoot>
+                                                        </table>
+
+                                                    </div>
+
+
+                                                    <div class="col-sm-12 table-responsive" formArrayName="mercredi">
+                                                        <table class="table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style="white-space: nowrap;padding-right: 4em;float:center"> jour </th>
+                                                                    <th style="white-space: nowrap;padding-right: 4em;float:center"> <span class="required-field"></span>debut de seance </th>
+                                                                    <th style="white-space: nowrap;padding-right: 4em;float:center"> <span class="required-field"></span> fin de seance </th>
+
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr class="form-group" *ngFor="let itemrow of weekFormGroup.controls.mercredi['controls']; let i=index" [formGroupName]="i">
+
+
+                                                                    <td style="white-space: nowrap;">
+                                                                        <p>mercredi</p>
+                                                                    </td>
+                                                                    <ng-container>
+
+
+
+                                                                        <td> <input formControlName="start" class="form-control " type="time" name="start" min="12:00" max="18:00" required>
+                                                                            <span class="validity"></span>
+                                                                        </td>
+
+                                                                        <td> <input formControlName="end" class="form-control " type="time" name="end" min="12:00" max="18:00" required>
+                                                                            <span class="validity"></span>
+                                                                        </td>
+                                                                    </ng-container>
+
+                                                                    <td> <button *ngIf="weekFormGroup.controls.mercredi.controls.length >0" (click)="deleteRow2(i)" class="btn btn-danger">
+                                                                      <i class="fa fa-minus-circle" aria-hidden="true"></i></button></td>
+
+                                                                </tr>
+                                                            </tbody>
+                                                            <tfoot>
+                                                                <tr>
+
+                                                                    <td> <button type="button" (click)="addNewRow2()" class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></td>
+                                                                </tr>
+                                                            </tfoot>
+                                                        </table>
+
+                                                    </div>
+                                                    <div class="col-sm-12 table-responsive" formArrayName="jeudi">
+                                                        <table class="table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style="white-space: nowrap;padding-right: 4em;float:center"> jour </th>
+                                                                    <th style="white-space: nowrap;padding-right: 4em;float:center"> <span class="required-field"></span>debut de seance </th>
+                                                                    <th style="white-space: nowrap;padding-right: 4em;float:center"> <span class="required-field"></span> fin de seance </th>
+
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr class="form-group" *ngFor="let itemrow of weekFormGroup.controls.jeudi['controls']; let i=index" [formGroupName]="i">
+
+
+                                                                    <td style="white-space: nowrap;">
+                                                                        <p>jeudi</p>
+                                                                    </td>
+                                                                    <ng-container>
+
+
+
+                                                                        <td> <input formControlName="start" class="form-control " type="time" name="start" min="12:00" max="18:00" required>
+                                                                            <span class="validity"></span>
+                                                                        </td>
+
+                                                                        <td> <input formControlName="end" class="form-control " type="time" name="end" min="12:00" max="18:00" required>
+                                                                            <span class="validity"></span>
+                                                                        </td>
+                                                                    </ng-container>
+
+                                                                    <td> <button *ngIf="weekFormGroup.controls.jeudi.controls.length >0" (click)="deleteRow3(i)" class="btn btn-danger">
+                                                                    <i class="fa fa-minus-circle" aria-hidden="true"></i></button></td>
+
+                                                                </tr>
+                                                            </tbody>
+                                                            <tfoot>
+                                                                <tr>
+
+                                                                    <td> <button type="button" (click)="addNewRow3()" class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></td>
+                                                                </tr>
+                                                            </tfoot>
+                                                        </table>
+
+                                                    </div>
+
+                                                    <div class="col-sm-12 table-responsive" formArrayName="vendredi">
+                                                        <table class="table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style="white-space: nowrap;padding-right: 4em;float:center"> jour </th>
+                                                                    <th style="white-space: nowrap;padding-right: 4em;float:center"> <span class="required-field"></span>debut de seance </th>
+                                                                    <th style="white-space: nowrap;padding-right: 4em;float:center"> <span class="required-field"></span> fin de seance </th>
+
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr class="form-group" *ngFor="let itemrow of weekFormGroup.controls.vendredi['controls']; let i=index" [formGroupName]="i">
+
+
+                                                                    <td style="white-space: nowrap;">
+                                                                        <p>vendredi</p>
+                                                                    </td>
+                                                                    <ng-container>
+
+
+
+                                                                        <td> <input formControlName="start" class="form-control " type="time" name="start" min="12:00" max="18:00" required>
+                                                                            <span class="validity"></span>
+                                                                        </td>
+
+                                                                        <td> <input formControlName="end" class="form-control " type="time" name="end" min="12:00" max="18:00" required>
+                                                                            <span class="validity"></span>
+                                                                        </td>
+                                                                    </ng-container>
+
+                                                                    <td> <button *ngIf="weekFormGroup.controls.vendredi.controls.length >0" (click)="deleteRow4(i)" class="btn btn-danger">
+                                                                    <i class="fa fa-minus-circle" aria-hidden="true"></i></button></td>
+
+                                                                </tr>
+                                                            </tbody>
+                                                            <tfoot>
+                                                                <tr>
+
+                                                                    <td> <button type="button" (click)="addNewRow4()" class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></td>
+                                                                </tr>
+                                                            </tfoot>
+                                                        </table>
+
+                                                    </div>
+                                                    <div class="col-sm-12 table-responsive" formArrayName="samedi">
+                                                        <table class="table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style="white-space: nowrap;padding-right: 4em;float:center"> jour </th>
+                                                                    <th style="white-space: nowrap;padding-right: 4em;float:center"> <span class="required-field"></span>debut de seance </th>
+                                                                    <th style="white-space: nowrap;padding-right: 4em;float:center"> <span class="required-field"></span> fin de seance </th>
+
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr class="form-group" *ngFor="let itemrow of weekFormGroup.controls.samedi['controls']; let i=index" [formGroupName]="i">
+
+
+                                                                    <td style="white-space: nowrap;">
+                                                                        <p>samedi</p>
+                                                                    </td>
+                                                                    <ng-container>
+
+
+
+                                                                        <td> <input formControlName="start" class="form-control " type="time" name="start" min="12:00" max="18:00" required>
+                                                                            <span class="validity"></span>
+                                                                        </td>
+
+                                                                        <td> <input formControlName="end" class="form-control " type="time" name="end" min="12:00" max="18:00" required>
+                                                                            <span class="validity"></span>
+                                                                        </td>
+                                                                    </ng-container>
+
+                                                                    <td> <button *ngIf="weekFormGroup.controls.samedi.controls.length >0" (click)="deleteRow5(i)" class="btn btn-danger">
+                                                                  <i class="fa fa-minus-circle" aria-hidden="true"></i></button></td>
+
+                                                                </tr>
+                                                            </tbody>
+                                                            <tfoot>
+                                                                <tr>
+
+                                                                    <td> <button type="button" (click)="addNewRow5()" class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></td>
+                                                                </tr>
+                                                            </tfoot>
+                                                        </table>
+
+                                                    </div>
+                                                    <div class="col-sm-12 table-responsive" formArrayName="dimanche">
+                                                        <table class="table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style="white-space: nowrap;padding-right: 4em;float:center"> jour </th>
+                                                                    <th style="white-space: nowrap;padding-right: 4em;float:center"> <span class="required-field"></span>debut de seance </th>
+                                                                    <th style="white-space: nowrap;padding-right: 4em;float:center"> <span class="required-field"></span> fin de seance </th>
+
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr class="form-group" *ngFor="let itemrow of weekFormGroup.controls.dimanche['controls']; let i=index" [formGroupName]="i">
+
+
+                                                                    <td style="white-space: nowrap;">
+                                                                        <p>dimanche</p>
+                                                                    </td>
+                                                                    <ng-container>
+
+
+
+                                                                        <td> <input formControlName="start" class="form-control " type="time" name="start" min="12:00" max="18:00" required>
+                                                                            <span class="validity"></span>
+                                                                        </td>
+
+                                                                        <td> <input formControlName="end" class="form-control " type="time" name="end" min="12:00" max="18:00" required>
+                                                                            <span class="validity"></span>
+                                                                        </td>
+                                                                    </ng-container>
+
+                                                                    <td> <button *ngIf="weekFormGroup.controls.dimanche.controls.length >0" (click)="deleteRow6(i)" class="btn btn-danger">
+                                                                <i class="fa fa-minus-circle" aria-hidden="true"></i></button></td>
+
+                                                                </tr>
+                                                            </tbody>
+                                                            <tfoot>
+                                                                <tr>
+
+                                                                    <td> <button type="button" (click)="addNewRow6()" class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></td>
+                                                                </tr>
+                                                            </tfoot>
+                                                        </table>
+
+                                                    </div>
+                                                </div>
+
+                                            </form>
+
+
+
+                                        </div>
+                                        <div fxLayout="row" fxLayoutAlign="space-around center" class="card-footer">
+
+                                            <button mdbBtn type="submit" color="success" [disabled]="weekFormGroup.invalid" rounded="true" mdbWavesEffect> Save</button>
+                                        </div>
                                     </div>
+
+
+
                                     <div style="padding-top: 3% ;text-align: center;">
 
                                         <button mat-button matStepperPrevious>Retour</button>
