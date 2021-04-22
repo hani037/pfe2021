@@ -4,6 +4,9 @@ import {event} from "../model/event";
 import {CalendarProService} from "../service/calendar-pro.service";
 import {CalendarProEs} from "../model/CalendarProEs";
 import {AppointmentService} from "../service/appointment.service";
+import {MatDialog} from "@angular/material/dialog";
+import {AddEventComponent} from "../add-event/add-event.component";
+import {SearchByDateComponent} from "../search-by-date/search-by-date.component";
 declare interface marker {
   position:{
     lat:number,
@@ -50,7 +53,7 @@ export class SearchResultComponent implements OnInit {
   selectable = true;
   removable = true;
   loading: boolean = true;
-  constructor(private calendarProService:CalendarProService,private appointmentService:AppointmentService) {
+  constructor(private dialog: MatDialog,private calendarProService:CalendarProService,private appointmentService:AppointmentService) {
     this.isMobileResolution = window.innerWidth < 900;
   }
   @HostListener('window:resize', ['$event'])
@@ -107,28 +110,46 @@ export class SearchResultComponent implements OnInit {
     if (index >= 0) {
       this.filters.splice(index, 1);
     }
-    if (filter.name =="Available Today"){
+    if (filter.name){
+      this.loading = true;
       this.ngOnInit();
     }
   }
 
   filterClicked(filter: string) {
 
-    let filter_exist=false;
-    this.filters.forEach(fil=>{
-      if (fil.name==filter){
-        filter_exist = true;
-      }
-    });
-    if (!filter_exist){
-      this.filters.push({name:filter})
-      if(filter == "Available Today"){
+    if (filter == "Available Today"){
+      let filter_exist=false;
+      this.filters.forEach(fil=>{
+        if (fil.name=="Available Today"){
+          filter_exist = true;
+        }
+      });
+      if(!filter_exist){
+        this.filters = [];
+        this.filters.push({name:filter});
         this.loading = true;
-        this.calendarProService.searchByAvailability(0,5).subscribe(calendarProEs=>{
+        this.calendarProService.searchByAvailabilityToday(0,5).subscribe(calendarProEs=>{
           this.calendarPro=calendarProEs;
           this.addMarker();
         });
       }
+    }else if(filter == "Available By Date"){
+      this.dialog.open(SearchByDateComponent, {
+        height: '250px',
+        width: '300px',
+        backdropClass: 'backdropBackground',
+      }).afterClosed().subscribe(data=>{
+        if(data){
+          this.filters = [];
+          this.filters.push({name:filter});
+          this.loading = true;
+          this.calendarProService.searchByAvailabilityDate(0,5,data).subscribe(calendarProEs=>{
+            this.calendarPro=calendarProEs;
+            this.addMarker();
+          });
+        }
+      })
     }
   }
 

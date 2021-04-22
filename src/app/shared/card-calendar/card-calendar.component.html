@@ -1,0 +1,24 @@
+<mat-card  class="example-card">
+  <mat-card-header class="text-center">
+    <mat-card-title>{{calendarPersonal.name}}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+  <mat-list >
+
+    <mat-list-item  >
+      <mat-icon  matListIcon>emoji_events</mat-icon>
+      <h3 matLine>Events({{calendarPersonal.events.length}})</h3>
+
+    </mat-list-item>
+    <mat-list-item  >
+      <mat-icon  matListIcon>today</mat-icon>
+      <h3 matLine>Appointments({{calendarPersonal.appointment.length}})</h3>
+
+    </mat-list-item>
+  </mat-list>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="warn">Edit</button>
+    <button mat-raised-button color="accent" (click)="open()" mat-button>open</button>
+  </mat-card-actions>
+</mat-card>

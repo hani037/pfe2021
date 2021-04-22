@@ -4,4 +4,5 @@ export class SearchCalendarProDto {
   distance;
   searchText;
   job;
+  date;
 }

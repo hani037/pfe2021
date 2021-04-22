@@ -1,6 +1,7 @@
 <div *ngIf="loading" fxLayout="row" fxLayoutAlign="space-around center">
   <mat-spinner></mat-spinner>
 </div>
+<!--
 <div *ngIf="!loading" >
   <div  fxLayout="row" fxLayoutAlign="space-around center"   >
     <button fxFlexOffset="30"    (click)="right()"
@@ -16,4 +17,39 @@
   </div>
   <app-newcalendar [id]="calendarPersonal.id" [events]="calendarPersonal.events" [appointments]="calendarPersonal.appointment" > </app-newcalendar>
 </div>
+-->
+<mat-tab-group *ngIf="!loading" mat-align-tabs="center">
+  <mat-tab >
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">calendar_today</mat-icon>
+      My Calendars({{calendarsPersonal.length}})
+    </ng-template>
+    <div fxLayout="row" fxLayoutAlign="start center" >
+      <app-card-calendar  *ngFor="let calendar of calendarsPersonal" [calendarPersonal]="calendar" ></app-card-calendar>
 
+    </div>
+
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">groups</mat-icon>
+      Calendars Group(0)
+    </ng-template>
+    Content 2
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">work</mat-icon>
+      Calendars Professional({{calendarsPro.length}})
+    </ng-template>
+    <div fxLayout="row" fxLayoutAlign="start center" >
+      <app-card-calendar-pro  *ngFor="let calendar of calendarsPro" [calendarPro]="calendar" ></app-card-calendar-pro>
+
+    </div>
+  </mat-tab>
+</mat-tab-group>
+<mat-fab-menu (onFabMenuItemSelected)="add($event)" (click)="add($event)" style="position:absolute;bottom: 1%;right:2%;z-index: 10000000 !important;"  color="warn"
+              [fabButtons]="fabButtonsRandom">
+</mat-fab-menu>

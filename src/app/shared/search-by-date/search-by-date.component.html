@@ -1,0 +1,23 @@
+
+<div fxLayout="column" fxLayoutAlign="space-around center" >
+  <h1 class="text-center">Choose Date</h1>
+  <div class="form-group">
+    <form action="" method="post" (ngSubmit)="search(f)" #f="ngForm" >
+      <div >
+
+        <mat-form-field appearance="legacy">
+          <mat-label>Date</mat-label>
+          <input ngModel required name="date" id="date" #date="ngModel"  matInput [matDatepicker]="picker">
+          <mat-datepicker-toggle style="color: black;font-size: 180%" matSuffix [for]="picker"></mat-datepicker-toggle>
+
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="text-center" style="margin-top: 3%" >
+
+        <button [disabled]="f.invalid"  type="submit" mat-flat-button color="warn">Search</button>
+      </div>
+    </form>
+  </div>
+</div>
+

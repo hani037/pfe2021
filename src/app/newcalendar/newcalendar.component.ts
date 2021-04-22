@@ -14,6 +14,8 @@ import {CalendarPersonalService} from "../shared/service/calendar-personal.servi
 import {AddCalendarComponent} from "../shared/add-calendar/add-calendar.component";
 import {event} from "../shared/model/event";
 import {Appointment} from "../shared/model/appointment";
+import {ActivatedRoute, Route} from "@angular/router";
+import {CalendarPersonal} from "../shared/model/calendarPersonal";
 
 interface MatFabMenu {
   id: string | number;
@@ -27,19 +29,13 @@ interface MatFabMenu {
 })
 export class NewcalendarComponent implements OnInit{
   @ViewChild('fullcalendar') fullcalendar: FullCalendarComponent;
-  @Input() events:event[];
-  @Input() appointments:Appointment[];
-  @Input() id:string;
+  calendarPersonal:CalendarPersonal;
   loading:boolean=true;
   fabButtonsRandom: MatFabMenu[] = [
     {
       id: 1,
       icon: 'celebration'
-    },
-    {
-      id: 2,
-      icon: 'calendar_today'
-    },
+    }
   ];
   INITIAL_EVENTS: EventInput[] = [];
   calendarVisible = true;
@@ -70,7 +66,7 @@ export class NewcalendarComponent implements OnInit{
 
 
   };
-    constructor(private dialog: MatDialog,private eventService:EventService,private appointmentService:AppointmentService,private calendarPersonalService:CalendarPersonalService) {
+    constructor(private activatedRoute: ActivatedRoute,private dialog: MatDialog,private eventService:EventService,private appointmentService:AppointmentService,private calendarPersonalService:CalendarPersonalService) {
     if(window.innerWidth < 768){
       this.calendarOptions.headerToolbar = {
         left: 'prev',
@@ -117,7 +113,7 @@ export class NewcalendarComponent implements OnInit{
         height: '600px',
         width: '500px',
         backdropClass: 'backdropBackground',
-        data:{start:selectInfo.start,end:selectInfo.end,calendarId: this.id}
+        data:{start:selectInfo.start,end:selectInfo.end,calendarId: this.calendarPersonal.id}
       })
     }
 
@@ -148,62 +144,32 @@ export class NewcalendarComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.events.forEach(event=>{
-      this.INITIAL_EVENTS.push( {
-        start: event.start,
-        end:event.end,
-        title: event.description,
-        id:event.id,
-        color:event.color,
-        extendedProps: {
-          type: 'Event'
-        },
-      },)
-    });
-    this.appointments.forEach(appointment=>{
-      this.INITIAL_EVENTS.push( {
-        start: appointment.seance.start,
-        end:appointment.seance.end,
-        title: "Appointment",
-        id:appointment.id,
-        color:"Blue",
-        extendedProps: {
-          type: 'Appointment'
-        },
-      },)
-    });
+    this.getCalendar();
     this.eventService.eventEmitter.subscribe(data=> {
       if(data){
-        this.getCalendar().subscribe(data => {
-          this.calendarOptions.events = this.INITIAL_EVENTS
-        })
+
+        this.getCalendar();
       }
     });
-    this.calendarPersonalService.changeEmitter.subscribe(data=>{
-      if(data){
-        this.getCalendarByID(data).subscribe(data => {
-          this.calendarOptions.events = this.INITIAL_EVENTS
-        })
-      }
-    })
-  //this.get_events_appointments().subscribe(data =>   this.calendarOptions.initialEvents = this.INITIAL_EVENTS);
+
   }
   getCalendar(){
-    this.INITIAL_EVENTS = [];
-    return this.calendarPersonalService.get_calendar(this.id).pipe(map(data=> {
-      data.events.forEach(event => {
-        this.INITIAL_EVENTS.push({
+    this.calendarPersonalService.get_calendar(this.activatedRoute.snapshot.params['id']).subscribe(data=>{
+      this.calendarPersonal =data;
+      this.INITIAL_EVENTS = [];
+      this.calendarPersonal.events.forEach(event=>{
+        this.INITIAL_EVENTS.push( {
           start: event.start,
-          end: event.end,
+          end:event.end,
           title: event.description,
-          id: event.id,
-          color: event.color,
+          id:event.id,
+          color:event.color,
           extendedProps: {
             type: 'Event'
           },
         },)
-      })
-      data.appointment.forEach(appointment=>{
+      });
+      this.calendarPersonal.appointment.forEach(appointment=>{
         this.INITIAL_EVENTS.push( {
           start: appointment.seance.start,
           end:appointment.seance.end,
@@ -215,7 +181,10 @@ export class NewcalendarComponent implements OnInit{
           },
         },)
       });
-    }))
+      this.calendarOptions.events = this.INITIAL_EVENTS;
+      this.loading = false;
+    })
+
   }
   getCalendarByID(id){
     this.INITIAL_EVENTS = [];
@@ -251,22 +220,14 @@ export class NewcalendarComponent implements OnInit{
       height: '600px',
       width: '500px',
       backdropClass: 'backdropBackground',
-      data:{calendarId: this.id}
+      data:{calendarId: this.calendarPersonal.id}
     })
   }
-  addCalendar(){
-    this.dialog.open(AddCalendarComponent, {
-      height: '200px',
-      width: '300px',
-      backdropClass: 'backdropBackground',
-    })
-  }
+
 
   add(event) {
     if(event ==1){
       this.add_event();
-    }else if (event==2) {
-    this.addCalendar()
     }
   }
 }

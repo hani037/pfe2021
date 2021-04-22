@@ -1,6 +1,15 @@
-
-
-<full-calendar    #fullcalendar style="margin:1% 2%;font-size: 80%;" [options]="calendarOptions"></full-calendar>
+<nav aria-label="breadcrumb">
+  <mat-list >
+  <mat-list-item>
+   <a  href="/home">
+      <h3 style="color: #2c2c2c" matLine>Return</h3></a>
+  </mat-list-item>
+  </mat-list>
+</nav>
+<div *ngIf="loading" fxLayout="row" fxLayoutAlign="space-around center">
+  <mat-spinner></mat-spinner>
+</div>
+<full-calendar *ngIf="!loading"    #fullcalendar style="margin:1% 2%;font-size: 80%;" [options]="calendarOptions"></full-calendar>
 
 <mat-fab-menu (onFabMenuItemSelected)="add($event)" (click)="add($event)" style="position:absolute;bottom: 2%;right:2%;z-index: 10000000 !important;"  color="warn"
               [fabButtons]="fabButtonsRandom">

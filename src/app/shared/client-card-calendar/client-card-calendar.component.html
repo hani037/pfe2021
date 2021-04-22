@@ -9,7 +9,10 @@
     <div *ngIf="loading" fxLayout="row" fxLayoutAlign="space-around center">
       <mat-spinner></mat-spinner>
     </div>
-    <full-calendar  #fullcalendar *ngIf="!loading" style="margin:1% 2%" [options]="calendarOptions"></full-calendar>
+    <div fxLayout="row" fxLayoutAlign="space-around center">
+      <full-calendar  #fullcalendar *ngIf="!loading" [options]="calendarOptions"></full-calendar>
+
+    </div>
   </mat-card-content>
     <mat-card-actions class="text-center">
       <div class="example-button-container">

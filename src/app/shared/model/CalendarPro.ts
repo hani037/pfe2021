@@ -1,17 +1,15 @@
 import {DayScheduleEs} from "./DayScheduleEs";
+import {Appointment} from "./appointment";
 
-export class GeoPoint {
-  lat:number;
-  lon:number;
-}
-
-export class CalendarProEs {
+export class CalendarPro {
   id;
+  userId;
   firstName:string;
   lastName:string;
   job:string;
   startDate:string;
   expiryDate:string;
-  location:GeoPoint;
-  dayScheduleEs:DayScheduleEs[];
+  lat:number;
+  lon:number;
+  appointment:Appointment[];
 }

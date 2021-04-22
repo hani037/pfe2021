@@ -13,12 +13,15 @@ import {SearchResultComponent} from "./shared/search-result/search-result.compon
 import {AccountActivateComponent} from "./shared/account-activate/account-activate.component";
 import {EventDisplayComponent} from "./shared/event-display/event-display.component";
 import { SignUpproComponent } from './sign-uppro/sign-uppro.component';
+import {NewcalendarComponent} from "./newcalendar/newcalendar.component";
 
 
 const routes: Routes = [
 
       { path: '',   redirectTo: 'home', pathMatch: 'full'},
       { path: 'home', component: HomeComponent,canActivate:[ConnectActivate]},
+      { path: 'home/:id', component: NewcalendarComponent,canActivate:[ConnectActivate]},
+      { path: 'home/calendarPro/:id', component: NewcalendarComponent,canActivate:[ConnectActivate]},
       { path: 'profile', component: ProfileComponent,canActivate:[ConnectActivate]},
       { path: 'event/:id', component: EventDisplayComponent},
       { path: 'search', component: SearchComponent,canActivate:[ConnectActivate]},

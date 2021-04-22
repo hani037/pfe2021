@@ -72,6 +72,12 @@ import { CdkStepperModule } from '@angular/cdk/stepper';
 import {MatSelectModule} from '@angular/material/select';
 import {MatFabMenuModule} from "@angular-material-extensions/fab-menu";
 import { AddCalendarComponent } from './shared/add-calendar/add-calendar.component';
+import { SearchByDateComponent } from './shared/search-by-date/search-by-date.component';
+import { CardCalendarComponent } from './shared/card-calendar/card-calendar.component';
+import { CardCalendarProComponent } from './shared/card-calendar-pro/card-calendar-pro.component';
+import { CalendarProComponent } from './shared/calendar-pro/calendar-pro.component';
+import { AppointmentProComponent } from './shared/appointment-pro/appointment-pro.component';
+import { SeanceProComponent } from './shared/seance-pro/seance-pro.component';
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -107,7 +113,13 @@ export const interceptorProviders =
     NewcalendarComponent,
     ClientCardCalendarComponent,
     SignUpproComponent,
-    AddCalendarComponent
+    AddCalendarComponent,
+    SearchByDateComponent,
+    CardCalendarComponent,
+    CardCalendarProComponent,
+    CalendarProComponent,
+    AppointmentProComponent,
+    SeanceProComponent
   ],
     imports: [
         NgxMaterialTimepickerModule,

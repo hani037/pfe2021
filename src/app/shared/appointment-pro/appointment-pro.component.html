@@ -1,0 +1,38 @@
+<div *ngIf="is_loading">
+  <h2 style="color: rgba(0,0,0,0.29)" class="text-center"> Appointment</h2>
+  <mat-card-header fxLayout="row" fxLayoutAlign="start center"   >
+    <div  mat-card-avatar class="example-header-image"></div>
+    <mat-card-subtitle > UserName</mat-card-subtitle>
+
+  </mat-card-header>
+
+
+  <mat-card-content style="margin-top: 2%">
+    <div  fxLayout="row" fxLayoutAlign="space-around center">
+
+    </div>
+    <div  fxLayout="row" fxLayoutAlign="space-around center">
+
+      <h6 style="color: rgba(0,0,0,0.29)" fxFlex="20" ><strong>Date:</strong></h6>
+      <h6 fxFlex="60">{{appointment.date}}</h6>
+
+    </div>
+    <div  fxLayout="row" fxLayoutAlign="space-around center">
+
+      <h6 style="color: rgba(0,0,0,0.29)" fxFlex="20" ><strong>Start Time:</strong></h6>
+      <h6 fxFlex="60">{{appointment.seance.start}}</h6>
+
+    </div>
+    <div  fxLayout="row" fxLayoutAlign="space-around center">
+
+      <h6 style="color: rgba(0,0,0,0.29)" fxFlex="20" ><strong>Start Time:</strong></h6>
+      <h6 fxFlex="60">{{appointment.seance.end}}</h6>
+    </div>
+  </mat-card-content>
+  <mat-dialog-actions align="end">
+    <button  mat-dialog-close="" mat-raised-button color="warn">close</button>
+
+  </mat-dialog-actions>
+</div>
+
+

@@ -36,7 +36,7 @@ export class ClientCardCalendarComponent implements OnInit {
   INITIAL_EVENTS: EventInput[] = [];
   calendarVisible = true;
   calendarOptions: CalendarOptions = {
-    themeSystem:'',
+
     headerToolbar: {
       left: 'prev',
       center: 'title',
@@ -45,7 +45,7 @@ export class ClientCardCalendarComponent implements OnInit {
     slotMinTime:'06:00:00',
     slotMaxTime:'24:00:00',
     initialView: 'timeGridWeek',
-    height:'400px',
+    height:'auto',
     // alternatively, use the `events` setting to fetch from a feed
     weekends: true,
     events:this.INITIAL_EVENTS,
