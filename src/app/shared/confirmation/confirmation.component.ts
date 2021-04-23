@@ -36,7 +36,8 @@ export class ConfirmationComponent implements OnInit {
 
   createAppointment(f: NgForm) {
     this.is_loading = true;
-    this.appointmentService.createAppointment(f.value.id,this.data.appointment).subscribe(data=>{
+    this.data.appointment.calendarPersonalId = f.value.id;
+    this.appointmentService.createAppointment(this.data.appointment).subscribe(data=>{
       this.appointmentService.AppointmentEmitter.next('created')
     this.dialogRef.close();
   })

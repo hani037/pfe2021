@@ -1,4 +1,7 @@
-<div fxLayout="column" fxLayoutAlign="space-around center" >
+<div *ngIf="is_loading" fxLayout="row" fxLayoutAlign="space-around center">
+  <mat-spinner></mat-spinner>
+</div>
+<div *ngIf="!is_loading" fxLayout="column" fxLayoutAlign="space-around center" >
 
     <mat-card-content class="text-center"  >
       <div  fxLayout="row" fxLayoutAlign="space-around center">
@@ -16,6 +19,7 @@
     </mat-card-content>
     <mat-dialog-actions align="end">
       <button (click)="delete()"   mat-raised-button color="warn">Delete</button>
+      <button  mat-dialog-close="" mat-raised-button color="warn">close</button>
     </mat-dialog-actions>
   </div>
 

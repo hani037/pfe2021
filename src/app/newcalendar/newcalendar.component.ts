@@ -171,8 +171,8 @@ export class NewcalendarComponent implements OnInit{
       });
       this.calendarPersonal.appointment.forEach(appointment=>{
         this.INITIAL_EVENTS.push( {
-          start: appointment.seance.start,
-          end:appointment.seance.end,
+          start: appointment.start,
+          end:appointment.end,
           title: "Appointment",
           id:appointment.id,
           color:"Blue",
@@ -203,8 +203,8 @@ export class NewcalendarComponent implements OnInit{
       })
       data.appointment.forEach(appointment=>{
         this.INITIAL_EVENTS.push( {
-          start: appointment.seance.start,
-          end:appointment.seance.end,
+          start: appointment.start,
+          end:appointment.end,
           title: "Appointment",
           id:appointment.id,
           color:"Blue",

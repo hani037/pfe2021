@@ -78,6 +78,7 @@ import { CardCalendarProComponent } from './shared/card-calendar-pro/card-calend
 import { CalendarProComponent } from './shared/calendar-pro/calendar-pro.component';
 import { AppointmentProComponent } from './shared/appointment-pro/appointment-pro.component';
 import { SeanceProComponent } from './shared/seance-pro/seance-pro.component';
+import {MatPaginatorModule} from "@angular/material/paginator";
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -165,6 +166,7 @@ export const interceptorProviders =
         MatProgressBarModule,
         MatSelectModule,
         MatFabMenuModule,
+        MatPaginatorModule,
 
     ],
   providers: [interceptorProviders,MatDatepickerModule,{

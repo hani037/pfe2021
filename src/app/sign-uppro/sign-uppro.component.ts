@@ -139,6 +139,7 @@ let   weekseance :DaySchedule[] = [
     calendarPro.chrono = this.weekFormGroup.value.chrono;
    calendarPro.job = this.weekFormGroup.value.job;
     calendarPro.expiryDate = new Date( "2021-05-23");
+    calendarPro.startDate = new Date( "2021-04-23");
 
     calendarPro.weekSchedule =weekseance;
 

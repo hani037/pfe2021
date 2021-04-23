@@ -94,31 +94,18 @@ export class ClientCardCalendarComponent implements OnInit {
     let month = ("0" + (clickInfo.event.start.getMonth()+1 )).slice(-2);
     let year = clickInfo.event.start.getFullYear();
     const date =year + "-" + month + "-" + day  ;
-    let MinStart = clickInfo.event.start.getMinutes().toString();
-    let MinEnd = clickInfo.event.end.getMinutes().toString();
-    let HStart = clickInfo.event.start.getHours().toString();
-    let HEnd = clickInfo.event.end.getHours().toString();
-    if(clickInfo.event.start.getMinutes()<10){
-      MinStart = '0'+clickInfo.event.start.getMinutes();
-    }
-    if(clickInfo.event.end.getMinutes()<10){
-      MinEnd = '0'+clickInfo.event.end.getMinutes();
-    }
-    if(clickInfo.event.start.getHours()<10){
-      HStart = '0'+clickInfo.event.start.getHours();
-    }
-    if(clickInfo.event.end.getHours()<10){
-      HEnd = '0'+clickInfo.event.end.getHours();
-    }
+    let MinStart = ("0" +clickInfo.event.start.getMinutes().toString()).slice(-2);
+    let MinEnd = ("0" +clickInfo.event.end.getMinutes().toString()).slice(-2);
+    let HStart = ("0" +clickInfo.event.start.getHours().toString()).slice(-2);
+    let HEnd = ("0" +clickInfo.event.end.getHours().toString()).slice(-2);
     const StartTime =HStart + ":" + MinStart;
     const endTime = HEnd + ":" + MinEnd;
     const appointment = new Appointment();
     appointment.date = date ;
     appointment.calendarProId = this.daysSchedule[0].calendarProId ;
     appointment.userId = this.userService.userConnected.id ;
-    appointment.seance = new Seance();
-    appointment.seance.start =  date+" "+StartTime ;
-    appointment.seance.end = date+" "+endTime ;
+    appointment.start =  date+" "+StartTime ;
+    appointment.end = date+" "+endTime ;
     this.dialog.open(ConfirmationComponent, {
       height: '250px',
       width: '300px',

@@ -11,8 +11,8 @@ export class AppointmentService {
   appointmentUrl = '/api/v1/appointment';
   AppointmentEmitter = new BehaviorSubject<string>(null);
   constructor(private http:HttpClient) { }
-  createAppointment(id:string,appointment: Appointment) {
-    return this.http.post<Appointment>(this.appointmentUrl+'/'+id, appointment);
+  createAppointment(appointment: Appointment) {
+    return this.http.post<Appointment>(this.appointmentUrl, appointment);
   }
   getUserAppointment() {
     return this.http.get<Appointment[]>(this.appointmentUrl);
@@ -23,7 +23,7 @@ export class AppointmentService {
   getUserProAppointment() {
     return this.http.get<Appointment[]>(this.appointmentUrl+'/userPro');
   }
-  UpdateStatusAppointment(id:string,status:string) {
-    return this.http.put<Appointment>(this.appointmentUrl+id+'/status/'+status,{});
+  UpdateStatusAppointment(id:string,status:string,appointment: Appointment) {
+    return this.http.put<Appointment>(this.appointmentUrl+"/"+id+'/status/'+status,appointment);
   }
 }

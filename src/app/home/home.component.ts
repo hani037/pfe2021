@@ -63,6 +63,7 @@ export class HomeComponent implements OnInit {
       return this.calendarProService.get_user_calendarsPro()
     }),map(data=>{
       this.calendarsPro =data;
+      console.log(this.calendarsPro)
     })).subscribe(data=>this.loading = false)
 
   }

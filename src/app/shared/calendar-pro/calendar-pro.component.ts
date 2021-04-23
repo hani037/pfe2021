@@ -10,6 +10,7 @@ import {EventComponent} from "../event/event.component";
 import {MatDialog} from "@angular/material/dialog";
 import {AppointmentProComponent} from "../appointment-pro/appointment-pro.component";
 import {SeanceProComponent} from "../seance-pro/seance-pro.component";
+import {SeanceEs} from "../model/SeanceEs";
 
 @Component({
   selector: 'app-calendar-pro',
@@ -74,8 +75,8 @@ export class CalendarProComponent implements OnInit {
         this.calendarPro =data;
           this.calendarPro.appointment.forEach(appointment=>{
           this.INITIAL_EVENTS.push( {
-            start: appointment.seance.start,
-            end:appointment.seance.end,
+            start: appointment.start,
+            end:appointment.end,
             title: "Appointment",
             id:appointment.id,
             color:"Blue",
@@ -93,17 +94,35 @@ export class CalendarProComponent implements OnInit {
 
     if(clickInfo.event.extendedProps.type=='Appointment'){
       this.dialog.open(AppointmentProComponent, {
-        height: '300px',
+        height: '250px',
         width: '350px',
         backdropClass: 'backdropBackground',
         data:{id: clickInfo.event.id}
+      }).afterClosed().subscribe(data=>{
+        if(data=="CANCELED"||data=="FINISHED"){
+          this.getCalendar();
+        }
       })
     }else {
+      let seance = new SeanceEs();
+      let date = ("0" + clickInfo.event.start.getDate()).slice(-2);
+      let month = ("0" + (clickInfo.event.start.getMonth()+1 )).slice(-2);
+      let year = clickInfo.event.start.getFullYear();
+      let startHour = ("0" + (clickInfo.event.start.getHours() )).slice(-2);
+      let startMin = ("0" + (clickInfo.event.start.getMinutes() )).slice(-2);
+      let endHour = ("0" + (clickInfo.event.end.getHours() )).slice(-2);
+      let endMin = ("0" + (clickInfo.event.end.getMinutes() )).slice(-2);
+      seance.start =year + "-" + month + "-" + date + " " + startHour + ":"+startMin ;
+      seance.end =year + "-" + month + "-" + date + " " + endHour + ":"+endMin ;
       this.dialog.open(SeanceProComponent, {
-        height: '400px',
+        height: '200px',
         width: '350px',
         backdropClass: 'backdropBackground',
-        data:{seance: {start:clickInfo.event.start, end:clickInfo.event.end}}
+        data:{seance: seance,calendarProId:this.calendarPro.id}
+      }).afterClosed().subscribe(data=>{
+        if(data){
+          this.getCalendar();
+        }
       })
     }
   }

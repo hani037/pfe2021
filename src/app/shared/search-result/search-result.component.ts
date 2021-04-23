@@ -7,6 +7,7 @@ import {AppointmentService} from "../service/appointment.service";
 import {MatDialog} from "@angular/material/dialog";
 import {AddEventComponent} from "../add-event/add-event.component";
 import {SearchByDateComponent} from "../search-by-date/search-by-date.component";
+import {PageEvent} from "@angular/material/paginator";
 declare interface marker {
   position:{
     lat:number,
@@ -42,6 +43,10 @@ declare interface Trier {
   styleUrls: ['./search-result.component.css']
 })
 export class SearchResultComponent implements OnInit {
+  date;
+  length;
+  pageSize = 1;
+  pageNb=0;
   isMobileResolution =false;
   Filter_index:number=-1;
   Trier_index:number=-1;
@@ -71,10 +76,37 @@ export class SearchResultComponent implements OnInit {
 
   }
   Search(){
-  this.calendarProService.search(0,5).subscribe(calendarProEs=>{
-    this.calendarPro=calendarProEs;
+  this.calendarProService.search(this.pageNb,this.pageSize).subscribe(calendarProEs=>{
+    if (calendarProEs.totalPages !=0){
+      this.length = calendarProEs.content.length * calendarProEs.totalPages;
+    }else {
+      this.length =0;
+    }
+    this.calendarPro=calendarProEs.content;
     this.addMarker();
    });
+  }
+  SearchByDate(){
+    this.calendarProService.searchByAvailabilityDate(this.pageNb,this.pageSize,this.date).subscribe(calendarProEs=>{
+      if (calendarProEs.totalPages !=0){
+        this.length = calendarProEs.content.length * calendarProEs.totalPages;
+      }else {
+        this.length =0;
+      }
+      this.calendarPro=calendarProEs.content;
+      this.addMarker();
+    });
+  }
+  SearchToday(){
+    this.calendarProService.searchByAvailabilityToday(this.pageNb,this.pageSize).subscribe(calendarProEs=>{
+      if (calendarProEs.totalPages !=0){
+        this.length = calendarProEs.content.length * calendarProEs.totalPages;
+      }else {
+        this.length =0;
+      }
+      this.calendarPro=calendarProEs.content;
+      this.addMarker();
+    });
   }
   addMarker() {
     this.markers =[];
@@ -111,6 +143,7 @@ export class SearchResultComponent implements OnInit {
       this.filters.splice(index, 1);
     }
     if (filter.name){
+      this.pageNb =0;
       this.loading = true;
       this.ngOnInit();
     }
@@ -126,28 +159,25 @@ export class SearchResultComponent implements OnInit {
         }
       });
       if(!filter_exist){
+        this.pageNb =0;
         this.filters = [];
         this.filters.push({name:filter});
         this.loading = true;
-        this.calendarProService.searchByAvailabilityToday(0,5).subscribe(calendarProEs=>{
-          this.calendarPro=calendarProEs;
-          this.addMarker();
-        });
+      this.SearchToday();
       }
     }else if(filter == "Available By Date"){
+      this.pageNb =0;
       this.dialog.open(SearchByDateComponent, {
         height: '250px',
         width: '300px',
         backdropClass: 'backdropBackground',
-      }).afterClosed().subscribe(data=>{
-        if(data){
+      }).afterClosed().subscribe(date=>{
+        if(date){
+          this.date = date;
           this.filters = [];
           this.filters.push({name:filter});
           this.loading = true;
-          this.calendarProService.searchByAvailabilityDate(0,5,data).subscribe(calendarProEs=>{
-            this.calendarPro=calendarProEs;
-            this.addMarker();
-          });
+          this.SearchByDate();
         }
       })
     }
@@ -159,5 +189,18 @@ export class SearchResultComponent implements OnInit {
 
   removeTrier() {
     this.Trier_index = -1;
+  }
+
+  page($event: PageEvent) {
+    this.pageNb = $event.pageIndex;
+    if(this.filters.length > 0){
+      if(this.filters[0].name == "Available By Date"){
+        this.SearchByDate()
+      }else if(this.filters[0].name == "Available Today"){
+        this.SearchToday();
+      }
+    }else {
+    this.Search();
+    }
   }
 }

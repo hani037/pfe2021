@@ -1,7 +1,9 @@
 <div *ngIf="loading" fxLayout="row" fxLayoutAlign="space-around center">
   <mat-spinner></mat-spinner>
 </div>
-<div *ngIf="!loading" fxLayout="row" fxLayoutAlign="space-around  start" >
+<div *ngIf="!loading"  >
+  <div fxLayout="row" fxLayoutAlign="space-around  start">
+
 
   <div fxFlex="75">
 
@@ -100,7 +102,10 @@
       </google-map>
     </div>
 
-
-
+  </div>
+  <mat-paginator [length]="length"
+                 [pageSize]="pageSize"
+                 (page)="page($event)">
+  </mat-paginator>
 </div>
 

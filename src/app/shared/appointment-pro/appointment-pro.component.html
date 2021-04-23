@@ -1,9 +1,10 @@
-<div *ngIf="is_loading">
-  <h2 style="color: rgba(0,0,0,0.29)" class="text-center"> Appointment</h2>
+<div *ngIf="is_loading" fxLayout="row" fxLayoutAlign="space-around center">
+  <mat-spinner></mat-spinner>
+</div>
+<div *ngIf="!is_loading">
   <mat-card-header fxLayout="row" fxLayoutAlign="start center"   >
     <div  mat-card-avatar class="example-header-image"></div>
-    <mat-card-subtitle > UserName</mat-card-subtitle>
-
+    <mat-card-subtitle > Appointment</mat-card-subtitle>
   </mat-card-header>
 
 
@@ -20,16 +21,24 @@
     <div  fxLayout="row" fxLayoutAlign="space-around center">
 
       <h6 style="color: rgba(0,0,0,0.29)" fxFlex="20" ><strong>Start Time:</strong></h6>
-      <h6 fxFlex="60">{{appointment.seance.start}}</h6>
+      <h6 fxFlex="60">{{appointment.start}}</h6>
 
     </div>
     <div  fxLayout="row" fxLayoutAlign="space-around center">
 
       <h6 style="color: rgba(0,0,0,0.29)" fxFlex="20" ><strong>Start Time:</strong></h6>
-      <h6 fxFlex="60">{{appointment.seance.end}}</h6>
+      <h6 fxFlex="60">{{appointment.end}}</h6>
     </div>
+    <mat-form-field style="width: 100%"  appearance="outline">
+      <mat-label>Status:</mat-label>
+      <mat-select  [ngModel]="appointment.status" required name="id"  #Status="ngModel" type="text" id="Status">
+        <mat-option *ngFor="let status of statusList"  [value]="status">{{status}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
   </mat-card-content>
   <mat-dialog-actions align="end">
+    <button  (click)="save(Status.control.value)"  mat-raised-button color="accent">save</button>
     <button  mat-dialog-close="" mat-raised-button color="warn">close</button>
 
   </mat-dialog-actions>
