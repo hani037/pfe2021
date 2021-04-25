@@ -10,5 +10,7 @@
   <mat-spinner></mat-spinner>
 </div>
 <full-calendar *ngIf="!loading"    #fullcalendar style="margin:1% 2%;font-size: 80%;" [options]="calendarOptions"></full-calendar>
-
+<mat-fab-menu (onFabMenuItemSelected)="add($event)" (click)="add($event)" style="position:absolute;bottom: 1%;right:2%;z-index: 10000000 !important;"  color="warn"
+              [fabButtons]="fabButtonsRandom">
+</mat-fab-menu>
 

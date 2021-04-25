@@ -1,0 +1,35 @@
+<div *ngIf="is_loading" fxLayout="row" fxLayoutAlign="space-around center">
+  <mat-spinner></mat-spinner>
+</div>
+<div *ngIf="!is_loading" >
+  <h1 class="text-center">Create Vacation</h1>
+  <div class="alert alert-danger text-center">
+    <mat-icon  class="example-tab-icon ">warning</mat-icon>
+    <br> all appointments will be deleted during this period and an apology email will be sent.
+  </div>
+  <div class="form-group">
+
+      <div style="margin-top: 5%" fxLayout="column" fxLayoutAlign="space-around center" >
+        <mat-form-field class="example-form-field" appearance="fill">
+          <mat-label>First campaign</mat-label>
+          <mat-date-range-input
+            [formGroup]="rangeDate"
+            [rangePicker]="campaignOnePicker"
+            [max]="data.end"
+            [min]="data.start"
+            >
+            <input matStartDate placeholder="Start date" formControlName="start">
+            <input matEndDate placeholder="End date" formControlName="end">
+          </mat-date-range-input>
+          <mat-datepicker-toggle matSuffix [for]="campaignOnePicker"></mat-datepicker-toggle>
+          <mat-date-range-picker #campaignOnePicker></mat-date-range-picker>
+        </mat-form-field>
+
+      </div>
+      <div class="text-center" style="margin-top: 3%" >
+
+        <button (click)="add()" [disabled]="rangeDate.invalid"  type="submit" mat-flat-button color="warn">ADD</button>
+      </div>
+
+  </div>
+</div>

@@ -11,6 +11,9 @@ import {MatDialog} from "@angular/material/dialog";
 import {AppointmentProComponent} from "../appointment-pro/appointment-pro.component";
 import {SeanceProComponent} from "../seance-pro/seance-pro.component";
 import {SeanceEs} from "../model/SeanceEs";
+import {MatFabMenu} from "@angular-material-extensions/fab-menu";
+import {AddCalendarComponent} from "../add-calendar/add-calendar.component";
+import {CreateVacationComponent} from "../create-vacation/create-vacation.component";
 
 @Component({
   selector: 'app-calendar-pro',
@@ -18,6 +21,12 @@ import {SeanceEs} from "../model/SeanceEs";
   styleUrls: ['./calendar-pro.component.css']
 })
 export class CalendarProComponent implements OnInit {
+  fabButtonsRandom: MatFabMenu[] = [
+    {
+      id: 1,
+      icon: 'beach_access'
+    }
+  ];
   loading=true;
   calendarProEs:CalendarProEs;
   calendarPro:CalendarPro;
@@ -26,9 +35,9 @@ export class CalendarProComponent implements OnInit {
   calendarOptions: CalendarOptions = {
 
     headerToolbar: {
-      left: 'prev',
+      left: 'prev,next',
       center: 'title',
-      right: 'next'
+      right: 'timeGridWeek,timeGridDay,listWeek'
     },
 
     initialView: 'timeGridWeek',
@@ -125,5 +134,24 @@ export class CalendarProComponent implements OnInit {
         }
       })
     }
+  }
+  add(event) {
+    if(event ==1){
+      let start =new Date(this.calendarPro.startDate);
+      if (start.getTime()<new Date().getTime()){
+        start = new Date();
+      }
+      this.dialog.open(CreateVacationComponent, {
+        height: '300px',
+        width: '300px',
+        backdropClass: 'backdropBackground',
+        data:{start:start,end:new Date(this.calendarPro.expiryDate),id:this.calendarPro.id}
+      }).afterClosed().subscribe(data=>{
+        if(data){
+          this.getCalendar();
+        }
+      })
+    }
+
   }
 }

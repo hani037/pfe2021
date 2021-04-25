@@ -5,6 +5,7 @@ import {SearchCalendarProDto} from "../model/SearchCalendarProDto";
 import {CalendarPersonal} from "../model/calendarPersonal";
 import {CalendarPro} from "../model/CalendarPro";
 import {SeanceEs} from "../model/SeanceEs";
+import {Vacation} from "../model/vacation";
 
 @Injectable({
   providedIn: 'root'
@@ -66,6 +67,10 @@ export class CalendarProService {
 
   deleteSeance(seanceEs:SeanceEs,calendarProId:string){
     return this.http.put<{}>(this.calendarProUrl+'/deleteSeance/'+calendarProId,seanceEs);
+
+  }
+  createVacation(vacation:Vacation,calendarProId:string){
+    return this.http.put<{}>(this.calendarProUrl+'/createVacation/'+calendarProId,vacation);
 
   }
 }

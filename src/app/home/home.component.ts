@@ -20,6 +20,10 @@ export class HomeComponent implements OnInit {
     {
       id: 1,
       icon: 'calendar_today'
+    },
+    {
+      id: 2,
+      icon: 'groups'
     }
   ];
   calendarsPersonal:CalendarPersonal[];
@@ -55,7 +59,7 @@ export class HomeComponent implements OnInit {
       })
     }
 
-    }
+  }
 
   private getCalendars() {
     this.calendarPersonalService.get_user_calendars().pipe(mergeMap(data => {
@@ -63,7 +67,6 @@ export class HomeComponent implements OnInit {
       return this.calendarProService.get_user_calendarsPro()
     }),map(data=>{
       this.calendarsPro =data;
-      console.log(this.calendarsPro)
     })).subscribe(data=>this.loading = false)
 
   }
