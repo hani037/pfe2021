@@ -80,6 +80,8 @@ import { AppointmentProComponent } from './shared/appointment-pro/appointment-pr
 import { SeanceProComponent } from './shared/seance-pro/seance-pro.component';
 import {MatPaginatorModule} from "@angular/material/paginator";
 import { CreateVacationComponent } from './shared/create-vacation/create-vacation.component';
+import { LoginDialogComponent } from './shared/login-dialog/login-dialog.component';
+import { JoinComponent } from './shared/join/join.component';
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -122,7 +124,9 @@ export const interceptorProviders =
     CalendarProComponent,
     AppointmentProComponent,
     SeanceProComponent,
-    CreateVacationComponent
+    CreateVacationComponent,
+    LoginDialogComponent,
+    JoinComponent
   ],
     imports: [
         NgxMaterialTimepickerModule,

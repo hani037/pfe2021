@@ -4,7 +4,7 @@
 
   <mat-card-content class="text-center"  >
     <img *ngIf="event.image!=''" style="height: 200px" mat-card-image [src]="event.image" >
-    <div *ngIf="event.image==''" style="margin-bottom: 50%"></div>
+
     <div  fxLayout="row" fxLayoutAlign="space-around center">
 
       <h6 style="color: rgba(0,0,0,0.29)" fxFlex="20" ><strong>Start:</strong></h6>
@@ -23,7 +23,7 @@
       <h6 fxFlex="60">{{event.description}}</h6>
     </div>
   </mat-card-content>
-  <mat-dialog-actions align="end">
+  <mat-dialog-actions *ngIf="event.userId==userService.userConnected.id" align="end">
     <button (click)="update()" mat-raised-button color="primary">Update</button>
     <button (click)="delete()"   mat-raised-button color="warn">Delete</button>
   </mat-dialog-actions>

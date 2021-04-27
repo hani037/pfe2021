@@ -16,7 +16,7 @@ export class EventComponent implements OnInit {
   event:event;
   constructor(private dialogRef: MatDialogRef<EventComponent>,private dialog: MatDialog,
               @Inject(MAT_DIALOG_DATA) public data: {id:string},private eventService:EventService
-              ,private _snackBar: MatSnackBar) { }
+              ,private _snackBar: MatSnackBar,private userService:UserService) { }
 
   ngOnInit(): void {
  this.getEvent();

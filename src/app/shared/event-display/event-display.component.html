@@ -19,6 +19,10 @@
       <h6 style="color: rgba(0,0,0,0.29)" fxFlex="60" ><strong>Description:</strong></h6>
       <h6 fxFlex="60">{{event.description}}</h6>
     </div>
+    <div *ngIf="not_invited" class="alert alert-danger text-center">
+      <mat-icon  class="example-tab-icon ">warning</mat-icon>
+      <br> you are not invited.
+    </div>
   </mat-card-content>
   <mat-card-actions>
     <button (click)="join()" mat-raised-button color="accent">join</button>

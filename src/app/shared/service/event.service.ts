@@ -31,4 +31,7 @@ export class EventService {
   uploadImage(formData,id){
     return this.http.put<any>(this.eventsUrl+'/'+id+'/upload',formData)
   }
+  joinEvent(event,calendarId){
+    return this.http.post<event>(this.eventsUrl+'/join/'+calendarId,event);
+  }
 }

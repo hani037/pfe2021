@@ -124,15 +124,13 @@ export class NewcalendarComponent implements OnInit{
 
     if(clickInfo.event.extendedProps.type=='Appointment'){
       this.dialog.open(AppointmentComponent, {
-        height: '300px',
-        width: '350px',
+
         backdropClass: 'backdropBackground',
         data:{id: clickInfo.event.id}
       })
     }else {
       this.dialog.open(EventComponent, {
-        height: '400px',
-        width: '350px',
+
         backdropClass: 'backdropBackground',
         data:{id: clickInfo.event.id}
       })
@@ -217,8 +215,7 @@ export class NewcalendarComponent implements OnInit{
   }
   add_event() {
     this.dialog.open(AddEventComponent, {
-      height: '600px',
-      width: '500px',
+
       backdropClass: 'backdropBackground',
       data:{calendarId: this.calendarPersonal.id}
     })

@@ -7,6 +7,9 @@ import {UserService} from "../service/user.service";
 import {EventComponent} from "../event/event.component";
 import {MatDialog} from "@angular/material/dialog";
 import {LoginComponent} from "../../login/login.component";
+import {AddEventComponent} from "../add-event/add-event.component";
+import {LoginDialogComponent} from "../login-dialog/login-dialog.component";
+import {JoinComponent} from "../join/join.component";
 @Component({
   selector: 'app-event-display',
   templateUrl: './event-display.component.html',
@@ -16,15 +19,16 @@ export class EventDisplayComponent implements OnInit {
   event:event;
   user:User;
   is_loading:boolean=false;
+  not_invited=false;
   constructor(private dialog: MatDialog,private eventService:EventService,private activatedRoute: ActivatedRoute,private userService:UserService) { }
 
   ngOnInit(): void {
-    console.log(this.activatedRoute.snapshot.params['id'])
+
     this.getEvent();
   }
 
   getEvent(){
-    console.log(this.activatedRoute.snapshot.params['id'])
+
       if (this.activatedRoute.snapshot.params['id']){
 
         this.eventService.get_event_by_id(this.activatedRoute.snapshot.params['id']).subscribe(data=>{
@@ -36,9 +40,19 @@ export class EventDisplayComponent implements OnInit {
 
   join() {
     if(this.userService.userConnected.id){
-
+      this.dialog.open(JoinComponent, {
+        backdropClass: 'backdropBackground',
+        data :{event:this.event}
+      }).afterClosed().subscribe(data=>{
+        if (data){
+          this.not_invited = true;
+        }
+      })
     }else {
+      this.dialog.open(LoginDialogComponent, {
 
+        backdropClass: 'backdropBackground',
+      })
     }
   }
 }
