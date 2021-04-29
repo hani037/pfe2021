@@ -6,6 +6,7 @@ export class event {
   color:string;
   description:string;
   image:string;
+  calendarsId?:string[];
   contacts?:string[];
   tags?:string[];
   public static clone(src: event, dest : event):void {

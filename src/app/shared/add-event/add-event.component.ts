@@ -86,6 +86,7 @@ export class AddEventComponent implements OnInit {
     event1.image = '';
     event1.contacts = this.friends;
     event1.tags = this.tags;
+    event1.calendarsId = [];
     this.eventService.addEvent(event1,this.data.calendarId).subscribe(data=>{
       this.eventService.eventEmitter.next(true);
       if(this.file){
@@ -203,6 +204,7 @@ export class AddEventComponent implements OnInit {
     event1.description  = f.value.description;
     event1.color  = f.value.color;
     event1.image = '';
+    event1.calendarsId = [];
     event1.contacts = this.friends;
     event1.tags = this.tags;
     this.eventService.addEvent(event1,this.data.calendarId).subscribe(data=>{
