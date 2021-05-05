@@ -82,6 +82,11 @@ import {MatPaginatorModule} from "@angular/material/paginator";
 import { CreateVacationComponent } from './shared/create-vacation/create-vacation.component';
 import { LoginDialogComponent } from './shared/login-dialog/login-dialog.component';
 import { JoinComponent } from './shared/join/join.component';
+import { CreateCalendarGroupComponent } from './shared/create-calendar-group/create-calendar-group.component';
+import { CardCalendarGroupComponent } from './shared/card-calendar-group/card-calendar-group.component';
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import { CalendarGroupComponent } from './shared/calendar-group/calendar-group.component';
+import { ProfileCalendarProComponent } from './shared/profile-calendar-pro/profile-calendar-pro.component';
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -126,7 +131,11 @@ export const interceptorProviders =
     SeanceProComponent,
     CreateVacationComponent,
     LoginDialogComponent,
-    JoinComponent
+    JoinComponent,
+    CreateCalendarGroupComponent,
+    CardCalendarGroupComponent,
+    CalendarGroupComponent,
+    ProfileCalendarProComponent
   ],
     imports: [
         NgxMaterialTimepickerModule,
@@ -173,6 +182,7 @@ export const interceptorProviders =
         MatSelectModule,
         MatFabMenuModule,
         MatPaginatorModule,
+        MatSlideToggleModule,
 
     ],
   providers: [interceptorProviders,MatDatepickerModule,{

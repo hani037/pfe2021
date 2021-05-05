@@ -10,6 +10,8 @@ export class CalendarPro {
   startDate:Date;
   chrono:number;
   expiryDate:Date;
+  address:string;
+  enabled:boolean;
   lat:number;
   lon:number;
   appointment:Appointment[];

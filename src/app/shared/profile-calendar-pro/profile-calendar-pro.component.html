@@ -1,0 +1,47 @@
+<div *ngIf="loading" fxLayout="row" fxLayoutAlign="space-around center">
+  <mat-spinner></mat-spinner>
+</div>
+<div *ngIf="!loading"  >
+  <div fxLayout="row" fxLayoutAlign="space-around  start">
+
+
+    <div fxFlex="75">
+
+
+
+      <div *ngIf="calendarsProEs.length>0" style="overflow-y: scroll; height:50rem;">
+        <!-- <app-client-card  (mouseenter)="changeAnimation(i)" (mouseleave)="stopAnimation()"
+                           *ngFor="let client of clients;let i=index" [address]="client.Address" [userName]="client.userName"
+                           [Events_Client]="client.events"
+         ></app-client-card>
+         -->
+        <app-client-card-calendar  (mouseenter)="changeAnimation(i)" (mouseleave)="stopAnimation()"
+                                   *ngFor="let calendar of calendarsProEs;let i=index"  [firstName]="calendar.firstName" [lastName]="calendar.lastName"
+                                   [daysSchedule]="calendar.dayScheduleEs"
+        ></app-client-card-calendar>
+
+      </div>
+      <div *ngIf="calendarsProEs.length==0" fxLayout="row" fxLayoutAlign="space-around center">
+        <h1>Aucune resultat</h1>
+      </div>
+    </div>
+
+    <div   fxFlex="25"style="margin-top: 7%">
+
+      <google-map *ngIf="calendarsProEs.length>0"  [center]="markers[0].position" width="100%" >
+        <map-marker
+          *ngFor="let marker of markers"
+          [position]="marker.position"
+          [label]="marker.label"
+          [title]="marker.title"
+          [options]="marker.options"
+
+        >
+        </map-marker>
+      </google-map>
+    </div>
+
+  </div>
+
+</div>
+

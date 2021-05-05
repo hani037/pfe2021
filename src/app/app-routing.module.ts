@@ -15,18 +15,25 @@ import {EventDisplayComponent} from "./shared/event-display/event-display.compon
 import { SignUpproComponent } from './sign-uppro/sign-uppro.component';
 import {NewcalendarComponent} from "./newcalendar/newcalendar.component";
 import {CalendarProComponent} from "./shared/calendar-pro/calendar-pro.component";
+import {CreateCalendarGroupComponent} from "./shared/create-calendar-group/create-calendar-group.component";
+import {CalendarGroupComponent} from "./shared/calendar-group/calendar-group.component";
+import {ProfileCalendarProComponent} from "./shared/profile-calendar-pro/profile-calendar-pro.component";
 
 
 const routes: Routes = [
 
       { path: '',   redirectTo: 'home', pathMatch: 'full'},
       { path: 'home', component: HomeComponent,canActivate:[ConnectActivate]},
-      { path: 'home/:id', component: NewcalendarComponent,canActivate:[ConnectActivate]},
+      { path: 'home/calendar/:id', component: NewcalendarComponent,canActivate:[ConnectActivate]},
       { path: 'home/calendarPro/:id', component: CalendarProComponent,canActivate:[ConnectActivate]},
+      { path: 'home/CreateCalendarGroup', component: CreateCalendarGroupComponent,canActivate:[ConnectActivate]},
+      { path: 'home/CalendarGroup/:id', component: CalendarGroupComponent,canActivate:[ConnectActivate]},
+      { path: 'home/CreateCalendarGroup/edit/:id', component: CreateCalendarGroupComponent,canActivate:[ConnectActivate]},
       { path: 'profile', component: ProfileComponent,canActivate:[ConnectActivate]},
+      { path: 'profile/:id', component: ProfileCalendarProComponent},
       { path: 'event/:id', component: EventDisplayComponent},
-      { path: 'search', component: SearchComponent,canActivate:[ConnectActivate]},
-      { path: 'search/:position/:service', component: SearchResultComponent,canActivate:[ConnectActivate]},
+      { path: 'search', component: SearchComponent},
+      { path: 'search/:position/:service', component: SearchResultComponent},
       { path: 'login', component:LoginComponent,canActivate:[LoginActivate]},
       { path: 'sign-up', component:SignUpComponent,canActivate:[LoginActivate]},
       { path: 'sign-uppro', component:SignUpproComponent,canActivate:[ConnectActivate]},

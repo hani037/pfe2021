@@ -18,16 +18,25 @@
         </div>
         <div >
           <mat-list >
+              <div *ngIf="userService.userConnected.id">
+                <mat-list-item  [style.color]="route_active.includes(l.path) ? null : 'rgba(0, 0, 0, 0.3)'" style="cursor: pointer"  (click)="navigate(l.path)" *ngFor="let l of list" >
+                  <div *ngIf="route_active.includes(l.path)"  class="rectangle"></div>
+                  <mat-icon *ngIf="!route_active.includes(l.path)" fontSet="material-icons-outlined"  matListIcon>{{l.icon}}</mat-icon>
+                  <mat-icon  *ngIf="route_active.includes(l.path)" style="color: #58CB7D" matListIcon>{{l.icon}}</mat-icon>
+                  <h3 *ngIf="expand" matLine><strong>{{l.title}}</strong></h3>
+                  <hr>
 
-              <mat-list-item [style.color]="route_active.includes(l.path) ? null : 'rgba(0, 0, 0, 0.3)'" style="cursor: pointer"  (click)="navigate(l.path)" *ngFor="let l of list" >
-              <div *ngIf="route_active.includes(l.path)"  class="rectangle"></div>
-              <mat-icon *ngIf="!route_active.includes(l.path)" fontSet="material-icons-outlined"  matListIcon>{{l.icon}}</mat-icon>
-              <mat-icon  *ngIf="route_active.includes(l.path)" style="color: #58CB7D" matListIcon>{{l.icon}}</mat-icon>
-              <h3 *ngIf="expand" matLine><strong>{{l.title}}</strong></h3>
+                </mat-list-item>
+              </div>
+            <mat-list-item  [style.color]="route_active.includes('search') ? null : 'rgba(0, 0, 0, 0.3)'" style="cursor: pointer"  (click)="navigate('search')"  >
+              <div *ngIf="route_active.includes('search')"  class="rectangle"></div>
+              <mat-icon *ngIf="!route_active.includes('search')" fontSet="material-icons-outlined"  matListIcon>search</mat-icon>
+              <mat-icon  *ngIf="route_active.includes('search')" style="color: #58CB7D" matListIcon>{{'search'}}</mat-icon>
+              <h3 *ngIf="expand" matLine><strong>SEARCH</strong></h3>
               <hr>
 
             </mat-list-item>
-            <mat-list-item [style.color]="(route_active!='login')&&(route_active!='sign-up')? 'rgba(0, 0, 0, 0.3)' : null" style="cursor: pointer"  (click)="logout()"  >
+            <mat-list-item *ngIf="userService.userConnected.id" [style.color]="(route_active!='login')&&(route_active!='sign-up')? 'rgba(0, 0, 0, 0.3)' : null" style="cursor: pointer"  (click)="logout()"  >
               <div *ngIf="(route_active==='login')||(route_active==='sign-up')"  class="rectangle"></div>
               <mat-icon *ngIf="(route_active!='login')&&(route_active!='sign-up')" fontSet="material-icons-outlined"  matListIcon>logout</mat-icon>
               <mat-icon  *ngIf="(route_active==='login')||(route_active==='sign-up')" style="color: #58CB7D" matListIcon>logout</mat-icon>
@@ -35,9 +44,17 @@
               <hr>
 
             </mat-list-item>
+            <mat-list-item *ngIf="!userService.userConnected.id" [style.color]="(route_active!='login')&&(route_active!='sign-up')? 'rgba(0, 0, 0, 0.3)' : null" style="cursor: pointer"  (click)="login()"  >
+              <div *ngIf="(route_active==='login')||(route_active==='sign-up')"  class="rectangle"></div>
+              <mat-icon *ngIf="(route_active!='login')&&(route_active!='sign-up')" fontSet="material-icons-outlined"  matListIcon>login</mat-icon>
+              <mat-icon  *ngIf="(route_active==='login')||(route_active==='sign-up')" style="color: #58CB7D" matListIcon>login</mat-icon>
+              <h3 *ngIf="expand" matLine><strong>LOGIN</strong></h3>
+              <hr>
+
+            </mat-list-item>
 
           </mat-list>
-      
+
         </div>
 
       </div>
@@ -52,7 +69,7 @@
             <mat-icon>more_vert</mat-icon>
           </button>
 
-          <div style="position: absolute;right:1%" class="example-button-container">
+          <div *ngIf="userService.userConnected.id" style="position: absolute;right:1%" class="example-button-container">
             <button   mat-mini-fab color="white" aria-label="Example icon button with a bookmark icon">
               <mat-icon matBadge="15" matBadgeColor="warn" style="color: #cb4f00">notifications</mat-icon>
             </button>

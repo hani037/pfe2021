@@ -35,6 +35,7 @@ export class UserService {
   }
   logout() {
     this.token = null;
+    this.userConnected = new User();
     localStorage.setItem('token', '');
     //Récupération de l'objet
     this._userConnected.next(null);
@@ -100,5 +101,5 @@ export class UserService {
     return this.http.put<User>(this.usersUrl+'/changeToken',user);
 
   }
- 
+
 }

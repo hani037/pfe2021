@@ -1,0 +1,20 @@
+<mat-card  class="example-card">
+  <mat-card-header class="text-center">
+    <mat-card-title>{{calendarGroup.name}}</mat-card-title>
+
+  </mat-card-header>
+  <mat-card-content>
+    <mat-list >
+
+      <mat-list-item  >
+        <mat-icon  matListIcon>work</mat-icon>
+        <h3 matLine>Calendars Pro({{calendarGroup.calendarProList.length}})</h3>
+
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+  <mat-card-actions>
+    <button (click)="edit()" mat-raised-button color="warn">Edit</button>
+    <button mat-raised-button color="accent" (click)="open()" mat-button>open</button>
+  </mat-card-actions>
+</mat-card>

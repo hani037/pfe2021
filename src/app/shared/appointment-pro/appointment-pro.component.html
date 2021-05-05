@@ -29,16 +29,16 @@
       <h6 style="color: rgba(0,0,0,0.29)" fxFlex="20" ><strong>Start Time:</strong></h6>
       <h6 fxFlex="60">{{appointment.end}}</h6>
     </div>
-    <mat-form-field style="width: 100%"  appearance="outline">
-      <mat-label>Status:</mat-label>
-      <mat-select  [ngModel]="appointment.status" required name="id"  #Status="ngModel" type="text" id="Status">
-        <mat-option *ngFor="let status of statusList"  [value]="status">{{status}}</mat-option>
-      </mat-select>
-    </mat-form-field>
+    <div *ngIf="appointment.status == 'WAIT'">
+      <button style="margin-right: 3%"  (click)="save('CANCELED')"  mat-raised-button color="warn">CANCELED</button>
+      <button  (click)="save('VALIDATED')"  mat-raised-button color="primary">VALIDATED</button>
+    </div>
+    <div *ngIf="appointment.status == 'VALIDATED'">
+      <button  (click)="save('CANCELED')"  mat-raised-button color="warn">CANCELED</button>
+    </div>
 
   </mat-card-content>
   <mat-dialog-actions align="end">
-    <button  (click)="save(Status.control.value)"  mat-raised-button color="accent">save</button>
     <button  mat-dialog-close="" mat-raised-button color="warn">close</button>
 
   </mat-dialog-actions>

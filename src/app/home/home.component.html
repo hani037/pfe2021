@@ -25,7 +25,7 @@
       My Calendars({{calendarsPersonal.length}})
     </ng-template>
     <div fxLayout="row" fxLayoutAlign="start center" >
-      <app-card-calendar  *ngFor="let calendar of calendarsPersonal" [calendarPersonal]="calendar" ></app-card-calendar>
+      <app-card-calendar style="margin-right: 2%"  *ngFor="let calendar of calendarsPersonal" [calendarPersonal]="calendar" ></app-card-calendar>
 
     </div>
 
@@ -34,9 +34,13 @@
   <mat-tab>
     <ng-template mat-tab-label>
       <mat-icon class="example-tab-icon">groups</mat-icon>
-      Calendars Group(0)
+      Calendars Group({{calendarsGroup.length}})
     </ng-template>
-    Content 2
+    <div fxLayout="row" fxLayoutAlign="start center" >
+      <app-card-calendar-group style="margin-right: 2%"  *ngFor="let calendar of calendarsGroup" [calendarGroup]="calendar" ></app-card-calendar-group>
+
+    </div>
+
   </mat-tab>
 
   <mat-tab>
@@ -45,7 +49,7 @@
       Calendars Professional({{calendarsPro.length}})
     </ng-template>
     <div fxLayout="row" fxLayoutAlign="start center" >
-      <app-card-calendar-pro  *ngFor="let calendar of calendarsPro" [calendarPro]="calendar" ></app-card-calendar-pro>
+      <app-card-calendar-pro style="margin-right: 2%"   *ngFor="let calendar of calendarsPro" [calendarPro]="calendar" ></app-card-calendar-pro>
 
     </div>
   </mat-tab>

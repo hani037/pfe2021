@@ -19,8 +19,7 @@ export class AppComponent implements OnInit  {
   public list_calendar:string[]=['CALENDAR 1','CALENDAR 2','CALENDAR 3']
   public list:List[] =[
     {icon:'home_outline',title:'HOME',path:'home'},
-    {icon:'person',title:'PROFILE',path:'profile'},
-    {icon:'search',title:'SEARCH',path:'search'}
+    {icon:'person',title:'PROFILE',path:'profile'}
   ];
   expand: boolean=true;
   constructor(public router:Router,public userService:UserService) {
@@ -32,7 +31,7 @@ export class AppComponent implements OnInit  {
   }
   ngOnInit(): void {
     this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
+      if (event instanceof NavigationStart) {
         this.route_active = event.url.replace("/","")
       }
     })
@@ -46,5 +45,9 @@ export class AppComponent implements OnInit  {
 
     this.router.navigateByUrl(path);
 
+  }
+
+  login() {
+    this.router.navigateByUrl('login')
   }
 }

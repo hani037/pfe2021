@@ -9,7 +9,6 @@ import {AppointmentService} from "../service/appointment.service";
   styleUrls: ['./appointment-pro.component.css']
 })
 export class AppointmentProComponent implements OnInit {
-  statusList:string[]=['VALIDATED','WAIT','CANCELED','FINISHED'];
   is_loading:boolean= true;
   appointment:Appointment;
   constructor(private dialogRef: MatDialogRef<AppointmentProComponent>,
@@ -22,6 +21,7 @@ export class AppointmentProComponent implements OnInit {
   private getAppointment() {
     this.appointmentService.getAppointment(this.data.id).subscribe(data=>{
       this.appointment=data;
+      console.log(data)
       this.is_loading = false;
     })
   }

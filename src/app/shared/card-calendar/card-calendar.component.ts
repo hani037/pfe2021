@@ -16,6 +16,6 @@ export class CardCalendarComponent implements OnInit {
   }
 
   open() {
-  this.router.navigateByUrl('home/'+this.calendarPersonal.id)
+  this.router.navigateByUrl('home/calendar/'+this.calendarPersonal.id)
   }
 }

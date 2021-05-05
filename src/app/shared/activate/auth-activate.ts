@@ -27,7 +27,7 @@ export class ConnectActivate implements CanActivate {
         return true;
       }
 
-      this.router.navigate(['/login']);
+      this.router.navigate(['/search']);
 
       return false;
     }));

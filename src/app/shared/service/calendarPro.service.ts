@@ -64,13 +64,28 @@ export class CalendarProService {
   get_calendarProEs(id){
     return this.http.get<CalendarProEs>(this.calendarProUrl+'/calendarProEs/'+id);
   }
-
+  get_User_calendarProEs(id){
+    return this.http.get<CalendarProEs[]>(this.calendarProUrl+'/userCalendarsProEs/'+id);
+  }
   deleteSeance(seanceEs:SeanceEs,calendarProId:string){
     return this.http.put<{}>(this.calendarProUrl+'/deleteSeance/'+calendarProId,seanceEs);
 
   }
   createVacation(vacation:Vacation,calendarProId:string){
     return this.http.put<{}>(this.calendarProUrl+'/createVacation/'+calendarProId,vacation);
+
+  }
+  updateSeances(calendarProId:string,calendarPro:CalendarPro){
+    return this.http.put<CalendarPro>(this.calendarProUrl+'/updateSeances/'+calendarProId,calendarPro).toPromise();
+
+  }
+  updateInfo(calendarProId:string,calendarPro:CalendarPro){
+    return this.http.put<CalendarPro>(this.calendarProUrl+'/updateInfo/'+calendarProId,calendarPro).toPromise();
+
+  }
+  updateEnabled(calendarProId:string){
+
+    return this.http.put<{}>(this.calendarProUrl+'/changeEnabled/'+calendarProId,{});
 
   }
 }
