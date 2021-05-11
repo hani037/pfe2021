@@ -21,16 +21,15 @@ export class CalendarProService {
 
 
 
-
   createCalendarPro(CalendarPro:CalendarPro){
     return this.http.post<CalendarPro>(this.calendarProUrl,CalendarPro);
   }
 
+
+
   getCalendarPro(id:string) {
     return this.http.get<CalendarPro>(this.calendarProUrl+'/'+id);
   }
-
-
 
 
   search(page,size) {

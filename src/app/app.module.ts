@@ -87,7 +87,7 @@ import { CardCalendarGroupComponent } from './shared/card-calendar-group/card-ca
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import { CalendarGroupComponent } from './shared/calendar-group/calendar-group.component';
 import { ProfileCalendarProComponent } from './shared/profile-calendar-pro/profile-calendar-pro.component';
-
+import { ToastModule } from 'ng-uikit-pro-standard';
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
   timeGridPlugin,
@@ -150,7 +150,7 @@ export const interceptorProviders =
         FullCalendarModule,
         CdkStepperModule,
         MDBBootstrapModule.forRoot(),
-
+        ToastModule.forRoot(),
         CalendarModule.forRoot({
             provide: DateAdapter,
             useFactory: adapterFactory,

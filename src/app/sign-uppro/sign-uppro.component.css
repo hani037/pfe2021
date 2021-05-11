@@ -1,42 +1,66 @@
-$color-primary: rgba(67, 66, 93, 255);
-$color-text: #43425d;
-$color-text-lite: rgba(#4d4f5c, .5);
-.login-container {
-    font-family: "Source Sans Pro";
-    .sidebar {
-        background-image: url(/assets/images/group_4.png), linear-gradient(-136.82353093203deg, rgba(36, 35, 72, 255) 0%, rgba(90, 85, 170, 255) 100%);
-        background-size: cover;
-        min-height: 100vh;
+.spinner {
+    height: 60px;
+    width: 60px;
+    margin: auto;
+    display: flex;
+    position: absolute;
+    -webkit-animation: rotation .6s infinite linear;
+    -moz-animation: rotation .6s infinite linear;
+    -o-animation: rotation .6s infinite linear;
+    animation: rotation .6s infinite linear;
+    border-left: 6px solid rgba(0, 174, 239, .15);
+    border-right: 6px solid rgba(0, 174, 239, .15);
+    border-bottom: 6px solid rgba(0, 174, 239, .15);
+    border-top: 6px solid rgba(0, 174, 239, .8);
+    border-radius: 100%;
+}
+
+@-webkit-keyframes rotation {
+    from {
+        -webkit-transform: rotate(0deg);
     }
-    .title,
-    a {
-        color: $color-text;
-    }
-    .title {
-        font-weight: bold;
-        letter-spacing: 5px;
-    }
-    .tag {
-        color: $color-text-lite
-    }
-    .btn-main {
-        background: $color-primary;
-    }
-    .btn-main-outline {
-        border: 1px solid $color-primary
+    to {
+        -webkit-transform: rotate(359deg);
     }
 }
 
-.required-field::before {
-    content: "*";
-    color: red;
+@-moz-keyframes rotation {
+    from {
+        -moz-transform: rotate(0deg);
+    }
+    to {
+        -moz-transform: rotate(359deg);
+    }
 }
 
-.btn1 {
-    height: 42px;
-    width: 70px;
+@-o-keyframes rotation {
+    from {
+        -o-transform: rotate(0deg);
+    }
+    to {
+        -o-transform: rotate(359deg);
+    }
 }
 
-.example-form-field {
-    margin: 0 8px 16px 0;
+@keyframes rotation {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(359deg);
+    }
+}
+
+#overlay {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.62);
+    z-index: 2;
+    cursor: pointer;
 }
