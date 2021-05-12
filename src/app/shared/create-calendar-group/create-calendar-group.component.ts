@@ -338,6 +338,7 @@ initItemRows() {
     this.SecondGroupChanged.forEach((data,index)=>{
       this.calendarPro.get(''+index).valueChanges.subscribe(val => {
         if(this.SecondGroupChanged[index]==1){
+
           this.SecondFormChanged = true;
           this.SecondGroupChanged[index]++;
         }else {

@@ -18,7 +18,9 @@ export class CardCalendarProComponent implements OnInit {
   open() {
     this.router.navigateByUrl('home/calendarPro/'+this.calendarPro.id)
   }
-
+  edit() {
+    this.router.navigateByUrl('sign-uppro/edit/'+this.calendarPro.id)
+  }
   change(event) {
     this.calendarProService.updateEnabled(this.calendarPro.id).subscribe()
 
