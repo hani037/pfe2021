@@ -14,6 +14,9 @@ import {SeanceEs} from "../model/SeanceEs";
 import {MatFabMenu} from "@angular-material-extensions/fab-menu";
 import {AddCalendarComponent} from "../add-calendar/add-calendar.component";
 import {CreateVacationComponent} from "../create-vacation/create-vacation.component";
+import {DateService} from "../service/date.service";
+import {AddSeanceComponent} from "../add-seance/add-seance.component";
+import {AddValidityComponent} from "../add-validity/add-validity.component";
 
 @Component({
   selector: 'app-calendar-pro',
@@ -25,6 +28,14 @@ export class CalendarProComponent implements OnInit {
     {
       id: 1,
       icon: 'beach_access'
+    },
+    {
+      id: 2,
+      icon: 'schedule '
+    },
+    {
+      id: 3,
+      icon: 'event_available '
     }
   ];
   loading=true;
@@ -56,7 +67,7 @@ export class CalendarProComponent implements OnInit {
 
 
   };
-  constructor(private activatedRoute: ActivatedRoute,private calendarProService:CalendarProService,private dialog: MatDialog ) { }
+  constructor(private activatedRoute: ActivatedRoute,private calendarProService:CalendarProService,private dialog: MatDialog,private dateService:DateService ) { }
 
   ngOnInit(): void {
     this.getCalendar();
@@ -64,19 +75,17 @@ export class CalendarProComponent implements OnInit {
   getCalendar(){
     this.calendarProService.get_calendarProEs(this.activatedRoute.snapshot.params['id']).pipe(mergeMap(data=> {
         this.calendarProEs = data;
+        console.log(data);
         this.INITIAL_EVENTS = [];
-        this.calendarProEs.dayScheduleEs.forEach(dayScheduleEs => {
-          dayScheduleEs.seances.forEach(seance => {
-            let seanceTime = new Date();
-            if (new Date(dayScheduleEs + " " + seance.start).getTime() < seanceTime.getTime()) {
-              return;
-            }
-            this.INITIAL_EVENTS.push({
-              start: new Date(dayScheduleEs + " " + seance.start),
-              end: new Date(dayScheduleEs + " " + seance.end),
+        this.calendarProEs.seanceEsList.forEach(seance => {
+          this.INITIAL_EVENTS.push({
+              start: new Date(seance.date+" "+seance.start),
+              end: new Date(seance.date+" "+seance.end),
               color: 'red',
+              extendedProps: {
+                seance: seance
+              },
             },)
-          })
         });
         return this.calendarProService.get_calendarPro(this.calendarProEs.id)
       }
@@ -84,8 +93,8 @@ export class CalendarProComponent implements OnInit {
         this.calendarPro =data;
           this.calendarPro.appointment.forEach(appointment=>{
           this.INITIAL_EVENTS.push( {
-            start: appointment.start,
-            end:appointment.end,
+            start: new Date(appointment.date +" " +appointment.start),
+            end:new Date(appointment.date +" " +appointment.end),
             title: "Appointment",
             id:appointment.id,
             color:"Blue",
@@ -103,31 +112,18 @@ export class CalendarProComponent implements OnInit {
 
     if(clickInfo.event.extendedProps.type=='Appointment'){
       this.dialog.open(AppointmentProComponent, {
-        height: '250px',
-        width: '350px',
+
         backdropClass: 'backdropBackground',
         data:{id: clickInfo.event.id}
       }).afterClosed().subscribe(data=>{
-        if(data=="CANCELED"||data=="FINISHED"){
+        if(data=="CANCELED"||data=="deleted"){
           this.getCalendar();
         }
       })
     }else {
-      let seance = new SeanceEs();
-      let date = ("0" + clickInfo.event.start.getDate()).slice(-2);
-      let month = ("0" + (clickInfo.event.start.getMonth()+1 )).slice(-2);
-      let year = clickInfo.event.start.getFullYear();
-      let startHour = ("0" + (clickInfo.event.start.getHours() )).slice(-2);
-      let startMin = ("0" + (clickInfo.event.start.getMinutes() )).slice(-2);
-      let endHour = ("0" + (clickInfo.event.end.getHours() )).slice(-2);
-      let endMin = ("0" + (clickInfo.event.end.getMinutes() )).slice(-2);
-      seance.start =year + "-" + month + "-" + date + " " + startHour + ":"+startMin ;
-      seance.end =year + "-" + month + "-" + date + " " + endHour + ":"+endMin ;
       this.dialog.open(SeanceProComponent, {
-        height: '200px',
-        width: '350px',
         backdropClass: 'backdropBackground',
-        data:{seance: seance,calendarProId:this.calendarPro.id}
+        data:{seance: clickInfo.event.extendedProps.seance,calendarProId:this.calendarPro.id}
       }).afterClosed().subscribe(data=>{
         if(data){
           this.getCalendar();
@@ -136,14 +132,34 @@ export class CalendarProComponent implements OnInit {
     }
   }
   add(event) {
+    let start =new Date(this.calendarPro.startDate);
+    if (start.getTime()<new Date().getTime()){
+      start = new Date();
+    }
     if(event ==1){
-      let start =new Date(this.calendarPro.startDate);
-      if (start.getTime()<new Date().getTime()){
-        start = new Date();
-      }
+
       this.dialog.open(CreateVacationComponent, {
-        height: '300px',
-        width: '300px',
+
+        backdropClass: 'backdropBackground',
+        data:{start:start,end:new Date(this.calendarPro.expiryDate),id:this.calendarPro.id}
+      }).afterClosed().subscribe(data=>{
+        if(data){
+          this.getCalendar();
+        }
+      })
+    }else  if(event ==2){
+
+      this.dialog.open(AddSeanceComponent, {
+        backdropClass: 'backdropBackground',
+        data:{start:start,end:new Date(this.calendarPro.expiryDate),id:this.calendarPro.id}
+      }).afterClosed().subscribe(data=>{
+        if(data){
+          this.getCalendar();
+        }
+      })
+    }
+    else  if(event ==3){
+      this.dialog.open(AddValidityComponent, {
         backdropClass: 'backdropBackground',
         data:{start:start,end:new Date(this.calendarPro.expiryDate),id:this.calendarPro.id}
       }).afterClosed().subscribe(data=>{

@@ -30,7 +30,7 @@ const routes: Routes = [
       { path: 'home/CalendarGroup/:id', component: CalendarGroupComponent,canActivate:[ConnectActivate]},
       { path: 'home/CreateCalendarGroup/edit/:id', component: CreateCalendarGroupComponent,canActivate:[ConnectActivate]},
       { path: 'profile', component: ProfileComponent,canActivate:[ConnectActivate]},
-      { path: 'profile/:id', component: ProfileCalendarProComponent},
+      { path: 'group/:id', component: ProfileCalendarProComponent},
       { path: 'event/:id', component: EventDisplayComponent},
       { path: 'search', component: SearchComponent},
       { path: 'search/:position/:service', component: SearchResultComponent},

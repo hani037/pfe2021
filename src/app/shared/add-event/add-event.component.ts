@@ -11,6 +11,7 @@ import {catchError, map} from "rxjs/operators";
 import {HttpErrorResponse, HttpEventType} from "@angular/common/http";
 import {of} from "rxjs";
 import {CalendarPersonalService} from "../service/calendar-personal.service";
+import {DateService} from "../service/date.service";
 
 
 
@@ -39,7 +40,8 @@ export class AddEventComponent implements OnInit {
   friends: string[] = [];
   contacts: string[] = [];
   constructor(private dialogRef: MatDialogRef<AddEventComponent>,private eventService:EventService,
-              @Inject(MAT_DIALOG_DATA) public data: {id:string,start:Date,end:Date,calendarId:string},private _snackBar: MatSnackBar) { }
+              @Inject(MAT_DIALOG_DATA) public data: {id:string,start:Date,end:Date,calendarId:string},private _snackBar: MatSnackBar,
+              private dateService:DateService) { }
 
   ngOnInit(): void {
     console.log(this.data);
@@ -57,8 +59,8 @@ export class AddEventComponent implements OnInit {
         })
       } else if (this.data.start) {
         this.date1 = new FormControl(new Date(this.data.start));
-        this.start1 = ("0"+this.data.start.getHours()).slice(-2)+':'+ ("0"+this.data.start.getMinutes()).slice(-2);
-        this.end1 = ("0"+this.data.end.getHours()).slice(-2) +':'+ ("0"+this.data.end.getMinutes()).slice(-2);
+        this.start1 = this.dateService.getHours(this.data.start);
+        this.end1 = this.dateService.getHours(this.data.end);
         this.is_add = true;
         this.is_loading = false;
       }else {
@@ -73,11 +75,8 @@ export class AddEventComponent implements OnInit {
 
   add(f:NgForm) {
     this.is_loading = true;
-    let date = ("0" + f.value.date.getDate()).slice(-2);
-    let month = ("0" + (f.value.date.getMonth()+1 )).slice(-2);
-    let year = f.value.date.getYear()+1900;
-    const start=year + "-" + month + "-" + date + " " + f.value.start + ":00" ;
-    const end=year + "-" + month + "-" + date + " " + f.value.end + ":00" ;
+    const start=this.dateService.getDate(f.value.date)  + " " + f.value.start + ":00" ;
+    const end=this.dateService.getDate(f.value.date) + " " + f.value.end + ":00" ;
     const event1 = new event();
     event1.start  = start;
     event1.end  = end;
@@ -139,11 +138,8 @@ export class AddEventComponent implements OnInit {
   update(f: NgForm) {
     this.is_loading = true;
     this.contacts.push(...this.friends);
-    let date = ("0" + this.date1.value.getDate()).slice(-2);
-    let month = ("0" + (this.date1.value.getMonth()+1 )).slice(-2);
-    let year = this.date1.value.getYear()+1900;
-    const start=year + "-" + month + "-" + date + " " + f.value.start + ":00" ;
-    const end=year + "-" + month + "-" + date + " " + f.value.end + ":00" ;
+    const start=this.dateService.getDate(this.date1.value)  + " " + f.value.start + ":00" ;
+    const end=this.dateService.getDate(this.date1.value)  + f.value.end + ":00" ;
     const event1 = new event();
     event1.id =this.event.id;
     event1.start  = start;
@@ -191,13 +187,10 @@ export class AddEventComponent implements OnInit {
   addFromCalendar(f:NgForm) {
     this.is_loading = true;
     let contacts:string[] = this.friends;
-    let date = ("0" + this.date1.value.getDate()).slice(-2);
-    let month = ("0" + (this.date1.value.getMonth()+1 )).slice(-2);
-    let year = this.date1.value.getYear()+1900;
     let start_hour = f.value.start;
     let end_hour =f.value.end;
-    const start=year + "-" + month + "-" + date + " " + start_hour + ":00" ;
-    const end=year + "-" + month + "-" + date + " " + end_hour+ ":00" ;
+    const start=this.dateService.getDate(this.date1.value) + " " + start_hour + ":00" ;
+    const end=this.dateService.getDate(this.date1.value) + " " + end_hour+ ":00" ;
     const event1 = new event();
     event1.start  = start;
     event1.end  = end;

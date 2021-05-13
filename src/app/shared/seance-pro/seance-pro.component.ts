@@ -15,11 +15,12 @@ export class SeanceProComponent implements OnInit {
               ,private calendarProService:CalendarProService) { }
 
   ngOnInit(): void {
+
   }
 
   delete() {
     this.is_loading = true;
-  this.calendarProService.deleteSeance(this.data.seance,this.data.calendarProId).subscribe(data=>{
+  this.calendarProService.deleteSeance(this.data.seance.id).subscribe(data=>{
     this.dialogRef.close('deleted')
   })
   }

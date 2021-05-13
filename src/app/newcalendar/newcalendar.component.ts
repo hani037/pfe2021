@@ -169,8 +169,8 @@ export class NewcalendarComponent implements OnInit{
       });
       this.calendarPersonal.appointment.forEach(appointment=>{
         this.INITIAL_EVENTS.push( {
-          start: appointment.start,
-          end:appointment.end,
+          start: new Date(appointment.date +" "+appointment.start),
+          end:new Date(appointment.date +" "+appointment.start),
           title: "Appointment",
           id:appointment.id,
           color:"Blue",
@@ -184,35 +184,7 @@ export class NewcalendarComponent implements OnInit{
     })
 
   }
-  getCalendarByID(id){
-    this.INITIAL_EVENTS = [];
-    return this.calendarPersonalService.get_calendar(id).pipe(map(data=> {
-      data.events.forEach(event => {
-        this.INITIAL_EVENTS.push({
-          start: event.start,
-          end: event.end,
-          title: event.description,
-          id: event.id,
-          color: event.color,
-          extendedProps: {
-            type: 'Event'
-          },
-        },)
-      })
-      data.appointment.forEach(appointment=>{
-        this.INITIAL_EVENTS.push( {
-          start: appointment.start,
-          end:appointment.end,
-          title: "Appointment",
-          id:appointment.id,
-          color:"Blue",
-          extendedProps: {
-            type: 'Appointment'
-          },
-        },)
-      });
-    }))
-  }
+
   add_event() {
     this.dialog.open(AddEventComponent, {
 

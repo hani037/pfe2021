@@ -168,8 +168,7 @@ export class SearchResultComponent implements OnInit {
     }else if(filter == "Available By Date"){
       this.pageNb =0;
       this.dialog.open(SearchByDateComponent, {
-        height: '250px',
-        width: '300px',
+
         backdropClass: 'backdropBackground',
       }).afterClosed().subscribe(date=>{
         if(date){

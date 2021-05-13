@@ -8,7 +8,7 @@
       <form action="" method="post" (ngSubmit)="add(f)" #f="ngForm" >
         <div >
 
-          <mat-form-field appearance="legacy">
+          <mat-form-field appearance="outline">
             <mat-label>Date</mat-label>
             <input ngModel required name="date" id="date" #date="ngModel"  matInput [matDatepicker]="picker">
             <mat-datepicker-toggle style="color: black;font-size: 180%" matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -18,7 +18,7 @@
         </div>
 
         <p>
-          <mat-form-field appearance="legacy">
+          <mat-form-field appearance="outline">
             <mat-label>Start Time</mat-label>
             <input matInput  required name="start" id="start" #start ngModel  aria-label="default time" [ngxTimepicker]="fullTime1" [format]="24"  >
             <ngx-material-timepicker #fullTime1></ngx-material-timepicker>
@@ -26,7 +26,7 @@
           </mat-form-field>
         </p>
         <p>
-          <mat-form-field appearance="legacy">
+          <mat-form-field appearance="outline">
             <mat-label>End Time</mat-label>
             <input matInput  [ngxTimepicker]="fullTime2" [format]="24" #end ngModel required name="end" id="end1"  >
             <ngx-material-timepicker #fullTime2></ngx-material-timepicker>
@@ -57,7 +57,7 @@
           </mat-radio-group>
         </div>
         <p>
-          <mat-form-field appearance="legacy">
+          <mat-form-field appearance="outline">
             <mat-label>Add Friend(e-mail)</mat-label>
             <mat-chip-list #chipList1 >
               <input [matChipInputFor]="chipList1"
@@ -76,7 +76,7 @@
           </mat-chip>
         </p>
         <p>
-          <mat-form-field appearance="legacy">
+          <mat-form-field appearance="outline">
             <mat-label>Tag</mat-label>
             <mat-chip-list #chipList >
               <input  matInput [matChipInputFor]="chipList"
@@ -118,7 +118,7 @@
       <form action="" method="post" (ngSubmit)="update(f)" #f="ngForm" >
         <div >
 
-          <mat-form-field appearance="legacy">
+          <mat-form-field appearance="outline">
             <mat-label>Date</mat-label>
             <input  [formControl]="date1" required  matInput [matDatepicker]="picker">
             <mat-datepicker-toggle style="color: black;font-size: 180%" matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -128,7 +128,7 @@
         </div>
 
         <p>
-          <mat-form-field appearance="legacy">
+          <mat-form-field appearance="outline">
             <mat-label>Start Time</mat-label>
             <input matInput  required name="start" id="edit_start" #start [ngModel]="start1" aria-label="default time" [ngxTimepicker]="fullTime1" [format]="24"  >
             <ngx-material-timepicker #fullTime1></ngx-material-timepicker>
@@ -137,7 +137,7 @@
         </p>
 
         <p>
-          <mat-form-field appearance="legacy">
+          <mat-form-field appearance="outline">
             <mat-label>End Time</mat-label>
             <input matInput  [ngxTimepicker]="fullTime2" [format]="24" #end [ngModel]="end1"   required name="end" id="edit_end1"  >
             <ngx-material-timepicker #fullTime2></ngx-material-timepicker>
@@ -164,7 +164,7 @@
           </mat-radio-group>
         </div>
         <p>
-          <mat-form-field appearance="legacy">
+          <mat-form-field appearance="outline">
             <mat-label>Add Friend(e-mail)</mat-label>
             <mat-chip-list #chipList1 >
               <input matInput [matChipInputFor]="chipList1"
@@ -189,7 +189,7 @@
           </mat-chip>
         </p>
         <p>
-          <mat-form-field appearance="legacy">
+          <mat-form-field appearance="outline">
             <mat-label>Tag</mat-label>
             <mat-chip-list #chipList >
               <input matInput [matChipInputFor]="chipList"
@@ -228,7 +228,7 @@
       <form action="" method="post" (ngSubmit)="addFromCalendar(f)" #f="ngForm" >
         <div >
 
-          <mat-form-field appearance="legacy">
+          <mat-form-field appearance="outline">
             <mat-label>Date</mat-label>
             <input  [formControl]="date1" required  matInput [matDatepicker]="picker">
             <mat-datepicker-toggle style="color: black;font-size: 180%" matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -238,7 +238,7 @@
         </div>
 
         <p>
-          <mat-form-field appearance="legacy">
+          <mat-form-field appearance="outline">
             <mat-label>Start Time</mat-label>
             <input matInput  required name="start" id="edit_start2" #start [ngModel]="start1" aria-label="default time" [ngxTimepicker]="fullTime1" [format]="24"  >
             <ngx-material-timepicker #fullTime1></ngx-material-timepicker>
@@ -247,7 +247,7 @@
         </p>
 
         <p>
-          <mat-form-field appearance="legacy">
+          <mat-form-field appearance="outline">
             <mat-label>End Time</mat-label>
             <input matInput  [ngxTimepicker]="fullTime2" [format]="24" #end [ngModel]="end1"   required name="end" id="edit_end2"  >
             <ngx-material-timepicker #fullTime2></ngx-material-timepicker>
@@ -277,7 +277,7 @@
           </mat-radio-group>
         </div>
         <p>
-          <mat-form-field appearance="legacy">
+          <mat-form-field appearance="outline">
             <mat-label>Add Friend(e-mail)</mat-label>
             <mat-chip-list #chipList1 >
               <input [matChipInputFor]="chipList1"

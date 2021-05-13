@@ -2,12 +2,13 @@
   <mat-spinner></mat-spinner>
 </div>
 <div *ngIf="!loading"  >
+
   <div fxLayout="row" fxLayoutAlign="space-around  start">
 
 
     <div fxFlex="75">
 
-
+      <h1 class="text-center" style="color: #ea4335">Group: {{calendarsGroup.name}}</h1>
 
       <div *ngIf="calendarsProEs.length>0" style="overflow-y: scroll; height:50rem;">
         <!-- <app-client-card  (mouseenter)="changeAnimation(i)" (mouseleave)="stopAnimation()"
@@ -15,7 +16,7 @@
                            [Events_Client]="client.events"
          ></app-client-card>
          -->
-        <app-client-card-calendar  (mouseenter)="changeAnimation(i)" (mouseleave)="stopAnimation()"
+        <app-client-card-calendar   (mouseenter)="changeAnimation(i)" (mouseleave)="stopAnimation()"
                                    *ngFor="let calendar of calendarsProEs;let i=index"  [firstName]="calendar.firstName" [lastName]="calendar.lastName"
                                    [daysSchedule]="calendar.dayScheduleEs"
         ></app-client-card-calendar>

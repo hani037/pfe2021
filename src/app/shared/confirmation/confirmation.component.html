@@ -3,13 +3,25 @@
   <mat-spinner></mat-spinner>
 </div>
 <div *ngIf="!is_loading">
+  <div *ngIf="appointment_Taken" class="alert alert-danger text-center">
+    <mat-icon  class="example-tab-icon ">danger</mat-icon>
+    <br> you have already made an appointment in that session.
+  </div>
   <h1 class="text-center">Add Appointment</h1>
+  <h2 *ngIf="data.seance.nbTotalPlaces != 1" class="text-center">total number of places: {{data.seance.nbTotalPlaces}}</h2>
+  <h2 *ngIf="data.seance.nbTotalPlaces != 1" class="text-center">places available: {{data.seance.nbPlacesAvailable}}</h2>
   <div class="form-group">
     <form action="" method="post" (ngSubmit)="createAppointment(f)" #f="ngForm" >
       <mat-form-field style="width: 100%"  appearance="outline">
         <mat-label>Select Calendar</mat-label>
-        <mat-select  ngModel required name="id"  #id="ngModel" type="text" id="id">
+        <mat-select  [ngModel]="calendarPersonals[0].id" required name="id"  #id="ngModel" type="text" id="id">
           <mat-option *ngFor="let calendarPersonal of calendarPersonals" [value]="calendarPersonal.id">{{calendarPersonal.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field *ngIf="data.seance.nbPlacesAvailable != 1" style="width: 100%"  appearance="outline">
+        <mat-label>places</mat-label>
+        <mat-select  [ngModel]="1" required name="places"  #places="ngModel" type="number" id="places">
+          <mat-option [value]="i+1" *ngFor="let q of arrayOne(2); let i = index;">{{i+1}}</mat-option>
         </mat-select>
       </mat-form-field>
       <div class="text-center" style="margin-top: 3%" >

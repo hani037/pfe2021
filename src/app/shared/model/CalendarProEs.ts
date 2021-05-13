@@ -1,4 +1,4 @@
-import {DayScheduleEs} from "./DayScheduleEs";
+import {SeanceEs} from "./SeanceEs";
 
 export class GeoPoint {
   lat:number;
@@ -8,6 +8,7 @@ export class GeoPoint {
 export class CalendarProEs {
   id;
   userId:string;
+  calendarGroupId;
   firstName:string;
   lastName:string;
   job:string;
@@ -16,5 +17,6 @@ export class CalendarProEs {
   address:string;
   enabled:boolean;
   location:GeoPoint;
-  dayScheduleEs:DayScheduleEs[];
+  seanceEsList:SeanceEs[];
+
 }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Appointment} from "../model/appointment";
 import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject} from "rxjs";
+import {AppointmentCalendarPro} from "../model/appointmentCalendarPro";
 
 
 @Injectable({
@@ -25,5 +26,14 @@ export class AppointmentService {
   }
   UpdateStatusAppointment(id:string,status:string,appointment: Appointment) {
     return this.http.put<Appointment>(this.appointmentUrl+"/"+id+'/status/'+status,appointment);
+  }
+
+  getAppointmentCalendarPro(id: string) {
+    return this.http.get<AppointmentCalendarPro>(this.appointmentUrl+'/calendarPro/'+id);
+
+  }
+  updateAll(id: string,status:string) {
+    return this.http.put<{}>(this.appointmentUrl+"/"+id+'/updateAll/status/'+status,{});
+
   }
 }

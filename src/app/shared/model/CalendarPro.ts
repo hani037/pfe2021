@@ -1,9 +1,11 @@
 import {DaySchedule} from "./daySchedule";
 import {Appointment} from "./appointment";
+import {AppointmentCalendarPro} from "./appointmentCalendarPro";
 
 export class CalendarPro {
   id;
   userId;
+  calendarGroupId;
   firstName:string;
   lastName:string;
   job:string;
@@ -14,13 +16,8 @@ export class CalendarPro {
   enabled:boolean;
   lat:number;
   lon:number;
-  appointment:Appointment[];
+  appointment:AppointmentCalendarPro[];
   weekSchedule :DaySchedule[];
 
-  public static clone(src:CalendarPro, dest : CalendarPro):void {
-    dest.id = src.id;
-    dest.job = src.job;
-    dest.chrono = src.chrono;
 
-  }
 }

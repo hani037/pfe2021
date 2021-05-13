@@ -63,11 +63,11 @@ export class CalendarProService {
   get_calendarProEs(id){
     return this.http.get<CalendarProEs>(this.calendarProUrl+'/calendarProEs/'+id);
   }
-  get_User_calendarProEs(id){
-    return this.http.get<CalendarProEs[]>(this.calendarProUrl+'/userCalendarsProEs/'+id);
+  getCalendarGroupCalendarsProEs(id){
+    return this.http.get<CalendarProEs[]>(this.calendarProUrl+'/calendarGroup/'+id);
   }
-  deleteSeance(seanceEs:SeanceEs,calendarProId:string){
-    return this.http.put<{}>(this.calendarProUrl+'/deleteSeance/'+calendarProId,seanceEs);
+  deleteSeance(seanceId:string){
+    return this.http.put<{}>(this.calendarProUrl+'/deleteSeance/'+seanceId,{});
 
   }
   createVacation(vacation:Vacation,calendarProId:string){
@@ -85,6 +85,14 @@ export class CalendarProService {
   updateEnabled(calendarProId:string){
 
     return this.http.put<{}>(this.calendarProUrl+'/changeEnabled/'+calendarProId,{});
+
+  }
+  addSeance(seanceEs:SeanceEs,calendarProId:string){
+    return this.http.post<{}>(this.calendarProUrl+'/addSeance/'+calendarProId,seanceEs);
+
+  }
+  addValidity(date:Date,calendarProId:string){
+    return this.http.post<{}>(this.calendarProUrl+'/addValidity/'+calendarProId,date);
 
   }
 }

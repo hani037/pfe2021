@@ -21,17 +21,21 @@ export class CreateCalendarGroupComponent implements OnInit {
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   FirstGroupChanged:boolean=false;
+  nbClients:boolean=false;
   NbCalendarPro:number=0;
-  SecondGroupChanged:number[];
+  SecondGroupChanged:boolean[];
   SecondFormChanged:boolean=false;
   weekGroupChanged:boolean[];
   loading=true;
   private max: Date;
   private min: Date;
+
   constructor(private activatedRoute: ActivatedRoute,private _formBuilder: FormBuilder,private calendarGroupService:CalendarGroupService
               ,private router:Router,private calendarProService:CalendarProService) { }
 
   ngOnInit(): void {
+    this.min = new Date();
+    this.max = new Date(this.min.getFullYear(),this.min.getMonth(),this.min.getDate()+90);
     if(this.activatedRoute.snapshot.params['id']){
       this.id = this.activatedRoute.snapshot.params['id'];
       this.getCalendarGroup();
@@ -45,7 +49,7 @@ export class CreateCalendarGroupComponent implements OnInit {
 
   }
   InitForms(){
-    this.min = new Date();
+
     this.firstFormGroup = this._formBuilder.group({
       name: ['', Validators.required],
       address: ['', Validators.required],
@@ -63,6 +67,7 @@ initItemRows() {
   return this._formBuilder.group({
     start:['08:00', Validators.required],
     end :['10:00', Validators.required],
+    nbTotalPlaces:[1, Validators.required]
   }); }
   initCalendarPro() {
     return this._formBuilder.group({
@@ -140,24 +145,7 @@ initItemRows() {
   async createCalendarsPro(stepper: MatStepper) {
     this.on();
     for (const data of this.calendarPro.value) {
-      let calendarPro = new CalendarPro();
-        calendarPro.firstName = data.firstName;
-        calendarPro.lastName = data.lastName;
-        calendarPro.job = data.job;
-        calendarPro.startDate = data.startDate;
-        calendarPro.expiryDate = data.endDate;
-        calendarPro.chrono = data.duration;
-        calendarPro.address = data.address;
-        calendarPro.enabled = data.enabled;
-      calendarPro.weekSchedule = [
-        {id: '', name: 'Monday', seances: data.weekSchedule[0]},
-        {id: '', name: 'Tuesday', seances: data.weekSchedule[1]},
-        {id: '', name: 'Wednesday', seances: data.weekSchedule[2]},
-        {id: '', name: 'Thursday', seances: data.weekSchedule[3]},
-        {id: '', name: 'Friday', seances: data.weekSchedule[4]},
-        {id: '', name: 'Saturday', seances: data.weekSchedule[5]},
-        {id: '', name: 'Sunday', seances: data.weekSchedule[6]},
-      ];
+      let calendarPro:CalendarPro =this.generateCalendarPro(data);
        await this.calendarGroupService.addCalendarPro(this.calendarGroup.id,calendarPro);
     }
     this.off();
@@ -171,9 +159,8 @@ initItemRows() {
 
   private getCalendarGroup() {
     this.calendarGroupService.get_calendar(this.id).subscribe(data=>{
-      console.log(data);
       this.calendarGroup = data;
-      this.SecondGroupChanged = new Array(this.calendarGroup.calendarProList.length).fill(0)
+      this.SecondGroupChanged = new Array(this.calendarGroup.calendarProList.length).fill(false)
       this.weekGroupChanged = new Array(this.calendarGroup.calendarProList.length).fill(false)
       this.InitFormsFromCalendarGroup().then(r =>this.loading = false );
 
@@ -196,7 +183,7 @@ initItemRows() {
       calendarPro.weekSchedule.forEach((daySchedule,index2)=>{
         daySchedule.seances.forEach((seance,index3)=>{
           let day =this.calendarPro.get(''+index).get("weekSchedule").get(""+index2)as FormArray;
-          day.push(this.initItemRowsFromCalendar(seance.start,seance.end));
+          day.push(this.initItemRowsFromCalendar(seance.start,seance.end,seance.nbTotalPlaces));
 
         })
       })
@@ -207,11 +194,10 @@ initItemRows() {
 
   }
   InitWeek(index){
-    console.log(this.firstFormGroup.value.weekSchedule)
     this.firstFormGroup.value.weekSchedule.forEach((daySchedule,index2)=>{
       daySchedule.forEach((seance,index3)=>{
         let day =this.calendarPro.get(''+index).get("weekSchedule").get(""+index2)as FormArray;
-        day.push(this.initItemRowsFromCalendar(seance.start,seance.end));
+        day.push(this.initItemRowsFromCalendar(seance.start,seance.end,seance.nbTotalPlaces));
 
       })
     })
@@ -245,15 +231,14 @@ initItemRows() {
 
   }
 
-  private initItemRowsFromCalendar(start,end) {
+  private initItemRowsFromCalendar(start,end,nbClients) {
     return this._formBuilder.group({
       start:[start, Validators.required],
       end :[end, Validators.required],
+      nbTotalPlaces:[nbClients, Validators.required]
     });
   }
-  startChanged(startDate) {
-    this.max = new Date(startDate.getFullYear(),startDate.getMonth(),startDate.getDate()+60);
-  }
+
 
   updateCalendarGroup(stepper: MatStepper) {
       this.on();
@@ -272,56 +257,18 @@ initItemRows() {
 
 
     this.on();
-    if(this.calendarPro.length > this.calendarGroup.calendarProList.length){
-      for (let i = this.calendarGroup.calendarProList.length; i < this.calendarPro.length; i++) {
-        let calendarPro = new CalendarPro();
-        calendarPro.firstName = this.calendarPro.get(''+i).value.firstName;
-        calendarPro.lastName = this.calendarPro.get(''+i).value.lastName;
-        calendarPro.job = this.calendarPro.get(''+i).value.job;
-        calendarPro.startDate = this.calendarPro.get(''+i).value.startDate;
-        calendarPro.expiryDate = this.calendarPro.get(''+i).value.endDate;
-        calendarPro.chrono = this.calendarPro.get(''+i).value.duration;
-        calendarPro.address = this.calendarPro.get(''+i).value.address;
-        calendarPro.enabled = this.calendarPro.get(''+i).value.enabled;
-        calendarPro.weekSchedule = [
-          {id: '', name: 'Monday', seances: this.calendarPro.get(''+i).value.weekSchedule[0]},
-          {id: '', name: 'Tuesday', seances: this.calendarPro.get(''+i).value.weekSchedule[1]},
-          {id: '', name: 'Wednesday', seances: this.calendarPro.get(''+i).value.weekSchedule[2]},
-          {id: '', name: 'Thursday', seances: this.calendarPro.get(''+i).value.weekSchedule[3]},
-          {id: '', name: 'Friday', seances: this.calendarPro.get(''+i).value.weekSchedule[4]},
-          {id: '', name: 'Saturday', seances: this.calendarPro.get(''+i).value.weekSchedule[5]},
-          {id: '', name: 'Sunday', seances: this.calendarPro.get(''+i).value.weekSchedule[6]},
-        ];
-        await this.calendarGroupService.addCalendarPro(this.calendarGroup.id,calendarPro);
-      }
-    }
     for (const data of this.calendarGroup.calendarProList) {
       let index = this.calendarGroup.calendarProList.indexOf(data);
-      if (this.SecondGroupChanged[index]<=1){
+      if (!this.SecondGroupChanged){
         continue;
       }
-      let calendarPro = data;
-      calendarPro.firstName = this.calendarPro.get(''+index).value.firstName;
-      calendarPro.lastName = this.calendarPro.get(''+index).value.lastName;
-      calendarPro.job = this.calendarPro.get(''+index).value.job;
-      calendarPro.startDate = this.calendarPro.get(''+index).value.startDate;
-      calendarPro.expiryDate = this.calendarPro.get(''+index).value.endDate;
-      calendarPro.chrono = this.calendarPro.get(''+index).value.duration;
-      calendarPro.address = this.calendarPro.get(''+index).value.address;
-      calendarPro.enabled = this.calendarPro.get(''+index).value.enabled;
-      calendarPro.weekSchedule = [
-        {id: '', name: 'Monday', seances: this.calendarPro.get(''+index).value.weekSchedule[0]},
-        {id: '', name: 'Tuesday', seances: this.calendarPro.get(''+index).value.weekSchedule[1]},
-        {id: '', name: 'Wednesday', seances: this.calendarPro.get(''+index).value.weekSchedule[2]},
-        {id: '', name: 'Thursday', seances: this.calendarPro.get(''+index).value.weekSchedule[3]},
-        {id: '', name: 'Friday', seances: this.calendarPro.get(''+index).value.weekSchedule[4]},
-        {id: '', name: 'Saturday', seances: this.calendarPro.get(''+index).value.weekSchedule[5]},
-        {id: '', name: 'Sunday', seances: this.calendarPro.get(''+index).value.weekSchedule[6]},
-      ];
+      let calendarPro = this.generateCalendarPro(this.calendarPro.get(""+index).value);
+      calendarPro.appointment = data.appointment;
+      calendarPro.id = data.id;
       if(this.weekGroupChanged[index]){
-        await this.calendarProService.updateSeances(calendarPro.id,calendarPro);
-      }else {
-        await this.calendarProService.updateInfo(calendarPro.id,calendarPro);
+        await this.calendarProService.updateSeances(data.id,calendarPro);
+      }else if(this.SecondGroupChanged[index]) {
+        await this.calendarProService.updateInfo(data.id,calendarPro);
 
       }
 
@@ -337,22 +284,16 @@ initItemRows() {
     });
     this.SecondGroupChanged.forEach((data,index)=>{
       this.calendarPro.get(''+index).valueChanges.subscribe(val => {
-        if(this.SecondGroupChanged[index]==1){
-
           this.SecondFormChanged = true;
-          this.SecondGroupChanged[index]++;
-        }else {
-          this.SecondGroupChanged[index]++;
-        }
-      });
+          this.SecondGroupChanged[index] = true;
+        })
       this.calendarPro.get(''+index).get('weekSchedule').valueChanges.subscribe(val=>{
         this.weekGroupChanged[index] = true;
       })
       this.calendarPro.get(''+index).get('duration').valueChanges.subscribe(val=>{
         this.weekGroupChanged[index] = true;
       })
-    });
-
+      });
 
   }
 
@@ -364,6 +305,32 @@ initItemRows() {
   addSeanceFirstForm(j: number) {
     let day =this.firstFormGroup.get("weekSchedule").get(""+j)as FormArray;
     day.push(this.initItemRows());
+  }
+
+  addClients() {
+    this.nbClients = true;
+  }
+
+  private generateCalendarPro(data) {
+    let calendarPro = new CalendarPro();
+    calendarPro.firstName = data.firstName;
+    calendarPro.lastName = data.lastName;
+    calendarPro.job = data.job;
+    calendarPro.startDate = data.startDate;
+    calendarPro.expiryDate = data.endDate;
+    calendarPro.chrono = data.duration;
+    calendarPro.address = data.address;
+    calendarPro.enabled = data.enabled;
+    calendarPro.weekSchedule = [
+      {id: '', name: 'Monday', seances: data.weekSchedule[0]},
+      {id: '', name: 'Tuesday', seances: data.weekSchedule[1]},
+      {id: '', name: 'Wednesday', seances: data.weekSchedule[2]},
+      {id: '', name: 'Thursday', seances: data.weekSchedule[3]},
+      {id: '', name: 'Friday', seances: data.weekSchedule[4]},
+      {id: '', name: 'Saturday', seances: data.weekSchedule[5]},
+      {id: '', name: 'Sunday', seances: data.weekSchedule[6]},
+    ];
+    return calendarPro;
   }
 }
 

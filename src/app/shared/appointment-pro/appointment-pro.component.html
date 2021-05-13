@@ -3,43 +3,73 @@
 </div>
 <div *ngIf="!is_loading">
   <mat-card-header fxLayout="row" fxLayoutAlign="start center"   >
-    <div  mat-card-avatar class="example-header-image"></div>
-    <mat-card-subtitle > Appointment</mat-card-subtitle>
+
+    <mat-card-title > Appointment</mat-card-title>
   </mat-card-header>
 
 
-  <mat-card-content style="margin-top: 2%">
-    <div  fxLayout="row" fxLayoutAlign="space-around center">
+  <mat-card-content >
+    <div  >
+      <div  fxLayout="row" fxLayoutAlign="space-between center" >
 
-    </div>
-    <div  fxLayout="row" fxLayoutAlign="space-around center">
+        <h4 style="color: rgba(0,0,0,0.29)"  ><strong>Date:</strong></h4>
+        <h4 >{{appointment.date}}</h4>
 
-      <h6 style="color: rgba(0,0,0,0.29)" fxFlex="20" ><strong>Date:</strong></h6>
-      <h6 fxFlex="60">{{appointment.date}}</h6>
+      </div>
+      <div  fxLayout="row" fxLayoutAlign="space-between center">
 
-    </div>
-    <div  fxLayout="row" fxLayoutAlign="space-around center">
+        <h4 style="color: rgba(0,0,0,0.29)"  ><strong>Start Time:</strong></h4>
+        <h4 >{{appointment.start}}</h4>
 
-      <h6 style="color: rgba(0,0,0,0.29)" fxFlex="20" ><strong>Start Time:</strong></h6>
-      <h6 fxFlex="60">{{appointment.start}}</h6>
+      </div>
+      <div  fxLayout="row" fxLayoutAlign="space-between center">
 
-    </div>
-    <div  fxLayout="row" fxLayoutAlign="space-around center">
+        <h4 style="color: rgba(0,0,0,0.29)" ><strong>Start Time:</strong></h4>
+        <h4 >{{appointment.end}}</h4>
+      </div>
+      <div  fxLayout="row" fxLayoutAlign="space-between center">
 
-      <h6 style="color: rgba(0,0,0,0.29)" fxFlex="20" ><strong>Start Time:</strong></h6>
-      <h6 fxFlex="60">{{appointment.end}}</h6>
+        <h4 style="color: rgba(0,0,0,0.29)"  ><strong>Total places:</strong></h4>
+        <h4 >{{appointment.nbTotalPlaces}}</h4>
+      </div>
+      <div  fxLayout="row" fxLayoutAlign="space-between center">
+
+        <h4 style="color: rgba(0,0,0,0.29)" ><strong>places Available:</strong></h4>
+        <h4 >{{appointment.nbPlacesAvailable}}</h4>
+      </div>
     </div>
-    <div *ngIf="appointment.status == 'WAIT'">
-      <button style="margin-right: 3%"  (click)="save('CANCELED')"  mat-raised-button color="warn">CANCELED</button>
-      <button  (click)="save('VALIDATED')"  mat-raised-button color="primary">VALIDATED</button>
-    </div>
-    <div *ngIf="appointment.status == 'VALIDATED'">
-      <button  (click)="save('CANCELED')"  mat-raised-button color="warn">CANCELED</button>
-    </div>
+
+
+    <table *ngIf="appointment.appointmentList.length>0" class="table">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Places</th>
+        <th scope="col">Status</th>
+        <th scope="col">Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let appointment of appointment.appointmentList;let i =index" >
+        <th scope="row">{{i+1}}</th>
+        <td>{{appointment.nbPlaces}}</td>
+        <td>{{appointment.status}}</td>
+        <td>  <div fxLayout="row" fxLayoutAlign="space-around center"  *ngIf="appointment.status == 'WAIT'">
+          <button style="margin-right: 3%" (click)="save('CANCELED',appointment)" mat-raised-button color="warn">CANCELED</button>
+          <button  (click)="save('VALIDATED',appointment)"  mat-raised-button color="primary">VALIDATED</button>
+        </div>
+          <div *ngIf="appointment.status == 'VALIDATED'">
+            <button (click)="save('CANCELED',appointment)" mat-raised-button color="warn">CANCELED</button>
+          </div></td>
+      </tr>
+
+      </tbody>
+    </table>
 
   </mat-card-content>
-  <mat-dialog-actions align="end">
-    <button  mat-dialog-close="" mat-raised-button color="warn">close</button>
+  <mat-dialog-actions  fxLayout="row" fxLayoutAlign="end center"  >
+      <button *ngIf="appointment.nbTotalPlaces>1" style="margin-right: 3%" (click)="changeAll('CANCELED')" mat-raised-button color="warn">CANCELED All</button>
+      <button *ngIf="appointment.nbTotalPlaces>1" (click)="changeAll('VALIDATED')"  mat-raised-button color="primary">VALIDATED All</button>
 
   </mat-dialog-actions>
 </div>

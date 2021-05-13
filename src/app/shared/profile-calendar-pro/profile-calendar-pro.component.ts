@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {CalendarProService} from "../service/calendarPro.service";
 import {CalendarProEs} from "../model/CalendarProEs";
+import {map, mergeMap} from "rxjs/operators";
+import {CalendarGroupService} from "../service/calendar-group.service";
+import {CalendarGroup} from "../model/calendarGroup";
 declare interface marker {
   position:{
     lat:number,
@@ -27,32 +30,39 @@ export class ProfileCalendarProComponent implements OnInit {
   markers:marker[];
   Filter_index:number=-1;
   public loading: boolean=true;
-  constructor(private activatedRoute: ActivatedRoute,private calendarProService:CalendarProService) { }
+  private calendarsGroup: CalendarGroup;
+  constructor(private activatedRoute: ActivatedRoute,private calendarProService:CalendarProService,private calendarGroupService:CalendarGroupService) { }
 
   ngOnInit(): void {
     this.id = this.activatedRoute.snapshot.params['id'];
-    this.calendarProService.get_User_calendarProEs(this.id).subscribe(data=>{
+    this.getCalendars();
+  }
+  private getCalendars() {
+    this.calendarProService.getCalendarGroupCalendarsProEs(this.id).pipe(mergeMap(data => {
       this.calendarsProEs = data;
-      console.log(data);
+      return this.calendarGroupService.get_calendar(this.id)
+    }),map(data=>{
+      this.calendarsGroup =data;
       this.addMarker();
-    })
+    })).subscribe(data=>this.loading = false)
+
   }
   addMarker() {
     this.markers =[];
-    this.calendarsProEs.forEach((calendarPro,index)=>{
+
       this.markers.push({
         position: {
-          lat: calendarPro.location.lat ,
-          lng: calendarPro.location.lon ,
+          lat: this.calendarsGroup.lat ,
+          lng: this.calendarsGroup.lon ,
         },
         label: {
           color: 'red',
-          text: calendarPro.firstName,
+          text: this.calendarsGroup.name,
         },
         title: 'Marker title ' + (this.markers.length + 1),
-        options: { animation: this.Filter_index == index ? google.maps.Animation.BOUNCE: null},
+        options: { animation:  null},
       })
-    })
+
     this.loading = false;
   }
   changeAnimation(index: number) {

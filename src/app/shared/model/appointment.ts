@@ -8,5 +8,7 @@ export class Appointment {
   date:string;
   start:string;
   end:string;
+  nbPlaces:number;
+  seanceId:string;
   status?:string;
 }

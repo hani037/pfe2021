@@ -1,8 +1,8 @@
 
-<mat-card  class="example-card">
+<mat-card style="margin-bottom: 2%"  class="example-card">
   <mat-card-header fxLayout="row" fxLayoutAlign="start center"   >
 
-    <mat-card-title > {{firstName+" "+lastName}}</mat-card-title>
+    <mat-card-title > {{calendarPro.firstName+" "+calendarPro.lastName}}</mat-card-title>
   </mat-card-header>
   <mat-card-content>
     <div *ngIf="loading" fxLayout="row" fxLayoutAlign="space-around center">
@@ -14,10 +14,10 @@
     </div>
   </mat-card-content>
     <mat-card-actions class="text-center">
-      <div *ngIf="route_active == 'search'" class="example-button-container">
-        <button  style="border-color: red" color="warn" (click)="profile()"   mat-stroked-button aria-label="Example icon button with a menu icon">
-          Profile
-          <mat-icon>person</mat-icon>
+      <div *ngIf="route_active == 'search'&&calendarPro.calendarGroupId" class="example-button-container">
+        <button  style="border-color: red" color="warn" (click)="group()"   mat-stroked-button aria-label="Example icon button with a menu icon">
+          Group
+          <mat-icon>group</mat-icon>
         </button>
       </div>
     </mat-card-actions>

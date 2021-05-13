@@ -87,7 +87,9 @@ import { CardCalendarGroupComponent } from './shared/card-calendar-group/card-ca
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import { CalendarGroupComponent } from './shared/calendar-group/calendar-group.component';
 import { ProfileCalendarProComponent } from './shared/profile-calendar-pro/profile-calendar-pro.component';
-import { ToastModule } from 'ng-uikit-pro-standard';
+import { AddSeanceComponent } from './shared/add-seance/add-seance.component';
+import { AddValidityComponent } from './shared/add-validity/add-validity.component';
+
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
   timeGridPlugin,
@@ -135,7 +137,9 @@ export const interceptorProviders =
     CreateCalendarGroupComponent,
     CardCalendarGroupComponent,
     CalendarGroupComponent,
-    ProfileCalendarProComponent
+    ProfileCalendarProComponent,
+    AddSeanceComponent,
+    AddValidityComponent
   ],
     imports: [
         NgxMaterialTimepickerModule,
@@ -150,7 +154,7 @@ export const interceptorProviders =
         FullCalendarModule,
         CdkStepperModule,
         MDBBootstrapModule.forRoot(),
-        ToastModule.forRoot(),
+
         CalendarModule.forRoot({
             provide: DateAdapter,
             useFactory: adapterFactory,
