@@ -2,10 +2,10 @@ import { CanActivate, ActivatedRouteSnapshot } from "@angular/router";
 
 import {ActivatedRoute, Router, RouterStateSnapshot} from "@angular/router";
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+
 
 import { mergeMap, map, take } from 'rxjs/operators';
-import { Promise } from 'q';
+
 import {UserService} from "../service/user.service";
 
 @Injectable({

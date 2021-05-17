@@ -83,3 +83,12 @@ background: rgba(255, 5, 0, 0.8);
 ::-webkit-scrollbar-thumb:hover {
   background: rgb(14, 255, 147);
 }
+.example-month-picker .mat-calendar-body-label{
+  color: rgba(0, 0, 0, 0);
+}.example-month-picker .mat-calendar-header{
+  display: none;
+}.example-month-picker .mat-calendar-table-header{
+  display: none;
+}
+
+

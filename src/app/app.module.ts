@@ -19,7 +19,8 @@ import { GoogleMapsModule } from '@angular/google-maps'
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AuthInterceptor} from './Interceptors/authInterceptor';
 import {NgbDatepickerModule, NgbTimepickerModule} from "@ng-bootstrap/ng-bootstrap";
-import { AddEventComponent } from './shared/add-event/add-event.component';
+import { AddEventComponent, CustomDateFormat1,
+  CustomDateFormat2} from './shared/add-event/add-event.component';
 import { CalendarComponent } from './shared/calendar/calendar.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatCardModule} from "@angular/material/card";
@@ -90,6 +91,7 @@ import { ProfileCalendarProComponent } from './shared/profile-calendar-pro/profi
 import { AddSeanceComponent } from './shared/add-seance/add-seance.component';
 import { AddValidityComponent } from './shared/add-validity/add-validity.component';
 
+
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
   timeGridPlugin,
@@ -139,7 +141,9 @@ export const interceptorProviders =
     CalendarGroupComponent,
     ProfileCalendarProComponent,
     AddSeanceComponent,
-    AddValidityComponent
+    AddValidityComponent,
+    CustomDateFormat2,
+    CustomDateFormat1
   ],
     imports: [
         NgxMaterialTimepickerModule,

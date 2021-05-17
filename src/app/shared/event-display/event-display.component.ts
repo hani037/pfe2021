@@ -20,6 +20,8 @@ export class EventDisplayComponent implements OnInit {
   user:User;
   is_loading:boolean=false;
   not_invited=false;
+  days: string[] = ['SUNDAY','MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
+
   constructor(private dialog: MatDialog,private eventService:EventService,private activatedRoute: ActivatedRoute,private userService:UserService) { }
 
   ngOnInit(): void {

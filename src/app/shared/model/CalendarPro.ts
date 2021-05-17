@@ -1,6 +1,7 @@
 import {DaySchedule} from "./daySchedule";
 import {Appointment} from "./appointment";
 import {AppointmentCalendarPro} from "./appointmentCalendarPro";
+import {Exception} from "./exception";
 
 export class CalendarPro {
   id;
@@ -18,6 +19,7 @@ export class CalendarPro {
   lon:number;
   appointment:AppointmentCalendarPro[];
   weekSchedule :DaySchedule[];
+  exception:Exception[];
 
 
 }

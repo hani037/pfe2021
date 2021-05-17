@@ -34,7 +34,7 @@ export class AddSeanceComponent implements OnInit {
   Seance.nbTotalPlaces =this.form.value.nbTotalPlaces;
   Seance.calendarProId =this.data.id;
 
-  this.calendarProService.addSeance(Seance,this.data.id).subscribe(data=>{
+  this.calendarProService.addSeance(Seance).subscribe(data=>{
     this.dialogRef.close('created');
   })
   }

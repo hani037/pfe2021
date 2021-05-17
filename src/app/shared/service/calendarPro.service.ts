@@ -87,8 +87,8 @@ export class CalendarProService {
     return this.http.put<{}>(this.calendarProUrl+'/changeEnabled/'+calendarProId,{});
 
   }
-  addSeance(seanceEs:SeanceEs,calendarProId:string){
-    return this.http.post<{}>(this.calendarProUrl+'/addSeance/'+calendarProId,seanceEs);
+  addSeance(seanceEs:SeanceEs){
+    return this.http.post<{}>(this.calendarProUrl+'/addSeance',seanceEs);
 
   }
   addValidity(date:Date,calendarProId:string){

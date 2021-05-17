@@ -3,8 +3,7 @@ import { CanActivate, ActivatedRouteSnapshot, UrlTree } from "@angular/router";
 import {ActivatedRoute, Router, RouterStateSnapshot} from "@angular/router";
 import { Injectable } from '@angular/core';
 
-import { Promise } from 'q';
-import { Observable } from 'rxjs/internal/Observable';
+
 import { map } from 'rxjs/internal/operators/map';
 import {UserService} from "../service/user.service";
 

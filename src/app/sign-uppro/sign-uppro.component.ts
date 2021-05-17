@@ -12,6 +12,8 @@ import { MatStepper } from '@angular/material/stepper';
 import {CalendarGroupService} from "../shared/service/calendar-group.service";
 import {CalendarGroup} from "../shared/model/calendarGroup";
 import { ToastService } from 'ng-uikit-pro-standard';
+import {DateService} from "../shared/service/date.service";
+import * as moment from "moment";
 
 @Component({
   selector: 'app-sign-uppro',
@@ -33,10 +35,14 @@ export class SignUpproComponent implements OnInit {
   private max: Date;
   private min: Date;
   nbClients: boolean=false;
+  list2: string[] = ['MONTHLY', 'YEARLY'];
+  date;
 
-constructor(private activatedRoute: ActivatedRoute,private _formBuilder: FormBuilder ,private router:Router,private calendarProService:CalendarProService){}
+constructor(private activatedRoute: ActivatedRoute,private _formBuilder: FormBuilder ,private router:Router,private calendarProService:CalendarProService
+  ,private dateService:DateService){}
 
 ngOnInit(): void {
+
   this.min = new Date();
   this.max = new Date(this.min.getFullYear(),this.min.getMonth(),this.min.getDate()+90);
   if(this.activatedRoute.snapshot.params['id']){
@@ -44,7 +50,7 @@ ngOnInit(): void {
     this.getCalendarPro();}
 
   else {
-
+    this.date =new Date(2021,0,1)
   this.InitForms();
   this.loading = false;
 
@@ -63,6 +69,7 @@ InitForms(){
     enabled: [true, Validators.required],
     expiryDate:[  '', Validators.required],
     duration:  ['', Validators.required],
+    exception:this._formBuilder.array([]),
     weekSchedule: this.initWeekSchedule()
 
   });}
@@ -101,11 +108,10 @@ deleteSeance(j:number,t:number) {
   day.removeAt(t);
 }
 
-async createCalendarPro(stepper: MatStepper) {
+public createCalendarPro(stepper: MatStepper) {
     this.on()
     let calendarPro:CalendarPro =this.generateCalendarPro();
-    this.calendarProService.createCalendarPro(calendarPro).subscribe(
-      calendarPro=>{
+    this.calendarProService.createCalendarPro(calendarPro).subscribe(calendarPro=>{
         this.home();
       });
   }
@@ -131,10 +137,15 @@ private  async initCalendarProFromCalendarPro() {
       duration : [this.calendarPro.chrono, Validators.required],
       job: [this.calendarPro.job, Validators.required],
       enabled: [this.calendarPro.enabled, Validators.required],
+      exception:this._formBuilder.array([]),
       weekSchedule: this.initWeekScheduleFromCalendarPro()
 
     });
+    this.calendarPro.exception.forEach((exception,index3)=>{
+    let exceptionForm =this.calendarProForm.get("exception")as FormArray;
+    exceptionForm.push(this.initExceptionFromCalendar(exception.recurrenceType,exception.date));
 
+  })
       this.calendarPro.weekSchedule.forEach((daySchedule,index2)=>{
       daySchedule.seances.forEach((seance,index3)=>{
         let day =this.calendarProForm.get("weekSchedule").get(""+index2)as FormArray;
@@ -169,19 +180,21 @@ initWeekScheduleFromCalendarPro(){
 
 
 
-updateCalendarPro( stepper: MatStepper){
-
+async updateCalendarPro( stepper: MatStepper){
+  this.on()
   let calendarPro:CalendarPro =this.generateCalendarPro();
       calendarPro.appointment = this.calendarPro.appointment;
       calendarPro.id = this.calendarPro.id;
-
+      console.log(calendarPro)
     if(this.weekFormChanged){
-
-        this.calendarProService.updateSeances(this.id,calendarPro);
+        await this.calendarProService.updateSeances(this.id,calendarPro);
+      this.home();
       }else {
-       this.calendarProService.updateInfo(this.id,calendarPro);
+       await this.calendarProService.updateInfo(this.id,calendarPro);
+      this.home();
 
       }
+
 }
 
 
@@ -196,6 +209,9 @@ private FormOnChanges() {
     this.calendarProForm.get('duration').valueChanges.subscribe(val=>{
       this.weekFormChanged = true;
     })
+  this.calendarProForm.get('exception').valueChanges.subscribe(val=>{
+    this.weekFormChanged = true;
+  })
   this.calendarProForm.get('firstName').valueChanges.subscribe(val=>{
     this.weekFormChanged = true;
   })
@@ -219,6 +235,14 @@ private FormOnChanges() {
     calendarPro.chrono = this.calendarProForm.value.duration;
     calendarPro.address = this.calendarProForm.value.address;
     calendarPro.enabled = this.calendarProForm.value.enabled;
+    calendarPro.exception = [];
+    this.calendarProForm.value.exception.forEach(exception=>{
+      if(exception.recurrenceType=="YEARLY"){
+        calendarPro.exception.push({recurrenceType:exception.recurrenceType,date:this.dateService.getDayAndMonth(new Date(exception.date._d))})
+      }else {
+        calendarPro.exception.push({recurrenceType:exception.recurrenceType,date:this.dateService.getDay(new Date(exception.date._d))})
+      }
+    })
     calendarPro.weekSchedule = [
 
       {id: '', name: 'Monday', seances: this.calendarProForm.value.weekSchedule[0]},
@@ -239,5 +263,36 @@ private FormOnChanges() {
   private home() {
     this.router.navigateByUrl('home')
   }
+
+  addException() {
+    let exception = this.calendarProForm.get("exception")as FormArray;
+    exception.push(this.initException())
+  }
+
+  deleteException(i: number) {
+    let exception =this.calendarProForm.get("exception")as FormArray;
+    exception.removeAt(i);
+  }
+
+  private initException() {
+    return this._formBuilder.group({
+      recurrenceType:['', Validators.required],
+      date :[this.date, Validators.required],
+    });
+  }
+  private initExceptionFromCalendar(recurrenceType,date) {
+    let date2 =new Date();
+    let date1;
+    if(recurrenceType=="MONTHLY"){
+      date1 = moment(new Date(date2.getFullYear(),0,date));
+
+    }else {
+      date1 = moment(new Date(date2.getFullYear(),(date.split('/')[1]-1),date.split('/')[0]));
+    }
+return this._formBuilder.group({
+  recurrenceType:[recurrenceType, Validators.required],
+  date :[date1, Validators.required],
+});
+}
 }
 

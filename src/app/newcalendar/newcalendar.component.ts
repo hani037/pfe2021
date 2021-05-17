@@ -16,7 +16,9 @@ import {event} from "../shared/model/event";
 import {Appointment} from "../shared/model/appointment";
 import {ActivatedRoute, Route} from "@angular/router";
 import {CalendarPersonal} from "../shared/model/calendarPersonal";
-
+import rrulePlugin from '@fullcalendar/rrule'
+import dayGridPlugin from '@fullcalendar/daygrid'
+import {DateService} from "../shared/service/date.service";
 interface MatFabMenu {
   id: string | number;
   icon?: string; // please use either icon or imgUrl
@@ -40,6 +42,7 @@ export class NewcalendarComponent implements OnInit{
   INITIAL_EVENTS: EventInput[] = [];
   calendarVisible = true;
   calendarOptions: CalendarOptions = {
+    plugins: [ rrulePlugin, dayGridPlugin ],
 
     headerToolbar: {
       left: 'prev,next today',
@@ -66,7 +69,8 @@ export class NewcalendarComponent implements OnInit{
 
 
   };
-    constructor(private activatedRoute: ActivatedRoute,private dialog: MatDialog,private eventService:EventService,private appointmentService:AppointmentService,private calendarPersonalService:CalendarPersonalService) {
+    constructor(private activatedRoute: ActivatedRoute,private dialog: MatDialog,private eventService:EventService,
+                private appointmentService:AppointmentService,private calendarPersonalService:CalendarPersonalService,private dateService: DateService) {
     if(window.innerWidth < 768){
       this.calendarOptions.headerToolbar = {
         left: 'prev',
@@ -151,21 +155,71 @@ export class NewcalendarComponent implements OnInit{
     });
 
   }
-  getCalendar(){
-    this.calendarPersonalService.get_calendar(this.activatedRoute.snapshot.params['id']).subscribe(data=>{
+   getCalendar(){
+    this.calendarPersonalService.get_calendar(this.activatedRoute.snapshot.params['id']).subscribe(async data=>{
       this.calendarPersonal =data;
+      console.log(data)
       this.INITIAL_EVENTS = [];
-      this.calendarPersonal.events.forEach(event=>{
-        this.INITIAL_EVENTS.push( {
-          start: event.start,
-          end:event.end,
-          title: event.description,
-          id:event.id,
-          color:event.color,
-          extendedProps: {
-            type: 'Event'
-          },
-        },)
+      await this.calendarPersonal.events.forEach(event=>{
+        if(!event.recurrence){
+          this.INITIAL_EVENTS.push( {
+            start: new Date(event.date +' '+event.start),
+            end:new Date(event.date +' '+event.end),
+            title: event.description,
+            id:event.id,
+            color:event.color,
+            extendedProps: {
+              type: 'Event'
+            },
+          },)
+        }else{
+          if(event.recurrenceType=="MONTHLY"||event.recurrenceType=="YEARLY") {
+            console.log(new Date(event.date+' '+event.start))
+            console.log(this.dateService.getDuration(event.start,event.end))
+            this.INITIAL_EVENTS.push({
+              title: event.description,
+              id:event.id,
+              color:event.color,
+              extendedProps: {
+                type: 'Event'
+              },
+              duration: this.dateService.getDuration(event.start,event.end),
+              // RRULE:FREQ=MONTHLY;COUNT=13;WKST=MO;BYMONTHDAY=13,
+              rrule: {
+                freq: event.recurrenceType,
+                dtstart: event.date+'T'+event.start,
+
+              }
+            })
+          }else if(event.recurrenceType=="WEEKLY") {
+            console.log('hi')
+            this.INITIAL_EVENTS.push( {
+              start: event.start,
+              end:event.end,
+              title: event.description,
+              id:event.id,
+              color:event.color,
+              daysOfWeek: [event.date ],
+              extendedProps: {
+                type: 'Event'
+              },
+            })
+          }else {
+            console.log('hi')
+            this.INITIAL_EVENTS.push( {
+              start: event.start,
+              end:event.end,
+              title: event.description,
+              id:event.id,
+              color:event.color,
+              daysOfWeek: [ '0','1','2','3','4','5','6' ],
+              extendedProps: {
+                type: 'Event'
+              },
+            })
+          }
+        }
+
       });
       this.calendarPersonal.appointment.forEach(appointment=>{
         this.INITIAL_EVENTS.push( {
@@ -180,6 +234,7 @@ export class NewcalendarComponent implements OnInit{
         },)
       });
       this.calendarOptions.events = this.INITIAL_EVENTS;
+
       this.loading = false;
     })
 
@@ -200,3 +255,26 @@ export class NewcalendarComponent implements OnInit{
     }
   }
 }
+/*
+ events: [
+
+      {
+        title: 'my recurring event',
+        duration: "01:50",
+        // RRULE:FREQ=MONTHLY;COUNT=13;WKST=MO;BYMONTHDAY=13,
+        rrule: {
+          freq: 'yearly',
+          dtstart: "2021-01-01T10:00:00.000Z",
+        }
+      },     {
+        title: 'my recurring event',
+        duration: "01:50",
+        // RRULE:FREQ=MONTHLY;COUNT=13;WKST=MO;BYMONTHDAY=13,
+        rrule: {
+          freq: 'monthly',
+          dtstart: "2021-01-01T10:00:00.000Z",
+
+        }
+      }
+    ],
+ */

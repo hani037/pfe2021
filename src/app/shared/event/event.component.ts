@@ -14,6 +14,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 export class EventComponent implements OnInit {
   is_loading:boolean=false;
   event:event;
+  days: string[] = ['SUNDAY','MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
   constructor(private dialogRef: MatDialogRef<EventComponent>,private dialog: MatDialog,
               @Inject(MAT_DIALOG_DATA) public data: {id:string},private eventService:EventService
               ,private _snackBar: MatSnackBar,private userService:UserService) { }

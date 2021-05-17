@@ -2,21 +2,54 @@
 
   <img *ngIf="event.image!=''" style="height: 50%;width: 50%" mat-card-image [src]="event.image" >
   <mat-card-content>
+    <div *ngIf="!event.recurrence" fxLayout="row" fxLayoutAlign="space-around center">
+
+      <h6 style="color: rgba(0,0,0,0.29)" fxFlex="20" ><strong>date:</strong></h6>
+      <h6 fxFlex="60">{{event.date}}</h6>
+
+    </div>
+    <div *ngIf="!event.recurrence">
+      <div  fxLayout="row" fxLayoutAlign="space-around center">
+
+        <h6 style="color: rgba(0,0,0,0.29)" fxFlex="20" ><strong>Recurrence:</strong></h6>
+        <h6 fxFlex="60">{{event.recurrenceType}}</h6>
+
+      </div>
+      <div *ngIf="event.recurrenceType=='YEARLY'" fxLayout="row" fxLayoutAlign="space-around center">
+
+        <h6 style="color: rgba(0,0,0,0.29)" fxFlex="20" ><strong>day of the Year:</strong></h6>
+        <h6 fxFlex="60">{{event.date.split('-')[2]}}/{{event.date.split('-')[1]}}</h6>
+
+      </div>
+      <div *ngIf="event.recurrenceType=='MONTHLY'" fxLayout="row" fxLayoutAlign="space-around center">
+
+        <h6 style="color: rgba(0,0,0,0.29)" fxFlex="20" ><strong>day of the Month:</strong></h6>
+        <h6 fxFlex="60">{{event.date.split('-')[2]}}</h6>
+
+      </div>
+      <div *ngIf="event.recurrenceType=='WEEKLY'" fxLayout="row" fxLayoutAlign="space-around center">
+
+        <h6 style="color: rgba(0,0,0,0.29)" fxFlex="20" ><strong>Recurrence each:</strong></h6>
+        <h6 fxFlex="60">{{days[event.date]}}</h6>
+
+      </div>
+    </div>
+
     <div  fxLayout="row" fxLayoutAlign="space-around center">
 
-      <h6 style="color: rgba(0,0,0,0.29)" fxFlex="60" ><strong>Start:</strong></h6>
+      <h6 style="color: rgba(0,0,0,0.29)" fxFlex="20" ><strong>Start:</strong></h6>
       <h6 fxFlex="60">{{event.start}}</h6>
 
     </div>
     <div  fxLayout="row" fxLayoutAlign="space-around center">
 
-      <h6 style="color: rgba(0,0,0,0.29)" fxFlex="60" ><strong>End:</strong></h6>
+      <h6 style="color: rgba(0,0,0,0.29)" fxFlex="20" ><strong>End:</strong></h6>
       <h6 fxFlex="60">{{event.end}}</h6>
 
     </div>
     <div  fxLayout="row" fxLayoutAlign="space-around center">
 
-      <h6 style="color: rgba(0,0,0,0.29)" fxFlex="60" ><strong>Description:</strong></h6>
+      <h6 style="color: rgba(0,0,0,0.29)" fxFlex="20" ><strong>Description:</strong></h6>
       <h6 fxFlex="60">{{event.description}}</h6>
     </div>
     <div *ngIf="not_invited" class="alert alert-danger text-center">

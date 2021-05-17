@@ -38,9 +38,6 @@ const routes: Routes = [
       { path: 'sign-up', component:SignUpComponent,canActivate:[LoginActivate]},
       { path: 'sign-uppro', component:SignUpproComponent,canActivate:[ConnectActivate]},
       { path: 'sign-uppro/edit/:id', component:SignUpproComponent,canActivate:[ConnectActivate]},
-
-
-
 ]
 
 @NgModule({

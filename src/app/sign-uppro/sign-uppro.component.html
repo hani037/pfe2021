@@ -7,7 +7,7 @@
 
     <mat-step [stepControl]="calendarProForm" [editable]="false">
 
-        <form [formGroup]="calendarProForm" (ngSubmit)="createCalendarPro(stepper)">
+        <form [formGroup]="calendarProForm" >
           <ng-template>Calendar Pro </ng-template>
           <div>
             <div> <h2>Enabled <mat-slide-toggle formControlName="enabled"  color="warn"></mat-slide-toggle></h2></div>
@@ -150,13 +150,56 @@
 
               </div>
             </div>
-          </div>
-          <div>
-            <button *ngIf="!id" (click)="createCalendarPro(stepper)" [disabled]="calendarProForm.invalid"  mat-raised-button color="warn" matStepperNext>save</button>
-            <button *ngIf="id"(click)="updateCalendarPro(stepper)" [disabled]="calendarProForm.invalid||!FormChanged"  mat-raised-button color="warn" matStepperNext>update</button>
-          </div>
+            <div class="text-center">
+              <div  class="alert alert-info text-center">
+                <mat-icon  class="example-tab-icon ">info</mat-icon>
+                <br> add exception dates that can be yearly or monthly.
+              </div>
+              <button type="button" (click)="addException()" mat-raised-button color="accent">
+                Exception
+                <mat-icon>add</mat-icon>
+              </button>
+              <div fxLayout="row" fxLayoutAlign="center center" >
+                <mat-card class="example-card "  *ngFor="let exception of calendarProForm.controls.exception['controls'];let r=index" [formGroup]="exception">
+                  <div >
+                    <button style="position: absolute;right: -2%;top: -2%" (click)="deleteException(r)" color="warn" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+                      <mat-icon>remove_circle_outline</mat-icon>
+                    </button>
+                  </div>
+                  <mat-form-field    appearance="outline">
+                    <mat-label>Recurrence:</mat-label>
+                    <mat-select formControlName="recurrenceType" [value]="list[0]" required   >
+                      <mat-option *ngFor="let l of list2"  [value]="l">{{l}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <div *ngIf="exception.value.recurrenceType =='YEARLY'">
+                    <mat-form-field dateFormat1 appearance="outline">
+                      <mat-label>choose the day</mat-label>
+                      <input formControlName="date"  matInput required [matDatepicker]="dp2" >
+                      <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
+                      <mat-datepicker startView="year"  #dp2 panelClass="example-month-picker"></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                  <div *ngIf="exception.value.recurrenceType =='MONTHLY'">
+                    <mat-form-field dateFormat2 appearance="outline">
+                      <mat-label>choose the day</mat-label>
+                      <label>
+                        <input formControlName="date"   required matInput [matDatepicker]="dp3"  >
+                      </label>
+                      <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+                      <mat-datepicker  startView="month"  #dp3 panelClass="example-month-picker"></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                </mat-card >
+              </div>
 
+            </div>
+          </div>
         </form>
+      <div>
+        <button *ngIf="!id" (click)="createCalendarPro(stepper)" [disabled]="calendarProForm.invalid"  mat-raised-button color="warn" matStepperNext>save</button>
+        <button *ngIf="id"(click)="updateCalendarPro(stepper)" [disabled]="calendarProForm.invalid||!FormChanged"  mat-raised-button color="warn" matStepperNext>update</button>
+      </div>
     </mat-step>
 
 </mat-horizontal-stepper>
