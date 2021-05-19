@@ -11,6 +11,7 @@ import {map, mergeMap} from "rxjs/operators";
 import {CalendarProService} from "../shared/service/calendarPro.service";
 import {CalendarGroupService} from "../shared/service/calendar-group.service";
 import {CalendarGroup} from "../shared/model/calendarGroup";
+import { ToastService } from 'ng-uikit-pro-standard';
 
 @Component({
   selector: 'app-home',
@@ -38,7 +39,7 @@ export class HomeComponent implements OnInit {
 
   loading:boolean=true;
 
-  constructor(private eventService:EventService,private calendarPersonalService:CalendarPersonalService,private dialog: MatDialog
+  constructor(private toastrService: ToastService,private eventService:EventService,private calendarPersonalService:CalendarPersonalService,private dialog: MatDialog
               ,private calendarProService:CalendarProService,private router:Router,private calendarGroupService:CalendarGroupService) { }
 
   ngOnInit(): void {
@@ -46,6 +47,7 @@ export class HomeComponent implements OnInit {
     this.calendarPersonalService.CalendarEmitter.subscribe(data=> {
       if(data){
         this.getCalendar();
+        this.showSuccess();
       }
     });
 
@@ -54,9 +56,16 @@ export class HomeComponent implements OnInit {
     this.calendarPersonalService.get_user_calendars().subscribe(data => {
       this.calendarsPersonal = data;
       this.loading = false;
+      this.showSuccess();
     })
   }
 
+  showSuccess() {
+
+    this.toastrService.success('felicitations votre calendrier Personel a ete bien cree',  {
+      duration: 1000,
+    });
+  }
   add(event) {
     if(event ==1){
       this.dialog.open(AddCalendarComponent, {
@@ -64,6 +73,9 @@ export class HomeComponent implements OnInit {
         width: '300px',
         backdropClass: 'backdropBackground',
       })
+
+
+
     }if(event == 2){
       this.router.navigateByUrl('home/CreateCalendarGroup')
     }if(event == 3){

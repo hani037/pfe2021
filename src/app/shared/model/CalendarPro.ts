@@ -12,6 +12,7 @@ export class CalendarPro {
   job:string;
   startDate:Date;
   chrono:number;
+  durationbetween:number;
   expiryDate:Date;
   address:string;
   enabled:boolean;
