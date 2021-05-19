@@ -1,75 +1,74 @@
 <body>
-<div class="container">
-  <div class="row">
-    <div class="col-lg-10 col-xl-9 mx-auto">
-      <div class="card card-signin flex-row my-5">
-        <div class="card-img-left d-none d-md-flex">
-          <!-- Background image for card set in CSS! -->
-        </div>
-        <div id="overlay" >
-          <div class="w-100 d-flex justify-content-center align-items-center">
-            <div class="spinner"></div>
-          </div>
-        </div>
-        <div *ngIf="!is_confirmation" class="card-body">
-          <h5  class="card-title text-center">Sign Up</h5>
-          <form action="" method="post" (ngSubmit)="createUser(f)" #f="ngForm" class="form-signin text-center">
-            <mat-form-field style="width: 100%" appearance="outline">
-              <mat-label>userName</mat-label>
-              <input  matInput ngModel required name="userName"  #userName="ngModel" type="text" id="userName"    autofocus >
-              <mat-icon color="accent" matSuffix>person</mat-icon>
-            </mat-form-field>
-            <mat-form-field style="width: 100%" appearance="outline">
-              <mat-label>email</mat-label>
-              <input  matInput ngModel required name="email" email  #email="ngModel" type="email" id="email">
-              <mat-icon color="accent" matSuffix>email</mat-icon>
-            </mat-form-field>
-            <mat-form-field style="width: 100%" appearance="outline">
-              <mat-label>firstName</mat-label>
-              <input  matInput ngModel required name="firstName"  #firstName="ngModel" type="text" id="firstName">
-              <mat-icon color="accent" matSuffix>person</mat-icon>
-            </mat-form-field>
-            <mat-form-field style="width: 100%" appearance="outline">
-              <mat-label>lastName</mat-label>
-              <input  matInput ngModel required name="lastName"  #lastName="ngModel" type="text" id="lastName">
-              <mat-icon color="accent" matSuffix>person</mat-icon>
-            </mat-form-field>
-            <mat-form-field style="width: 100%" appearance="outline">
-              <mat-label>Password</mat-label>
-              <input  matInput type="password" id="inputPassword" id="Password"  ngModel required name="Password"  #Password="ngModel">
-              <mat-icon color="accent" matSuffix>lock</mat-icon>
-            </mat-form-field>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-xl-9 mx-auto">
+                <div class="card card-signin flex-row my-5">
+                    <div class="card-img-left d-none d-md-flex">
+                        <!-- Background image for card set in CSS! -->
+                    </div>
+                    <div id="overlay">
+                        <div class="w-100 d-flex justify-content-center align-items-center">
+                            <div class="spinner"></div>
+                        </div>
+                    </div>
+                    <div *ngIf="!is_confirmation" class="card-body">
+                        <h5 class="card-title text-center">Sign Up</h5>
+                        <form action="" method="post" (ngSubmit)="createUser(f)" #f="ngForm" class="form-signin text-center">
+                            <mat-form-field style="width: 100%" appearance="outline">
+                                <mat-label>userName</mat-label>
+                                <input matInput ngModel required name="userName" #userName="ngModel" type="text" id="userName" autofocus>
+                                <mat-icon color="accent" matSuffix>person</mat-icon>
+                            </mat-form-field>
+                            <mat-form-field style="width: 100%" appearance="outline">
+                                <mat-label>email</mat-label>
+                                <input matInput ngModel required name="email" email #email="ngModel" type="email" id="email">
+                                <mat-icon color="accent" matSuffix>email</mat-icon>
+                            </mat-form-field>
+                            <mat-form-field style="width: 100%" appearance="outline">
+                                <mat-label>firstName</mat-label>
+                                <input matInput ngModel required name="firstName" #firstName="ngModel" type="text" id="firstName">
+                                <mat-icon color="accent" matSuffix>person</mat-icon>
+                            </mat-form-field>
+                            <mat-form-field style="width: 100%" appearance="outline">
+                                <mat-label>lastName</mat-label>
+                                <input matInput ngModel required name="lastName" #lastName="ngModel" type="text" id="lastName">
+                                <mat-icon color="accent" matSuffix>person</mat-icon>
+                            </mat-form-field>
+                            <mat-form-field style="width: 100%" appearance="outline">
+                                <mat-label>Password</mat-label>
+                                <input matInput type="password" id="inputPassword" id="Password" ngModel required name="Password" #Password="ngModel">
+                                <mat-icon color="accent" matSuffix>lock</mat-icon>
+                            </mat-form-field>
 
-            <div >
-              <button style="width: 100%" class="btn-lg"  type="submit" [disabled]="f.invalid" mat-raised-button color="warn">Sign Up</button>
-              <br>
-              <button (click)="router.navigateByUrl('login')" mat-button color="warn">Login</button>
-              <h4 style="color:red" class="text-center" *ngIf="is_message" >User Already exist</h4>
+                            <div>
+                                <button style="width: 100%" class="btn-lg" type="submit" [disabled]="f.invalid" mat-raised-button color="warn">Sign Up</button>
+                                <br>
+                                <button (click)="router.navigateByUrl('login')" mat-button color="warn">Login</button>
+                                <h4 style="color:red" class="text-center" *ngIf="is_message">User Already exist</h4>
 
+                            </div>
+
+                        </form>
+                    </div>
+                    <div class="text-center card-body" *ngIf="is_confirmation">
+                        <h5 class="card-title text-center">Veuillez vérifier votre E-mail</h5>
+                        <div *ngIf="is_message_confirmation" style="margin: 2% 20%;color: #ea2530">
+                            <p>Désolé, le code est invalide ou obsolète.</p>
+                        </div>
+                        <div>
+                            <p>Pour terminer la configuration de votre compte, veuillez vérifier {{user_crated.email}}Saisissez le code de sécurité envoyé à votre adresse e-mail et cliquez sur le bouton ci-dessous. Pensez à vérifier votre dossier de courrier
+                                indésirable.
+                            </p>
+                            <code-input style="margin:0% 20% 2% 20%;" [isCodeHidden]="false" [codeLength]="8" [isCharsCode]="true" (codeCompleted)="onCodeCompleted($event)">
+                                >
+                            </code-input>
+                            <button [disabled]="!is_code" (click)="verify()" style="width: 100%" class="btn-lg" mat-raised-button color="warn">Vérifier</button>
+                            <button (click)="changeCode()" mat-button color="warn">Renvoyez le code</button>
+
+                        </div>
+                    </div>
+                </div>
             </div>
-
-          </form>
         </div>
-        <div  class="text-center card-body" *ngIf="is_confirmation" >
-          <h5  class="card-title text-center">Veuillez vérifier votre E-mail</h5>
-          <div *ngIf="is_message_confirmation" style="margin: 2% 20%;color: #ea2530"><p>Désolé, le code est invalide ou obsolète.</p></div>
-          <div >
-            <p>Pour terminer la configuration de votre compte, veuillez vérifier
-            {{user_crated.email}}Saisissez le code de sécurité envoyé à votre adresse e-mail et
-              cliquez sur le bouton ci-dessous. Pensez à vérifier votre dossier de courrier indésirable.</p>
-            <code-input  style="margin:0% 20% 2% 20%;" [isCodeHidden]="false"
-                        [codeLength]="8" [isCharsCode]="true"
-                        (codeCompleted)="onCodeCompleted($event)">
-                        >
-            </code-input>
-            <button [disabled]="!is_code" (click)="verify()" style="width: 100%" class="btn-lg"   mat-raised-button color="warn">Vérifier</button>
-            <button (click)="changeCode()" mat-button color="warn">Renvoyez le code</button>
-
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
-</div>
 </body>
-
