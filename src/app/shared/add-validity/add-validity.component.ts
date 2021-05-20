@@ -20,7 +20,8 @@ export class AddValidityComponent implements OnInit {
 
   ngOnInit(): void {
     this.max = new Date(this.data.start.getFullYear(),this.data.start.getMonth(),this.data.start.getDate()+90);
-    this.min = this.data.end;
+    this.min = new Date(this.data.end);
+    this.min = new Date(this.min.getFullYear(),this.min.getMonth(),this.min.getDate()+1);
     this.date = this.dateService.getDate(this.data.end);
     this.form = new FormGroup({
       date: new FormControl(null, Validators.required),

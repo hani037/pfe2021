@@ -174,8 +174,6 @@ export class NewcalendarComponent implements OnInit{
           },)
         }else{
           if(event.recurrenceType=="MONTHLY"||event.recurrenceType=="YEARLY") {
-            console.log(new Date(event.date+' '+event.start))
-            console.log(this.dateService.getDuration(event.start,event.end))
             this.INITIAL_EVENTS.push({
               title: event.description,
               id:event.id,
@@ -192,30 +190,39 @@ export class NewcalendarComponent implements OnInit{
               }
             })
           }else if(event.recurrenceType=="WEEKLY") {
-            console.log('hi')
             this.INITIAL_EVENTS.push( {
               start: event.start,
               end:event.end,
               title: event.description,
               id:event.id,
+              allDay:false,
               color:event.color,
-              daysOfWeek: [event.date ],
               extendedProps: {
-                type: 'Event'
+                type: 'Event',
+
               },
+              rrule: {
+                freq: event.recurrenceType,
+                dtstart: this.getNextDayOfWeek(event.date),
+
+              }
             })
           }else {
-            console.log('hi')
             this.INITIAL_EVENTS.push( {
               start: event.start,
               end:event.end,
               title: event.description,
+              allDay:false,
               id:event.id,
               color:event.color,
-              daysOfWeek: [ '0','1','2','3','4','5','6' ],
               extendedProps: {
                 type: 'Event'
               },
+              rrule: {
+                freq: event.recurrenceType,
+
+
+              }
             })
           }
         }
@@ -253,6 +260,15 @@ export class NewcalendarComponent implements OnInit{
     if(event ==1){
       this.add_event();
     }
+  }
+  getNextDayOfWeek(dayOfWeek) {
+   let date =new Date();
+
+    var resultDate = new Date(date.getTime());
+
+    resultDate.setDate(date.getDate() + (7 + dayOfWeek - date.getDay()) % 7);
+
+    return resultDate;
   }
 }
 /*
