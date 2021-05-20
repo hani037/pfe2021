@@ -13,7 +13,6 @@ import {CalendarGroupService} from "../shared/service/calendar-group.service";
 import {CalendarGroup} from "../shared/model/calendarGroup";
 import { ToastService } from 'ng-uikit-pro-standard';
 import {DateService} from "../shared/service/date.service";
-
 import * as moment from "moment";
 
 @Component({
@@ -39,7 +38,7 @@ export class SignUpproComponent implements OnInit {
   list2: string[] = ['MONTHLY', 'YEARLY'];
   date;
 
-constructor(private toastrService: ToastService,private activatedRoute: ActivatedRoute,private _formBuilder: FormBuilder ,private router:Router,private calendarProService:CalendarProService
+constructor(private activatedRoute: ActivatedRoute,private _formBuilder: FormBuilder ,private router:Router,private calendarProService:CalendarProService
   ,private dateService:DateService){}
 
 ngOnInit(): void {
@@ -70,7 +69,6 @@ InitForms(){
     enabled: [true, Validators.required],
     expiryDate:[  '', Validators.required],
     duration:  ['', Validators.required],
-
     exception:this._formBuilder.array([]),
     weekSchedule: this.initWeekSchedule()
 
@@ -100,36 +98,6 @@ initWeekSchedule(){
 
   }
 
-
-  showSuccess() {
-
-    this.toastrService.success('felicitations votre calendrier a ete bien cree',  {
-      duration: 1000,position: "top-left",
-  maxToasts: 2,
-  newestOnTop: true,
-      timeout: 5000,
-      closeOnClick: true,
-      pauseOnFocusLoss: true,
-      pauseOnHover: true,
-      draggable: true,
-      draggablePercent: 0.6,
-      showCloseButtonOnHover: false,
-      hideProgressBar: true,
-      closeButton: "button",
-      icon: true,
-      rtl: false
-    });
-  }
-  showInfo() {
-
-    this.toastrService.info('felicitations votre calendrier a ete bien Modifie',  {
-      duration: 1000,
-    });
-  }
-
-  addInfoToast() {
-    this.toastrService.info('message');
- }
 addSeance(j:number) {
   let day =this.calendarProForm.get("weekSchedule").get(""+j)as FormArray;
   day.push(this.initItemRows());
@@ -145,8 +113,6 @@ public createCalendarPro(stepper: MatStepper) {
     let calendarPro:CalendarPro =this.generateCalendarPro();
     this.calendarProService.createCalendarPro(calendarPro).subscribe(calendarPro=>{
         this.home();
-        this.showSuccess()
-        this.addInfoToast();
       });
   }
 
@@ -154,8 +120,6 @@ private  getCalendarPro() {
   this.calendarProService.get_calendarPro(this.id).subscribe(data=>{
 this.calendarPro=data;
 this.initCalendarProFromCalendarPro().then(r =>{
-
-
   this.loading = false;
 this.FormOnChanges();} );
 
@@ -225,11 +189,10 @@ async updateCalendarPro( stepper: MatStepper){
     if(this.weekFormChanged){
         await this.calendarProService.updateSeances(this.id,calendarPro);
       this.home();
-    this.showInfo()
       }else {
        await this.calendarProService.updateInfo(this.id,calendarPro);
       this.home();
-     this.showInfo()
+
       }
 
 }

@@ -1,219 +1,205 @@
-<div id="overlay">
-    <div class="w-100 d-flex justify-content-center align-items-center">
-        <div class="spinner"></div>
-    </div>
+<div id="overlay" >
+  <div class="w-100 d-flex justify-content-center align-items-center">
+    <div class="spinner"></div>
+  </div>
 </div>
 <mat-horizontal-stepper *ngIf="!loading" linear #stepper>
 
     <mat-step [stepControl]="calendarProForm" [editable]="false">
 
-        <form [formGroup]="calendarProForm">
-
-            <ng-template>Calendar Pro </ng-template>
+        <form [formGroup]="calendarProForm" >
+          <ng-template>Calendar Pro </ng-template>
+          <div>
+            <div> <h2>Enabled <mat-slide-toggle formControlName="enabled"  color="warn"></mat-slide-toggle></h2></div>
             <div>
-                <div>
-                    <h2>Enabled
-                        <mat-slide-toggle formControlName="enabled" color="warn"></mat-slide-toggle>
-                    </h2>
-                </div>
-                <div fxLayoutAlign="center center">
-                    <mat-form-field appearance="outline">
-                        <mat-label>firstName </mat-label>
-                        <input matInput formControlName="firstName" required>
-                        <span matSuffix class="material-icons-outlined">info </span>
-                    </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>firstName</mat-label>
+                <input matInput formControlName="firstName"
+                       required>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field appearance="outline">
+                <mat-label>lastName</mat-label>
+                <input matInput formControlName="lastName"
+                       required>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field appearance="outline">
+                <mat-label>address</mat-label>
+                <input matInput formControlName="address"
+                       required>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field class="example-form-field" appearance="outline">
+                <mat-label>calendar Validate(Max 3 months)</mat-label>
+                <mat-date-range-input
 
-                    <mat-form-field style="margin-left: 12%;" appearance="outline">
-                        <mat-label>lastName</mat-label>
-                        <input matInput formControlName="lastName" required>
-                        <span matSuffix class="material-icons-outlined">info </span>
-                    </mat-form-field>
+                  [rangePicker]="campaignOnePicker"
+                  [max]="max"
+                  [min]="min"
 
+                >
 
-                </div>
-                <div fxLayoutAlign="center center">
-                    <mat-form-field appearance="outline">
-                        <mat-label>Address</mat-label>
-                        <input matInput formControlName="address" required>
-                        <span matSuffix class="material-icons-outlined">info </span>
-                    </mat-form-field>
-
-                    <mat-form-field style="margin-left: 12%;" appearance="outline">
-                        <mat-label>Job: </mat-label>
-                        <span matSuffix class="material-icons-outlined">info </span>
-                        <mat-select required formControlName="job" required>
-                            <mat-option *ngFor="let job of list" [value]="job">{{job}}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-                <div fxLayoutAlign="center center">
-
-                    <mat-form-field class="example-form-field" appearance="outline">
-                        <mat-label>calendar Validate(Max 3 months)</mat-label>
-                        <mat-date-range-input [rangePicker]="campaignOnePicker" [max]="max" [min]="min">
-                            <input matStartDate placeholder="Start date" formControlName="startDate">
-                            <input matEndDate placeholder="End date" formControlName="expiryDate">
-                        </mat-date-range-input>
-                        <mat-datepicker-toggle matSuffix [for]="campaignOnePicker"></mat-datepicker-toggle>
-                        <mat-date-range-picker #campaignOnePicker></mat-date-range-picker>
-                    </mat-form-field>
-                </div>
-
-                <div *ngIf="id" class="alert alert-danger text-center">
-                    <mat-icon class="example-tab-icon ">warning</mat-icon>
-                    <br> Any appointments that their session modifies will be deleted and an apology email will be sent.
-                </div>
-
-                <div class="alert alert-info text-center">
-                    <mat-icon class="example-tab-icon ">info</mat-icon>
-                    <br> Each session will be divided by the duration.
-                </div>
+                  <input     matStartDate placeholder="Start date" formControlName="startDate">
+                  <input  matEndDate placeholder="End date" formControlName="expiryDate">
+                </mat-date-range-input>
+                <mat-datepicker-toggle matSuffix [for]="campaignOnePicker"></mat-datepicker-toggle>
+                <mat-date-range-picker #campaignOnePicker></mat-date-range-picker>
+              </mat-form-field>
+            </div>
+            <div>
 
 
-                <div fxLayoutAlign="center center">
-                    <mat-form-field appearance="outline">
-                        <mat-label>duration(in minute)</mat-label>
-                        <input matInput formControlName="duration" type="number" min="15" required>
 
-                        <span matSuffix class="material-icons-outlined">    schedule  </span>
-                    </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field   appearance="outline">
+                <mat-label>Job:</mat-label>
+                <mat-select   required formControlName="job">
+                  <mat-option *ngFor="let job of list"  [value]="job">{{job}}</mat-option>
+                </mat-select>
+              </mat-form-field>
 
-                    <mat-form-field style="margin-left: 12%;" appearance="outline">
-                        <mat-label>duration between session(in minute)</mat-label>
-                        <input matInput formControlName="" type="number" min="15" required>
-                        <span matSuffix class="material-icons-outlined">    schedule  </span>
-                    </mat-form-field>
-                </div>
+            </div>
+            <div *ngIf="id" class="alert alert-danger text-center">
+              <mat-icon  class="example-tab-icon ">warning</mat-icon>
+              <br> Any appointments that their session modifies will be deleted and an apology email will be sent.
+            </div>
 
-
-                <div *ngIf="!id&&!nbClients">
-                    <div class="alert alert-info text-center">
-                        <mat-icon class="example-tab-icon ">info</mat-icon>
-                        <br> add number of clients per session by default one client per session.
-                    </div>
-                    <div class="text-center">
-                        <button (click)="addClients()" mat-raised-button color="warn">Add</button>
-                    </div>
-                </div>
-                <div *ngIf="id&&!nbClients">
-                    <div class="alert alert-info text-center">
-                        <mat-icon class="example-tab-icon ">info</mat-icon>
-                        <br> edit number of clients per session.
-                    </div>
-                    <div class="text-center">
-                        <button (click)="addClients()" mat-raised-button color="warn">edit</button>
-                    </div>
-                </div>
-                <div *ngFor="let weeKSchedule of calendarProForm.controls.weekSchedule['controls']; let j=index" [formGroup]="weeKSchedule">
-                    <div fxLayout="row" fxLayoutAlign="center center">
-                        <div fxLayout="row" fxLayoutAlign="center center">
-                            <h3 *ngIf="j==0">Monday</h3>
-                            <h3 *ngIf="j==1">Tuesday</h3>
-                            <h3 *ngIf="j==2">Wednesday</h3>
-                            <h3 *ngIf="j==3">Thursday</h3>
-                            <h3 *ngIf="j==4">Friday</h3>
-                            <h3 *ngIf="j==5">Saturday</h3>
-                            <h3 *ngIf="j==6">Sunday</h3>
-                            <div>
-                                <button (click)="addSeance(j)" color="primary" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+            <div  class="alert alert-info text-center">
+              <mat-icon  class="example-tab-icon ">info</mat-icon>
+              <br> Each session will be divided by the duration.
+            </div>
+            <mat-form-field appearance="outline">
+              <mat-label>duration(in minute)</mat-label>
+              <input matInput formControlName="duration" type="number" min="15"
+                     required>
+            </mat-form-field>
+            <div *ngIf="!id&&!nbClients">
+              <div  class="alert alert-info text-center">
+                <mat-icon  class="example-tab-icon ">info</mat-icon>
+                <br> add number of clients per session by default one client per session.
+              </div>
+              <div class="text-center">
+                <button (click)="addClients()" mat-raised-button color="warn">Add</button>
+              </div>
+            </div>
+            <div *ngIf="id&&!nbClients">
+              <div  class="alert alert-info text-center">
+                <mat-icon  class="example-tab-icon ">info</mat-icon>
+                <br> edit number of clients per session.
+              </div>
+              <div class="text-center">
+                <button (click)="addClients()" mat-raised-button color="warn">edit</button>
+              </div>
+            </div>
+            <div  *ngFor="let weeKSchedule of calendarProForm.controls.weekSchedule['controls']; let j=index"  [formGroup]="weeKSchedule"   >
+              <div fxLayout="row" fxLayoutAlign="center center">
+                <div fxLayout="row" fxLayoutAlign="center center"  >
+                  <h3 *ngIf="j==0">Monday</h3>
+                  <h3 *ngIf="j==1">Tuesday</h3>
+                  <h3 *ngIf="j==2">Wednesday</h3>
+                  <h3 *ngIf="j==3">Thursday</h3>
+                  <h3 *ngIf="j==4">Friday</h3>
+                  <h3 *ngIf="j==5">Saturday</h3>
+                  <h3 *ngIf="j==6">Sunday</h3>
+                  <div >
+                    <button  (click)="addSeance(j)" color="primary" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
                       <mat-icon>add_circle_outline</mat-icon>
                     </button>
-                            </div>
-                        </div>
+                  </div>
+                </div>
 
-                    </div>
+              </div>
 
-                    <div fxLayout="row" fxLayoutAlign="center center" *ngFor="let itemrow of weeKSchedule.controls; let t=index" [formGroupName]="t">
-                        <div style="margin-right: 3%">
-                            <h5>session {{t+1}}</h5>
-                        </div>
-                        <div fxLayout="row" fxLayoutAlign="start center">
-                            <div style="margin-right: 3%">
-                                <mat-form-field appearance="outline">
-                                    <mat-label>start</mat-label>
-                                    <input type="time" matInput formControlName="start" required>
-                                </mat-form-field>
-                            </div>
-                            <div style="margin-right: 3%">
-                                <mat-form-field appearance="outline">
-                                    <mat-label>end</mat-label>
-                                    <input type="time" matInput formControlName="end" required>
-                                </mat-form-field>
-                            </div>
-                            <div *ngIf="nbClients" style="margin-right: 3%">
-                                <mat-form-field appearance="outline">
-                                    <mat-label>nbTotalPlaces</mat-label>
-                                    <input type="number" matInput formControlName="nbTotalPlaces" required>
-                                </mat-form-field>
-                            </div>
-                            <div>
-                                <button (click)="deleteSeance(j,t)" color="warn" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+              <div fxLayout="row" fxLayoutAlign="center center" *ngFor="let itemrow of weeKSchedule.controls; let t=index" [formGroupName]="t" >
+                <div  style="margin-right: 3%" >
+                  <h5>session {{t+1}}</h5>
+                </div>
+                <div  fxLayout="row" fxLayoutAlign="start center"  >
+                  <div style="margin-right: 3%" >
+                    <mat-form-field appearance="outline">
+                      <mat-label>start</mat-label>
+                      <input type="time" matInput formControlName="start"
+                             required>
+                    </mat-form-field>
+                  </div>
+                  <div style="margin-right: 3%" >
+                    <mat-form-field appearance="outline">
+                      <mat-label>end</mat-label>
+                      <input type="time" matInput formControlName="end"
+                             required>
+                    </mat-form-field>
+                  </div>
+                  <div *ngIf="nbClients" style="margin-right: 3%" >
+                    <mat-form-field appearance="outline">
+                      <mat-label>nbTotalPlaces</mat-label>
+                      <input type="number" matInput formControlName="nbTotalPlaces"
+                             required>
+                    </mat-form-field>
+                  </div>
+                  <div >
+                    <button (click)="deleteSeance(j,t)" color="warn" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
                       <mat-icon>remove_circle_outline</mat-icon>
                     </button>
-                            </div>
-                        </div>
-
-                    </div>
+                  </div>
                 </div>
-                <div class="text-center">
-                    <div class="alert alert-info text-center">
-                        <mat-icon class="example-tab-icon ">info</mat-icon>
-                        <br> add exception dates that can be yearly or monthly.
-                    </div>
-                    <button type="button" (click)="addException()" mat-raised-button color="accent">
+
+              </div>
+            </div>
+            <div class="text-center">
+              <div  class="alert alert-info text-center">
+                <mat-icon  class="example-tab-icon ">info</mat-icon>
+                <br> add exception dates that can be yearly or monthly.
+              </div>
+              <button type="button" (click)="addException()" mat-raised-button color="accent">
                 Exception
                 <mat-icon>add</mat-icon>
               </button>
-                    <div fxLayout="row" fxLayoutAlign="center center">
-                        <mat-card class="example-card " *ngFor="let exception of calendarProForm.controls.exception['controls'];let r=index" [formGroup]="exception">
-                            <div>
-                                <button style="position: absolute;right: -2%;top: -2%" (click)="deleteException(r)" color="warn" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+              <div fxLayout="row" fxLayoutAlign="center center" >
+                <mat-card class="example-card "  *ngFor="let exception of calendarProForm.controls.exception['controls'];let r=index" [formGroup]="exception">
+                  <div >
+                    <button style="position: absolute;right: -2%;top: -2%" (click)="deleteException(r)" color="warn" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
                       <mat-icon>remove_circle_outline</mat-icon>
                     </button>
-                            </div>
-                            <mat-form-field appearance="outline">
-                                <mat-label>Recurrence:</mat-label>
-                                <mat-select formControlName="recurrenceType" [value]="list[0]" required>
-                                    <mat-option *ngFor="let l of list2" [value]="l">{{l}}</mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                            <div *ngIf="exception.value.recurrenceType =='YEARLY'">
-                                <mat-form-field dateFormat1 appearance="outline">
-                                    <mat-label>choose the day</mat-label>
-                                    <input formControlName="date" matInput required [matDatepicker]="dp2">
-                                    <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
-                                    <mat-datepicker startView="year" #dp2 panelClass="example-month-picker"></mat-datepicker>
-                                </mat-form-field>
-                            </div>
-                            <div *ngIf="exception.value.recurrenceType =='MONTHLY'">
-                                <mat-form-field dateFormat2 appearance="outline">
-                                    <mat-label>choose the day</mat-label>
-                                    <label>
+                  </div>
+                  <mat-form-field    appearance="outline">
+                    <mat-label>Recurrence:</mat-label>
+                    <mat-select formControlName="recurrenceType" [value]="list[0]" required   >
+                      <mat-option *ngFor="let l of list2"  [value]="l">{{l}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <div *ngIf="exception.value.recurrenceType =='YEARLY'">
+                    <mat-form-field dateFormat1 appearance="outline">
+                      <mat-label>choose the day</mat-label>
+                      <input formControlName="date"  matInput required [matDatepicker]="dp2" >
+                      <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
+                      <mat-datepicker startView="year"  #dp2 panelClass="example-month-picker"></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                  <div *ngIf="exception.value.recurrenceType =='MONTHLY'">
+                    <mat-form-field dateFormat2 appearance="outline">
+                      <mat-label>choose the day</mat-label>
+                      <label>
                         <input formControlName="date"   required matInput [matDatepicker]="dp3"  >
                       </label>
-                                    <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
-                                    <mat-datepicker startView="month" #dp3 panelClass="example-month-picker"></mat-datepicker>
-                                </mat-form-field>
-                            </div>
-                        </mat-card>
-                    </div>
+                      <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+                      <mat-datepicker  startView="month"  #dp3 panelClass="example-month-picker"></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                </mat-card >
+              </div>
 
-                </div>
             </div>
+          </div>
         </form>
-
-        <br>
-        <br>
-
-        <div fxLayoutAlign="center center">
-
-
-            <button *ngIf="!id" (click)=" createCalendarPro(stepper)" class="btn btn-info waves-light" [disabled]="calendarProForm.invalid"> <span class='glyphicon glyphicon-saved'></span>Save </button>
-            <button *ngIf="id" (click)="updateCalendarPro(stepper)" class="btn btn-info waves-light" [disabled]="calendarProForm.invalid||!FormChanged" class='btn btn-primary'>    <span class='glyphicon glyphicon-saved'></span>update </button>
-            <lib-toastify-toast-container></lib-toastify-toast-container>
-
-        </div>
-
+      <div>
+        <button *ngIf="!id" (click)="createCalendarPro(stepper)" [disabled]="calendarProForm.invalid"  mat-raised-button color="warn" matStepperNext>save</button>
+        <button *ngIf="id"(click)="updateCalendarPro(stepper)" [disabled]="calendarProForm.invalid||!FormChanged"  mat-raised-button color="warn" matStepperNext>update</button>
+      </div>
     </mat-step>
 
 </mat-horizontal-stepper>
