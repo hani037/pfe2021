@@ -90,9 +90,7 @@ import { CalendarGroupComponent } from './shared/calendar-group/calendar-group.c
 import { ProfileCalendarProComponent } from './shared/profile-calendar-pro/profile-calendar-pro.component';
 import { AddSeanceComponent } from './shared/add-seance/add-seance.component';
 import { AddValidityComponent } from './shared/add-validity/add-validity.component';
-import { ToastModule, ToastService } from 'ng-uikit-pro-standard';
-import { AngularToastifyModule } from 'angular-toastify';
-import { LibToastifyToastContainerComponent } from './lib-toastify-toast-container/lib-toastify-toast-container.component';
+
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -145,11 +143,9 @@ export const interceptorProviders =
     AddSeanceComponent,
     AddValidityComponent,
     CustomDateFormat2,
-    CustomDateFormat1,
-    LibToastifyToastContainerComponent
+    CustomDateFormat1
   ],
     imports: [
-      AngularToastifyModule,
         NgxMaterialTimepickerModule,
         CodeInputModule,
         BrowserModule,
@@ -162,7 +158,7 @@ export const interceptorProviders =
         FullCalendarModule,
         CdkStepperModule,
         MDBBootstrapModule.forRoot(),
-        ToastModule.forRoot(),
+
         CalendarModule.forRoot({
             provide: DateAdapter,
             useFactory: adapterFactory,
@@ -197,7 +193,7 @@ export const interceptorProviders =
         MatSlideToggleModule,
 
     ],
-  providers:   [interceptorProviders,ToastService,MatDatepickerModule,{
+  providers: [interceptorProviders,MatDatepickerModule,{
     provide: APP_INITIALIZER,
     useFactory: (ds: UserService) =>async () => {
       await ds.autoLogin();
@@ -205,8 +201,6 @@ export const interceptorProviders =
     deps: [UserService],
     multi: true
   } ],
-
-
   bootstrap: [AppComponent]
 })
 export class AppModule { }

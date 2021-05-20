@@ -10,7 +10,6 @@ import {getCalendar} from "@angular/material/datepicker/testing/datepicker-trigg
 import {CalendarProService} from "../service/calendarPro.service";
 import {DateService} from "../service/date.service";
 import * as moment from "moment";
-import { ToastService } from 'ng-uikit-pro-standard';
 
 @Component({
   selector: 'app-create-calendar-group',
@@ -36,7 +35,7 @@ export class CreateCalendarGroupComponent implements OnInit {
   private min: Date;
   private date: Date;
 
-  constructor(private toastrService: ToastService,private activatedRoute: ActivatedRoute,private _formBuilder: FormBuilder,private calendarGroupService:CalendarGroupService
+  constructor(private activatedRoute: ActivatedRoute,private _formBuilder: FormBuilder,private calendarGroupService:CalendarGroupService
               ,private router:Router,private calendarProService:CalendarProService,private dateService:DateService) { }
 
   ngOnInit(): void {
@@ -64,7 +63,6 @@ export class CreateCalendarGroupComponent implements OnInit {
       startDate:[  '', Validators.required],
       endDate:  ['', Validators.required],
       duration:  ['', Validators.required],
-
       exception:this._formBuilder.array([]),
       weekSchedule: this.initWeekSchedule()
     });
@@ -113,20 +111,6 @@ initItemRows() {
       }
     }
 
-    showSuccess() {
-      const options = { toastClass: 'opacity' };
-      this.toastrService.success('felicitations votre calendrierGroup a ete bien cree',  {
-        duration: 1000,
-      });
-    }
-    showInfo() {
-
-      this.toastrService.info('felicitations votre calendrierGroup a ete bien Modifie',  {
-        duration: 1000,
-      });
-    }
-
-
   addSeance(i:number,j:number) {
     let day =this.calendarPro.get(''+i).get("weekSchedule").get(""+j)as FormArray;
     day.push(this.initItemRows());
@@ -146,20 +130,16 @@ initItemRows() {
 
   createCalendarGroup(stepper: MatStepper) {
     this.on();
-
-
     let calendarGroup = new CalendarGroup();
     calendarGroup.name = this.firstFormGroup.value.name;
     calendarGroup.address = this.firstFormGroup.value.address;
     calendarGroup.lat = 10;
     calendarGroup.lon = 10;
-
     this.calendarGroupService.createCalendarGroup(calendarGroup).subscribe(data=>{
       this.calendarGroup = data;
       this.InitWeek(0);
       this.off();
       stepper.next();
-      this.showSuccess();
     })
   }
   public on() {
@@ -172,7 +152,6 @@ initItemRows() {
 
   async createCalendarsPro(stepper: MatStepper) {
     this.on();
-
     for (const data of this.calendarPro.value) {
       let calendarPro:CalendarPro =this.generateCalendarPro(data);
       console.log(calendarPro)
@@ -180,7 +159,7 @@ initItemRows() {
     }
     this.off();
     this.home();
-    this.showSuccess();
+
   }
 
   home() {
@@ -291,7 +270,6 @@ initItemRows() {
         this.calendarGroup = data;
         this.off();
         stepper.next();
-        this.showInfo()
       })
   }
 
@@ -307,20 +285,17 @@ initItemRows() {
       let calendarPro = this.generateCalendarPro(this.calendarPro.get(""+index).value);
       calendarPro.appointment = data.appointment;
       calendarPro.id = data.id;
-
       if(this.weekGroupChanged[index]){
         await this.calendarProService.updateSeances(data.id,calendarPro);
       }else if(this.SecondGroupChanged[index]) {
         await this.calendarProService.updateInfo(data.id,calendarPro);
-
-
 
       }
 
     }
     this.off();
     this.home();
- this.showInfo()
+
   }
 
   private FormOnChanges() {
