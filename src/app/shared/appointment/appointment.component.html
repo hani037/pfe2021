@@ -48,6 +48,11 @@
       <h6 style="color: rgba(0,0,0,0.29)" fxFlex="20" ><strong>Places:</strong></h6>
       <h6 fxFlex="60">{{appointment.nbPlaces}}</h6>
     </div>
+    <div *ngIf="appointment.meeting"  fxLayout="row" fxLayoutAlign="space-between center">
+
+      <h4 style="color: rgba(0,0,0,0.29)" ><strong>meeting Link:</strong></h4>
+      <a [href]="appointment.meeting.meetingUrl" target="_blank">Link</a>
+    </div>
   </mat-card-content>
   <mat-dialog-actions align="end">
 

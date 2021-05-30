@@ -18,12 +18,14 @@ import {CalendarProComponent} from "./shared/calendar-pro/calendar-pro.component
 import {CreateCalendarGroupComponent} from "./shared/create-calendar-group/create-calendar-group.component";
 import {CalendarGroupComponent} from "./shared/calendar-group/calendar-group.component";
 import {ProfileCalendarProComponent} from "./shared/profile-calendar-pro/profile-calendar-pro.component";
+import {FeedComponent} from "./shared/feed/feed.component";
 
 
 const routes: Routes = [
 
       { path: '',   redirectTo: 'home', pathMatch: 'full'},
       { path: 'home', component: HomeComponent,canActivate:[ConnectActivate]},
+      { path: 'feed', component: FeedComponent,canActivate:[ConnectActivate]},
       { path: 'home/calendar/:id', component: NewcalendarComponent,canActivate:[ConnectActivate]},
       { path: 'home/calendarPro/:id', component: CalendarProComponent,canActivate:[ConnectActivate]},
       { path: 'home/CreateCalendarGroup', component: CreateCalendarGroupComponent,canActivate:[ConnectActivate]},

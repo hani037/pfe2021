@@ -10,7 +10,12 @@
         <form [formGroup]="calendarProForm" >
           <ng-template>Calendar Pro </ng-template>
           <div>
-            <div> <h2>Enabled <mat-slide-toggle formControlName="enabled"  color="warn"></mat-slide-toggle></h2></div>
+            <div  class="alert alert-info text-center">
+              <mat-icon  class="example-tab-icon ">info</mat-icon>
+              <br> Enable people to follow your calendar to keep him updated.
+            </div>
+            <div> <h2>Follow <mat-slide-toggle formControlName="follow"  color="warn"></mat-slide-toggle></h2></div>
+            <div> <h2>Video consultation <mat-slide-toggle formControlName="videoConsultation"  color="warn"></mat-slide-toggle></h2></div>
             <div>
               <mat-form-field appearance="outline">
                 <mat-label>firstName</mat-label>
@@ -31,6 +36,35 @@
                 <input matInput formControlName="address"
                        required>
               </mat-form-field>
+            </div>
+            <div  >
+              <div fxLayout="row" fxLayoutAlign="start center">
+                <h2>Admins</h2>
+                <div >
+                  <button type="button" (click)="addAdmin()" color="primary" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+                    <mat-icon>add_circle_outline</mat-icon>
+                  </button>
+                </div>
+              </div>
+             <div  fxLayout="row" fxLayoutAlign="start center" *ngFor="let admin of calendarProForm.controls.admins['controls'];let i=index" [formGroup]="admin">
+               <mat-form-field appearance="outline">
+                 <mat-label>Email</mat-label>
+                 <input [readonly]="i==0" matInput formControlName="email"
+                        required>
+               </mat-form-field>
+               <div >
+                 <button *ngIf="i!=0" (click)="deleteAdmin(i)" color="warn" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+                   <mat-icon>remove_circle_outline</mat-icon>
+                 </button>
+               </div>
+             </div>
+
+            </div>
+            <div *ngIf="id" class="alert alert-danger text-center">
+              <mat-icon  class="example-tab-icon ">warning</mat-icon>
+              <br>  Your calendar is active from {{calendarPro.startDate|date}} to {{calendarPro.expiryDate|date}} if you change the time of a meeting session during this period
+              they will be deleted and an apology email will be sent you can start the modification from {{calendarProForm.value.startDate|date}} there will be no problem.
+              .
             </div>
             <div>
               <mat-form-field class="example-form-field" appearance="outline">
@@ -64,10 +98,7 @@
               </mat-form-field>
 
             </div>
-            <div *ngIf="id" class="alert alert-danger text-center">
-              <mat-icon  class="example-tab-icon ">warning</mat-icon>
-              <br> Any appointments that their session modifies will be deleted and an apology email will be sent.
-            </div>
+
 
             <div  class="alert alert-info text-center">
               <mat-icon  class="example-tab-icon ">info</mat-icon>

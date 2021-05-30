@@ -1,4 +1,5 @@
 import {Appointment} from "./appointment";
+import {Meeting} from "./meeting";
 
 export class AppointmentCalendarPro {
   id:string;
@@ -10,4 +11,7 @@ export class AppointmentCalendarPro {
   nbPlacesAvailable:number;
   seanceId:string;
   appointmentList:Appointment[];
+  videoConsultation:boolean;
+  meeting:Meeting;
+
 }

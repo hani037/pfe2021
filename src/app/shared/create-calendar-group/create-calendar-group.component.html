@@ -24,11 +24,38 @@
           <input matInput  formControlName="address" required>
         </mat-form-field>
       </p>
+      <div>
+        <div  fxLayout="row" fxLayoutAlign="start center">
+          <h2>Admins</h2>
+          <div >
+            <button type="button" (click)="addAdmin()" color="primary" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+              <mat-icon>add_circle_outline</mat-icon>
+            </button>
+          </div>
+        </div>
+        <div  fxLayout="row" fxLayoutAlign="start center" *ngFor="let admin of firstFormGroup.controls.admins['controls'];let i=index" [formGroup]="admin">
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input  [readonly]="i==0" matInput formControlName="email"
+                   required>
+          </mat-form-field>
+          <div >
+            <button *ngIf="i!=0" (click)="deleteAdmin(i)" color="warn" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+              <mat-icon>remove_circle_outline</mat-icon>
+            </button>
+          </div>
+        </div>
       <div *ngIf="!id">
         <div  class="alert alert-info text-center">
           <mat-icon  class="example-tab-icon ">info</mat-icon>
           <br> This  will be applicable to each calendar, but you can change it later.
         </div>
+        <div  class="alert alert-info text-center">
+          <mat-icon  class="example-tab-icon ">info</mat-icon>
+          <br> Enable people to follow your calendar to keep him updated.
+        </div>
+        <div> <h2>Follow <mat-slide-toggle formControlName="follow"  color="warn"></mat-slide-toggle></h2></div>
+        <div> <h2>Video consultation <mat-slide-toggle formControlName="videoConsultation"  color="warn"></mat-slide-toggle></h2></div>
 
         <mat-form-field  class="example-form-field" appearance="outline">
           <mat-label>calendar Validate(Max 3 months)</mat-label>
@@ -172,6 +199,7 @@
         <button style="margin-right: 2%" *ngIf="id"  [disabled]="firstFormGroup.invalid" matStepperNext mat-raised-button color="primary" >Skip</button>
         <button *ngIf="id" (click)="updateCalendarGroup(stepper)" [disabled]="firstFormGroup.invalid||!FirstGroupChanged" mat-raised-button color="warn" >Update</button>
       </div>
+      </div>
     </form>
   </mat-step>
   <mat-step [stepControl]="secondFormGroup" >
@@ -198,7 +226,10 @@
           </ng-template>
 
 
-
+        <div *ngIf="id" > <h2>Follow <mat-slide-toggle  formControlName="follow"  color="warn"></mat-slide-toggle></h2></div>
+        <div *ngIf="!id"  > <h2>Follow <mat-slide-toggle [ngModel]="firstFormGroup.value.follow" formControlName="follow"  color="warn"></mat-slide-toggle></h2></div>
+        <div *ngIf="id" > <h2>Video consultation <mat-slide-toggle  formControlName="videoConsultation"  color="warn"></mat-slide-toggle></h2></div>
+        <div *ngIf="!id" > <h2>Video consultation <mat-slide-toggle [ngModel]="firstFormGroup.value.videoConsultation" formControlName="videoConsultation"  color="warn"></mat-slide-toggle></h2></div>
           <div>
             <div>
               <mat-form-field appearance="outline">
@@ -223,7 +254,11 @@
                        required>
               </mat-form-field>
             </div>
-
+            <div *ngIf="id&&i<calendarGroup.calendarProList.length" class="alert alert-danger text-center">
+              <mat-icon  class="example-tab-icon ">warning</mat-icon>
+              <br> Your calendar is active from {{calendarGroup.calendarProList[i].startDate}} to {{calendarGroup.calendarProList[i].expiryDate}} if you change the time of a meeting session during this period
+              they will be deleted and an apology email will be sent you can start the modification from {{calendarPro.value.startDate}} there will be no problem.
+            </div>
             <div>
               <mat-form-field class="example-form-field" appearance="outline">
                 <mat-label>calendar Validate(Max 3 months)</mat-label>
@@ -262,10 +297,7 @@
                 </mat-select>
               </mat-form-field>
             </div>
-            <div *ngIf="id&&i<calendarGroup.calendarProList.length" class="alert alert-danger text-center">
-            <mat-icon  class="example-tab-icon ">warning</mat-icon>
-            <br> Any appointments that their session modifies will be deleted and an apology email will be sent.
-          </div>
+
             <div *ngIf="id&&i>=calendarGroup.calendarProList.length" class="alert alert-info text-center">
             <mat-icon  class="example-tab-icon ">info</mat-icon>
             <br> Each session will be divided by the duration.

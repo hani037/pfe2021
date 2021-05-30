@@ -1,8 +1,19 @@
 
 <mat-card style="margin-bottom: 2%"  class="example-card">
   <mat-card-header fxLayout="row" fxLayoutAlign="start center"   >
+    <div *ngIf="calendarPro.follow">
+      <button (click)="follow()" *ngIf="!follows"    mat-raised-button color="accent">
+        Follow
+        <mat-icon>bookmark</mat-icon>
+      </button>
+      <button *ngIf="follows"  (click)="unfollow()"   mat-raised-button color="accent">
+        Followed
+        <mat-icon>bookmark</mat-icon>
+      </button>
+    </div>
 
     <mat-card-title > {{calendarPro.firstName+" "+calendarPro.lastName}}</mat-card-title>
+    <mat-card-subtitle *ngIf="calendarPro.videoConsultation" >Video Consultation available  <mat-icon>voice_chat</mat-icon> </mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
     <div *ngIf="loading" fxLayout="row" fxLayoutAlign="space-around center">

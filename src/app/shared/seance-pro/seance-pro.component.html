@@ -3,46 +3,64 @@
 </div>
 <div *ngIf="!is_loading" fxLayout="column" fxLayoutAlign="space-around center" >
 
-    <mat-card-content class="text-center"  >
-      <div  fxLayout="row" fxLayoutAlign="space-around center">
+  <mat-card-content class="text-center"  >
+    <div fxLayout="row" fxLayoutAlign="start center" *ngIf="data.seance.images.length>0">
+      <button (click)="prev()" *ngIf="data.seance.images.length>1" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+        <mat-icon>chevron_left</mat-icon>
+      </button>
+      <img  [src]="this.data.seance.images[nb]"  style="width: 520px;height: 300px"  mat-card-image>
+      <button (click)="next()" *ngIf="data.seance.images.length>1" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+        <mat-icon>navigate_next</mat-icon>
+      </button>
+    </div>
+    <div  fxLayout="row" fxLayoutAlign="space-around center">
 
-        <h6 style="color: rgba(0,0,0,0.29)" fxFlex="20" ><strong>date:</strong></h6>
-        <h6 fxFlex="60">{{data.seance.date}}</h6>
+      <h6 style="color: rgba(0,0,0,0.29)" fxFlex="20" ><strong>date:</strong></h6>
+      <h6 fxFlex="60">{{data.seance.date}}</h6>
 
-      </div>
-      <div  fxLayout="row" fxLayoutAlign="space-around center">
+    </div>
+    <div  fxLayout="row" fxLayoutAlign="space-around center">
 
-        <h6 style="color: rgba(0,0,0,0.29)" fxFlex="20" ><strong>Start:</strong></h6>
-        <h6 fxFlex="60">{{data.seance.start}}</h6>
+      <h6 style="color: rgba(0,0,0,0.29)" fxFlex="20" ><strong>Start:</strong></h6>
+      <h6 fxFlex="60">{{data.seance.start}}</h6>
 
-      </div>
-      <div  fxLayout="row" fxLayoutAlign="space-around center">
+    </div>
+    <div  fxLayout="row" fxLayoutAlign="space-around center">
 
-        <h6 style="color: rgba(0,0,0,0.29)" fxFlex="20" ><strong>End:</strong></h6>
-        <h6 fxFlex="60">{{data.seance.end}}</h6>
+      <h6 style="color: rgba(0,0,0,0.29)" fxFlex="20" ><strong>End:</strong></h6>
+      <h6 fxFlex="60">{{data.seance.end}}</h6>
 
-      </div>
-      <div  fxLayout="row" fxLayoutAlign="space-around center">
+    </div>
+    <div  fxLayout="row" fxLayoutAlign="space-around center">
 
-        <h6 style="color: rgba(0,0,0,0.29)" fxFlex="20" ><strong>Total places:</strong></h6>
-        <h6 fxFlex="60">{{data.seance.nbTotalPlaces}}</h6>
-      </div>
-      <div  fxLayout="row" fxLayoutAlign="space-around center">
+      <h6 style="color: rgba(0,0,0,0.29)" fxFlex="20" ><strong>Total places:</strong></h6>
+      <h6 fxFlex="60">{{data.seance.nbTotalPlaces}}</h6>
+    </div>
+    <div  fxLayout="row" fxLayoutAlign="space-around center">
 
-        <h6 style="color: rgba(0,0,0,0.29)" fxFlex="20" ><strong>places Available:</strong></h6>
-        <h6 fxFlex="60">{{data.seance.nbPlacesAvailable}}</h6>
-      </div>
-    </mat-card-content>
-</div>
+      <h6 style="color: rgba(0,0,0,0.29)" fxFlex="20" ><strong>places Available:</strong></h6>
+      <h6 fxFlex="60">{{data.seance.nbPlacesAvailable}}</h6>
+    </div>
+    <div  fxLayout="row" fxLayoutAlign="space-around center" >
+      <h5>Add Image:</h5>
+      <input ngModel   type="file" #fileUpload id="fileUpload" name="fileUpload" multiple="multiple" accept="image/*" style="display:none;" />
+      <button type="button" mat-mini-fab color="warn" (click)="onClick()"  mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+        <mat-icon>file_upload</mat-icon>
+      </button>
+    </div>
+  </mat-card-content>
+
 <div  class="alert alert-danger text-center">
   <mat-icon  class="example-tab-icon ">warning</mat-icon>
   <br> If you delete the session, clients will not be able to get appointments in it.
 
 </div>
 <div>
-    <mat-dialog-actions align="end">
-      <button (click)="delete()"   mat-raised-button color="warn">Delete</button>
-      <button  mat-dialog-close="" mat-raised-button color="warn">close</button>
-    </mat-dialog-actions>
-  </div>
+  <mat-dialog-actions align="end">
+    <button (click)="delete()"   mat-raised-button color="warn">Delete</button>
+    <button  mat-dialog-close="" mat-raised-button color="warn">close</button>
+    <button (click)="openComments()" mat-button color="warn">see comments</button>
+  </mat-dialog-actions>
+</div>
 
+</div>

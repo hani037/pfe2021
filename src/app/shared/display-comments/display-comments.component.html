@@ -1,0 +1,60 @@
+<div style="color: #9A9A9A">
+  <mat-card  class="example-card">
+    <mat-card-title> {{data.seance.date}} </mat-card-title>
+    <mat-card-content style="margin-top:4%" >
+      <div fxLayout="row" fxLayoutAlign="start center" *ngIf="data.seance.images.length>0">
+        <button (click)="prev()" *ngIf="data.seance.images.length>1" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+          <mat-icon>chevron_left</mat-icon>
+        </button>
+        <img  [src]="data.seance.images[nb]" style="width: 520px;height: 300px" mat-card-image>
+        <button (click)="next()" *ngIf="data.seance.images.length>1" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+          <mat-icon>navigate_next</mat-icon>
+        </button>
+      </div>
+      <div >
+        <div  fxLayout="row" fxLayoutAlign="space-around center">
+
+          <h6 style="color: rgba(0,0,0,0.29)" fxFlex="50" ><strong>Start:</strong></h6>
+          <h6 fxFlex="50">{{data.seance.start}}</h6>
+
+        </div>
+        <div  fxLayout="row" fxLayoutAlign="space-around center">
+
+          <h6 style="color: rgba(0,0,0,0.29)" fxFlex="50" ><strong>End:</strong></h6>
+          <h6 fxFlex="50">{{data.seance.end}}</h6>
+
+        </div>
+        <div  fxLayout="row" fxLayoutAlign="space-around center">
+
+          <h6 style="color: rgba(0,0,0,0.29)" fxFlex="50" ><strong>Total places:</strong></h6>
+          <h6 fxFlex="50">{{data.seance.nbTotalPlaces}}</h6>
+        </div>
+        <div  fxLayout="row" fxLayoutAlign="space-around center">
+
+          <h6 style="color: rgba(0,0,0,0.29)" fxFlex="50" ><strong>places Available:</strong></h6>
+          <h6 fxFlex="50">{{data.seance.nbPlacesAvailable}}</h6>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <mat-card class="example-card">
+    <mat-card-content  >
+      <div fxLayout="row" fxLayoutAlign="space-around center">
+        <form [formGroup]="form">
+          <label for="text"></label><textarea formControlName="text" id="text"  cols="50"   class="form-control " rows="3" placeholder="Comment...">
+        </textarea>
+          <div>
+            <button (click)="addComment()"  [disabled]="form.invalid" mat-raised-button color="warn" >Comment</button>
+          </div>
+        </form>
+
+      </div>
+      <div >
+        <app-comment *ngFor="let comment of comments"  [comment]="comment">
+
+        </app-comment>
+      </div>
+
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -3,6 +3,10 @@
   <mat-spinner></mat-spinner>
 </div>
 <div *ngIf="!is_loading">
+  <div *ngIf="not_Available" class="alert alert-danger text-center">
+    <mat-icon  class="example-tab-icon ">danger</mat-icon>
+    <br> There are no available places.
+  </div>
   <div *ngIf="appointment_Taken" class="alert alert-danger text-center">
     <mat-icon  class="example-tab-icon ">danger</mat-icon>
     <br> you have already made an appointment in that session.
@@ -10,7 +14,7 @@
   <h1 class="text-center">Add Appointment</h1>
   <h2 *ngIf="data.seance.nbTotalPlaces != 1" class="text-center">total number of places: {{data.seance.nbTotalPlaces}}</h2>
   <h2 *ngIf="data.seance.nbTotalPlaces != 1" class="text-center">places available: {{data.seance.nbPlacesAvailable}}</h2>
-  <div class="form-group">
+  <div *ngIf="!not_Available" class="form-group">
     <form action="" method="post" (ngSubmit)="createAppointment(f)" #f="ngForm" >
       <mat-form-field style="width: 100%"  appearance="outline">
         <mat-label>Select Calendar</mat-label>
@@ -24,6 +28,7 @@
           <mat-option [value]="i+1" *ngFor="let q of arrayOne(2); let i = index;">{{i+1}}</mat-option>
         </mat-select>
       </mat-form-field>
+      <div *ngIf="data.seance.videoConsultation"> <h2>Video consultation <mat-slide-toggle name="video" #video ngModel color="warn"></mat-slide-toggle></h2></div>
       <div class="text-center" style="margin-top: 3%" >
 
         <button [disabled]="f.invalid"  type="submit" mat-flat-button color="warn">Submit</button>

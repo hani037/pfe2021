@@ -1,0 +1,9 @@
+<div>
+  <div fxLayout="row" fxLayoutAlign="start center" >
+    <h4>{{comment.userName}} </h4>
+    <h5 style="margin: 2%">{{comment.date|date}}</h5>
+    <h6  *ngIf="comment.isAdmin">Admin</h6>
+  </div>
+
+  <p>{{comment.text}}</p>
+</div>

@@ -10,6 +10,8 @@ import {getCalendar} from "@angular/material/datepicker/testing/datepicker-trigg
 import {CalendarProService} from "../service/calendarPro.service";
 import {DateService} from "../service/date.service";
 import * as moment from "moment";
+import {Admin} from "../model/admin";
+import {UserService} from "../service/user.service";
 
 @Component({
   selector: 'app-create-calendar-group',
@@ -36,7 +38,7 @@ export class CreateCalendarGroupComponent implements OnInit {
   private date: Date;
 
   constructor(private activatedRoute: ActivatedRoute,private _formBuilder: FormBuilder,private calendarGroupService:CalendarGroupService
-              ,private router:Router,private calendarProService:CalendarProService,private dateService:DateService) { }
+              ,private router:Router,private calendarProService:CalendarProService,private dateService:DateService,private userService:UserService) { }
 
   ngOnInit(): void {
     this.min = new Date();
@@ -63,8 +65,11 @@ export class CreateCalendarGroupComponent implements OnInit {
       startDate:[  '', Validators.required],
       endDate:  ['', Validators.required],
       duration:  ['', Validators.required],
+      follow: [false, Validators.required],
+      videoConsultation: [false, Validators.required],
       exception:this._formBuilder.array([]),
-      weekSchedule: this.initWeekSchedule()
+      weekSchedule: this.initWeekSchedule(),
+      admins: this._formBuilder.array([this.initFirstAdmin()])
     });
     this.secondFormGroup = this._formBuilder.group({
       calendarPro:this._formBuilder.array([this.initCalendarPro()])
@@ -86,6 +91,8 @@ initItemRows() {
       duration : ['', Validators.required],
       job: ['', Validators.required],
       enabled: [true, Validators.required],
+      follow: [false, Validators.required],
+      videoConsultation: [false, Validators.required],
       exception:this._formBuilder.array([]),
       weekSchedule: this.initWeekScheduleFromCalendarGroup()
     }); }
@@ -133,6 +140,10 @@ initItemRows() {
     let calendarGroup = new CalendarGroup();
     calendarGroup.name = this.firstFormGroup.value.name;
     calendarGroup.address = this.firstFormGroup.value.address;
+    calendarGroup.admins = [];
+    this.firstFormGroup.value.admins.forEach(admin=>{
+      calendarGroup.admins.push({id:'',email:admin.email,calendarProID:''})
+    })
     calendarGroup.lat = 10;
     calendarGroup.lon = 10;
     this.calendarGroupService.createCalendarGroup(calendarGroup).subscribe(data=>{
@@ -154,7 +165,6 @@ initItemRows() {
     this.on();
     for (const data of this.calendarPro.value) {
       let calendarPro:CalendarPro =this.generateCalendarPro(data);
-      console.log(calendarPro)
        await this.calendarGroupService.addCalendarPro(this.calendarGroup.id,calendarPro);
     }
     this.off();
@@ -181,9 +191,14 @@ initItemRows() {
     this.firstFormGroup = this._formBuilder.group({
       name: [this.calendarGroup.name, Validators.required],
       address: [this.calendarGroup.address, Validators.required],
+      admins: this._formBuilder.array([])
 
     });
+     this.calendarGroup.admins.forEach((admin,index3)=>{
+       let admins =this.firstFormGroup.get("admins")as FormArray;
+       admins.push(this.initAdminFromCalendar(admin));
 
+     })
     this.secondFormGroup = this._formBuilder.group({
       calendarPro: this._formBuilder.array([])
     });
@@ -223,16 +238,19 @@ initItemRows() {
   }
 
   private initCalendarProFromCalendarGroup(calendarPro:CalendarPro) {
-
+    let date = new Date(calendarPro.expiryDate);
+    let start=new Date(date.getFullYear(),date.getMonth(),date.getDate()+1);
       return this._formBuilder.group({
         firstName: [calendarPro.firstName, Validators.required],
         lastName: [calendarPro.lastName, Validators.required],
         address: [calendarPro.address, Validators.required],
-        startDate:[ calendarPro.startDate , Validators.required],
-        endDate:  [calendarPro.expiryDate, Validators.required],
+        startDate:[ start , Validators.required],
+        endDate:  ['', Validators.required],
         duration : [calendarPro.chrono, Validators.required],
         job: [calendarPro.job, Validators.required],
         enabled: [calendarPro.enabled, Validators.required],
+        follow: [calendarPro.follow, Validators.required],
+        videoConsultation: [calendarPro.videoConsultation, Validators.required],
         exception:this._formBuilder.array([]),
         weekSchedule: this.initWeekScheduleFromCalendarGroup()
       });
@@ -285,7 +303,9 @@ initItemRows() {
       let calendarPro = this.generateCalendarPro(this.calendarPro.get(""+index).value);
       calendarPro.appointment = data.appointment;
       calendarPro.id = data.id;
-      if(this.weekGroupChanged[index]){
+      let startDate= new Date(this.calendarGroup.calendarProList[index].startDate);
+      let expiryDate= new Date(this.calendarGroup.calendarProList[index].expiryDate);
+      if(this.weekGroupChanged[index]||calendarPro.startDate.getTime()!=startDate.getTime()||calendarPro.expiryDate.getTime()!=expiryDate.getTime()){
         await this.calendarProService.updateSeances(data.id,calendarPro);
       }else if(this.SecondGroupChanged[index]) {
         await this.calendarProService.updateInfo(data.id,calendarPro);
@@ -344,7 +364,11 @@ initItemRows() {
     calendarPro.chrono = data.duration;
     calendarPro.address = data.address;
     calendarPro.enabled = data.enabled;
+    calendarPro.follow = data.follow;
+    calendarPro.videoConsultation = data.videoConsultation;
     calendarPro.exception = [];
+    calendarPro.admins = [];
+
      data.exception.forEach(exception=>{
        if(exception.recurrenceType=="YEARLY"){
          calendarPro.exception.push({recurrenceType:exception.recurrenceType,date:this.dateService.getDayAndMonth(new Date(exception.date._d))})
@@ -405,6 +429,33 @@ initItemRows() {
   deleteExceptionFromCalendarPro(i:number,j:number,) {
     let exception =this.calendarPro.get(''+i).get("exception")as FormArray;
     exception.removeAt(j);
+  }
+
+  addAdmin() {
+    let admins = this.firstFormGroup.get("admins")as FormArray;
+    admins.push(this.initAdmin())
+  }
+
+  deleteAdmin(j) {
+    let admins = this.firstFormGroup.get("admins")as FormArray;
+    admins.removeAt(j);
+  }
+
+  private initAdminFromCalendar(admin: Admin) {
+    return this._formBuilder.group({
+      email:[admin.email, Validators.required],
+    });
+  }
+  initAdmin() {
+    return this._formBuilder.group({
+      email:['', Validators.required],
+    });
+  }
+
+  private initFirstAdmin() {
+    return this._formBuilder.group({
+      email:[this.userService.userConnected.email, Validators.required],
+    });
   }
 }
 

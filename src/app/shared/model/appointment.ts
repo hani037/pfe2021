@@ -1,4 +1,5 @@
 import {Seance} from "./seance";
+import {Meeting} from "./meeting";
 
 export class Appointment {
   id:string;
@@ -11,4 +12,6 @@ export class Appointment {
   nbPlaces:number;
   seanceId:string;
   status?:string;
+  videoConsultation:boolean;
+  meeting:Meeting;
 }

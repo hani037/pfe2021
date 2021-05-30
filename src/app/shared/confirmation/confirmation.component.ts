@@ -15,6 +15,7 @@ import {SeanceEs} from "../model/SeanceEs";
 })
 export class ConfirmationComponent implements OnInit {
   appointment_Taken = false;
+  not_Available = false;
   is_loading = true;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
@@ -37,6 +38,7 @@ export class ConfirmationComponent implements OnInit {
   }
 
   createAppointment(f: NgForm) {
+    console.log(f.value)
     this.is_loading = true;
     this.data.appointment.calendarPersonalId = f.value.id;
     if(this.data.seance.nbPlacesAvailable == 1){
@@ -45,14 +47,22 @@ export class ConfirmationComponent implements OnInit {
       this.data.appointment.nbPlaces = f.value.places;
     }
     this.data.appointment.seanceId = this.data.seance.id;
-    console.log(this.data.appointment);
+    if(this.data.seance.videoConsultation){
+      this.data.appointment.videoConsultation =f.value.video;
+    }
     this.appointmentService.createAppointment(this.data.appointment).subscribe(data=>{
-      if(data==null){
+      if(!data.id){
         this.appointment_Taken = true;
         this.is_loading = false;
       }else {
-        this.appointmentService.AppointmentEmitter.next('created');
-        this.dialogRef.close();
+        if(!data){
+          this.not_Available = true;
+          this.is_loading = false;
+        }else {
+          this.appointmentService.AppointmentEmitter.next('created');
+          this.dialogRef.close();
+        }
+
       }
   })
   }

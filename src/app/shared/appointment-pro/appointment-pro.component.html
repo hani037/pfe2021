@@ -37,6 +37,11 @@
         <h4 style="color: rgba(0,0,0,0.29)" ><strong>places Available:</strong></h4>
         <h4 >{{appointment.nbPlacesAvailable}}</h4>
       </div>
+      <div *ngIf="appointment.videoConsultation"  fxLayout="row" fxLayoutAlign="space-between center">
+
+        <h4 style="color: rgba(0,0,0,0.29)" ><strong>meeting Link:</strong></h4>
+        <a [href]="appointment.meeting.meetingUrl" target="_blank">Link</a>
+      </div>
     </div>
 
 

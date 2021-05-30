@@ -77,8 +77,8 @@ export class SearchResultComponent implements OnInit {
   }
   Search(){
   this.calendarProService.search(this.pageNb,this.pageSize).subscribe(calendarProEs=>{
-    if (calendarProEs.totalPages !=0){
-      this.length = calendarProEs.content.length * calendarProEs.totalPages;
+    if (calendarProEs.totalElements !=0){
+      this.length = calendarProEs.totalElements
     }else {
       this.length =0;
     }
@@ -88,8 +88,8 @@ export class SearchResultComponent implements OnInit {
   }
   SearchByDate(){
     this.calendarProService.searchByAvailabilityDate(this.pageNb,this.pageSize,this.date).subscribe(calendarProEs=>{
-      if (calendarProEs.totalPages !=0){
-        this.length = calendarProEs.content.length * calendarProEs.totalPages;
+      if (calendarProEs.totalElements !=0){
+        this.length = calendarProEs.totalElements;
       }else {
         this.length =0;
       }
@@ -99,8 +99,8 @@ export class SearchResultComponent implements OnInit {
   }
   SearchToday(){
     this.calendarProService.searchByAvailabilityToday(this.pageNb,this.pageSize).subscribe(calendarProEs=>{
-      if (calendarProEs.totalPages !=0){
-        this.length = calendarProEs.content.length * calendarProEs.totalPages;
+      if (calendarProEs.totalElements !=0){
+        this.length = calendarProEs.totalElements;
       }else {
         this.length =0;
       }

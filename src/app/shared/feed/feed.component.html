@@ -1,0 +1,10 @@
+
+<div fxLayout="row" fxLayoutAlign="space-around center" >
+  <div *ngIf="calendarProList.length>0">
+    <app-card-seance  style="margin:2%" *ngFor="let calendar of calendarProList" [calendarPro]="calendar"></app-card-seance>
+
+  </div>
+  <h1 *ngIf="calendarProList.length==0">
+  u'need to follow calendars to have a feed
+  </h1>
+</div>

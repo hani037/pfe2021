@@ -26,6 +26,8 @@ import {DateService} from "../service/date.service";
 import {SeanceEs} from "../model/SeanceEs";
 import {CalendarPro} from "../model/CalendarPro";
 import {CalendarProEs} from "../model/CalendarProEs";
+import {CalendarProService} from "../service/calendarPro.service";
+import {Follows} from "../model/follows";
 
 @Component({
   selector: 'app-client-card-calendar',
@@ -40,6 +42,8 @@ export class ClientCardCalendarComponent implements OnInit {
   loading:boolean=false;
   INITIAL_EVENTS: EventInput[] = [];
   calendarVisible = true;
+  is_follow=false;
+  follows:Follows;
   calendarOptions: CalendarOptions = {
 
     headerToolbar: {
@@ -63,7 +67,8 @@ export class ClientCardCalendarComponent implements OnInit {
     eventClick: this.handleEventClick.bind(this),
 
   };
-  constructor(private activatedRoute: ActivatedRoute,private dialog: MatDialog,private userService:UserService,public router:Router,public dateService:DateService) {
+  constructor(private activatedRoute: ActivatedRoute,private dialog: MatDialog,private userService:UserService,public router:Router,public dateService:DateService,
+  private calendarProService:CalendarProService) {
     this.route_active = this.activatedRoute.snapshot.url[0].path;
   }
   @HostListener('window:resize', ['$event'])
@@ -71,24 +76,26 @@ export class ClientCardCalendarComponent implements OnInit {
 
   }
   ngOnInit(): void {
-
     this.calendarPro.seanceEsList.forEach(seance=>{
       let today =new Date();
       today.setHours(0)
       if(new Date(seance.date).getTime() < today.getTime()){
-      return;
+        return;
       }
-        this.INITIAL_EVENTS.push( {
-          start: new Date(seance.date +" " +seance.start),
-          end:new Date(seance.date +" " +seance.end),
-          color:'red',
-          extendedProps: {
-            seance: seance
-          },
-        },)
-      })
+      this.INITIAL_EVENTS.push( {
+        start: new Date(seance.date +" " +seance.start),
+        end:new Date(seance.date +" " +seance.end),
+        color:'red',
+        extendedProps: {
+          seance: seance
+        },
+      },)
+    })
 
-    this.loading = false;
+    this.calendarProService.userFollowCalendar(this.calendarPro.id).subscribe(data=>{
+      this.follows = data;
+      this.loading = false;
+    })
   }
 
 
@@ -120,5 +127,15 @@ export class ClientCardCalendarComponent implements OnInit {
 
   group() {
     this.router.navigateByUrl('group/'+this.calendarPro.calendarGroupId);
+  }
+
+  follow() {
+  this.calendarProService.follow(this.calendarPro.id).subscribe(data=>{
+    this.follows =data;
+  })
+  }
+
+  unfollow() {
+    this.calendarProService.Unfollow(this.follows.id).subscribe(data=>this.follows=null)
   }
 }

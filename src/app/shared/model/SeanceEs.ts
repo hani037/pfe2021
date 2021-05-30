@@ -6,4 +6,7 @@ export class SeanceEs {
   date:string;
   nbTotalPlaces:number;
   nbPlacesAvailable:number;
+  videoConsultation:boolean;
+  creationDate:string;
+  images:string[];
 }

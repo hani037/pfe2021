@@ -90,6 +90,10 @@ import { CalendarGroupComponent } from './shared/calendar-group/calendar-group.c
 import { ProfileCalendarProComponent } from './shared/profile-calendar-pro/profile-calendar-pro.component';
 import { AddSeanceComponent } from './shared/add-seance/add-seance.component';
 import { AddValidityComponent } from './shared/add-validity/add-validity.component';
+import { CardSeanceComponent } from './shared/card-seance/card-seance.component';
+import { FeedComponent } from './shared/feed/feed.component';
+import { DisplayCommentsComponent } from './shared/display-comments/display-comments.component';
+import { CommentComponent } from './shared/comment/comment.component';
 
 
 FullCalendarModule.registerPlugins([
@@ -143,7 +147,11 @@ export const interceptorProviders =
     AddSeanceComponent,
     AddValidityComponent,
     CustomDateFormat2,
-    CustomDateFormat1
+    CustomDateFormat1,
+    CardSeanceComponent,
+    FeedComponent,
+    DisplayCommentsComponent,
+    CommentComponent
   ],
     imports: [
         NgxMaterialTimepickerModule,

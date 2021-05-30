@@ -18,5 +18,7 @@ export class CalendarProEs {
   enabled:boolean;
   location:GeoPoint;
   seanceEsList:SeanceEs[];
+  follow:boolean;
+  videoConsultation:boolean;
 
 }

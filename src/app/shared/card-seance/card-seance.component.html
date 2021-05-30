@@ -1,0 +1,46 @@
+<mat-card  class="example-card text-center">
+  <mat-card-title> {{calendarPro.firstName}} {{calendarPro.lastName}}</mat-card-title>
+  <mat-card-subtitle> {{seance.date}}</mat-card-subtitle>
+
+
+  <mat-card-content >
+    <div fxLayout="row" fxLayoutAlign="start center" *ngIf="seance.images.length>0">
+      <button (click)="prev()" *ngIf="seance.images.length>1" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+        <mat-icon>chevron_left</mat-icon>
+      </button>
+      <img  [src]="this.seance.images[nb]" style="width: 520px;height: 300px" mat-card-image>
+      <button (click)="next()" *ngIf="seance.images.length>1" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+        <mat-icon>navigate_next</mat-icon>
+      </button>
+    </div>
+    <div >
+      <div  fxLayout="row" fxLayoutAlign="space-around center">
+
+        <h6 style="color: rgba(0,0,0,0.29)" fxFlex="50" ><strong>Start:</strong></h6>
+        <h6 fxFlex="50">{{seance.start}}</h6>
+
+      </div>
+      <div  fxLayout="row" fxLayoutAlign="space-around center">
+
+        <h6 style="color: rgba(0,0,0,0.29)" fxFlex="50" ><strong>End:</strong></h6>
+        <h6 fxFlex="50">{{seance.end}}</h6>
+
+      </div>
+      <div  fxLayout="row" fxLayoutAlign="space-around center">
+
+        <h6 style="color: rgba(0,0,0,0.29)" fxFlex="50" ><strong>Total places:</strong></h6>
+        <h6 fxFlex="50">{{seance.nbTotalPlaces}}</h6>
+      </div>
+      <div  fxLayout="row" fxLayoutAlign="space-around center">
+
+        <h6 style="color: rgba(0,0,0,0.29)" fxFlex="50" ><strong>places Available:</strong></h6>
+        <h6 fxFlex="50">{{seance.nbPlacesAvailable}}</h6>
+      </div>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <button *ngIf="seance.nbPlacesAvailable>0" (click)="appointment()" color="accent" mat-raised-button>take appointment</button>
+    <br>
+    <button (click)="openComments()" mat-button color="warn">see comments</button>
+  </mat-card-actions>
+</mat-card>
