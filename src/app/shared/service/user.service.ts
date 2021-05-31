@@ -29,7 +29,9 @@ export class UserService {
   constructor(private http: HttpClient) {
 
   }
-
+  getuser(){
+    return this.http.get<User[]>(this.usersUrl)
+  }
   isLoggedInObservable() : Observable<User> {
     return this.userConnectedObservable;
   }

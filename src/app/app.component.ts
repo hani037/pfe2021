@@ -31,6 +31,7 @@ export class AppComponent implements OnInit  {
     this.expand = window.innerWidth >= 768;
   }
   ngOnInit(): void {
+    this.userService.getuser().subscribe(data=>console.log(data));
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
         this.route_active = event.url.replace("/","")
