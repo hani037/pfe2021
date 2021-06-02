@@ -13,14 +13,11 @@ build:
     paths:
       - dist
 deploy:clevercloud:
-  image: node:14.7.0-alpine3.11
+  image: node:14.7.0-wheezy
   stage: deploy
-  before_script:
-    - apk update && apk add git
+
   only:
     - /master/
   script:
-    - git add .
-    - git commit -m deploy
     - git remote add clever https://$CLEVER_TOKEN:$CLEVER_SECRET@push-par-clevercloud-customers.services.clever-cloud.com/app_89f18954-43d0-472b-b6a4-9c5af716172b.git
-    - git push -u clever master
+    - git push --verbose --force clever master 2>&1 | grep -e 'remote:' -e '->'
