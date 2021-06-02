@@ -13,22 +13,14 @@ export class FeedComponent implements OnInit {
   pageSize = 40;
   pageNb=0;
   stopLoad=false;
+  is_loading=true;
   listener;
   constructor(private calendarProService:CalendarProService,private renderer2: Renderer2) {
-    this.listener = this.renderer2.listen('window', 'scroll', (e) => {
-      console.log("this.getYPosition(e)");
-    });
-    }
-    @HostListener('window:scroll', ['$event']) onWindowScroll(e) {
-      console.log(e.target['scrollingElement'].scrollTop)
-
-
-      // Your Code Here
 
   }
   ngOnInit(): void {
     this.calendarProService.userFeed(this.pageNb,this.pageSize).subscribe(data=>{
-      console.log(data);
+      this.is_loading = false;
       this.calendarProList = data.content;
     })
   }
