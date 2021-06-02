@@ -20,5 +20,7 @@ deploy:clevercloud:
   only:
     - /master/
   script:
+    - git add .
+    - git commit -m deploy
     - git remote add clever https://$CLEVER_TOKEN:$CLEVER_SECRET@push-par-clevercloud-customers.services.clever-cloud.com/app_89f18954-43d0-472b-b6a4-9c5af716172b.git
     - git push -u clever master
