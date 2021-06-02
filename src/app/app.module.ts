@@ -204,7 +204,7 @@ export const interceptorProviders =
         MatSlideToggleModule,
 
     ],
-  providers: [interceptorProviders,MatDatepickerModule,{
+  providers: [interceptorProviders,MatDatepickerModule,TimeagoModule,{
     provide: APP_INITIALIZER,
     useFactory: (ds: UserService) =>async () => {
       await ds.autoLogin();
