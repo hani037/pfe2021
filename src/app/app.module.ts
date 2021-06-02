@@ -94,7 +94,7 @@ import { CardSeanceComponent } from './shared/card-seance/card-seance.component'
 import { FeedComponent } from './shared/feed/feed.component';
 import { DisplayCommentsComponent } from './shared/display-comments/display-comments.component';
 import { CommentComponent } from './shared/comment/comment.component';
-import {TimeagoFormatter, TimeagoModule} from 'ngx-timeago';
+import { TimeagoModule } from 'ngx-timeago';
 
 
 FullCalendarModule.registerPlugins([
@@ -156,7 +156,7 @@ export const interceptorProviders =
     CommentComponent
   ],
     imports: [
-        TimeagoModule,
+        TimeagoModule.forRoot(),
         NgxMaterialTimepickerModule,
         CodeInputModule,
         BrowserModule,
@@ -204,7 +204,7 @@ export const interceptorProviders =
         MatSlideToggleModule,
 
     ],
-  providers: [interceptorProviders,MatDatepickerModule,TimeagoModule,TimeagoFormatter,{
+  providers: [interceptorProviders,MatDatepickerModule,{
     provide: APP_INITIALIZER,
     useFactory: (ds: UserService) =>async () => {
       await ds.autoLogin();
