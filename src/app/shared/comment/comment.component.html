@@ -2,7 +2,7 @@
   <div fxLayout="row" fxLayoutAlign="start center" >
     <h6>{{comment.userName}} </h6>
     <p style="color: red" *ngIf="comment.isAdmin">Admin</p>
-    <p style="margin: 2%">{{comment.date|timeAgo}}</p>
+    <p style="margin: 2%">{{comment.date|timeago}}</p>
 
   </div>
   <h5>{{comment.text}}</h5>
