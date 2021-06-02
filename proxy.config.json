@@ -1,6 +1,6 @@
 {
   "/api/*": {
-    "target": "https://app-5afd84cf-a92b-467b-ad7f-83e73aa667cb.cleverapps.io",
+    "target": "https://app-a10cb3d2-353c-4d9c-93b2-7811859cec3c.cleverapps.io/",
     "secure": false,
     "changeOrigin": true,
     "pathRewrite": {
