@@ -13,9 +13,10 @@ build:
     paths:
       - dist
 deploy:clevercloud:
-  image: node:14.7.0-wheezy
+  image: node:14.7.0-alpine3.11
   stage: deploy
-
+  before_script:
+    - apk update && apk add git
   only:
     - /master/
   script:
