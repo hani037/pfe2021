@@ -1,6 +1,6 @@
 stages:
   - build
-
+  - deploy
 build:
   stage: build
   image: node:14.7.0-alpine3.11
@@ -12,3 +12,11 @@ build:
   artifacts:
     paths:
       - dist
+deploy:clevercloud:
+  image: node:14.7.0-alpine3.11
+  stage: deploy
+  only:
+    - /master/
+  script:
+    - git remote add clever https://$CLEVER_TOKEN:$CLEVER_SECRET@push-par-clevercloud-customers.services.clever-cloud.com/app_89f18954-43d0-472b-b6a4-9c5af716172b.git
+    - git push --verbose --force clever master 2>&1 | grep -e 'remote:' -e '->'
