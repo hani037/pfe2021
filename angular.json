@@ -21,6 +21,10 @@
           "fr": {
             "translation": "src/locale/fr.xlf",
             "baseHref": ""
+          },
+          "ar": {
+            "translation": "src/locale/fr.xlf",
+            "baseHref": ""
           }
         }
       },
@@ -28,7 +32,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "localize": ["fr"],
+            "localize": ["fr","ar"],
             "outputPath": "dist/calendrier",
             "index": "src/index.html",
             "main": "src/main.ts",
