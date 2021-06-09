@@ -17,8 +17,8 @@
          ></app-client-card>
          -->
         <app-client-card-calendar   (mouseenter)="changeAnimation(i)" (mouseleave)="stopAnimation()"
-                                   *ngFor="let calendar of calendarsProEs;let i=index"  [firstName]="calendar.firstName" [lastName]="calendar.lastName"
-                                   [daysSchedule]="calendar.dayScheduleEs"
+                                   *ngFor="let calendar of calendarsProEs;let i=index"
+                                   [calendarPro]="calendar"
         ></app-client-card-calendar>
 
       </div>

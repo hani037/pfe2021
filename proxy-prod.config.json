@@ -1,0 +1,10 @@
+{
+  "/api/*": {
+    "target": "https://app-ca650691-571e-49d8-b373-69da212c7460.cleverapps.io/",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api": ""
+    }
+  }
+}

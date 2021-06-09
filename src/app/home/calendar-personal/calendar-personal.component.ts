@@ -1,35 +1,38 @@
-import {Component, HostListener, Input, OnInit, ViewChild} from '@angular/core';
-import { CalendarOptions, DateSelectArg, EventClickArg, EventApi } from '@fullcalendar/angular';
-import { EventInput } from '@fullcalendar/angular';
-import {map, mergeMap} from "rxjs/operators";
+import {Component, HostListener, Inject, OnInit, ViewChild} from '@angular/core';
+import {
+  CalendarOptions,
+  DateSelectArg,
+  EventApi,
+  EventClickArg,
+  EventInput,
+  FullCalendarComponent
+} from "@fullcalendar/angular";
+import allLocales from '@fullcalendar/core/locales-all';
+import { LOCALE_ID } from '@angular/core';
+import {CalendarPersonal} from "../../shared/model/calendarPersonal";
+import rrulePlugin from "@fullcalendar/rrule";
+import dayGridPlugin from "@fullcalendar/daygrid";
+import {ActivatedRoute} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
-import {EventService} from "../shared/service/event.service";
-import {AppointmentService} from "../shared/service/appointment.service";
-import {AddEventComponent} from "../shared/add-event/add-event.component";
-import {AppointmentComponent} from "../shared/appointment/appointment.component";
-import {EventComponent} from "../shared/event/event.component";
-import { FullCalendarComponent } from '@fullcalendar/angular';
-import * as Events from "events";
-import {CalendarPersonalService} from "../shared/service/calendar-personal.service";
-import {AddCalendarComponent} from "../shared/add-calendar/add-calendar.component";
-import {event} from "../shared/model/event";
-import {Appointment} from "../shared/model/appointment";
-import {ActivatedRoute, Route} from "@angular/router";
-import {CalendarPersonal} from "../shared/model/calendarPersonal";
-import rrulePlugin from '@fullcalendar/rrule'
-import dayGridPlugin from '@fullcalendar/daygrid'
-import {DateService} from "../shared/service/date.service";
+import {EventService} from "../../shared/service/event.service";
+import {AppointmentService} from "../../shared/service/appointment.service";
+import {CalendarPersonalService} from "../../shared/service/calendar-personal.service";
+import {DateService} from "../../shared/service/date.service";
+import {AddEventComponent} from "../../shared/add-event/add-event.component";
+import {AppointmentComponent} from "../../shared/appointment/appointment.component";
+import {EventComponent} from "../../shared/event/event.component";
 interface MatFabMenu {
   id: string | number;
   icon?: string; // please use either icon or imgUrl
 
 }
 @Component({
-  selector: 'app-newcalendar',
-  templateUrl: './newcalendar.component.html',
-  styleUrls: ['./newcalendar.component.css']
+  selector: 'app-calendar-personal',
+  templateUrl: './calendar-personal.component.html',
+  styleUrls: ['./calendar-personal.component.css']
 })
-export class NewcalendarComponent implements OnInit{
+
+export class CalendarPersonalComponent implements OnInit {
   @ViewChild('fullcalendar') fullcalendar: FullCalendarComponent;
   calendarPersonal:CalendarPersonal;
   loading:boolean=true;
@@ -44,6 +47,7 @@ export class NewcalendarComponent implements OnInit{
   calendarOptions: CalendarOptions = {
     plugins: [ rrulePlugin, dayGridPlugin ],
 
+    locales: allLocales,
     headerToolbar: {
       left: 'prev,next today',
       center: 'title',
@@ -69,8 +73,9 @@ export class NewcalendarComponent implements OnInit{
 
 
   };
-    constructor(private activatedRoute: ActivatedRoute,private dialog: MatDialog,private eventService:EventService,
-                private appointmentService:AppointmentService,private calendarPersonalService:CalendarPersonalService,private dateService: DateService) {
+  constructor(private activatedRoute: ActivatedRoute,private dialog: MatDialog,private eventService:EventService,@Inject(LOCALE_ID) public locale: string,
+              private appointmentService:AppointmentService,private calendarPersonalService:CalendarPersonalService,private dateService: DateService) {
+    this.calendarOptions.locale = this.locale;
     if(window.innerWidth < 768){
       this.calendarOptions.headerToolbar = {
         left: 'prev',
@@ -146,6 +151,7 @@ export class NewcalendarComponent implements OnInit{
   }
 
   ngOnInit(): void {
+
     this.getCalendar();
     this.eventService.eventEmitter.subscribe(data=> {
       if(data){
@@ -155,7 +161,7 @@ export class NewcalendarComponent implements OnInit{
     });
 
   }
-   getCalendar(){
+  getCalendar(){
     this.calendarPersonalService.get_calendar(this.activatedRoute.snapshot.params['id']).subscribe(async data=>{
       this.calendarPersonal =data;
       console.log(data)
@@ -262,7 +268,7 @@ export class NewcalendarComponent implements OnInit{
     }
   }
   getNextDayOfWeek(dayOfWeek) {
-   let date =new Date();
+    let date =new Date();
 
     var resultDate = new Date(date.getTime());
 

@@ -7,27 +7,27 @@
           <!-- Background image for card set in CSS! -->
         </div>
         <div class="card-body">
-          <h5  class="card-title text-center">Login</h5>
+          <h5 i18n  class="card-title text-center">Login</h5>
 
           <form action="" method="post" (ngSubmit)="login(f)" #f="ngForm" class="form-signingn text-center ">
              <mat-form-field style="width: 100%" appearance="outline">
-              <mat-label>userName</mat-label>
+              <mat-label i18n>userName</mat-label>
               <input  matInput ngModel required name="userName"  #userName="ngModel" type="text" id="userName"   autofocus >
               <mat-icon color="accent" matSuffix>person</mat-icon>
             </mat-form-field>
             <mat-form-field style="width: 100%" appearance="outline">
-              <mat-label>Password</mat-label>
+              <mat-label i18n>Password</mat-label>
               <input  matInput type="password" id="inputPassword"  id="Password" ngModel required name="Password"  #Password="ngModel">
               <mat-icon color="accent" matSuffix>lock</mat-icon>
             </mat-form-field>
 
             <div >
               <div >
-                <button style="width: 100%" class="btn-lg"  type="submit" [disabled]="f.invalid" mat-raised-button color="warn">Login</button>
+                <button i18n style="width: 100%" class="btn-lg"  type="submit" [disabled]="f.invalid" mat-raised-button color="warn">Login</button>
                 <br>
-                <button (click)="router.navigateByUrl('sign-up')" mat-button color="warn">Sign Up</button>
+                <button i18n (click)="router.navigateByUrl('sign-up')" mat-button color="warn">Sign Up</button>
 
-                <h4 style="color:red" class="text-center" *ngIf="is_error" > User don't exist</h4>
+                <h4  i18n style="color:red" class="text-center" *ngIf="is_error" > User don't exist</h4>
               </div>
             </div>
 

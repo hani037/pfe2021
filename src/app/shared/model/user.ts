@@ -1,3 +1,5 @@
+import {SelectedCalendar} from "./selectedCalendar";
+
 export class User {
   id: string;
   userName?: string;
@@ -7,6 +9,7 @@ export class User {
   lastName?: string;
   client?: boolean;
   enabled?: boolean;
+  selectedCalendar:SelectedCalendar;
   public static clone(src: User, dest : User):void {
     dest.id = src.id;
     dest.userName = src.userName;
@@ -16,6 +19,7 @@ export class User {
     dest.lastName = src.lastName;
     dest.client = src.client;
     dest.enabled = src.enabled;
+    dest.selectedCalendar = src.selectedCalendar;
   }
 }
 

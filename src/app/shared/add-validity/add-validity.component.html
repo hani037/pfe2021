@@ -2,14 +2,14 @@
   <mat-spinner></mat-spinner>
 </div>
 <div *ngIf="!is_loading" >
-  <h1 class="text-center">Add Validity</h1>
-  <h2 class="text-center">Your calendar valid until {{date}}</h2>
+  <h1 i18n class="text-center">Add Validity</h1>
+  <h2 i18n class="text-center">Your calendar valid until {{date}}</h2>
 
   <div class="form-group">
     <form [formGroup]="form" class="text-center">
       <div style="margin-top: 5%" fxLayout="column" fxLayoutAlign="space-around center" >
         <mat-form-field appearance="outline">
-          <mat-label>Add Validity until</mat-label>
+          <mat-label i18n>Add Validity until</mat-label>
           <input [max]="max" [min]="min" matInput formControlName="date" [matDatepicker]="picker">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker  ></mat-datepicker>
@@ -21,7 +21,7 @@
 
     <div class="text-center" style="margin-top: 3%" >
 
-      <button (click)="add()" [disabled]="form.invalid"  type="submit" mat-flat-button color="warn">ADD</button>
+      <button i18n (click)="add()" [disabled]="form.invalid"  type="submit" mat-flat-button color="warn">ADD</button>
     </div>
 
   </div>

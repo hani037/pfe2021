@@ -1,59 +1,15 @@
-<div *ngIf="loading" fxLayout="row" fxLayoutAlign="space-around center">
-  <mat-spinner></mat-spinner>
+
+<div>
+  <mat-list >
+    <div>
+      <mat-list-item fxLayout="row" fxLayoutAlign="space-around center" >
+        <h3 >{{userService.userConnected.selectedCalendar.name|uppercase}}</h3>
+        <button (click)="change_calendar()" mat-icon-button aria-label="Example icon button with a vertical three dot icon" color="primary">
+          <mat-icon>published_with_changes</mat-icon>
+        </button>
+
+      </mat-list-item>
+    </div>
+  </mat-list>
 </div>
-<!--
-<div *ngIf="!loading" >
-  <div  fxLayout="row" fxLayoutAlign="space-around center"   >
-    <button fxFlexOffset="30"    (click)="right()"
-            mat-icon-button  color="warn" >
-      <mat-icon style="font-size: 200%">keyboard_arrow_left</mat-icon>
-    </button>
-    <h1 style="text-align: center;color:black;">{{ calendarPersonal.name }}</h1>
-    <button   (click)="left()"
-              mat-icon-button color="warn" >
-      <mat-icon style="font-size: 200%">keyboard_arrow_right</mat-icon>
-    </button>
-    <div fxFlexOffset="30"></div>
-  </div>
-  <app-newcalendar [id]="calendarPersonal.id" [events]="calendarPersonal.events" [appointments]="calendarPersonal.appointment" > </app-newcalendar>
-</div>
--->
-<mat-tab-group *ngIf="!loading" mat-align-tabs="center">
-  <mat-tab >
-    <ng-template mat-tab-label>
-      <mat-icon class="example-tab-icon">calendar_today</mat-icon>
-      My Calendars({{calendarsPersonal.length}})
-    </ng-template>
-    <div fxLayout="row" fxLayoutAlign="start center" >
-      <app-card-calendar style="margin-right: 2%"  *ngFor="let calendar of calendarsPersonal" [calendarPersonal]="calendar" ></app-card-calendar>
-
-    </div>
-
-  </mat-tab>
-
-  <mat-tab>
-    <ng-template mat-tab-label>
-      <mat-icon class="example-tab-icon">groups</mat-icon>
-      Calendars Group({{calendarsGroup.length}})
-    </ng-template>
-    <div fxLayout="row" fxLayoutAlign="start center" >
-      <app-card-calendar-group style="margin-right: 2%"  *ngFor="let calendar of calendarsGroup" [calendarGroup]="calendar" ></app-card-calendar-group>
-
-    </div>
-
-  </mat-tab>
-
-  <mat-tab>
-    <ng-template mat-tab-label>
-      <mat-icon class="example-tab-icon">work</mat-icon>
-      Calendars Professional({{calendarsPro.length}})
-    </ng-template>
-    <div fxLayout="row" fxLayoutAlign="start center" >
-      <app-card-calendar-pro style="margin-right: 2%"   *ngFor="let calendar of calendarsPro" [calendarPro]="calendar" ></app-card-calendar-pro>
-
-    </div>
-  </mat-tab>
-</mat-tab-group>
-<mat-fab-menu (onFabMenuItemSelected)="add($event)" (click)="add($event)" style="position:absolute;bottom: 1%;right:2%;z-index: 10000000 !important;"  color="warn"
-              [fabButtons]="fabButtonsRandom">
-</mat-fab-menu>
+<router-outlet></router-outlet>

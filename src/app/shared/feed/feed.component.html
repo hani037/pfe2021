@@ -1,3 +1,16 @@
+<div>
+  <mat-list >
+    <div>
+      <mat-list-item fxLayout="row" fxLayoutAlign="space-around center" >
+        <h3  >{{userService.userConnected.selectedCalendar.name|uppercase}}</h3>
+        <button (click)="change_calendar()" mat-icon-button aria-label="Example icon button with a vertical three dot icon" color="primary">
+          <mat-icon>published_with_changes</mat-icon>
+        </button>
+
+      </mat-list-item>
+    </div>
+  </mat-list>
+</div>
 <div *ngIf="is_loading" fxLayout="row" fxLayoutAlign="space-around center">
   <mat-spinner></mat-spinner>
 </div>

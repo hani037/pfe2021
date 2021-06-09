@@ -1,0 +1,15 @@
+{
+
+  "writeKey": "a8614865362839054602-a8d878e32e86db3e0ebe0bf31fbc55f9383b058541c5003f91a4f9648685dc80",
+  "readKey": "a8614865362839054602-a4a4e96b3f5f1fa66f8b57d65e4ecbdd9413806f49c76d5c48dd095b8bf5f544",
+
+  "upload": {
+    "type": "xliff",
+    "files": "src/locale/messages.xlf"
+  },
+
+  "download": {
+    "files": "src/locale/${lang}.xlf"
+  }
+
+}

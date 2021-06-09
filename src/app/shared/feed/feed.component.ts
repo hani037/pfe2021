@@ -2,6 +2,9 @@ import {Component, HostListener, OnInit, Renderer2} from '@angular/core';
 import {CalendarProService} from "../service/calendarPro.service";
 import {CalendarPro} from "../model/CalendarPro";
 import {CalendarProEs} from "../model/CalendarProEs";
+import {SelectedCalendarComponent} from "../selected-calendar/selected-calendar.component";
+import {MatDialog} from "@angular/material/dialog";
+import {UserService} from "../service/user.service";
 
 @Component({
   selector: 'app-feed',
@@ -15,7 +18,7 @@ export class FeedComponent implements OnInit {
   stopLoad=false;
   is_loading=true;
   listener;
-  constructor(private calendarProService:CalendarProService,private renderer2: Renderer2) {
+  constructor(private calendarProService:CalendarProService,private dialog: MatDialog,public userService:UserService) {
 
   }
   ngOnInit(): void {
@@ -44,4 +47,13 @@ export class FeedComponent implements OnInit {
     })
   }
 
+  change_calendar() {
+    this.dialog.open(SelectedCalendarComponent, {
+      backdropClass: 'backdropBackground',
+    }).afterClosed().subscribe(data=>{
+      if(data){
+        this.userService.me().subscribe(data=>this.ngOnInit());
+      }
+    })
+  }
 }

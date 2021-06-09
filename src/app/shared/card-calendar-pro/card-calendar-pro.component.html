@@ -8,13 +8,13 @@
 
             <mat-list-item>
                 <mat-icon matListIcon>today</mat-icon>
-                <h3 matLine>Appointments({{calendarPro.appointment.length}})</h3>
+                <h3 i18n matLine>Appointments({{calendarPro.appointment.length}})</h3>
 
             </mat-list-item>
         </mat-list>
     </mat-card-content>
     <mat-card-actions>
-        <button mat-raised-button color="warn" (click)="edit()">Edit</button>
-        <button mat-raised-button color="accent" (click)="open()" mat-button>open</button>
+        <button i18n mat-raised-button color="warn" (click)="edit()">Edit</button>
+        <button i18n mat-raised-button color="accent" (click)="open()" mat-button>open</button>
     </mat-card-actions>
 </mat-card>

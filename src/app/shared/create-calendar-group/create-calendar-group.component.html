@@ -10,23 +10,23 @@
 
   <mat-step [stepControl]="firstFormGroup" [editable]="false" >
     <form [formGroup]="firstFormGroup" >
-      <ng-template matStepLabel>Calendar Group Info</ng-template>
+      <ng-template matStepLabel i18n>Calendar Group Info</ng-template>
 
       <p>
         <mat-form-field appearance="outline">
-          <mat-label>Name</mat-label>
+          <mat-label i18n>Name</mat-label>
           <input matInput formControlName="name" required>
         </mat-form-field>
       </p>
       <p>
         <mat-form-field appearance="outline">
-          <mat-label>Address</mat-label>
+          <mat-label i18n>Address</mat-label>
           <input matInput  formControlName="address" required>
         </mat-form-field>
       </p>
       <div>
         <div  fxLayout="row" fxLayoutAlign="start center">
-          <h2>Admins</h2>
+          <h2 i18n>Admins</h2>
           <div >
             <button type="button" (click)="addAdmin()" color="primary" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
               <mat-icon>add_circle_outline</mat-icon>
@@ -35,7 +35,7 @@
         </div>
         <div  fxLayout="row" fxLayoutAlign="start center" *ngFor="let admin of firstFormGroup.controls.admins['controls'];let i=index" [formGroup]="admin">
           <mat-form-field appearance="outline">
-            <mat-label>Email</mat-label>
+            <mat-label i18n>Email</mat-label>
             <input  [readonly]="i==0" matInput formControlName="email"
                    required>
           </mat-form-field>
@@ -48,17 +48,17 @@
       <div *ngIf="!id">
         <div  class="alert alert-info text-center">
           <mat-icon  class="example-tab-icon ">info</mat-icon>
-          <br> This  will be applicable to each calendar, but you can change it later.
+          <br> <p i18n>This  will be applicable to each calendar, but you can change it later.</p>
         </div>
         <div  class="alert alert-info text-center">
           <mat-icon  class="example-tab-icon ">info</mat-icon>
-          <br> Enable people to follow your calendar to keep him updated.
+          <br> <p i18n>Enable people to follow your calendar to keep him updated.</p>
         </div>
-        <div> <h2>Follow <mat-slide-toggle formControlName="follow"  color="warn"></mat-slide-toggle></h2></div>
-        <div> <h2>Video consultation <mat-slide-toggle formControlName="videoConsultation"  color="warn"></mat-slide-toggle></h2></div>
+        <div> <h2 i18n>Follow <mat-slide-toggle formControlName="follow"  color="warn"></mat-slide-toggle></h2></div>
+        <div> <h2 i18n>Video consultation <mat-slide-toggle formControlName="videoConsultation"  color="warn"></mat-slide-toggle></h2></div>
 
         <mat-form-field  class="example-form-field" appearance="outline">
-          <mat-label>calendar Validate(Max 3 months)</mat-label>
+          <mat-label i18n>calendar Validate(Max 3 months)</mat-label>
           <mat-date-range-input
 
             [rangePicker]="campaignOnePicker"
@@ -74,20 +74,20 @@
         </mat-form-field>
         <div>
           <mat-form-field     appearance="outline">
-            <mat-label>Job:</mat-label>
+            <mat-label i18n>Job:</mat-label>
             <mat-select   required formControlName="job">
               <mat-option *ngFor="let job of list"  [value]="job">{{job}}</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
         <mat-form-field  appearance="outline">
-          <mat-label>duration(in minute)</mat-label>
+          <mat-label i18n>duration(in minute)</mat-label>
           <input matInput formControlName="duration" type="number" min="15"
                  required>
         </mat-form-field>
         <div  class="alert alert-info text-center">
           <mat-icon  class="example-tab-icon ">info</mat-icon>
-          <br> add number of clients per session by default one client per session.
+          <br>  <p i18n>add number of clients per session by default one client per session.</p>
         </div>
         <div class="text-center">
           <button (click)="addClients()" mat-raised-button color="warn">Add</button>
@@ -96,13 +96,13 @@
         <div  *ngFor="let weeKSchedule of firstFormGroup.controls.weekSchedule['controls']; let j=index"  [formGroup]="weeKSchedule"   >
           <div fxLayout="row" fxLayoutAlign="center center">
             <div fxLayout="row" fxLayoutAlign="center center"  >
-              <h3 *ngIf="j==0">Monday</h3>
-              <h3 *ngIf="j==1">Tuesday</h3>
-              <h3 *ngIf="j==2">Wednesday</h3>
-              <h3 *ngIf="j==3">Thursday</h3>
-              <h3 *ngIf="j==4">Friday</h3>
-              <h3 *ngIf="j==5">Saturday</h3>
-              <h3 *ngIf="j==6">Sunday</h3>
+              <h3 i18n *ngIf="j==0">Monday</h3>
+              <h3  i18n *ngIf="j==1">Tuesday</h3>
+              <h3 i18n *ngIf="j==2">Wednesday</h3>
+              <h3 i18n *ngIf="j==3">Thursday</h3>
+              <h3 i18n *ngIf="j==4">Friday</h3>
+              <h3 i18n *ngIf="j==5">Saturday</h3>
+              <h3  i18n *ngIf="j==6">Sunday</h3>
               <div >
                 <button  (click)="addSeanceFirstForm(j)" color="primary" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
                   <mat-icon>add_circle_outline</mat-icon>
@@ -114,26 +114,26 @@
 
           <div fxLayout="row" fxLayoutAlign="center center" *ngFor="let itemrow of weeKSchedule.controls; let t=index" [formGroupName]="t" >
             <div  style="margin-right: 3%" >
-              <h5>session {{t+1}}</h5>
+              <h5 i18n>session {{t+1}}</h5>
             </div>
             <div  fxLayout="row" fxLayoutAlign="start center"  >
               <div style="margin-right: 3%" >
                 <mat-form-field appearance="outline">
-                  <mat-label>start</mat-label>
+                  <mat-label i18n>start</mat-label>
                   <input type="time" matInput formControlName="start"
                          required>
                 </mat-form-field>
               </div>
               <div style="margin-right: 3%" >
                 <mat-form-field appearance="outline">
-                  <mat-label>end</mat-label>
+                  <mat-label i18n>end</mat-label>
                   <input type="time" matInput formControlName="end"
                          required>
                 </mat-form-field>
               </div>
               <div *ngIf="nbClients" style="margin-right: 3%" >
                 <mat-form-field appearance="outline">
-                  <mat-label>nbTotalPlaces</mat-label>
+                  <mat-label i18n>nbTotalPlaces</mat-label>
                   <input type="number" matInput formControlName="nbTotalPlaces"
                          required>
                 </mat-form-field>
@@ -150,9 +150,9 @@
         <div class="text-center">
           <div  class="alert alert-info text-center">
             <mat-icon  class="example-tab-icon ">info</mat-icon>
-            <br> add exception dates that can be yearly or monthly.
+            <br>  <p i18n>add exception dates that can be yearly or monthly.</p>
           </div>
-          <button  (click)="addException()" mat-raised-button color="accent">
+          <button i18n  (click)="addException()" mat-raised-button color="accent">
             Exception
             <mat-icon>add</mat-icon>
           </button>
@@ -164,14 +164,14 @@
                 </button>
               </div>
               <mat-form-field    appearance="outline">
-                <mat-label>Recurrence:</mat-label>
+                <mat-label i18n>Recurrence:</mat-label>
                 <mat-select formControlName="recurrenceType" [value]="list[0]" required   >
                   <mat-option *ngFor="let l of list2"  [value]="l">{{l}}</mat-option>
                 </mat-select>
               </mat-form-field>
               <div *ngIf="exception.value.recurrenceType =='YEARLY'">
                 <mat-form-field dateFormat1 appearance="outline">
-                  <mat-label>choose the day</mat-label>
+                  <mat-label i18n>choose the day</mat-label>
                   <input formControlName="date"  matInput required [matDatepicker]="dp2" >
                   <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
                   <mat-datepicker startView="year"  #dp2 panelClass="example-month-picker"></mat-datepicker>
@@ -179,7 +179,7 @@
               </div>
               <div *ngIf="exception.value.recurrenceType =='MONTHLY'">
                 <mat-form-field dateFormat2 appearance="outline">
-                  <mat-label>choose the day</mat-label>
+                  <mat-label i18n>choose the day</mat-label>
                   <label>
                     <input formControlName="date"   required matInput [matDatepicker]="dp3"  >
                   </label>
@@ -195,17 +195,17 @@
       </div>
 
       <div>
-        <button *ngIf="!id" (click)="createCalendarGroup(stepper)" [disabled]="firstFormGroup.invalid" mat-raised-button color="warn" >Next</button>
-        <button style="margin-right: 2%" *ngIf="id"  [disabled]="firstFormGroup.invalid" matStepperNext mat-raised-button color="primary" >Skip</button>
-        <button *ngIf="id" (click)="updateCalendarGroup(stepper)" [disabled]="firstFormGroup.invalid||!FirstGroupChanged" mat-raised-button color="warn" >Update</button>
+        <button i18n *ngIf="!id" (click)="createCalendarGroup(stepper)" [disabled]="firstFormGroup.invalid" mat-raised-button color="warn" >Next</button>
+        <button i18n style="margin-right: 2%" *ngIf="id"  [disabled]="firstFormGroup.invalid" matStepperNext mat-raised-button color="primary" >Skip</button>
+        <button i18n *ngIf="id" (click)="updateCalendarGroup(stepper)" [disabled]="firstFormGroup.invalid||!FirstGroupChanged" mat-raised-button color="warn" >Update</button>
       </div>
       </div>
     </form>
   </mat-step>
   <mat-step [stepControl]="secondFormGroup" >
 
-    <ng-template matStepLabel>Calendar Pro</ng-template>
-    <button class="text-center" (click)="addCalendar()" mat-raised-button color="accent">
+    <ng-template i18n matStepLabel>Calendar Pro</ng-template>
+    <button i18n class="text-center" (click)="addCalendar()" mat-raised-button color="accent">
       Calendar
       <mat-icon>add</mat-icon>
     </button>
@@ -213,7 +213,7 @@
       <mat-step   *ngFor="let calendarPro of secondFormGroup.controls.calendarPro['controls']; let i=index"  [formGroup]="calendarPro" >
 
 
-        <ng-template matStepLabel>
+        <ng-template matStepLabel i18n>
           <button *ngIf="i!=0&&!id" (click)="removeCalendarPro(i)" color="warn"  mat-icon-button aria-label="Example icon button with a vertical three dot icon">
             <mat-icon>highlight_off</mat-icon>
           </button>
@@ -226,28 +226,28 @@
           </ng-template>
 
 
-        <div *ngIf="id" > <h2>Follow <mat-slide-toggle  formControlName="follow"  color="warn"></mat-slide-toggle></h2></div>
-        <div *ngIf="!id"  > <h2>Follow <mat-slide-toggle [ngModel]="firstFormGroup.value.follow" formControlName="follow"  color="warn"></mat-slide-toggle></h2></div>
-        <div *ngIf="id" > <h2>Video consultation <mat-slide-toggle  formControlName="videoConsultation"  color="warn"></mat-slide-toggle></h2></div>
-        <div *ngIf="!id" > <h2>Video consultation <mat-slide-toggle [ngModel]="firstFormGroup.value.videoConsultation" formControlName="videoConsultation"  color="warn"></mat-slide-toggle></h2></div>
+        <div *ngIf="id" > <h2 i18n>Follow  <mat-slide-toggle  formControlName="follow"  color="warn"></mat-slide-toggle></h2></div>
+        <div *ngIf="!id"  > <h2 i18n>Follow <mat-slide-toggle [ngModel]="firstFormGroup.value.follow" formControlName="follow"  color="warn"></mat-slide-toggle></h2></div>
+        <div *ngIf="id" > <h2 i18n>Video consultation <mat-slide-toggle  formControlName="videoConsultation"  color="warn"></mat-slide-toggle></h2></div>
+        <div *ngIf="!id" > <h2 i18n>Video consultation <mat-slide-toggle [ngModel]="firstFormGroup.value.videoConsultation" formControlName="videoConsultation"  color="warn"></mat-slide-toggle></h2></div>
           <div>
             <div>
               <mat-form-field appearance="outline">
-                <mat-label>firstName</mat-label>
+                <mat-label i18n>firstName</mat-label>
                 <input matInput formControlName="firstName"
                        required>
               </mat-form-field>
             </div>
             <div>
               <mat-form-field appearance="outline">
-                <mat-label>lastName</mat-label>
+                <mat-label i18n>lastName</mat-label>
                 <input matInput formControlName="lastName"
                        required>
               </mat-form-field>
             </div>
             <div>
               <mat-form-field appearance="outline">
-                <mat-label>address</mat-label>
+                <mat-label i18n>address</mat-label>
                 <input *ngIf="id"  matInput formControlName="address"
                        required>
                 <input *ngIf="!id" [ngModel]="firstFormGroup.value.address" matInput formControlName="address"
@@ -256,12 +256,14 @@
             </div>
             <div *ngIf="id&&i<calendarGroup.calendarProList.length" class="alert alert-danger text-center">
               <mat-icon  class="example-tab-icon ">warning</mat-icon>
-              <br> Your calendar is active from {{calendarGroup.calendarProList[i].startDate}} to {{calendarGroup.calendarProList[i].expiryDate}} if you change the time of a meeting session during this period
+              <br> <p i18n>
+              Your calendar is active from {{calendarGroup.calendarProList[i].startDate}} to {{calendarGroup.calendarProList[i].expiryDate}} if you change the time of a meeting session during this period
               they will be deleted and an apology email will be sent you can start the modification from {{calendarPro.value.startDate}} there will be no problem.
-            </div>
+
+            </p></div>
             <div>
               <mat-form-field class="example-form-field" appearance="outline">
-                <mat-label>calendar Validate(Max 3 months)</mat-label>
+                <mat-label i18n>calendar Validate(Max 3 months)</mat-label>
                 <mat-date-range-input
 
                   [rangePicker]="campaignOnePicker"
@@ -269,8 +271,8 @@
                   [min]="min"
 
                 >
-                  <input *ngIf="!id" [ngModel]="firstFormGroup.value.startDate"  matStartDate placeholder="Start date" formControlName="startDate">
-                  <input *ngIf="!id" [ngModel]="firstFormGroup.value.endDate" matEndDate placeholder="End date" formControlName="endDate">
+                  <input *ngIf="!id" [ngModel]="firstFormGroup.value.startDate"  matStartDate i18n-placeholder placeholder="Start date" formControlName="startDate">
+                  <input *ngIf="!id" [ngModel]="firstFormGroup.value.endDate" matEndDate i18n-placeholder placeholder="End date" formControlName="endDate">
                   <input  *ngIf="id"    matStartDate placeholder="Start date" formControlName="startDate">
                   <input *ngIf="id"  matEndDate placeholder="End date" formControlName="endDate">
                 </mat-date-range-input>
@@ -285,13 +287,13 @@
             </div>
             <div>
               <mat-form-field *ngIf="!id"   appearance="outline">
-                <mat-label>Job:</mat-label>
+                <mat-label i18n>Job:</mat-label>
                 <mat-select  [ngModel]="firstFormGroup.value.job"  required formControlName="job">
                   <mat-option *ngFor="let job of list"  [value]="job">{{job}}</mat-option>
                 </mat-select>
               </mat-form-field>
               <mat-form-field   *ngIf="id"  appearance="outline">
-                <mat-label>Job:</mat-label>
+                <mat-label i18n>Job:</mat-label>
                 <mat-select    required formControlName="job">
                   <mat-option *ngFor="let job of list"  [value]="job">{{job}}</mat-option>
                 </mat-select>
@@ -300,50 +302,50 @@
 
             <div *ngIf="id&&i>=calendarGroup.calendarProList.length" class="alert alert-info text-center">
             <mat-icon  class="example-tab-icon ">info</mat-icon>
-            <br> Each session will be divided by the duration.
+            <br> <p i18n>Each session will be divided by the duration.</p>
           </div>
             <div *ngIf="!id" class="alert alert-info text-center">
               <mat-icon  class="example-tab-icon ">info</mat-icon>
-              <br> Each session will be divided by the duration.
+              <br> <p i18n>Each session will be divided by the duration.</p>
             </div>
             <mat-form-field *ngIf="!id" appearance="outline">
-              <mat-label>duration(in minute)</mat-label>
+              <mat-label i18n>duration(in minute)</mat-label>
               <input [ngModel]="firstFormGroup.value.duration" matInput formControlName="duration" type="number" min="15"
                      required>
             </mat-form-field>
             <mat-form-field *ngIf="id" appearance="outline">
-              <mat-label>duration(in minute)</mat-label>
+              <mat-label i18n>duration(in minute)</mat-label>
               <input  matInput formControlName="duration" type="number" min="15"
                      required>
             </mat-form-field>
             <div *ngIf="!id&&!nbClients">
               <div  class="alert alert-info text-center">
                 <mat-icon  class="example-tab-icon ">info</mat-icon>
-                <br> add number of clients per session by default one client per session.
+                <br> <p i18n>add number of clients per session by default one client per session.</p>
               </div>
               <div class="text-center">
-                <button (click)="addClients()" mat-raised-button color="warn">Add</button>
+                <button i18n (click)="addClients()" mat-raised-button color="warn">Add</button>
               </div>
             </div>
             <div *ngIf="id&&!nbClients">
               <div  class="alert alert-info text-center">
                 <mat-icon  class="example-tab-icon ">info</mat-icon>
-                <br> edit number of clients per session.
+                <br> <p i18n>edit number of clients per session.</p>
               </div>
               <div class="text-center">
-                <button (click)="addClients()" mat-raised-button color="warn">edit</button>
+                <button i18n (click)="addClients()" mat-raised-button color="warn">edit</button>
               </div>
             </div>
             <div  *ngFor="let weeKSchedule of calendarPro.controls.weekSchedule['controls']; let j=index"  [formGroup]="weeKSchedule"   >
               <div fxLayout="row" fxLayoutAlign="center center">
                 <div fxLayout="row" fxLayoutAlign="center center"  >
-                  <h3 *ngIf="j==0">Monday</h3>
-                  <h3 *ngIf="j==1">Tuesday</h3>
-                  <h3 *ngIf="j==2">Wednesday</h3>
-                  <h3 *ngIf="j==3">Thursday</h3>
-                  <h3 *ngIf="j==4">Friday</h3>
-                  <h3 *ngIf="j==5">Saturday</h3>
-                  <h3 *ngIf="j==6">Sunday</h3>
+                  <h3 i18n *ngIf="j==0">Monday</h3>
+                  <h3 i18n *ngIf="j==1">Tuesday</h3>
+                  <h3 i18n *ngIf="j==2">Wednesday</h3>
+                  <h3 i18n *ngIf="j==3">Thursday</h3>
+                  <h3 i18n *ngIf="j==4">Friday</h3>
+                  <h3 i18n *ngIf="j==5">Saturday</h3>
+                  <h3 i18n *ngIf="j==6">Sunday</h3>
                   <div >
                     <button  (click)="addSeance(i,j)" color="primary" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
                       <mat-icon>add_circle_outline</mat-icon>
@@ -355,26 +357,26 @@
 
               <div fxLayout="row" fxLayoutAlign="center center" *ngFor="let itemrow of weeKSchedule.controls; let t=index" [formGroupName]="t" >
                 <div  style="margin-right: 3%" >
-                  <h5>session {{t+1}}</h5>
+                  <h5 i18n>session {{t+1}}</h5>
                 </div>
                 <div  fxLayout="row" fxLayoutAlign="start center"  >
                   <div style="margin-right: 3%" >
                     <mat-form-field appearance="outline">
-                      <mat-label>start</mat-label>
+                      <mat-label i18n>start</mat-label>
                       <input type="time" matInput formControlName="start"
                              required>
                     </mat-form-field>
                   </div>
                   <div style="margin-right: 3%" >
                     <mat-form-field appearance="outline">
-                      <mat-label>end</mat-label>
+                      <mat-label i18n>end</mat-label>
                       <input type="time" matInput formControlName="end"
                              required>
                     </mat-form-field>
                   </div>
                   <div *ngIf="nbClients" style="margin-right: 3%" >
                     <mat-form-field appearance="outline">
-                      <mat-label>nbTotalPlaces</mat-label>
+                      <mat-label i18n>nbTotalPlaces</mat-label>
                       <input type="number" matInput formControlName="nbTotalPlaces"
                              required>
                     </mat-form-field>
@@ -391,7 +393,7 @@
             <div class="text-center">
               <div  class="alert alert-info text-center">
                 <mat-icon  class="example-tab-icon ">info</mat-icon>
-                <br> add exception dates that can be yearly or monthly.
+                <br>  <p i18n>add exception dates that can be yearly or monthly.</p>
               </div>
               <button class="text-center" (click)="addExceptionForCalendarPro(i)" mat-raised-button color="accent">
                 Exception
@@ -405,14 +407,14 @@
                     </button>
                   </div>
                   <mat-form-field    appearance="outline">
-                    <mat-label>Recurrence:</mat-label>
+                    <mat-label i18n>Recurrence:</mat-label>
                     <mat-select formControlName="recurrenceType" [value]="list[0]" required   >
                       <mat-option *ngFor="let l of list2"  [value]="l">{{l}}</mat-option>
                     </mat-select>
                   </mat-form-field>
                   <div *ngIf="exception.value.recurrenceType =='YEARLY'">
                     <mat-form-field dateFormat1 appearance="outline">
-                      <mat-label>choose the day</mat-label>
+                      <mat-label i18n>choose the day</mat-label>
                       <input formControlName="date"  matInput required [matDatepicker]="dp2" >
                       <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
                       <mat-datepicker startView="year"  #dp2 panelClass="example-month-picker"></mat-datepicker>
@@ -420,7 +422,7 @@
                   </div>
                   <div *ngIf="exception.value.recurrenceType =='MONTHLY'">
                     <mat-form-field dateFormat2 appearance="outline">
-                      <mat-label>choose the day</mat-label>
+                      <mat-label i18n>choose the day</mat-label>
                       <label>
                         <input formControlName="date"   required matInput [matDatepicker]="dp3"  >
                       </label>

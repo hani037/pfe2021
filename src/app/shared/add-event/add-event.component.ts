@@ -34,12 +34,12 @@ export class AddEventComponent implements OnInit {
   is_loading: boolean = true;
   event: event;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-  tags: string[] = ['Sport', 'Education'];
+  tags: string[] = [$localize`:@@event.Sport:Sport`, $localize`:@@event.Education:Education`];
   FormGroup: FormGroup;
   friends: string[] = [];
   contacts: string[] = [];
-  list: string[] = ['DAILY', 'WEEKLY', 'MONTHLY', 'YEARLY'];
-  days: string[] = ['SUNDAY','MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
+  list: string[] = [$localize`:@@event.DAILY:DAILY`, $localize`:@@event.WEEKLY:WEEKLY`, $localize`:@@event.MONTHLY:MONTHLY`, $localize`:@@event.YEARLY:YEARLY`];
+  days: string[] = [$localize`:@@event.SUNDAY:SUNDAY`,$localize`:@@event.MONDAY:MONDAY`, $localize`:@@event.TUESDAY:TUESDAY`, $localize`:@@event.WEDNESDAY:WEDNESDAY`, $localize`:@@event.THURSDAY:THURSDAY`, $localize`:@@event.FRIDAY:FRIDAY`, $localize`:@@event.SATURDAY:SATURDAY`];
 
   constructor(private dialogRef: MatDialogRef<AddEventComponent>, private eventService: EventService,
               @Inject(MAT_DIALOG_DATA) public data: { id: string, start: Date, end: Date, calendarId: string }, private _snackBar: MatSnackBar,

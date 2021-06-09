@@ -1,5 +1,5 @@
 <mat-card  class="example-card text-center">
-  <mat-card-title><span style="color: #3c4142">Created by</span> {{calendarPro.firstName|uppercase}} {{calendarPro.lastName|uppercase}} <h6>{{seance.creationDate|timeago}}</h6></mat-card-title>
+  <mat-card-title><span i18n style="color: #3c4142">Created by</span> {{calendarPro.firstName|uppercase}} {{calendarPro.lastName|uppercase}} <h6>{{seance.creationDate|timeago}}</h6></mat-card-title>
   <mat-card-subtitle> {{seance.date|date}}</mat-card-subtitle>
 
 
@@ -16,31 +16,31 @@
     <div >
       <div  fxLayout="row" fxLayoutAlign="space-around center">
 
-        <h6 style="color: rgba(0,0,0,0.29)" fxFlex="50" ><strong>Start:</strong></h6>
+        <h6 style="color: rgba(0,0,0,0.29)" fxFlex="50" ><strong i18n>Start:</strong></h6>
         <h6 fxFlex="50">{{seance.start}}</h6>
 
       </div>
       <div  fxLayout="row" fxLayoutAlign="space-around center">
 
-        <h6 style="color: rgba(0,0,0,0.29)" fxFlex="50" ><strong>End:</strong></h6>
+        <h6 style="color: rgba(0,0,0,0.29)" fxFlex="50" ><strong i18n>End:</strong></h6>
         <h6 fxFlex="50">{{seance.end}}</h6>
 
       </div>
       <div  fxLayout="row" fxLayoutAlign="space-around center">
 
-        <h6 style="color: rgba(0,0,0,0.29)" fxFlex="50" ><strong>Total places:</strong></h6>
+        <h6 style="color: rgba(0,0,0,0.29)" fxFlex="50" ><strong i18n>Total places:</strong></h6>
         <h6 fxFlex="50">{{seance.nbTotalPlaces}}</h6>
       </div>
       <div  fxLayout="row" fxLayoutAlign="space-around center">
 
-        <h6 style="color: rgba(0,0,0,0.29)" fxFlex="50" ><strong>places Available:</strong></h6>
+        <h6 style="color: rgba(0,0,0,0.29)" fxFlex="50" ><strong i18n>places Available:</strong></h6>
         <h6 fxFlex="50">{{seance.nbPlacesAvailable}}</h6>
       </div>
     </div>
   </mat-card-content>
   <mat-card-actions>
-    <button *ngIf="seance.nbPlacesAvailable>0" (click)="appointment()" color="accent" mat-raised-button>take appointment</button>
+    <button i18n *ngIf="seance.nbPlacesAvailable>0" (click)="appointment()" color="accent" mat-raised-button>take appointment</button>
     <br>
-    <button (click)="openComments()" mat-button color="warn">see comments</button>
+    <button i18n (click)="openComments()" mat-button color="warn">see comments</button>
   </mat-card-actions>
 </mat-card>

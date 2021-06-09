@@ -1,6 +1,6 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, NavigationStart, Router, RouterEvent} from "@angular/router";
-import {filter} from "rxjs/operators";
+
 import {UserService} from "./shared/service/user.service";
 declare interface List {
   icon:string,
@@ -20,7 +20,8 @@ export class AppComponent implements OnInit  {
   public list:List[] =[
     {icon:'home_outline',title:'HOME',path:'home'},
     {icon:'person',title:'PROFILE',path:'profile'},
-    {icon:'feed',title:'FEED',path:'feed'}
+    {icon:'feed',title:'FEED',path:'feed'},
+    {icon:'settings',title:'SETTINGS',path:'config'}
   ];
   expand: boolean=true;
   constructor(public router:Router,public userService:UserService) {
@@ -36,6 +37,7 @@ export class AppComponent implements OnInit  {
       if (event instanceof NavigationStart) {
         this.route_active = event.url.replace("/","")
       }
+
     })
   }
   logout() {

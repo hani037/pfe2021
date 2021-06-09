@@ -25,7 +25,7 @@ export class LoginActivate implements CanActivate {
         return true;
       }
 
-      this.router.navigate(['/home']);
+      this.router.navigateByUrl('/home');
 
       return false;
     }));

@@ -3,6 +3,11 @@ import {User} from "../model/user";
 import {UserService} from "../service/user.service";
 import {FormBuilder, FormGroup, NgForm, Validators} from "@angular/forms";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {Calendar} from "../model/calendar";
+import {AddValidityComponent} from "../add-validity/add-validity.component";
+import {MatDialog} from "@angular/material/dialog";
+import {SelectedCalendar} from "../model/selectedCalendar";
+import {SelectedCalendarComponent} from "../selected-calendar/selected-calendar.component";
 
 @Component({
   selector: 'app-profile',
@@ -21,11 +26,12 @@ export class ProfileComponent implements OnInit {
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   isEditable = false;
+  calendarList:Calendar[];
 
-
-  constructor(public userService:UserService,private _snackBar: MatSnackBar,private _formBuilder: FormBuilder) { }
+  constructor(public userService:UserService,private _snackBar: MatSnackBar,private _formBuilder: FormBuilder,private dialog: MatDialog) { }
 
   ngOnInit(): void {
+
     this.firstFormGroup = this._formBuilder.group({
       firstCtrl: ['', Validators.required]
     });
@@ -58,5 +64,15 @@ export class ProfileComponent implements OnInit {
     this._snackBar.open(message, action, {
       duration: 2000,
     });
+  }
+
+  change_calendar() {
+    this.dialog.open(SelectedCalendarComponent, {
+      backdropClass: 'backdropBackground',
+    }).afterClosed().subscribe(data=>{
+      if(data){
+        this.userService.me().subscribe();
+      }
+    })
   }
 }

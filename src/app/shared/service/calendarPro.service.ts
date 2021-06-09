@@ -104,17 +104,17 @@ export class CalendarProService {
   userFeed(page,size){
     return this.http.post<{content:CalendarProEs[],totalPages}>(this.calendarProUrl+'/feed?page='+page+'&size='+size,{})
   }
-  follow(calendarProId){
-    return this.http.post<Follows>(this.calendarProUrl+'/follow/'+calendarProId,{})
+  follow(follow:Follows){
+    return this.http.post<Follows>(this.calendarProUrl+'/follow',follow)
   }
   Unfollow(followId){
     return this.http.post<{}>(this.calendarProUrl+'/unfollow/'+followId,{})
   }
-  userFollows(){
-    return this.http.get<Follows[]>(this.calendarProUrl+'/user/follow');
+  calendarFollows(){
+    return this.http.get<Follows[]>(this.calendarProUrl+'/calendar/following');
   }
-  userFollowCalendar(id){
-    return this.http.get<Follows>(this.calendarProUrl+'/user/follow/'+id);
+  is_Follow(id){
+    return this.http.get<Follows>(this.calendarProUrl+'/follow/'+id);
   }
   deleteComment(id){
     return this.http.delete(this.calendarProUrl+'/comment/'+id);

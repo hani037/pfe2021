@@ -21,7 +21,6 @@ import {AuthInterceptor} from './Interceptors/authInterceptor';
 import {NgbDatepickerModule, NgbTimepickerModule} from "@ng-bootstrap/ng-bootstrap";
 import { AddEventComponent, CustomDateFormat1,
   CustomDateFormat2} from './shared/add-event/add-event.component';
-import { CalendarComponent } from './shared/calendar/calendar.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatCardModule} from "@angular/material/card";
 
@@ -40,7 +39,6 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {UserService} from "./shared/service/user.service";
 import { ProfileComponent } from './shared/profile/profile.component';
-import { CalendarProfileComponent } from './shared/calendar-profile/calendar-profile.component';
 import {MatTabsModule} from "@angular/material/tabs";
 import { EventComponent } from './shared/event/event.component';
 import {  MatSnackBarModule } from "@angular/material/snack-bar";
@@ -61,7 +59,6 @@ import { AppointmentComponent } from './shared/appointment/appointment.component
 import { AccountActivateComponent } from './shared/account-activate/account-activate.component';
 import { EventDisplayComponent } from './shared/event-display/event-display.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
-import { NewcalendarComponent } from './newcalendar/newcalendar.component';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
@@ -76,7 +73,6 @@ import { AddCalendarComponent } from './shared/add-calendar/add-calendar.compone
 import { SearchByDateComponent } from './shared/search-by-date/search-by-date.component';
 import { CardCalendarComponent } from './shared/card-calendar/card-calendar.component';
 import { CardCalendarProComponent } from './shared/card-calendar-pro/card-calendar-pro.component';
-import { CalendarProComponent } from './shared/calendar-pro/calendar-pro.component';
 import { AppointmentProComponent } from './shared/appointment-pro/appointment-pro.component';
 import { SeanceProComponent } from './shared/seance-pro/seance-pro.component';
 import {MatPaginatorModule} from "@angular/material/paginator";
@@ -86,7 +82,6 @@ import { JoinComponent } from './shared/join/join.component';
 import { CreateCalendarGroupComponent } from './shared/create-calendar-group/create-calendar-group.component';
 import { CardCalendarGroupComponent } from './shared/card-calendar-group/card-calendar-group.component';
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
-import { CalendarGroupComponent } from './shared/calendar-group/calendar-group.component';
 import { ProfileCalendarProComponent } from './shared/profile-calendar-pro/profile-calendar-pro.component';
 import { AddSeanceComponent } from './shared/add-seance/add-seance.component';
 import { AddValidityComponent } from './shared/add-validity/add-validity.component';
@@ -95,6 +90,8 @@ import { FeedComponent } from './shared/feed/feed.component';
 import { DisplayCommentsComponent } from './shared/display-comments/display-comments.component';
 import { CommentComponent } from './shared/comment/comment.component';
 import { TimeagoModule } from 'ngx-timeago';
+import { SelectedCalendarComponent } from './shared/selected-calendar/selected-calendar.component';
+import { ConfigComponent } from './shared/config/config.component';
 
 
 FullCalendarModule.registerPlugins([
@@ -114,11 +111,9 @@ export const interceptorProviders =
     HeaderComponent,
     HomeComponent,
     AddEventComponent,
-    CalendarComponent,
     LoginComponent,
     SignUpComponent,
     ProfileComponent,
-    CalendarProfileComponent,
     EventComponent,
     SidenavComponent,
     SearchComponent,
@@ -129,14 +124,14 @@ export const interceptorProviders =
     AppointmentComponent,
     AccountActivateComponent,
     EventDisplayComponent,
-    NewcalendarComponent,
+
     ClientCardCalendarComponent,
     SignUpproComponent,
     AddCalendarComponent,
     SearchByDateComponent,
     CardCalendarComponent,
     CardCalendarProComponent,
-    CalendarProComponent,
+
     AppointmentProComponent,
     SeanceProComponent,
     CreateVacationComponent,
@@ -144,7 +139,7 @@ export const interceptorProviders =
     JoinComponent,
     CreateCalendarGroupComponent,
     CardCalendarGroupComponent,
-    CalendarGroupComponent,
+
     ProfileCalendarProComponent,
     AddSeanceComponent,
     AddValidityComponent,
@@ -153,65 +148,71 @@ export const interceptorProviders =
     CardSeanceComponent,
     FeedComponent,
     DisplayCommentsComponent,
-    CommentComponent
+    CommentComponent,
+    SelectedCalendarComponent,
+    ConfigComponent
   ],
-    imports: [
-        TimeagoModule.forRoot(),
-        NgxMaterialTimepickerModule,
-        CodeInputModule,
-        BrowserModule,
-        GoogleMapsModule,
-        MatProgressSpinnerModule,
-        HttpClientModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        MatToolbarModule,
-        FullCalendarModule,
-        CdkStepperModule,
-        MDBBootstrapModule.forRoot(),
+  imports: [
+    TimeagoModule.forRoot(),
+    NgxMaterialTimepickerModule,
+    CodeInputModule,
+    BrowserModule,
+    GoogleMapsModule,
+    MatProgressSpinnerModule,
+    HttpClientModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    FullCalendarModule,
+    CdkStepperModule,
+    MDBBootstrapModule.forRoot(),
 
-        CalendarModule.forRoot({
-            provide: DateAdapter,
-            useFactory: adapterFactory,
-        }),
-        FontAwesomeModule,
-        NgbDatepickerModule,
-        NgbTimepickerModule,
-        FormsModule,
-        MatCardModule,
-        MatDialogModule,
-        MatIconModule,
-        MatButtonModule,
-        MatFormFieldModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
-        MatInputModule,
-        FlexModule,
-        MatMenuModule,
-        MatTabsModule,
-        MatSnackBarModule,
-        MatSidenavModule,
-        MatListModule,
-        MatBadgeModule,
-        MatRadioModule,
-        MatChipsModule,
-        MatStepperModule,
-        ReactiveFormsModule,
-        MatProgressBarModule,
-        MatSelectModule,
-        MatFabMenuModule,
-        MatPaginatorModule,
-        MatSlideToggleModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
+    FontAwesomeModule,
+    NgbDatepickerModule,
+    NgbTimepickerModule,
+    FormsModule,
+    MatCardModule,
+    MatDialogModule,
+    MatIconModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatInputModule,
+    FlexModule,
+    MatMenuModule,
+    MatTabsModule,
+    MatSnackBarModule,
+    MatSidenavModule,
+    MatListModule,
+    MatBadgeModule,
+    MatRadioModule,
+    MatChipsModule,
+    MatStepperModule,
+    ReactiveFormsModule,
+    MatProgressBarModule,
+    MatSelectModule,
+    MatFabMenuModule,
+    MatPaginatorModule,
+    MatSlideToggleModule,
 
-    ],
-  providers: [interceptorProviders,MatDatepickerModule,{
+  ],
+  providers: [interceptorProviders, MatDatepickerModule, {
     provide: APP_INITIALIZER,
-    useFactory: (ds: UserService) =>async () => {
+    useFactory: (ds: UserService) => async () => {
       await ds.autoLogin();
     },
     deps: [UserService],
     multi: true
-  } ],
+  }],
+  exports: [
+    CardCalendarProComponent
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

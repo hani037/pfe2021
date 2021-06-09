@@ -1,0 +1,662 @@
+<?xml version="1.0" encoding="UTF-8"?><xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+    <file datatype="plaintext" original="ng2.template" source-language="en" target-language="ar">
+        <body>
+            <trans-unit id="1039010421229328005">
+                <source xml:space="preserve">Add Appointment</source>
+                <target xml:space="preserve">Add Appointment</target>
+            </trans-unit>
+            <trans-unit id="1105559843175201032">
+                <source xml:space="preserve">see comments</source>
+                <target xml:space="preserve">see comments</target>
+            </trans-unit>
+            <trans-unit id="1172900402115678485">
+                <source xml:space="preserve"> Your calendar is active from <x equiv-text=" {{calendarGroup.calendarProList[i].startDate}" id="INTERPOLATION"/> to <x equiv-text=" {{calendarGroup.calendarProList[i].expiryDate}" id="INTERPOLATION_1"/> if you change the time of a meeting session during this period they will be deleted and an apology email will be sent you can start the modification from <x equiv-text="m {{calendarPro.value.startDate" id="INTERPOLATION_2"/> there will be no problem. </source>
+                <target xml:space="preserve"> Your calendar is active from <x equiv-text=" {{calendarGroup.calendarProList[i].startDate}" id="INTERPOLATION"/> to <x equiv-text=" {{calendarGroup.calendarProList[i].expiryDate}" id="INTERPOLATION_1"/> if you change the time of a meeting session during this period they will be deleted and an apology email will be sent you can start the modification from <x equiv-text="m {{calendarPro.value.startDate" id="INTERPOLATION_2"/> there will be no problem. </target>
+            </trans-unit>
+            <trans-unit id="1258517556918335222">
+                <source xml:space="preserve">Recurrence <x ctype="x-mat_slide_toggle" equiv-text="&lt;mat-slide-toggle formControlName=&quot;recurrence&quot;  color=&quot;warn&quot;&gt;" id="START_TAG_MAT_SLIDE_TOGGLE"/><x ctype="x-mat_slide_toggle" equiv-text="&lt;/mat-slide-toggle&gt;" id="CLOSE_TAG_MAT_SLIDE_TOGGLE"/></source>
+                <target xml:space="preserve">Recurrence <x ctype="x-mat_slide_toggle" equiv-text="&lt;mat-slide-toggle formControlName=&quot;recurrence&quot;  color=&quot;warn&quot;&gt;" id="START_TAG_MAT_SLIDE_TOGGLE"/><x ctype="x-mat_slide_toggle" equiv-text="&lt;/mat-slide-toggle&gt;" id="CLOSE_TAG_MAT_SLIDE_TOGGLE"/></target>
+            </trans-unit>
+            <trans-unit id="126074860850048964">
+                <source xml:space="preserve">End date</source>
+                <target xml:space="preserve">تاريخ الانتهاء</target>
+            </trans-unit>
+            <trans-unit id="1397512334982372726">
+                <source xml:space="preserve">Places</source>
+                <target xml:space="preserve">أماكن</target>
+            </trans-unit>
+            <trans-unit id="1422532799283087461">
+                <source xml:space="preserve">userName</source>
+                <target xml:space="preserve">اسم المستخدم</target>
+            </trans-unit>
+            <trans-unit id="1423052227910649619">
+                <source xml:space="preserve">Calendar Group Info</source>
+                <target xml:space="preserve">Calendar Group Info</target>
+            </trans-unit>
+            <trans-unit id="1427832227549285761">
+                <source xml:space="preserve"> There are no available places.</source>
+                <target xml:space="preserve"> There are no available places.</target>
+            </trans-unit>
+            <trans-unit id="1431416938026210429">
+                <source xml:space="preserve">Password</source>
+                <target xml:space="preserve">كلمة المرور</target>
+            </trans-unit>
+            <trans-unit id="1433683192825895947">
+                <source xml:space="preserve">Thursday</source>
+                <target xml:space="preserve">الخميس</target>
+            </trans-unit>
+            <trans-unit id="1466012768716286509">
+                <source xml:space="preserve">Sign Up</source>
+                <target xml:space="preserve">اشتراك</target>
+            </trans-unit>
+            <trans-unit id="1492955406172415700">
+                <source xml:space="preserve">meeting Link:</source>
+                <target xml:space="preserve">meeting Link:</target>
+            </trans-unit>
+            <trans-unit id="1740706656014136536">
+                <source xml:space="preserve">Your calendar valid until <x equiv-text="{{date}}" id="INTERPOLATION"/></source>
+                <target xml:space="preserve">Your calendar valid until <x equiv-text="{{date}}" id="INTERPOLATION"/></target>
+            </trans-unit>
+            <trans-unit id="1825829511397926879">
+                <source xml:space="preserve">Tag</source>
+                <target xml:space="preserve">بطاقة</target>
+            </trans-unit>
+            <trans-unit id="1830554030016307335">
+                <source xml:space="preserve">Saturday</source>
+                <target xml:space="preserve">السبت</target>
+            </trans-unit>
+            <trans-unit id="1830981537263188397">
+                <source xml:space="preserve">ADD</source>
+                <target xml:space="preserve">إضافة</target>
+            </trans-unit>
+            <trans-unit id="1908417291315323180">
+                <source xml:space="preserve">lastName</source>
+                <target xml:space="preserve">الاسم الأخير</target>
+            </trans-unit>
+            <trans-unit id="1908524204371641029">
+                <source xml:space="preserve">End:</source>
+                <target xml:space="preserve">النهاية</target>
+            </trans-unit>
+            <trans-unit id="202442244688100878">
+                <source xml:space="preserve">close</source>
+                <target xml:space="preserve">إغلاق</target>
+            </trans-unit>
+            <trans-unit id="2054846790157376783">
+                <source xml:space="preserve">SEARCH</source>
+                <target xml:space="preserve">بحث…</target>
+            </trans-unit>
+            <trans-unit id="2070680864109170331">
+                <source xml:space="preserve">Select Calendar</source>
+                <target xml:space="preserve">Select Calendar</target>
+            </trans-unit>
+            <trans-unit id="219508925928589168">
+                <source xml:space="preserve">This will be applicable to each calendar, but you can change it later.</source>
+                <target xml:space="preserve">This will be applicable to each calendar, but you can change it later.</target>
+            </trans-unit>
+            <trans-unit id="2386751812639190059">
+                <source xml:space="preserve">Each session will be divided by the duration.</source>
+                <target xml:space="preserve">Each session will be divided by the duration.</target>
+            </trans-unit>
+            <trans-unit id="2454050363478003966">
+                <source xml:space="preserve">Login</source>
+                <target xml:space="preserve">دخول</target>
+            </trans-unit>
+            <trans-unit id="2496156299500103413">
+                <source xml:space="preserve">session <x equiv-text="{{t+1}}" id="INTERPOLATION"/></source>
+                <target xml:space="preserve">session <x equiv-text="{{t+1}}" id="INTERPOLATION"/></target>
+            </trans-unit>
+            <trans-unit id="2524456694678944799">
+                <source xml:space="preserve">VALIDATED</source>
+                <target xml:space="preserve">VALIDATED</target>
+            </trans-unit>
+            <trans-unit id="2732155249596575480">
+                <source xml:space="preserve">SELECT</source>
+                <target xml:space="preserve">تحديد</target>
+            </trans-unit>
+            <trans-unit id="2815002627028548136">
+                <source xml:space="preserve">start</source>
+                <target xml:space="preserve">بدء</target>
+            </trans-unit>
+            <trans-unit id="2921937379893450476">
+                <source xml:space="preserve"> Group <x ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;" id="START_TAG_MAT_ICON"/>group<x ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;" id="CLOSE_TAG_MAT_ICON"/></source>
+                <target xml:space="preserve"> Group <x ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;" id="START_TAG_MAT_ICON"/>group<x ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;" id="CLOSE_TAG_MAT_ICON"/></target>
+            </trans-unit>
+            <trans-unit id="2981219928115418649">
+                <source xml:space="preserve">Link</source>
+                <target xml:space="preserve">رابط</target>
+            </trans-unit>
+            <trans-unit id="3193976279273491157">
+                <source xml:space="preserve">Actions</source>
+                <target xml:space="preserve">الإجراءات</target>
+            </trans-unit>
+            <trans-unit id="3249513483374643425">
+                <source xml:space="preserve">Add</source>
+                <target xml:space="preserve">إضافة</target>
+            </trans-unit>
+            <trans-unit id="3317524451592221367">
+                <source xml:space="preserve">EVENT</source>
+                <target xml:space="preserve">الحدث</target>
+            </trans-unit>
+            <trans-unit id="3371321149776053188">
+                <source xml:space="preserve"> Followed <x ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;" id="START_TAG_MAT_ICON"/>bookmark<x ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;" id="CLOSE_TAG_MAT_ICON"/></source>
+                <target xml:space="preserve"> Followed <x ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;" id="START_TAG_MAT_ICON"/>bookmark<x ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;" id="CLOSE_TAG_MAT_ICON"/></target>
+            </trans-unit>
+            <trans-unit id="3504479096315666680">
+                <source xml:space="preserve"> Calendar <x ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;" id="START_TAG_MAT_ICON"/>add<x ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;" id="CLOSE_TAG_MAT_ICON"/></source>
+                <target xml:space="preserve"> Calendar <x ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;" id="START_TAG_MAT_ICON"/>add<x ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;" id="CLOSE_TAG_MAT_ICON"/></target>
+            </trans-unit>
+            <trans-unit id="3524515557222146955">
+                <source xml:space="preserve">firstName</source>
+                <target xml:space="preserve">الاسم الأول</target>
+            </trans-unit>
+            <trans-unit id="3641471108133686655">
+                <source xml:space="preserve">places available: <x equiv-text="{{data.seance.nbPlacesAvailable}}" id="INTERPOLATION"/></source>
+                <target xml:space="preserve">places available: <x equiv-text="{{data.seance.nbPlacesAvailable}}" id="INTERPOLATION"/></target>
+            </trans-unit>
+            <trans-unit id="3711889941704624217">
+                <source xml:space="preserve">Image:</source>
+                <target xml:space="preserve">صورة</target>
+            </trans-unit>
+            <trans-unit id="3730139500618908668">
+                <source xml:space="preserve">Friday</source>
+                <target xml:space="preserve">الجمعة</target>
+            </trans-unit>
+            <trans-unit id="3757481300360546344">
+                <source xml:space="preserve">CANCELED All</source>
+                <target xml:space="preserve">ألغيت الكل</target>
+            </trans-unit>
+            <trans-unit id="3779094953039659699">
+                <source xml:space="preserve">Start Time:</source>
+                <target xml:space="preserve">وقت البدء</target>
+            </trans-unit>
+            <trans-unit id="3845185958891849368">
+                <source xml:space="preserve">End Time</source>
+                <target xml:space="preserve">وقت الانتهاء</target>
+            </trans-unit>
+            <trans-unit id="3845604629698327512">
+                <source xml:space="preserve">choose the day</source>
+                <target xml:space="preserve">اختيار اليوم</target>
+            </trans-unit>
+            <trans-unit id="3885497195825665706">
+                <source xml:space="preserve">Next</source>
+                <target xml:space="preserve">التالي</target>
+            </trans-unit>
+            <trans-unit id="3911464417368517815">
+                <source xml:space="preserve"> Appointment</source>
+                <target xml:space="preserve">موعد</target>
+            </trans-unit>
+            <trans-unit id="3973931101896534797">
+                <source xml:space="preserve">Date</source>
+                <target xml:space="preserve">التاريخ</target>
+            </trans-unit>
+            <trans-unit id="4021752662928002901">
+                <source xml:space="preserve">Update</source>
+                <target xml:space="preserve">تحديث</target>
+            </trans-unit>
+            <trans-unit id="4068707323515050201">
+                <source xml:space="preserve">Total places:</source>
+                <target xml:space="preserve">مجموع الأماكن:</target>
+            </trans-unit>
+            <trans-unit id="4204880191779081093">
+                <source xml:space="preserve">Start Time</source>
+                <target xml:space="preserve">وقت البدء</target>
+            </trans-unit>
+            <trans-unit id="436994651483888975">
+                <source xml:space="preserve">total number of places: <x equiv-text="{{data.seance.nbTotalPlaces}}" id="INTERPOLATION"/></source>
+                <target xml:space="preserve">total number of places: <x equiv-text="{{data.seance.nbTotalPlaces}}" id="INTERPOLATION"/></target>
+            </trans-unit>
+            <trans-unit id="4446705318102483782">
+                <source xml:space="preserve">VALIDATED All</source>
+                <target xml:space="preserve">VALIDATED All</target>
+            </trans-unit>
+            <trans-unit id="4506803456670769268">
+                <source xml:space="preserve">Admins</source>
+                <target xml:space="preserve">المسؤولون</target>
+            </trans-unit>
+            <trans-unit id="4563965495368336177">
+                <source xml:space="preserve">Skip</source>
+                <target xml:space="preserve">تخطي</target>
+            </trans-unit>
+            <trans-unit id="4645508729917632552">
+                <source xml:space="preserve"> you have already made an appointment in that session.</source>
+                <target xml:space="preserve"> لقد حددت بالفعل موعدا في تلك الدورة.</target>
+            </trans-unit>
+            <trans-unit id="4655844939507031097">
+                <source xml:space="preserve">CANCELED</source>
+                <target xml:space="preserve">تم الإلغاء</target>
+            </trans-unit>
+            <trans-unit id="4768749765465246664">
+                <source xml:space="preserve">Email</source>
+                <target xml:space="preserve">البريد الإلكتروني</target>
+            </trans-unit>
+            <trans-unit id="4846169049204943179">
+                <source xml:space="preserve">Add Friend(e-mail)</source>
+                <target xml:space="preserve">إضافة صديق (البريد الإلكتروني)</target>
+            </trans-unit>
+            <trans-unit id="4902817035128594900">
+                <source xml:space="preserve">Description</source>
+                <target xml:space="preserve">الوصف</target>
+            </trans-unit>
+            <trans-unit id="492608211396452986">
+                <source xml:space="preserve">Calendar Pro</source>
+                <target xml:space="preserve">التقويم برو</target>
+            </trans-unit>
+            <trans-unit id="4931873073677337279">
+                <source xml:space="preserve"><x ctype="x-button" equiv-text="&lt;button *ngIf=&quot;i!=0&amp;&amp;!id&quot; (click)=&quot;removeCalendarPro(i)&quot; color=&quot;warn&quot;  mat-icon-button aria-label=&quot;Example icon button with a vertical three dot icon&quot;&gt;" id="START_TAG_BUTTON"/><x ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;" id="START_TAG_MAT_ICON"/>highlight_off<x ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;" id="CLOSE_TAG_MAT_ICON"/><x ctype="x-button" equiv-text="&lt;/button&gt;" id="CLOSE_TAG_BUTTON"/><x ctype="x-button_1" equiv-text="&lt;button *ngIf=&quot;id&amp;&amp;i&gt;=calendarGroup.calendarProList.length&quot; (click)=&quot;removeCalendarPro(i)&quot; color=&quot;warn&quot;  mat-icon-button aria-label=&quot;Example icon button with a vertical three dot icon&quot;&gt;" id="START_TAG_BUTTON_1"/><x ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;" id="START_TAG_MAT_ICON"/>highlight_off<x ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;" id="CLOSE_TAG_MAT_ICON"/><x ctype="x-button" equiv-text="&lt;/button&gt;" id="CLOSE_TAG_BUTTON"/> Calendar Pro<x equiv-text="o{{i+1}" id="INTERPOLATION"/> <x ctype="x-mat_slide_toggle" equiv-text="&lt;mat-slide-toggle formControlName=&quot;enabled&quot;  color=&quot;warn&quot;&gt;" id="START_TAG_MAT_SLIDE_TOGGLE"/><x ctype="x-mat_slide_toggle" equiv-text="&lt;/mat-slide-toggle&gt;" id="CLOSE_TAG_MAT_SLIDE_TOGGLE"/></source>
+                <target xml:space="preserve"><x ctype="x-button" equiv-text="&lt;button *ngIf=&quot;i!=0&amp;&amp;!id&quot; (click)=&quot;removeCalendarPro(i)&quot; color=&quot;warn&quot;  mat-icon-button aria-label=&quot;Example icon button with a vertical three dot icon&quot;&gt;" id="START_TAG_BUTTON"/><x ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;" id="START_TAG_MAT_ICON"/>highlight_off<x ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;" id="CLOSE_TAG_MAT_ICON"/><x ctype="x-button" equiv-text="&lt;/button&gt;" id="CLOSE_TAG_BUTTON"/><x ctype="x-button_1" equiv-text="&lt;button *ngIf=&quot;id&amp;&amp;i&gt;=calendarGroup.calendarProList.length&quot; (click)=&quot;removeCalendarPro(i)&quot; color=&quot;warn&quot;  mat-icon-button aria-label=&quot;Example icon button with a vertical three dot icon&quot;&gt;" id="START_TAG_BUTTON_1"/><x ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;" id="START_TAG_MAT_ICON"/>highlight_off<x ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;" id="CLOSE_TAG_MAT_ICON"/><x ctype="x-button" equiv-text="&lt;/button&gt;" id="CLOSE_TAG_BUTTON"/> Calendar Pro<x equiv-text="o{{i+1}" id="INTERPOLATION"/> <x ctype="x-mat_slide_toggle" equiv-text="&lt;mat-slide-toggle formControlName=&quot;enabled&quot;  color=&quot;warn&quot;&gt;" id="START_TAG_MAT_SLIDE_TOGGLE"/><x ctype="x-mat_slide_toggle" equiv-text="&lt;/mat-slide-toggle&gt;" id="CLOSE_TAG_MAT_SLIDE_TOGGLE"/></target>
+            </trans-unit>
+            <trans-unit id="4949282191348659945">
+                <source xml:space="preserve">end</source>
+                <target xml:space="preserve">النهاية</target>
+            </trans-unit>
+            <trans-unit id="5041354590769758251">
+                <source xml:space="preserve">Admin</source>
+                <target xml:space="preserve">المسؤول</target>
+            </trans-unit>
+            <trans-unit id="5063406253514221416">
+                <source xml:space="preserve"><x ctype="x-mat_icon" equiv-text="&lt;mat-icon class=&quot;example-tab-icon&quot;&gt;" id="START_TAG_MAT_ICON"/>work<x ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;" id="CLOSE_TAG_MAT_ICON"/> Calendars Professional(<x equiv-text="{{calendarsPro.length}}" id="INTERPOLATION"/>) </source>
+                <target xml:space="preserve"><x ctype="x-mat_icon" equiv-text="&lt;mat-icon class=&quot;example-tab-icon&quot;&gt;" id="START_TAG_MAT_ICON"/>work<x ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;" id="CLOSE_TAG_MAT_ICON"/> Calendars Professional(<x equiv-text="{{calendarsPro.length}}" id="INTERPOLATION"/>) </target>
+            </trans-unit>
+            <trans-unit id="5115204040045186228">
+                <source xml:space="preserve"><x ctype="x-mat_icon" equiv-text="&lt;mat-icon class=&quot;example-tab-icon&quot;&gt;" id="START_TAG_MAT_ICON"/>calendar_today<x ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;" id="CLOSE_TAG_MAT_ICON"/> My Calendars(<x equiv-text="{{calendarsPersonal.length}}" id="INTERPOLATION"/>) </source>
+                <target xml:space="preserve"><x ctype="x-mat_icon" equiv-text="&lt;mat-icon class=&quot;example-tab-icon&quot;&gt;" id="START_TAG_MAT_ICON"/>calendar_today<x ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;" id="CLOSE_TAG_MAT_ICON"/> My Calendars(<x equiv-text="{{calendarsPersonal.length}}" id="INTERPOLATION"/>) </target>
+            </trans-unit>
+            <trans-unit id="5228759769320335454">
+                <source xml:space="preserve">address</source>
+                <target xml:space="preserve">العنوان</target>
+            </trans-unit>
+            <trans-unit id="5260441293577120490">
+                <source xml:space="preserve">Add Validity until</source>
+                <target xml:space="preserve">Add Validity until</target>
+            </trans-unit>
+            <trans-unit id="5326421204669399930">
+                <source xml:space="preserve"> Exception <x ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;" id="START_TAG_MAT_ICON"/>add<x ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;" id="CLOSE_TAG_MAT_ICON"/></source>
+                <target xml:space="preserve"> Exception <x ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;" id="START_TAG_MAT_ICON"/>add<x ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;" id="CLOSE_TAG_MAT_ICON"/></target>
+            </trans-unit>
+            <trans-unit id="5332507797504154356">
+                <source xml:space="preserve">edit number of clients per session.</source>
+                <target xml:space="preserve">edit number of clients per session.</target>
+            </trans-unit>
+            <trans-unit id="5471364137065913932">
+                <source xml:space="preserve">places Available:</source>
+                <target xml:space="preserve">places Available:</target>
+            </trans-unit>
+            <trans-unit id="5479123162353107666">
+                <source xml:space="preserve">take appointment</source>
+                <target xml:space="preserve">take appointment</target>
+            </trans-unit>
+            <trans-unit id="5515951209837072935">
+                <source xml:space="preserve">Video Consultation available <x ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;" id="START_TAG_MAT_ICON"/>voice_chat<x ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;" id="CLOSE_TAG_MAT_ICON"/></source>
+                <target xml:space="preserve">Video Consultation available <x ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;" id="START_TAG_MAT_ICON"/>voice_chat<x ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;" id="CLOSE_TAG_MAT_ICON"/></target>
+            </trans-unit>
+            <trans-unit id="5579117169102226256">
+                <source xml:space="preserve">Calendars Pro(<x equiv-text="{{calendarGroup.calendarProList.length}}" id="INTERPOLATION"/>)</source>
+                <target xml:space="preserve">Calendars Pro(<x equiv-text="{{calendarGroup.calendarProList.length}}" id="INTERPOLATION"/>)</target>
+            </trans-unit>
+            <trans-unit id="5611592591303869712">
+                <source xml:space="preserve">Status</source>
+                <target xml:space="preserve">الحالة</target>
+            </trans-unit>
+            <trans-unit id="5711599240976335591">
+                <source xml:space="preserve">Add Seance</source>
+                <target xml:space="preserve">Add Seance</target>
+            </trans-unit>
+            <trans-unit id="5853577984585679402">
+                <source xml:space="preserve">Everything you need</source>
+                <target xml:space="preserve">Everything you need</target>
+            </trans-unit>
+            <trans-unit id="5912186763708477581">
+                <source xml:space="preserve"><x ctype="x-strong" equiv-text="&lt;strong&gt;" id="START_TAG_STRONG"/>meeting Link:<x ctype="x-strong" equiv-text="&lt;/strong&gt;" id="CLOSE_TAG_STRONG"/></source>
+                <target xml:space="preserve"><x ctype="x-strong" equiv-text="&lt;strong&gt;" id="START_TAG_STRONG"/>meeting Link:<x ctype="x-strong" equiv-text="&lt;/strong&gt;" id="CLOSE_TAG_STRONG"/></target>
+            </trans-unit>
+            <trans-unit id="618102091739388012">
+                <source xml:space="preserve"> Follow <x ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;" id="START_TAG_MAT_ICON"/>bookmark<x ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;" id="CLOSE_TAG_MAT_ICON"/></source>
+                <target xml:space="preserve"> Follow <x ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;" id="START_TAG_MAT_ICON"/>bookmark<x ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;" id="CLOSE_TAG_MAT_ICON"/></target>
+            </trans-unit>
+            <trans-unit id="6304432362546770951">
+                <source xml:space="preserve">Address</source>
+                <target xml:space="preserve">العنوان</target>
+            </trans-unit>
+            <trans-unit id="6458677044022639721">
+                <source xml:space="preserve">Job:</source>
+                <target xml:space="preserve">عمل</target>
+            </trans-unit>
+            <trans-unit id="6524262610032366385">
+                <source xml:space="preserve">Choose a date</source>
+                <target xml:space="preserve">اختيار التاريخ</target>
+            </trans-unit>
+            <trans-unit id="6780381636741529189">
+                <source xml:space="preserve">Enable people to follow your calendar to keep him updated.</source>
+                <target xml:space="preserve">Enable people to follow your calendar to keep him updated.</target>
+            </trans-unit>
+            <trans-unit id="6816326784504885062">
+                <source xml:space="preserve">Start:</source>
+                <target xml:space="preserve">بدء</target>
+            </trans-unit>
+            <trans-unit id="6899410641137821757">
+                <source xml:space="preserve">Date:</source>
+                <target xml:space="preserve">التاريخ</target>
+            </trans-unit>
+            <trans-unit id="6931049814853427506">
+                <source xml:space="preserve">Add Validity</source>
+                <target xml:space="preserve">Add Validity</target>
+            </trans-unit>
+            <trans-unit id="6950140976689343775">
+                <source xml:space="preserve">Sunday</source>
+                <target xml:space="preserve">الأحد</target>
+            </trans-unit>
+            <trans-unit id="7248926931237700452">
+                <source xml:space="preserve">Calendar:</source>
+                <target xml:space="preserve">التقويم</target>
+            </trans-unit>
+            <trans-unit id="7448808151142843482">
+                <source xml:space="preserve">Created by</source>
+                <target xml:space="preserve">تم الإنشاء بواسطة</target>
+            </trans-unit>
+            <trans-unit id="7485956663409146181">
+                <source xml:space="preserve">Color:</source>
+                <target xml:space="preserve">اللون</target>
+            </trans-unit>
+            <trans-unit id="7585826646011739428">
+                <source xml:space="preserve">Edit</source>
+                <target xml:space="preserve">تعديل</target>
+            </trans-unit>
+            <trans-unit id="7748782601812844910">
+                <source xml:space="preserve">nbTotalPlaces</source>
+                <target xml:space="preserve">nbTotalPlaces</target>
+            </trans-unit>
+            <trans-unit id="7802564422711544764">
+                <source xml:space="preserve"><x ctype="x-mat_icon" equiv-text="&lt;mat-icon class=&quot;example-tab-icon&quot;&gt;" id="START_TAG_MAT_ICON"/>groups<x ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;" id="CLOSE_TAG_MAT_ICON"/> Calendars Group(<x equiv-text="{{calendarsGroup.length}}" id="INTERPOLATION"/>) </source>
+                <target xml:space="preserve"><x ctype="x-mat_icon" equiv-text="&lt;mat-icon class=&quot;example-tab-icon&quot;&gt;" id="START_TAG_MAT_ICON"/>groups<x ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;" id="CLOSE_TAG_MAT_ICON"/> Calendars Group(<x equiv-text="{{calendarsGroup.length}}" id="INTERPOLATION"/>) </target>
+            </trans-unit>
+            <trans-unit id="7896370263558357034">
+                <source xml:space="preserve">duration(in minute)</source>
+                <target xml:space="preserve">duration(in minute)</target>
+            </trans-unit>
+            <trans-unit id="791339276090339937">
+                <source xml:space="preserve">add number of clients per session by default one client per session.</source>
+                <target xml:space="preserve">add number of clients per session by default one client per session.</target>
+            </trans-unit>
+            <trans-unit id="7972234002155439426">
+                <source xml:space="preserve"><x ctype="x-strong" equiv-text="&lt;strong&gt;" id="START_TAG_STRONG"/>Places:<x ctype="x-strong" equiv-text="&lt;/strong&gt;" id="CLOSE_TAG_STRONG"/></source>
+                <target xml:space="preserve"><x ctype="x-strong" equiv-text="&lt;strong&gt;" id="START_TAG_STRONG"/>Places:<x ctype="x-strong" equiv-text="&lt;/strong&gt;" id="CLOSE_TAG_STRONG"/></target>
+            </trans-unit>
+            <trans-unit id="7982621716065668709">
+                <source xml:space="preserve">Appointments(<x equiv-text="{{calendarPro.appointment.length}}" id="INTERPOLATION"/>)</source>
+                <target xml:space="preserve">Appointments(<x equiv-text="{{calendarPro.appointment.length}}" id="INTERPOLATION"/>)</target>
+            </trans-unit>
+            <trans-unit id="8008836823203045608">
+                <source xml:space="preserve"><x ctype="x-strong" equiv-text="&lt;strong&gt;" id="START_TAG_STRONG"/>Start Time:<x ctype="x-strong" equiv-text="&lt;/strong&gt;" id="CLOSE_TAG_STRONG"/></source>
+                <target xml:space="preserve"><x ctype="x-strong" equiv-text="&lt;strong&gt;" id="START_TAG_STRONG"/>Start Time:<x ctype="x-strong" equiv-text="&lt;/strong&gt;" id="CLOSE_TAG_STRONG"/></target>
+            </trans-unit>
+            <trans-unit id="8137976969279258293">
+                <source xml:space="preserve">Video consultation <x ctype="x-mat_slide_toggle" equiv-text="&lt;mat-slide-toggle formControlName=&quot;videoConsultation&quot;  color=&quot;warn&quot;&gt;" id="START_TAG_MAT_SLIDE_TOGGLE"/><x ctype="x-mat_slide_toggle" equiv-text="&lt;/mat-slide-toggle&gt;" id="CLOSE_TAG_MAT_SLIDE_TOGGLE"/></source>
+                <target xml:space="preserve">Video consultation <x ctype="x-mat_slide_toggle" equiv-text="&lt;mat-slide-toggle formControlName=&quot;videoConsultation&quot;  color=&quot;warn&quot;&gt;" id="START_TAG_MAT_SLIDE_TOGGLE"/><x ctype="x-mat_slide_toggle" equiv-text="&lt;/mat-slide-toggle&gt;" id="CLOSE_TAG_MAT_SLIDE_TOGGLE"/></target>
+            </trans-unit>
+            <trans-unit id="8560316495208643556">
+                <source xml:space="preserve">Follow <x ctype="x-mat_slide_toggle" equiv-text="&lt;mat-slide-toggle formControlName=&quot;follow&quot;  color=&quot;warn&quot;&gt;" id="START_TAG_MAT_SLIDE_TOGGLE"/><x ctype="x-mat_slide_toggle" equiv-text="&lt;/mat-slide-toggle&gt;" id="CLOSE_TAG_MAT_SLIDE_TOGGLE"/></source>
+                <target xml:space="preserve">Follow <x ctype="x-mat_slide_toggle" equiv-text="&lt;mat-slide-toggle formControlName=&quot;follow&quot;  color=&quot;warn&quot;&gt;" id="START_TAG_MAT_SLIDE_TOGGLE"/><x ctype="x-mat_slide_toggle" equiv-text="&lt;/mat-slide-toggle&gt;" id="CLOSE_TAG_MAT_SLIDE_TOGGLE"/></target>
+            </trans-unit>
+            <trans-unit id="8577526263870088949">
+                <source xml:space="preserve">Calendar Pro <x equiv-text="{{calendarPro.firstName}}" id="INTERPOLATION"/> <x equiv-text="{{calendarPro.lastName}}" id="INTERPOLATION_1"/></source>
+                <target xml:space="preserve">Calendar Pro <x equiv-text="{{calendarPro.firstName}}" id="INTERPOLATION"/> <x equiv-text="{{calendarPro.lastName}}" id="INTERPOLATION_1"/></target>
+            </trans-unit>
+            <trans-unit id="864345870138596250">
+                <source xml:space="preserve"> User don&apos;t exist</source>
+                <target xml:space="preserve"> User don&apos;t exist</target>
+            </trans-unit>
+            <trans-unit id="869213916176333095">
+                <source xml:space="preserve">places</source>
+                <target xml:space="preserve">مناطق</target>
+            </trans-unit>
+            <trans-unit id="8716479129878177673">
+                <source xml:space="preserve">Recurrence:</source>
+                <target xml:space="preserve">تكرار</target>
+            </trans-unit>
+            <trans-unit id="8739442281958563044">
+                <source xml:space="preserve">Monday</source>
+                <target xml:space="preserve">الإثنين</target>
+            </trans-unit>
+            <trans-unit id="8798932904948432529">
+                <source xml:space="preserve">Wednesday</source>
+                <target xml:space="preserve">الأربعاء</target>
+            </trans-unit>
+            <trans-unit id="886906908042085889">
+                <source xml:space="preserve">calendar Validate(Max 3 months)</source>
+                <target xml:space="preserve">calendar Validate(Max 3 months)</target>
+            </trans-unit>
+            <trans-unit id="888341446683346521">
+                <source xml:space="preserve">Start date</source>
+                <target xml:space="preserve">تاريخ البدء</target>
+            </trans-unit>
+            <trans-unit id="8953033926734869941">
+                <source xml:space="preserve">Name</source>
+                <target xml:space="preserve">الاسم</target>
+            </trans-unit>
+            <trans-unit id="8989547740472906038">
+                <source xml:space="preserve"> Choose a service </source>
+                <target xml:space="preserve">اختيار خدمة</target>
+            </trans-unit>
+            <trans-unit id="8993944303108398931">
+                <source xml:space="preserve">add exception dates that can be yearly or monthly.</source>
+                <target xml:space="preserve">add exception dates that can be yearly or monthly.</target>
+            </trans-unit>
+            <trans-unit id="9010413891924313175">
+                <source xml:space="preserve">open</source>
+                <target xml:space="preserve">مفتوح</target>
+            </trans-unit>
+            <trans-unit id="9062608892823787532">
+                <source xml:space="preserve">Events(<x equiv-text="{{calendarPersonal.events.length}}" id="INTERPOLATION"/>)</source>
+                <target xml:space="preserve">Events(<x equiv-text="{{calendarPersonal.events.length}}" id="INTERPOLATION"/>)</target>
+            </trans-unit>
+            <trans-unit id="9095134843628689709">
+                <source xml:space="preserve">edit</source>
+                <target xml:space="preserve">تعديل</target>
+            </trans-unit>
+            <trans-unit id="9176037901730521018">
+                <source xml:space="preserve">Tuesday</source>
+                <target xml:space="preserve">الثلاثاء</target>
+            </trans-unit>
+            <trans-unit id="935187492052582731">
+                <source xml:space="preserve">Submit</source>
+                <target xml:space="preserve">ارسل</target>
+            </trans-unit>
+            <trans-unit id="event.DAILY">
+                <source xml:space="preserve">DAILY</source>
+                <target xml:space="preserve">يوميًا</target>
+            </trans-unit>
+            <trans-unit id="event.Education">
+                <source xml:space="preserve">Education</source>
+                <target xml:space="preserve">التعليم</target>
+            </trans-unit>
+            <trans-unit id="event.FRIDAY">
+                <source xml:space="preserve">FRIDAY</source>
+                <target xml:space="preserve">الجمعة</target>
+            </trans-unit>
+            <trans-unit id="event.MONDAY">
+                <source xml:space="preserve">MONDAY</source>
+                <target xml:space="preserve">الإثنين</target>
+            </trans-unit>
+            <trans-unit id="event.MONTHLY">
+                <source xml:space="preserve">MONTHLY</source>
+                <target xml:space="preserve">شهريًا</target>
+            </trans-unit>
+            <trans-unit id="event.SATURDAY">
+                <source xml:space="preserve">SATURDAY</source>
+                <target xml:space="preserve">السبت</target>
+            </trans-unit>
+            <trans-unit id="event.SUNDAY">
+                <source xml:space="preserve">SUNDAY</source>
+                <target xml:space="preserve">الأحد</target>
+            </trans-unit>
+            <trans-unit id="event.Sport">
+                <source xml:space="preserve">Sport</source>
+                <target xml:space="preserve">رياضة</target>
+            </trans-unit>
+            <trans-unit id="event.THURSDAY">
+                <source xml:space="preserve">THURSDAY</source>
+                <target xml:space="preserve">الخميس</target>
+            </trans-unit>
+            <trans-unit id="event.TUESDAY">
+                <source xml:space="preserve">TUESDAY</source>
+                <target xml:space="preserve">الثلاثاء</target>
+            </trans-unit>
+            <trans-unit id="event.WEDNESDAY">
+                <source xml:space="preserve">WEDNESDAY</source>
+                <target xml:space="preserve">الأربعاء</target>
+            </trans-unit>
+            <trans-unit id="event.WEEKLY">
+                <source xml:space="preserve">WEEKLY</source>
+                <target xml:space="preserve">أسبوعيًا</target>
+            </trans-unit>
+            <trans-unit id="event.YEARLY">
+                <source xml:space="preserve">YEARLY</source>
+                <target xml:space="preserve">سنويًا</target>
+            </trans-unit>
+            <trans-unit id="ngb.alert.close">
+                <source xml:space="preserve">Close</source>
+                <target xml:space="preserve">إغلاق</target>
+            </trans-unit>
+            <trans-unit id="ngb.carousel.next">
+                <source xml:space="preserve">Next</source>
+                <target xml:space="preserve">التالي</target>
+            </trans-unit>
+            <trans-unit id="ngb.carousel.previous">
+                <source xml:space="preserve">Previous</source>
+                <target xml:space="preserve">السّابق</target>
+            </trans-unit>
+            <trans-unit id="ngb.carousel.slide-number">
+                <source xml:space="preserve"> Slide <x equiv-text="private _pauseO" id="INTERPOLATION"/> of <x equiv-text="Subject(false);" id="INTERPOLATION_1"/> </source>
+                <target xml:space="preserve"> Slide <x equiv-text="private _pauseO" id="INTERPOLATION"/> of <x equiv-text="Subject(false);" id="INTERPOLATION_1"/> </target>
+            </trans-unit>
+            <trans-unit id="ngb.datepicker.next-month">
+                <source xml:space="preserve">Next month</source>
+                <target xml:space="preserve">‏الشهر التالي</target>
+            </trans-unit>
+            <trans-unit id="ngb.datepicker.previous-month">
+                <source xml:space="preserve">Previous month</source>
+                <target xml:space="preserve">الشهر السابق</target>
+            </trans-unit>
+            <trans-unit id="ngb.datepicker.select-month">
+                <source xml:space="preserve">Select month</source>
+                <target xml:space="preserve">اختر الشهر</target>
+            </trans-unit>
+            <trans-unit id="ngb.datepicker.select-year">
+                <source xml:space="preserve">Select year</source>
+                <target xml:space="preserve">تحديد العام</target>
+            </trans-unit>
+            <trans-unit id="ngb.pagination.first">
+                <source xml:space="preserve">««</source>
+                <target xml:space="preserve">««</target>
+            </trans-unit>
+            <trans-unit id="ngb.pagination.first-aria">
+                <source xml:space="preserve">First</source>
+                <target xml:space="preserve">الأول</target>
+            </trans-unit>
+            <trans-unit id="ngb.pagination.last">
+                <source xml:space="preserve">»»</source>
+                <target xml:space="preserve">»»</target>
+            </trans-unit>
+            <trans-unit id="ngb.pagination.last-aria">
+                <source xml:space="preserve">Last</source>
+                <target xml:space="preserve">الأخير</target>
+            </trans-unit>
+            <trans-unit id="ngb.pagination.next">
+                <source xml:space="preserve">»</source>
+                <target xml:space="preserve">»</target>
+            </trans-unit>
+            <trans-unit id="ngb.pagination.next-aria">
+                <source xml:space="preserve">Next</source>
+                <target xml:space="preserve">التالي</target>
+            </trans-unit>
+            <trans-unit id="ngb.pagination.previous">
+                <source xml:space="preserve">«</source>
+                <target xml:space="preserve">«</target>
+            </trans-unit>
+            <trans-unit id="ngb.pagination.previous-aria">
+                <source xml:space="preserve">Previous</source>
+                <target xml:space="preserve">السّابق</target>
+            </trans-unit>
+            <trans-unit id="ngb.progressbar.value">
+                <source xml:space="preserve"><x equiv-text="turn this._max;" id="INTERPOLATION"/></source>
+                <target xml:space="preserve"><x equiv-text="turn this._max;" id="INTERPOLATION"/></target>
+            </trans-unit>
+            <trans-unit id="ngb.timepicker.AM">
+                <source xml:space="preserve"><x equiv-text="Step: number;  " id="INTERPOLATION"/></source>
+                <target xml:space="preserve"><x equiv-text="Step: number;  " id="INTERPOLATION"/></target>
+            </trans-unit>
+            <trans-unit id="ngb.timepicker.HH">
+                <source xml:space="preserve">HH</source>
+                <target xml:space="preserve">HH</target>
+            </trans-unit>
+            <trans-unit id="ngb.timepicker.MM">
+                <source xml:space="preserve">MM</source>
+                <target xml:space="preserve">MM</target>
+            </trans-unit>
+            <trans-unit id="ngb.timepicker.PM">
+                <source xml:space="preserve"><x equiv-text="sible.    */   " id="INTERPOLATION"/></source>
+                <target xml:space="preserve"><x equiv-text="sible.    */   " id="INTERPOLATION"/></target>
+            </trans-unit>
+            <trans-unit id="ngb.timepicker.SS">
+                <source xml:space="preserve">SS</source>
+                <target xml:space="preserve">SS</target>
+            </trans-unit>
+            <trans-unit id="ngb.timepicker.decrement-hours">
+                <source xml:space="preserve">Decrement hours</source>
+                <target xml:space="preserve">ساعات إنقاص</target>
+            </trans-unit>
+            <trans-unit id="ngb.timepicker.decrement-minutes">
+                <source xml:space="preserve">Decrement minutes</source>
+                <target xml:space="preserve">دقائق إنقاص</target>
+            </trans-unit>
+            <trans-unit id="ngb.timepicker.decrement-seconds">
+                <source xml:space="preserve">Decrement seconds</source>
+                <target xml:space="preserve">إنقاص الثواني</target>
+            </trans-unit>
+            <trans-unit id="ngb.timepicker.hours">
+                <source xml:space="preserve">Hours</source>
+                <target xml:space="preserve">ساعات</target>
+            </trans-unit>
+            <trans-unit id="ngb.timepicker.increment-hours">
+                <source xml:space="preserve">Increment hours</source>
+                <target xml:space="preserve">ساعات الزيادة</target>
+            </trans-unit>
+            <trans-unit id="ngb.timepicker.increment-minutes">
+                <source xml:space="preserve">Increment minutes</source>
+                <target xml:space="preserve">دقائق الزيادة</target>
+            </trans-unit>
+            <trans-unit id="ngb.timepicker.increment-seconds">
+                <source xml:space="preserve">Increment seconds</source>
+                <target xml:space="preserve">ثواني الزيادة</target>
+            </trans-unit>
+            <trans-unit id="ngb.timepicker.minutes">
+                <source xml:space="preserve">Minutes</source>
+                <target xml:space="preserve">دقائق</target>
+            </trans-unit>
+            <trans-unit id="ngb.timepicker.seconds">
+                <source xml:space="preserve">Seconds</source>
+                <target xml:space="preserve">ثواني</target>
+            </trans-unit>
+            <trans-unit id="ngb.toast.close-aria">
+                <source xml:space="preserve">Close</source>
+                <target xml:space="preserve">إغلاق</target>
+            </trans-unit>
+            <trans-unit id="search.ent">
+                <source xml:space="preserve">entertainment</source>
+                <target xml:space="preserve">ترفيه</target>
+            </trans-unit>
+            <trans-unit id="search.mat">
+                <source xml:space="preserve">maintenance</source>
+                <target xml:space="preserve">صيانة</target>
+            </trans-unit>
+            <trans-unit id="search.med">
+                <source xml:space="preserve">medicine</source>
+                <target xml:space="preserve">الطب</target>
+            </trans-unit>
+            <trans-unit id="search.sp">
+                <source xml:space="preserve">sport</source>
+                <target xml:space="preserve">رياضة</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

@@ -12,10 +12,27 @@
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
+      "i18n": {
+        "sourceLocale": {
+          "code": "en",
+          "baseHref": ""
+        },
+        "locales": {
+          "fr": {
+            "translation": "src/locale/fr.xlf",
+            "baseHref": ""
+          },
+          "ar": {
+            "translation": "src/locale/fr.xlf",
+            "baseHref": ""
+          }
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "localize": ["fr","ar"],
             "outputPath": "dist/calendrier",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -28,7 +45,7 @@
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.css",
+              "src/styles.css"
             ],
             "scripts": []
           },

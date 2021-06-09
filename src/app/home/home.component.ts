@@ -1,16 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Route, Router} from "@angular/router";
-import {CalendarPersonalService} from "../shared/service/calendar-personal.service";
-import {CalendarPersonal} from "../shared/model/calendarPersonal";
-import {EventService} from "../shared/service/event.service";
-import {MatFabMenu} from "@angular-material-extensions/fab-menu";
-import {AddCalendarComponent} from "../shared/add-calendar/add-calendar.component";
+import {UserService} from "../shared/service/user.service";
+import {Router} from "@angular/router";
+import {SelectedCalendarComponent} from "../shared/selected-calendar/selected-calendar.component";
 import {MatDialog} from "@angular/material/dialog";
-import {CalendarPro} from "../shared/model/CalendarPro";
-import {map, mergeMap} from "rxjs/operators";
-import {CalendarProService} from "../shared/service/calendarPro.service";
-import {CalendarGroupService} from "../shared/service/calendar-group.service";
-import {CalendarGroup} from "../shared/model/calendarGroup";
 
 @Component({
   selector: 'app-home',
@@ -18,71 +10,20 @@ import {CalendarGroup} from "../shared/model/calendarGroup";
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  fabButtonsRandom: MatFabMenu[] = [
-    {
-      id: 1,
-      icon: 'calendar_today'
-    },
-    {
-      id: 2,
-      icon: 'groups'
-    },
-    {
-      id: 3,
-      icon: 'work'
-    }
-  ];
-  calendarsPersonal:CalendarPersonal[];
-  calendarsPro:CalendarPro[];
-  calendarsGroup:CalendarGroup[];
 
-  loading:boolean=true;
 
-  constructor(private eventService:EventService,private calendarPersonalService:CalendarPersonalService,private dialog: MatDialog
-              ,private calendarProService:CalendarProService,private router:Router,private calendarGroupService:CalendarGroupService) { }
+  constructor(private router:Router,public userService:UserService,private dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.getCalendars();
-    this.calendarPersonalService.CalendarEmitter.subscribe(data=> {
-      if(data){
-        this.getCalendar();
+    this.router.navigateByUrl('home/'+this.userService.userConnected.selectedCalendar.calendarType+"/"+this.userService.userConnected.selectedCalendar.calendarId);
       }
-    });
-
-  }
-  getCalendar(){
-    this.calendarPersonalService.get_user_calendars().subscribe(data => {
-      this.calendarsPersonal = data;
-      this.loading = false;
+  change_calendar() {
+    this.dialog.open(SelectedCalendarComponent, {
+      backdropClass: 'backdropBackground',
+    }).afterClosed().subscribe(data=>{
+      if(data){
+        this.userService.me().subscribe(data=>this.ngOnInit());
+      }
     })
-  }
-
-  add(event) {
-    if(event ==1){
-      this.dialog.open(AddCalendarComponent, {
-        height: '200px',
-        width: '300px',
-        backdropClass: 'backdropBackground',
-      })
-    }if(event == 2){
-      this.router.navigateByUrl('home/CreateCalendarGroup')
-    }if(event == 3){
-      this.router.navigateByUrl('sign-uppro')
-
-    }
-
-  }
-
-  private getCalendars() {
-    this.calendarPersonalService.get_user_calendars().pipe(mergeMap(data => {
-      this.calendarsPersonal = data;
-      return this.calendarProService.get_user_calendarsPro()
-    }),mergeMap(data=>{
-      this.calendarsPro =data;
-      return this.calendarGroupService.get_user_calendarsGroup()
-    }),map(data=>{
-      this.calendarsGroup =data;
-    })).subscribe(data=>this.loading = false)
-
   }
 }

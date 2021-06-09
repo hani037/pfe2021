@@ -5,6 +5,8 @@ import { Observable, of } from 'rxjs';
 import { mergeMap, map } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
 import {User} from '../model/user';
+import {SelectedCalendar} from "../model/selectedCalendar";
+import {Calendar} from "../model/calendar";
 
 
 
@@ -102,6 +104,13 @@ export class UserService {
   changeCode(user: User) {
     return this.http.put<User>(this.usersUrl+'/changeToken',user);
 
+  }
+  selectedCalendar(selectedCalendar:SelectedCalendar) {
+    return this.http.put<{}>(this.usersUrl+'/selectedCalendar',selectedCalendar);
+
+  }
+  getUserCalendars(){
+    return this.http.get<Calendar[]>(this.usersUrl+'/calendars');
   }
 
 }

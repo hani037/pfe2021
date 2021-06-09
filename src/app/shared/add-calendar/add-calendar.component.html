@@ -7,14 +7,14 @@
     <form action="" method="post" (ngSubmit)="add(f)" #f="ngForm" >
       <div >
         <mat-form-field style="width: 100%" appearance="outline">
-          <mat-label>Name</mat-label>
+          <mat-label i18n >Name</mat-label>
           <input  matInput ngModel required name="name"  #name="ngModel" type="text" id="lastName">
           <mat-icon color="warn" matSuffix>calendar_today</mat-icon>
         </mat-form-field>
       </div>
       <div class="text-center" style="margin-top: 3%" >
 
-        <button [disabled]="f.invalid"  type="submit" mat-flat-button color="warn">ADD</button>
+        <button [disabled]="f.invalid" i18n  type="submit" mat-flat-button color="warn">ADD</button>
       </div>
     </form>
   </div>

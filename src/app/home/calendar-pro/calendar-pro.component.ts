@@ -1,22 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
-import {CalendarOptions, EventClickArg, EventInput} from "@fullcalendar/angular";
-import {CalendarProService} from "../service/calendarPro.service";
-import {CalendarPro} from "../model/CalendarPro";
-import {CalendarProEs} from "../model/CalendarProEs";
-import {map, mergeMap} from "rxjs/operators";
-import {AppointmentComponent} from "../appointment/appointment.component";
-import {EventComponent} from "../event/event.component";
-import {MatDialog} from "@angular/material/dialog";
-import {AppointmentProComponent} from "../appointment-pro/appointment-pro.component";
-import {SeanceProComponent} from "../seance-pro/seance-pro.component";
-import {SeanceEs} from "../model/SeanceEs";
+import {Component, Inject, LOCALE_ID, OnInit} from '@angular/core';
 import {MatFabMenu} from "@angular-material-extensions/fab-menu";
-import {AddCalendarComponent} from "../add-calendar/add-calendar.component";
-import {CreateVacationComponent} from "../create-vacation/create-vacation.component";
-import {DateService} from "../service/date.service";
-import {AddSeanceComponent} from "../add-seance/add-seance.component";
-import {AddValidityComponent} from "../add-validity/add-validity.component";
+import {CalendarProEs} from "../../shared/model/CalendarProEs";
+import {CalendarPro} from "../../shared/model/CalendarPro";
+import {CalendarOptions, EventClickArg, EventInput} from "@fullcalendar/angular";
+import {ActivatedRoute} from "@angular/router";
+import {CalendarProService} from "../../shared/service/calendarPro.service";
+import {MatDialog} from "@angular/material/dialog";
+import {DateService} from "../../shared/service/date.service";
+import {map, mergeMap} from "rxjs/operators";
+import {AppointmentProComponent} from "../../shared/appointment-pro/appointment-pro.component";
+import {SeanceProComponent} from "../../shared/seance-pro/seance-pro.component";
+import {CreateVacationComponent} from "../../shared/create-vacation/create-vacation.component";
+import {AddSeanceComponent} from "../../shared/add-seance/add-seance.component";
+import {AddValidityComponent} from "../../shared/add-validity/add-validity.component";
 
 @Component({
   selector: 'app-calendar-pro',
@@ -67,7 +63,8 @@ export class CalendarProComponent implements OnInit {
 
 
   };
-  constructor(private activatedRoute: ActivatedRoute,private calendarProService:CalendarProService,private dialog: MatDialog,private dateService:DateService ) { }
+  constructor(private activatedRoute: ActivatedRoute,private calendarProService:CalendarProService,private dialog: MatDialog,@Inject(LOCALE_ID) public locale: string) {
+    this.calendarOptions.locale = this.locale; }
 
   ngOnInit(): void {
     this.getCalendar();
@@ -79,33 +76,33 @@ export class CalendarProComponent implements OnInit {
         this.INITIAL_EVENTS = [];
         this.calendarProEs.seanceEsList.forEach(seance => {
           this.INITIAL_EVENTS.push({
-              start: new Date(seance.date+" "+seance.start),
-              end: new Date(seance.date+" "+seance.end),
-              color: 'red',
-              extendedProps: {
-                seance: seance
-              },
-            },)
-        });
-        return this.calendarProService.get_calendarPro(this.calendarProEs.id)
-      }
-      ),map(data=>{
-        this.calendarPro =data;
-          this.calendarPro.appointment.forEach(appointment=>{
-          this.INITIAL_EVENTS.push( {
-            start: new Date(appointment.date +" " +appointment.start),
-            end:new Date(appointment.date +" " +appointment.end),
-            title: "Appointment",
-            id:appointment.id,
-            color:"Blue",
+            start: new Date(seance.date+" "+seance.start),
+            end: new Date(seance.date+" "+seance.end),
+            color: 'red',
             extendedProps: {
-              type: 'Appointment'
+              seance: seance
             },
           },)
         });
+        return this.calendarProService.get_calendarPro(this.calendarProEs.id)
+      }
+    ),map(data=>{
+      this.calendarPro =data;
+      this.calendarPro.appointment.forEach(appointment=>{
+        this.INITIAL_EVENTS.push( {
+          start: new Date(appointment.date +" " +appointment.start),
+          end:new Date(appointment.date +" " +appointment.end),
+          title: "Appointment",
+          id:appointment.id,
+          color:"Blue",
+          extendedProps: {
+            type: 'Appointment'
+          },
+        },)
+      });
       this.calendarOptions.events = this.INITIAL_EVENTS;
       this.loading = false;
-      })).subscribe()
+    })).subscribe()
 
   }
   handleEventClick(clickInfo: EventClickArg) {

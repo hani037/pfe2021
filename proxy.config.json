@@ -1,8 +1,7 @@
 {
   "/api/*": {
-    "target": "https://app-a10cb3d2-353c-4d9c-93b2-7811859cec3c.cleverapps.io/",
+    "target": "http://localhost:8080/",
     "secure": false,
-    "changeOrigin": true,
     "pathRewrite": {
       "^/api": ""
     }

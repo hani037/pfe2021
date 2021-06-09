@@ -1,0 +1,15 @@
+<form (ngSubmit)="select()" [formGroup]="form" >
+  <div>
+    <mat-form-field   appearance="outline">
+      <mat-label>selected Calendar:</mat-label>
+      <mat-select   required formControlName="calendar">
+        <mat-option *ngFor="let calendar of calendarList;let i=index"  [value]="i">{{calendar.name}}: {{calendar.calendarType}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="text-center" style="margin-top: 3%" >
+
+    <button  [disabled]="form.invalid"  type="submit" mat-flat-button color="warn">submit</button>
+  </div>
+</form>
+

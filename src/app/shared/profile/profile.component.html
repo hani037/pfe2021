@@ -351,8 +351,17 @@
                       </button>
                                                 </div>
                                                 <div class="card-block">
+                                                  <mat-list >
+                                                    <div>
+                                                      <mat-list-item fxLayout="row" fxLayoutAlign="space-around center" >
+                                                        <h6 style="margin-right: 5%"  >selected Calendar: <strong>{{userService.userConnected.selectedCalendar.name}}</strong></h6>
+                                                        <button (click)="change_calendar()" mat-mini-fab aria-label="Example icon button with a vertical three dot icon" color="primary">
+                                                          <mat-icon>published_with_changes</mat-icon>
+                                                        </button>
 
-
+                                                      </mat-list-item>
+                                                    </div>
+                                                  </mat-list>
                                                 </div>
                                             </div>
                                         </div>
@@ -477,3 +486,5 @@
         </div>
     </section>
 </main>
+
+

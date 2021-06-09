@@ -23,7 +23,7 @@
                   <div *ngIf="route_active.includes(l.path)"  class="rectangle"></div>
                   <mat-icon *ngIf="!route_active.includes(l.path)" fontSet="material-icons-outlined"  matListIcon>{{l.icon}}</mat-icon>
                   <mat-icon  *ngIf="route_active.includes(l.path)" style="color: #58CB7D" matListIcon>{{l.icon}}</mat-icon>
-                  <h3 *ngIf="expand" matLine><strong>{{l.title}}</strong></h3>
+                  <h3  *ngIf="expand" matLine><strong>{{l.title}} </strong></h3>
                   <hr>
 
                 </mat-list-item>
@@ -32,7 +32,8 @@
               <div *ngIf="route_active.includes('search')"  class="rectangle"></div>
               <mat-icon *ngIf="!route_active.includes('search')" fontSet="material-icons-outlined"  matListIcon>search</mat-icon>
               <mat-icon  *ngIf="route_active.includes('search')" style="color: #58CB7D" matListIcon>{{'search'}}</mat-icon>
-              <h3 *ngIf="expand" matLine><strong>SEARCH</strong></h3>
+              <h3  *ngIf="expand" matLine><strong i18n>SEARCH</strong></h3>
+
               <hr>
 
             </mat-list-item>

@@ -22,10 +22,10 @@ export class SearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.list = [
-      {title:'médecine',img:'../../../assets/img/medecine.jpg'},
-      {title:'divertissement',img:'../../../assets/img/divertissement.jpg'},
-      {title:'sport',img:'../../../assets/img/sport.jpg'},
-      {title:'maintenance',img:'../../../assets/img/maintenance.jpg'},
+      {title:$localize`:@@search.med:medicine`,img:'../../../assets/img/medecine.jpg'},
+      {title:$localize`:@@search.ent:entertainment`,img:'../../../assets/img/divertissement.jpg'},
+      {title:$localize`:@@search.sp:sport`,img:'../../../assets/img/sport.jpg'},
+      {title:$localize`:@@search.mat:maintenance`,img:'../../../assets/img/maintenance.jpg'},
 
     ]
     this.is_Loading = false;

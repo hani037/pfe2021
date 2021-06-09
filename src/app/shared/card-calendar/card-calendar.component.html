@@ -7,18 +7,18 @@
 
     <mat-list-item  >
       <mat-icon  matListIcon>emoji_events</mat-icon>
-      <h3 matLine>Events({{calendarPersonal.events.length}})</h3>
+      <h3 i18n matLine>Events({{calendarPersonal.events.length}})</h3>
 
     </mat-list-item>
     <mat-list-item  >
       <mat-icon  matListIcon>today</mat-icon>
-      <h3 matLine>Appointments({{calendarPersonal.appointment.length}})</h3>
+      <h3 i18n matLine>Appointments({{calendarPersonal.appointment.length}})</h3>
 
     </mat-list-item>
   </mat-list>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-raised-button color="warn">Edit</button>
-    <button mat-raised-button color="accent" (click)="open()" mat-button>open</button>
+    <button i18n mat-raised-button color="warn">Edit</button>
+    <button i18n mat-raised-button color="accent" (click)="open()" mat-button>open</button>
   </mat-card-actions>
 </mat-card>

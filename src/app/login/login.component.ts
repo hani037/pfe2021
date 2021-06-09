@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
       console.log(user);
       if(user.enabled){
         this.userService.setToken();
-          this.router.navigateByUrl("home");
+          this.router.navigateByUrl("home/"+user.selectedCalendar.calendarType+"/"+user.selectedCalendar.calendarId);
       }else {
         this.is_activated = false;
       }

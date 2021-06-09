@@ -20,7 +20,7 @@ import {UserService} from "../service/user.service";
 })
 export class CreateCalendarGroupComponent implements OnInit {
 
-  public list:string[]=['médecine','divertissement','sport','maintenance'];
+  public list:string[]=['medicine','entertainment','sport','maintenance'];
   list2: string[] = ['MONTHLY', 'YEARLY'];
   calendarGroup:CalendarGroup;
   id:string;

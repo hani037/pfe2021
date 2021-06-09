@@ -1,6 +1,6 @@
 stages:
   - build
-  - deploy
+  #- - deploy
 build:
   stage: build
   image: node:14.7.0-alpine3.11
@@ -12,16 +12,13 @@ build:
   artifacts:
     paths:
       - dist
-deploy:clevercloud:
-  image: ubuntu
-  stage: deploy
-  only:
-    - /master/
-  script:
-    - apt-get update && apt-get install -y curl
-    - curl https://clever-tools.cellar.services.clever-cloud.com/releases/latest/clever-tools-latest_linux.tar.gz > clever-tools-latest_linux.tar.gz
-    - tar -xvf clever-tools-latest_linux.tar.gz
-    - ./clever login --token $CLEVER_TOKEN --secret $CLEVER_SECRET
-    - rm -f .clever.json
-    - ./clever link -a deploy $app_89f18954-43d0-472b-b6a4-9c5af716172b
-    - ./clever deploy -a deploy
+#-deploy:clevercloud:
+  #-  image: node:14.7.0-alpine3.11
+  #-  stage: deploy
+      #- before_script:
+  #-   - apk update && apk add git
+      #- only:
+  #-   - /master/
+      #- script:
+      #-  - git remote add clever https://$CLEVER_TOKEN:$CLEVER_SECRET@push-par-clevercloud-customers.services.clever-cloud.com/app_89f18954-43d0-472b-b6a4-9c5af716172b.git
+  #-  - git push --verbose --force clever master 2>&1 | grep -e 'remote:' -e '->'

@@ -92,7 +92,7 @@ export class ClientCardCalendarComponent implements OnInit {
       },)
     })
 
-    this.calendarProService.userFollowCalendar(this.calendarPro.id).subscribe(data=>{
+    this.calendarProService.is_Follow(this.calendarPro.id).subscribe(data=>{
       this.follows = data;
       this.loading = false;
     })
@@ -130,7 +130,10 @@ export class ClientCardCalendarComponent implements OnInit {
   }
 
   follow() {
-  this.calendarProService.follow(this.calendarPro.id).subscribe(data=>{
+    let follow = new Follows()
+    follow.followedId = this.calendarPro.id;
+    follow.followerId = this.userService.userConnected.selectedCalendar.calendarId;
+  this.calendarProService.follow(follow).subscribe(data=>{
     this.follows =data;
   })
   }

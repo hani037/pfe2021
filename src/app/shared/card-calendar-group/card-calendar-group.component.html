@@ -8,13 +8,13 @@
 
       <mat-list-item  >
         <mat-icon  matListIcon>work</mat-icon>
-        <h3 matLine>Calendars Pro({{calendarGroup.calendarProList.length}})</h3>
+        <h3 i18n  matLine>Calendars Pro({{calendarGroup.calendarProList.length}})</h3>
 
       </mat-list-item>
     </mat-list>
   </mat-card-content>
   <mat-card-actions>
-    <button (click)="edit()" mat-raised-button color="warn">Edit</button>
-    <button mat-raised-button color="accent" (click)="open()" mat-button>open</button>
+    <button i18n (click)="edit()" mat-raised-button color="warn">Edit</button>
+    <button  i18n mat-raised-button color="accent" (click)="open()" mat-button>open</button>
   </mat-card-actions>
 </mat-card>

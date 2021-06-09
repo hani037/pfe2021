@@ -3,11 +3,11 @@
 </div>
 
 <div *ngIf="!is_Loading" class="text-center">
-  <h1>Tout ce dont vous avez besoin</h1>
+  <h1 i18n>Everything you need</h1>
 
   <app-google-places (setAddress)="getAddress($event)" adressType="geocode"></app-google-places>
-  <h3>
-    Choisissez un service
+  <h3 i18n>
+    Choose a service
   </h3>
   <div *ngIf="!isMobileResolution" fxLayout="row" fxLayoutAlign="space-around center" >
     <app-card-search [list]="l" *ngFor="let l of list" ></app-card-search>

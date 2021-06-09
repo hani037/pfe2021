@@ -16,11 +16,11 @@ export class CardCalendarGroupComponent implements OnInit {
   }
 
   open() {
-    this.router.navigateByUrl('home/CalendarGroup/'+this.calendarGroup.id)
+    this.router.navigateByUrl('home/calendarGroup/'+this.calendarGroup.id)
   }
 
   edit() {
-    this.router.navigateByUrl('home/CreateCalendarGroup/edit/'+this.calendarGroup.id)
+    this.router.navigateByUrl('config/CreateCalendarGroup/edit/'+this.calendarGroup.id)
 
   }
 }

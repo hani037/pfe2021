@@ -1,5 +1,5 @@
 export class Follows {
   id:string;
-  userId:string;
-  calendarId:string;
+  followerId:string;
+  followedId:string;
 }
