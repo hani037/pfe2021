@@ -32,7 +32,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "localize": true,
+            "localize": false,
             "outputPath": "dist/calendrier",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -76,12 +76,6 @@
                   "maximumError": "10kb"
                 }
               ]
-            },
-            "fr": {
-              "localize": ["fr"]
-            },
-            "ar": {
-              "localize": ["ar"]
             }
           }
         },
@@ -93,11 +87,6 @@
           "configurations": {
             "production": {
               "browserTarget": "calendrier:build:production"
-            },"fr": {
-              "browserTarget": "angular-localize:build:fr"
-            },
-            "ar": {
-              "browserTarget": "angular-localize:build:ar"
             }
           }
         },
