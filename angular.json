@@ -15,16 +15,16 @@
       "i18n": {
         "sourceLocale": {
           "code": "en",
-          "baseHref": ""
+          "baseHref": "en"
         },
         "locales": {
           "fr": {
             "translation": "src/locale/fr.xlf",
-            "baseHref": ""
+            "baseHref": "fr"
           },
           "ar": {
-            "translation": "src/locale/fr.xlf",
-            "baseHref": ""
+            "translation": "src/locale/ar.xlf",
+            "baseHref": "ar"
           }
         }
       },
@@ -32,7 +32,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "localize": false,
+            "localize": ["fr"],
             "outputPath": "dist/calendrier",
             "index": "src/index.html",
             "main": "src/main.ts",
