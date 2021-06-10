@@ -4,10 +4,14 @@
     "scripts": {
         "ng": "ng",
         "start": "ng serve --proxy-config=proxy-prod.config.json --port 8080  --host 0.0.0.0 --disable-host-check ",
-        "build": "ng build --localize",
+        "build": "build-i18n",
         "test": "ng test",
         "lint": "ng lint",
-        "e2e": "ng e2e"
+        "e2e": "ng e2e",
+        "build-i18n:fr": "ng build --output-path=dist/fr --aot -prod --bh /fr/ --i18n-file=src/locale/fr.xlf --i18n-format=xlf --locale=fr",
+        "build-i18n:es": "ng build --output-path=dist/es --aot -prod --bh /es/ --i18n-file=src/locale/ar.xlf --i18n-format=xlf --locale=es",
+        "build-i18n:en": "ng build --output-path=dist/en --aot -prod --bh /en/ --i18n-file=src/locale/messages.xlf --i18n-format=xlf --locale=en",
+        "build-i18n": "npm run build-i18n:en && npm run build-i18n:es && npm run build-i18n:fr"
     },
     "private": true,
     "dependencies": {
